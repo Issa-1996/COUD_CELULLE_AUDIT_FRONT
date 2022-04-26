@@ -17,6 +17,7 @@ import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.
 import { FicheDeControleComponent } from './Pages/fiche-de-controle/fiche-de-controle.component';
 import { UsersComponent } from './Pages/Agents/users/users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FicheDeControleAffichageComponent } from './Pages/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ControleursComponent,
     CoordinateurComponent,
     FicheDeControleComponent,
-    UsersComponent
+    UsersComponent,
+    FicheDeControleAffichageComponent
   ],
   imports: [
     BrowserModule,
