@@ -10,6 +10,7 @@ import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.
 import { UsersComponent } from './Pages/Agents/users/users.component';
 import { CouriersComponent } from './Pages/couriers/couriers.component';
 import { FactureComponent } from './Pages/facture/facture.component';
+import { FicheDeControleAffichageComponent } from './Pages/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { FicheDeControleComponent } from './Pages/fiche-de-controle/fiche-de-controle.component';
 import { RapportsComponent } from './Pages/rapports/rapports.component';
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
     {path: 'accueil', component: AccueilComponent },
     {path: 'courier', component: CouriersComponent },
     {path: 'fichedecontrole', component: FicheDeControleComponent },
+    {path: 'fichedecontroleaffichage', component: FicheDeControleAffichageComponent },
     {path: 'rapport', component: RapportsComponent },
     {path: 'facture', component: FactureComponent },
     {path: 'assistante', component: AssistanteComponent },
