@@ -1,0 +1,36 @@
+<div class="container">
+    <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+      {{!isLinear ? 'Activer la lecture' : 'Desactiver la lecture'}}
+    </button>
+    <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Ajout Fiche de Controle</ng-template>
+            <app-fiche-de-controle></app-fiche-de-controle>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Affiche Fiche de Controle">
+      <form [formGroup]="secondFormGroup">
+        <app-fiche-de-controle-affichage></app-fiche-de-controle-affichage>
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button (click)="stepper.reset()">Annuler</button>
+      </div>
+    </mat-step>
+    </mat-stepper>
+</div>
+  
+  
+  

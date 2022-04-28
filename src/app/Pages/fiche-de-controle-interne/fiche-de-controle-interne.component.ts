@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-couriers',
-  templateUrl: './couriers.component.html',
-  styleUrls: ['./couriers.component.css']
+  selector: 'app-fiche-de-controle-interne',
+  templateUrl: './fiche-de-controle-interne.component.html',
+  styleUrls: ['./fiche-de-controle-interne.component.css']
 })
-export class CouriersComponent implements OnInit {
+export class FicheDeControleInterneComponent implements OnInit {
+
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -21,5 +22,6 @@ export class CouriersComponent implements OnInit {
       secondCtrl: ['', Validators.required],
     });
   }
+
 
 }

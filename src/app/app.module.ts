@@ -29,6 +29,11 @@ import { UsersComponent } from './Pages/Agents/users/users.component';
 import { FicheDeControleAffichageComponent } from './Pages/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './Material/matmodule.service';
+import { AddUserComponent } from './Pages/Agents/add-user/add-user.component';
+import { UpdateUserComponent } from './Pages/Agents/update-user/update-user.component';
+import { CourierDepartComponent } from './Pages/courier-depart/courier-depart.component';
+import { CourierArriverComponent } from './Pages/courier-arriver/courier-arriver.component';
+import { FicheDeControleInterneComponent } from './Pages/fiche-de-controle-interne/fiche-de-controle-interne.component';
 
 @NgModule({
   imports: [
@@ -63,7 +68,12 @@ import { MaterialModule } from './Material/matmodule.service';
     CoordinateurComponent,
     FicheDeControleComponent,
     UsersComponent,
-    FicheDeControleAffichageComponent
+    FicheDeControleAffichageComponent,
+    AddUserComponent,
+    UpdateUserComponent,
+    CourierDepartComponent,
+    CourierArriverComponent,
+    FicheDeControleInterneComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,7 @@ import { AssistanteComponent } from './Pages/Agents/assistante/assistante.compon
 import { ControleursComponent } from './Pages/Agents/controleurs/controleurs.component';
 import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.component';
 import { UsersComponent } from './Pages/Agents/users/users.component';
+import { FicheDeControleInterneComponent } from './Pages/fiche-de-controle-interne/fiche-de-controle-interne.component';
 
 const routes: Routes =[
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -33,7 +34,8 @@ const routes: Routes =[
     {path: 'assistante', component: AssistanteComponent },
     {path: 'cotroleur', component: ControleursComponent },
     {path: 'coordinateur', component: CoordinateurComponent },
-    {path: 'users', component: UsersComponent }
+    {path: 'users', component: UsersComponent },
+    {path: 'fichedecontroleinterne', component: FicheDeControleInterneComponent}
   ]}
 ];
 
