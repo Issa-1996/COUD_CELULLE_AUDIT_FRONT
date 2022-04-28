@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fiche-de-controle.component.css']
 })
 export class FicheDeControleComponent implements OnInit {
+  
 
   constructor() { }
 

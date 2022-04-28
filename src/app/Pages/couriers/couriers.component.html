@@ -1,2 +1,42 @@
-<h1 class="text-center">WELCOME TO THE PAGE TO COURIER</h1>
-<a href="">Deconnexion</a>
+<div class="container">
+    <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+        {{!isLinear ? 'Active la lecture' : 'Desactiver la lecture'}}
+    </button>
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Courier de depart</ng-template>
+          <!-- <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+          </mat-form-field> -->
+          <app-courier-depart></app-courier-depart>
+          <div>
+              <button mat-button matStepperNext>Suivant</button>
+          </div>
+      </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Courier d'arriver">
+      <form [formGroup]="secondFormGroup">
+          <!-- <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+            required>
+          </mat-form-field> -->
+          <app-courier-arriver></app-courier-arriver>
+          <div>
+              <button mat-button matStepperPrevious>Retour</button>
+              <button mat-button matStepperNext>Suivant</button>
+          </div> 
+      </form>
+      </mat-step>
+      <mat-step>
+          <ng-template matStepLabel>Courier rejeter</ng-template>
+          <p>You are now done.</p>
+          <div>
+              <button mat-button matStepperPrevious>Retour</button>
+              <button mat-button (click)="stepper.reset()">Annuler</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+</div>
