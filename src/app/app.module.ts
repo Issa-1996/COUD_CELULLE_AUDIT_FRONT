@@ -1,11 +1,21 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from 'express';
 import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './login/login.component';
 import { ContainerComponent } from './container/container.component';
+import { LoginComponent } from './login/login.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { AccueilComponent } from './Pages/accueil/accueil.component';
 import { RapportsComponent } from './Pages/rapports/rapports.component';
@@ -16,10 +26,28 @@ import { ControleursComponent } from './Pages/Agents/controleurs/controleurs.com
 import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.component';
 import { FicheDeControleComponent } from './Pages/fiche-de-controle/fiche-de-controle.component';
 import { UsersComponent } from './Pages/Agents/users/users.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FicheDeControleAffichageComponent } from './Pages/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from './Material/matmodule.service';
 
 @NgModule({
+  imports: [
+    MaterialModule,
+    BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatRippleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule, 
+  ],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -36,11 +64,6 @@ import { FicheDeControleAffichageComponent } from './Pages/fiche-de-controle-aff
     FicheDeControleComponent,
     UsersComponent,
     FicheDeControleAffichageComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
