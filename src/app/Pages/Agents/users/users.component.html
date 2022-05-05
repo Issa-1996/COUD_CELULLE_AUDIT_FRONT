@@ -27,12 +27,11 @@ AJOUTER UN ADMIN
         <form class="form-signin">
           <h3 class="form-signin-heading"> </h3>
           <input type="text" class="form-control" name="matricule" placeholder="matricule" required="" autofocus="" /><br />
-          <input type="text" class="form-control" name="nom" placeholder="Nom" required="" /><br />
+          <input type="text" class="form-control" name="u_nom" placeholder="Nom" required="" /><br />
           <input type="text" class="form-control" name="u_prenom" placeholder="Prenom" required="" /><br />
           <input type="text" class="form-control" name="u_username" placeholder="Username" required="" /><br />
-          <input type="password" class="form-control" name="u_pass" placeholder="Password" required="" />
           <input type="email" class="form-control" name="u_email" placeholder="Email" required=""  /><br />
-          <input type="date" class="form-control" name="u_naissance" placeholder="Date Naissance" required="" /><br />
+         <!-- <input type="date" class="form-control" name="u_naissance" placeholder="Date Naissance" required="" /><br />-->
           <select class="form-control">
             <option>choisir un profil</option>
             <option>Coordinateur</option>
@@ -85,9 +84,12 @@ AJOUTER UN ADMIN
           <mat-slide-toggle>
             Bloqué/Débloqué
           </mat-slide-toggle>
-          <i class="fa fa-pencil" aria-hidden="true"></i>
-          {{element.action}} 
-            
+
+         <!-- Button trigger modal -->
+         <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="background-color: #28a745; color: white;"> -->
+         <i class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#exampleModal" style="color: #28a745;" ></i>
+        <!-- </button> -->
+        {{element.action}}  
         </td>
       </ng-container>
 
@@ -99,4 +101,38 @@ AJOUTER UN ADMIN
 </div>
 </div>
   
+
+
+
+  
+   <!------------------------------- -------------VOILA LE MODAL MODIFIER --------------------------------------------->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h3 class="modal-title" id="exampleModalLabel" style="color: aliceblue;">MODIFIER UN ADMIN</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin">
+        <input type="text" class="form-control" name="matricule" placeholder="936598/AB" required="" disabled="disabled" /><br />
+        <input type="text" class="form-control" name="nom" placeholder="Nom" required="" /><br />
+        <input type="text" class="form-control" name="prenom" placeholder="Prenom" required="" /><br />
+        <input type="text" class="form-control" name="username" placeholder="Username" required="" /><br />
+        <input type="password" class="form-control" name="password" placeholder="Password" required="" />
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-success">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!------------------------------------ FIN MODAL MODIFIER------------------------------------- -->
+
 
