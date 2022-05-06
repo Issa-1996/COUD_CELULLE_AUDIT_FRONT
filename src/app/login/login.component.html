@@ -21,20 +21,23 @@
 						<h2>CONNEXION</h2>
 					</div>
 					<div class="row">
-						<form control="" class="form-group">
+						<span style="color: red; font-size: 20px;" *ngIf="erreur!=''"> {{ erreur }} </span>
+						<form [formGroup]="addForm" class="form-group">
 							<div class="row">
-								<input type="text" name="username" id="username" class="form__input" placeholder="Username">
+								<input type="text" id="inputUsername"  formControlName="username" name="username" class="form__input" placeholder="Username">
+								<span style="color: red; font-size: 16px;" *ngIf="erreurUsername!=''"> {{ erreurUsername }} </span>
 							</div>
 							<div class="row">
 								<!-- <span class="fa fa-lock"></span> -->
-								<input type="password" name="password" id="password" class="form__input" placeholder="Password">
+								<input type="password"id="inputPassword" formControlName="password" name="password" class="form__input" placeholder="Password">
+								<span style="color: red; font-size: 16px;" *ngIf="erreurPassword!=''"> {{ erreurPassword }} </span>
 							</div>
 							<div class="row">
 								<input type="checkbox" name="remember_me" id="remember_me" class="">
 								<label for="remember_me">Remember Me!</label>
 							</div>
 							<div class="row">
-								<input routerLink="container/accueil" type="submit" value="Submit" class="btn">
+								<input (click)="onSignIn()" type="submit" value="Submit" class="btn">
 							</div>
 						</form>
 					</div>

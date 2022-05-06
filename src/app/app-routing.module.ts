@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardGuard } from './auth-guard.guard';
 import { ContainerComponent } from './container/container.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { LoginComponent } from './login/login.component';
@@ -15,20 +16,19 @@ import { FicheDeControleComponent } from './Pages/fiche-de-controle/fiche-de-con
 import { RapportsComponent } from './Pages/rapports/rapports.component';
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: '', component: LoginComponent },
-  {path: 'inscription', component: InscriptionComponent },
-  {path: 'container', component: ContainerComponent,
+  {path: 'login', component: LoginComponent },
+  {path: 'container', component: ContainerComponent, canActivate:[AuthGuardGuard],
     children: [
-    {path: 'accueil', component: AccueilComponent },
-    {path: 'courier', component: CouriersComponent },
-    {path: 'fichedecontrole', component: FicheDeControleComponent },
-    {path: 'fichedecontroleaffichage', component: FicheDeControleAffichageComponent },
-    {path: 'rapport', component: RapportsComponent },
-    {path: 'facture', component: FactureComponent },
-    {path: 'assistante', component: AssistanteComponent },
-    {path: 'cotroleur', component: ControleursComponent },
-    {path: 'coordinateur', component: CoordinateurComponent },
-    {path: 'users', component: UsersComponent }
+    {path: 'accueil', component: AccueilComponent, canActivate:[AuthGuardGuard] },
+    {path: 'courier', component: CouriersComponent, canActivate:[AuthGuardGuard] },
+    {path: 'fichedecontrole', component: FicheDeControleComponent, canActivate:[AuthGuardGuard] },
+    {path: 'fichedecontroleaffichage', component: FicheDeControleAffichageComponent, canActivate:[AuthGuardGuard] },
+    {path: 'rapport', component: RapportsComponent, canActivate:[AuthGuardGuard] },
+    {path: 'facture', component: FactureComponent, canActivate:[AuthGuardGuard] },
+    {path: 'assistante', component: AssistanteComponent, canActivate:[AuthGuardGuard] },
+    {path: 'cotroleur', component: ControleursComponent, canActivate:[AuthGuardGuard] },
+    {path: 'coordinateur', component: CoordinateurComponent, canActivate:[AuthGuardGuard] },
+    {path: 'users', component: UsersComponent, canActivate:[AuthGuardGuard] }
   ]}
 ];
 

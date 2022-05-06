@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -34,25 +34,12 @@ import { UpdateUserComponent } from './Pages/Agents/update-user/update-user.comp
 import { CourierDepartComponent } from './Pages/courier-depart/courier-depart.component';
 import { CourierArriverComponent } from './Pages/courier-arriver/courier-arriver.component';
 import { FicheDeControleInterneComponent } from './Pages/fiche-de-controle-interne/fiche-de-controle-interne.component';
+import { AuthService } from './Service/auth.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { TokeInterceptorService } from './Service/toke-interceptor.service';
+import { AuthGuardGuard } from './auth-guard.guard';
 
 @NgModule({
-  imports: [
-    MaterialModule,
-    BrowserModule,
-    CommonModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatRippleModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
-    HttpClientModule,
-    RouterModule,
-    AppRoutingModule, 
-  ],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -75,7 +62,34 @@ import { FicheDeControleInterneComponent } from './Pages/fiche-de-controle-inter
     CourierArriverComponent,
     FicheDeControleInterneComponent
   ],
-  providers: [],
+  imports: [
+    MaterialModule,
+    BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatRippleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule
+  ],
+  providers: [
+    AuthService,
+    JwtHelperService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    TokeInterceptorService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokeInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
