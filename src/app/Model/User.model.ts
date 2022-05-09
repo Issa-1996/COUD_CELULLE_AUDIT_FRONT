@@ -7,12 +7,9 @@ export interface UserModel {
     prenom: string;
     nom: string;
     matricule: string;
+    password: string;
     username: string;
     dateNaissance: string;
-    profil: string;
     email: string;
     roles: [];
-    ficheDeControl: FicheDeControlModel;
-    courier: CourierModel;
-    rapports: RapportModel;
 }

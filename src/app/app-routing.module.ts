@@ -9,6 +9,7 @@ import { AssistanteComponent } from './Pages/Agents/assistante/assistante.compon
 import { ControleursComponent } from './Pages/Agents/controleurs/controleurs.component';
 import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.component';
 import { UsersComponent } from './Pages/Agents/users/users.component';
+import { CourierArriverComponent } from './Pages/courier-arriver/courier-arriver.component';
 import { CouriersComponent } from './Pages/couriers/couriers.component';
 import { FactureComponent } from './Pages/facture/facture.component';
 import { FicheDeControleAffichageComponent } from './Pages/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
     children: [
     {path: 'accueil', component: AccueilComponent, canActivate:[AuthGuardGuard] },
     {path: 'courier', component: CouriersComponent, canActivate:[AuthGuardGuard] },
+    {path: 'courierArriver', component: CourierArriverComponent, canActivate:[AuthGuardGuard] },
     {path: 'fichedecontrole', component: FicheDeControleComponent, canActivate:[AuthGuardGuard] },
     {path: 'fichedecontroleaffichage', component: FicheDeControleAffichageComponent, canActivate:[AuthGuardGuard] },
     {path: 'rapport', component: RapportsComponent, canActivate:[AuthGuardGuard] },

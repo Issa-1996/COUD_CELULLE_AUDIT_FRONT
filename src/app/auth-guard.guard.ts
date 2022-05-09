@@ -8,12 +8,13 @@ import { AuthService } from './Service/auth.service';
 })
 export class AuthGuardGuard implements CanActivate {
   constructor(public auth: AuthService, public router: Router) {}
-  // tslint:disable-next-line:typedef
+  // tslint:disable-next-line:typedef  
   canActivate(){
+    
     if (!this.auth.hasToken()) {
       this.router.navigate(['/']);
       return false;
     }
-    return true;
+    return false;
   }
 }

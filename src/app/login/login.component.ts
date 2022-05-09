@@ -66,6 +66,19 @@ export class LoginComponent implements OnInit {
                 const roles: string[] = decodedToken.roles;
               }
             )
+        },
+        (error) => {
+          if (error.status === 500 || error.status === 0) {
+            this.erreur = 'Erreur. Veillez resseyer svp.';
+            this.sending = false;
+            this.btnText = 'Connexion';
+            return;
+          }
+          else{
+          this.sending = false;
+          this.btnText = 'Connexion';
+          this.erreur = 'Login ou mot de passe incorrect.';
+          }
         }
       )
   }

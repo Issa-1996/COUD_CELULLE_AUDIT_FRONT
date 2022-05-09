@@ -1,38 +1,57 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>GESTION AUDITE COUD</title>
-</head>
-<body>
-    <div class="container col-md-6 mt-5" style="box-shadow: 1px 5px 10px 3px beige;">
-      <h4 style="text-align:center; background-color: blue; width: 60%; margin-left: 20%; color: white; border-radius: 5px;"> COURRIER DE DEPART </h4>
-      <form method="post">
+    <div class="container col-md-9" style="box-shadow: 1px 5px 10px 3px beige;">
+      <h4 style="text-align:center; background-color: blue; width: 60%; margin-left: 20%; color: white; border-radius: 5px;"> COURRIER DEPART </h4>
+      <div *ngIf="erreur!=''" class="login-erreur-container text-center">
+        <span class="login-erreur" > {{ erreur }} </span>
+      </div>
+      <form method="post" [formGroup]="addForm">
+        <div class="mb-3">
+          <label for="object:" class="form-label">Object</label>
+          <input type="text" class="form-control" id="object" formControlName="object">
+          <span class="login-erreur" *ngIf="erreurobject!=''" style="color: red;"> {{ erreurobject }} </span>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Numero Courier</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+            <input type="text" class="form-control" formControlName="numeroCourier" id="numeroCourier">
+            <span class="login-erreur" *ngIf="erreurnumeroCourier!=''" style="color: red;"> {{ erreurnumeroCourier }} </span>
+          </div>
+          <div class="col">
+            <label>Date départ</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+            <input type="date" class="form-control" formControlName="dateDepart" id="dateDepart">
+            <span class="login-erreur" *ngIf="erreurdateDepart!=''" style="color: red;"> {{ erreurdateDepart }} </span>
+          </div>
+        </div>
         <div class="form-group">
-          <label>Numero Facture</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-          <input type="texte" class="form-control" placeholder="Numero Facture:" name="saisir">
+          <label>Observation Courier</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+          <textarea class="form-control" formControlName="observation" id="observation" rows="3"></textarea>
+          <span class="login-erreur" *ngIf="erreurobservation!=''" style="color: red;"> {{ erreurobservation }} </span>
         </div>
-        <div class="mb-3">
-          <label for="Montant Facture:" class="form-label">Montant Facture</label>
-          <textarea class="form-control" id="Montant Facture " rows="3"></textarea>
+        <div class="row">
+          <div class="col">
+            <label>Numero archive </label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+            <input type="text" class="form-control" formControlName="numeroArchive" id="numeroArchive">
+            <span class="login-erreur" *ngIf="erreurnumeroArchive!=''" style="color: red;"> {{ erreurnumeroArchive }} </span>
+          </div>
+          <div class="col">
+            <label>Destination</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+            <input type="text" class="form-control" id="destination" formControlName="destination">
+            <span class="login-erreur" *ngIf="erreurdestination!=''" style="color: red;"> {{ erreurdestination }} </span>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="Objet:" class="form-label">Objet</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="Beneficiaire:" class="form-label">Beneficiaire</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+        <div class="row">
+          <div class="col">
+            <label>Nombre de piece</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+            <input type="text" class="form-control" formControlName="nombrePiece" id="nombrePiece">
+            <span class="login-erreur" *ngIf="erreurnombrePiece!=''" style="color: red;"> {{ erreurnombrePiece }} </span>
+          </div>
+          <div class="col">
+            <label>Numero Ordre</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+            <input type="text" class="form-control" id="numeroOrdre" formControlName="numeroOrdre">
+            <span class="login-erreur" *ngIf="erreurnumeroOrdre!=''" style="color: red;"> {{ erreurnumeroOrdre }} </span>
+          </div>
         </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-primary" name="submit">Annuler</button>
-          <button type="submit" class="btn btn-primary ml-5" name="submit">Envoyer</button>
-        </div>
+          <button type="submit" class="btn btn-success btn-lg btn-block" name="submit" [disabled]="sending" (click)="onSignIn()">{{btnText}}</button>
+        </div> 
     </form>
    </div>
-  </body>
-</html>

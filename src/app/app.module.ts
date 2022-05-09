@@ -38,6 +38,8 @@ import { AuthService } from './Service/auth.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TokeInterceptorService } from './Service/toke-interceptor.service';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { AfficheUserComponent } from './Pages/Agents/affiche-user/affiche-user.component';
+import { MethodeService } from './Service/methode.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { AuthGuardGuard } from './auth-guard.guard';
     UpdateUserComponent,
     CourierDepartComponent,
     CourierArriverComponent,
-    FicheDeControleInterneComponent
+    FicheDeControleInterneComponent,
+    AfficheUserComponent
   ],
   imports: [
     MaterialModule,
@@ -81,6 +84,7 @@ import { AuthGuardGuard } from './auth-guard.guard';
   ],
   providers: [
     AuthService,
+    MethodeService,
     JwtHelperService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     TokeInterceptorService,

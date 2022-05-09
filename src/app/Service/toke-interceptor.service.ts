@@ -16,9 +16,8 @@ export class TokeInterceptorService {
    if (localStorage.getItem('token')){
       const token = localStorage.getItem('token');
       if (this.helper.isTokenExpired(token)){
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       }
-      console.log(token);
       const newRequest = request.clone({
           setHeaders: {
             Authorization: `Bearer ${token}`,

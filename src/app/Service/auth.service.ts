@@ -16,8 +16,9 @@ export class AuthService {
    * Stock le token si l'utilisateur est connecter
    * @returns {boolean}
    */
-   public hasToken(): boolean {
+   public hasToken(): boolean {     
     return !!localStorage.getItem('token');
+    
   }
   /**
    * Connexion de l'utilisateur et prend en parametre, le login et le password
