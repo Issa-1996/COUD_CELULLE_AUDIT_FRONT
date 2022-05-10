@@ -19,6 +19,7 @@ import { UsersComponent } from './Pages/Agents/users/users.component';
 import { FicheDeControleInterneComponent } from './Pages/fiche-de-controle-interne/fiche-de-controle-interne.component';
 import { AuthGuard } from './auth.guard';
 import { AfficheUserComponent } from './Pages/Agents/affiche-user/affiche-user.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes =[
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -37,7 +38,8 @@ const routes: Routes =[
     {path: 'coordinateur', component: CoordinateurComponent, canActivate: [AuthGuard] },
     {path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
     {path: 'utilisateurs', component: AfficheUserComponent, canActivate: [AuthGuard] },
-    {path: 'fichedecontroleinterne', component: FicheDeControleInterneComponent, canActivate: [AuthGuard]}
+    {path: 'fichedecontroleinterne', component: FicheDeControleInterneComponent, canActivate: [AuthGuard]},
+    {path: 'footer', component: FooterComponent, canActivate: [AuthGuard]}
   ]}
 ];
 

@@ -69,9 +69,9 @@ export class DashboardComponent implements OnInit {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
       const dataDailySalesChart: any = {
-          labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+          labels: ['J', 'F', 'Mars', 'A', 'M', 'Juin', 'J','A','Septembre','O', 'N', 'Decembre'],
           series: [
-              [12, 17, 7, 17, 23, 18, 38]
+              [12, 17, 7, 17, 23, 18, 38, 45, 19, 45, 27, 1]
           ]
       };
 

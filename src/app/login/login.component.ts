@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
    */
    onSignIn(){
     if (this.addForm.get('username').value.trim() === '') {
-      this.erreurUsername = 'Username obligatoire !';
+      this.erreurUsername = 'Nom d\'utilisateur obligatoire !';
     }
     if (this.addForm.get('password').value.trim() === '') {
       this.erreurPassword = 'Mot de passe obligatoire !';
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
           else{
           this.sending = false;
           this.btnText = 'Connexion';
-          this.erreur = 'Login ou mot de passe incorrect.';
+          this.erreur = 'Nom d\'utilisateur ou mot de passe incorrect.';
           }
         }
       )

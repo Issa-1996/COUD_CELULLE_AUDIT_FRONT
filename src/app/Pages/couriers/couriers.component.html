@@ -5,25 +5,27 @@
     <mat-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Courier de depart</ng-template>
+          <ng-template matStepLabel>COURRIERS ARRIVES</ng-template>
           <!-- <mat-form-field appearance="fill">
               <mat-label>Name</mat-label>
               <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
           </mat-form-field> -->
-          <app-courier-depart></app-courier-depart>
+          <app-courier-arriver></app-courier-arriver>
+
           <div>
               <button mat-button matStepperNext>Suivant</button>
           </div>
       </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" label="Courier d'arriver">
+  <mat-step [stepControl]="secondFormGroup" label="COURRIERS DEPARTS">
       <form [formGroup]="secondFormGroup">
           <!-- <mat-form-field appearance="fill">
             <mat-label>Address</mat-label>
             <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
             required>
           </mat-form-field> -->
-          <app-courier-arriver></app-courier-arriver>
+          <app-courier-depart></app-courier-depart>
+          
           <div>
               <button mat-button matStepperPrevious>Retour</button>
               <button mat-button matStepperNext>Suivant</button>
@@ -31,7 +33,7 @@
       </form>
       </mat-step>
       <mat-step>
-          <ng-template matStepLabel>Courier rejeter</ng-template>
+          <ng-template matStepLabel>AFFICHAGE COURRIERS</ng-template>
           <p>You are now done.</p>
           <div>
               <button mat-button matStepperPrevious>Retour</button>

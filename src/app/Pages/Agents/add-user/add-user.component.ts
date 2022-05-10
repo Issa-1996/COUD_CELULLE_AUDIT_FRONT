@@ -35,7 +35,7 @@ export class AddUserComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      roles: ['', Validators.required],
+      //roles: ['', Validators.required],
       matricule: ['', Validators.required],
       nom: ['', Validators.required],
       prenom: ['', [Validators.required]],
@@ -48,9 +48,9 @@ export class AddUserComponent implements OnInit {
     this.addForm.get('password').valueChanges.subscribe(
       () => { this.erreurpassword = ''; this.erreur = ''; }
     );
-    this.addForm.get('roles').valueChanges.subscribe(
-      () => { this.erreurroles = ''; this.erreur = ''; }
-    );
+    // this.addForm.get('roles').valueChanges.subscribe(
+    //   () => { this.erreurroles = ''; this.erreur = ''; }
+    // );
     this.addForm.get('matricule').valueChanges.subscribe(
       () => { this.erreurmatricule = ''; this.erreur = ''; }
     );
@@ -75,9 +75,9 @@ export class AddUserComponent implements OnInit {
     if (this.addForm.get('password').value.trim() === ''){
       this.erreurpassword = 'Password obligatoire !';
     }
-    if (this.addForm.get('roles').value.trim() === ''){
-      this.erreurroles = 'Roles obligatoire !';
-    }
+    // if (this.addForm.get('roles').value.trim() === ''){
+    //   this.erreurroles = 'Roles obligatoire !';
+    // }
     if (this.addForm.get('matricule').value.trim() === ''){
       this.erreurmatricule = 'Matricule obligatoire !';
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import {MatPaginator, } from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -8,7 +9,12 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements AfterViewInit {
+export class UsersComponent implements AfterViewInit, OnInit {
+
+  addForm: FormGroup;
+  constructor(){}
+  ngOnInit(): void {
+  }
   displayedColumns: string[] = [ 'matricule', 'nom', 'prenom', 'profil', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 

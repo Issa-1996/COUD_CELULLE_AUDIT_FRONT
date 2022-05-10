@@ -27,4 +27,7 @@ export class MethodeService {
   addUser(ObjetUser: any): Observable<UserModel> {
     return this.httpClient.post<UserModel>(`${envVars.url}/coud/users`, ObjetUser, {headers: this.headers});
   }
+  updateUser(username: any): Observable<any>{
+    return this.httpClient.put<any>(envVars.url+'/coud/users' + '/' + username.id, username, {headers: this.headers});
+  }
 }

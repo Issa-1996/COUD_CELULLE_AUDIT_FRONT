@@ -5,7 +5,7 @@
   <mat-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Liste des utilisateurs</ng-template>
+      <ng-template matStepLabel>LISTES DES UTILISATEURS</ng-template>
           <app-users></app-users>
       <div>
         <button mat-button matStepperNext>Suivant</button>
@@ -14,7 +14,7 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" label="Ajout utilisateurs">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Liste des utilisateurs</ng-template>
+      <ng-template matStepLabel>AJOUTER UTILISATEURS</ng-template>
       <app-add-user></app-add-user>
       <div>
         <button mat-button matStepperPrevious>Retour</button>
@@ -22,14 +22,14 @@
       </div>
     </form>
   </mat-step>
-  <mat-step>
+  <!-- <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
     <div>
       <button mat-button matStepperPrevious>Retour</button>
       <button mat-button (click)="stepper.reset()">Annuler</button>
     </div>
-  </mat-step>
+  </mat-step> -->
   </mat-stepper>
 </div>
 

@@ -40,6 +40,7 @@ import { TokeInterceptorService } from './Service/toke-interceptor.service';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { AfficheUserComponent } from './Pages/Agents/affiche-user/affiche-user.component';
 import { MethodeService } from './Service/methode.service';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { MethodeService } from './Service/methode.service';
     CourierDepartComponent,
     CourierArriverComponent,
     FicheDeControleInterneComponent,
-    AfficheUserComponent
+    AfficheUserComponent,
+    FooterComponent
   ],
   imports: [
     MaterialModule,
