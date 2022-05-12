@@ -17,13 +17,15 @@ export class AuthGuard implements CanActivate {
     if(!this.auth.hasToken()) {
       const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
           // console.log(decodedToken.username);
-          const roles: string[] = decodedToken.roles;
-          console.log(roles);
+          // const roles: string[] = decodedToken.roles;
+          // console.log(roles);
           
-          if (roles.includes('ROLE_COORDINATEUR')) {
-            this.router.navigate(['/']);
-            return false;
-          }
+          // if (roles.includes('ROLE_COORDINATEUR')) {
+          //   this.router.navigate(['/']);
+          //   return false;
+          // }
+          this.router.navigate(['/']);
+          return false;
     }
     return true;
   }

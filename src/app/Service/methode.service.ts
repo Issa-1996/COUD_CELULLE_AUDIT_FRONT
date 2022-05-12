@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
 import { FicheDeControlModel } from 'app/Model/FicheDeControl.model';
+import { ProfilModel } from 'app/Model/Profil.model';
 import { UserModel } from 'app/Model/User.model';
 import { envVars } from 'envVars';
 import { Observable } from 'rxjs';
@@ -29,5 +30,11 @@ export class MethodeService {
   }
   updateUser(username: any): Observable<any>{
     return this.httpClient.put<any>(envVars.url+'/coud/users' + '/' + username.id, username, {headers: this.headers});
+  }
+  getProfils(): Observable<ProfilModel>{
+    return this.httpClient.get<ProfilModel>(`${envVars.url}/coud/profils`);
+  }
+  getControleurs(): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs`);
   }
 }

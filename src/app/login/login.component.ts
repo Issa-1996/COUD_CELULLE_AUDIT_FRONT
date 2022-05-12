@@ -59,13 +59,26 @@ export class LoginComponent implements OnInit {
         (data: any) => {
             localStorage.setItem('token', data.token);
             const decodedToken = this.helper.decodeToken(data.token);
-            this.router.navigate(['/container/accueil']);
-            this.authService.getUserConnected(decodedToken.username).subscribe(
-              (res) => {
-                localStorage.setItem('connectedUser', JSON.stringify(res['hydra:member'][0]));
-                const roles: string[] = decodedToken.roles;
-              }
-            )
+            const roles: string[] = decodedToken.roles;
+
+            if (roles.includes('ROLE_COORDINATEUR')){
+              this.router.navigate(['/container/accueil']);
+              this.authService.getUserConnected(decodedToken.username).subscribe(
+                (res) => {
+                  localStorage.setItem('connectedUser', JSON.stringify(res['hydra:member'][0]));
+                  //const roles: string[] = decodedToken.roles;
+                }
+              )
+            }
+            if (roles.includes('ROLE_CONTROLEUR') || roles.includes('ROLE_ASSISTANTE')){
+              this.router.navigate(['/container/courier']);
+              this.authService.getUserConnected(decodedToken.username).subscribe(
+                (res) => {
+                  localStorage.setItem('connectedUser', JSON.stringify(res['hydra:member'][0]));
+                  //const roles: string[] = decodedToken.roles;
+                }
+              )
+            }
         },
         (error) => {
           if (error.status === 500 || error.status === 0) {

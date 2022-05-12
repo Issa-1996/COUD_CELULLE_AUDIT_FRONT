@@ -22,11 +22,27 @@
             <span class="login-erreur" *ngIf="erreurdateArriver!=''" style="color: red;"> {{ erreurdateArriver }} </span>
           </div>
         </div>
-        <div class="form-group">
-          <label>Expediteur Du Courier</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-          <input type="text" class="form-control" formControlName="expediteur" id="expediteur">
-          <span class="login-erreur" *ngIf="erreurexpediteur!=''" style="color: red;"> {{ erreurexpediteur }} </span>
+        
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Expediteur Du Courier</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+              <input type="text" class="form-control" formControlName="expediteur" id="expediteur">
+              <span class="login-erreur" *ngIf="erreurexpediteur!=''" style="color: red;"> {{ erreurexpediteur }} </span>
+            </div>
+          </div>
+          <div class="col">
+            <label>CONTROLEUR</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+            <select class="form-control" id="controleur" formControlName="controleur">
+              <option disabled>choisir un controleur</option>
+            <option value="[/coud/controleurs/{{ ctrl.id }}]"  *ngFor="let ctrl of controleur">{{ctrl.prenom}} {{ctrl.nom}}</option>
+            </select>
+            <span class="login-erreur" *ngIf="erreurControleur!=''" style="color: red;"> {{ erreurControleur }} </span>
+          </div>
         </div>
+
+
         <div class="row">
           <div class="col">
             <label>Numero Correspondance</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
