@@ -103,7 +103,7 @@ export class AddUserComponent implements OnInit {
           // @ts-ignore
           if (error.status === 403){this.erreur = error.error;}
           else{this.erreur = 'Une erreur est produite !';}});
-    }else if(this.addForm.get('profil').value=="/api/coud/profils/2"){
+    }else if(this.addForm.get('profil').value=="2"){
       this.addForm.addControl("roles",new FormControl(["ROLE_CONTROLEUR"],));
       this.addForm.addControl("password",new FormControl('password',));
       this.methodeService.addUser(this.addForm.value).subscribe(
@@ -114,7 +114,7 @@ export class AddUserComponent implements OnInit {
           // @ts-ignore
           if (error.status === 403){this.erreur = error.error;}
           else{this.erreur = 'Une erreur est produite !';}});
-    }else if(this.addForm.get('profil').value=="/api/coud/profils/3"){
+    }else if(this.addForm.get('profil').value=="3"){
       this.addForm.addControl("roles",new FormControl(["ROLE_ASSISTANTE"],));
       this.addForm.addControl("password",new FormControl('password',));
       this.methodeService.addUser(this.addForm.value).subscribe(
