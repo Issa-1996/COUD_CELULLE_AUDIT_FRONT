@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfilModel } from 'app/Model/Profil.model';
 import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
@@ -12,9 +13,8 @@ export class AddUserComponent implements OnInit {
 
   addForm: FormGroup;
 
+  profil:ProfilModel;
   erreurusername = '';
-  erreurpassword='';
-  erreurroles = '';
   erreurmatricule = '';
   erreurnom = '';
   erreurprenom = '';
@@ -32,10 +32,10 @@ export class AddUserComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.getProfilUser();
     this.addForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
-      //roles: ['', Validators.required],
+      profil: ['', Validators.required],
       matricule: ['', Validators.required],
       nom: ['', Validators.required],
       prenom: ['', [Validators.required]],
@@ -45,12 +45,9 @@ export class AddUserComponent implements OnInit {
     this.addForm.get('username').valueChanges.subscribe(
       () => { this.erreurusername = ''; this.erreur = ''; }
     );
-    this.addForm.get('password').valueChanges.subscribe(
-      () => { this.erreurpassword = ''; this.erreur = ''; }
+    this.addForm.get('roles').valueChanges.subscribe(
+      () => { this.erreurprofil = ''; this.erreur = ''; }
     );
-    // this.addForm.get('roles').valueChanges.subscribe(
-    //   () => { this.erreurroles = ''; this.erreur = ''; }
-    // );
     this.addForm.get('matricule').valueChanges.subscribe(
       () => { this.erreurmatricule = ''; this.erreur = ''; }
     );
@@ -72,12 +69,9 @@ export class AddUserComponent implements OnInit {
     if (this.addForm.get('username').value.trim() === ''){
       this.erreurusername = 'username obligatoire !';
     }
-    if (this.addForm.get('password').value.trim() === ''){
-      this.erreurpassword = 'Password obligatoire !';
+    if (this.addForm.get('profil').value.trim() === ''){
+      this.erreurprofil = 'Profil obligatoire !';
     }
-    // if (this.addForm.get('roles').value.trim() === ''){
-    //   this.erreurroles = 'Roles obligatoire !';
-    // }
     if (this.addForm.get('matricule').value.trim() === ''){
       this.erreurmatricule = 'Matricule obligatoire !';
     }
@@ -95,30 +89,62 @@ export class AddUserComponent implements OnInit {
     }
     if (this.addForm.invalid){
       return;
-    }
-    this.sending = true;
-    this.btnText = 'Vérification...';
-    this.subscribeUser(this.addForm.value);
-  }
-  subscribeUser(objetUser: any){
-    this.methodeService.addUser(objetUser)
-      .subscribe(
+    }    
+    if(this.addForm.get('profil').value=="1"){  
+      this.addForm.addControl("roles",new FormControl(["ROLE_COORDONATEUR"],));
+      this.addForm.addControl("password",new FormControl('password',));
+      
+      
+      this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
-        this.erreur = 'Ajout utilisateur avec success';
-        //this.router.navigate(['/']);
-      },
-      (error) => {
-        // @ts-ignore
-        if (error.status === 403){
-          this.erreur = error.error;
-        }
-        else{
-          this.erreur = 'Une erreur est produite !';
-        }
-        this.sending = false;
-        this.btnText = 'Envoyer';
-        return;
-      });
+          this.erreur = 'Ajout coordonateur avec success';
+          this.router.navigate(['/container/utilisateurs']); 
+        },(error) => {
+          // @ts-ignore
+          if (error.status === 403){this.erreur = error.error;}
+          else{this.erreur = 'Une erreur est produite !';}});
+    }else if(this.addForm.get('profil').value=="/api/coud/profils/2"){
+      this.addForm.addControl("roles",new FormControl(["ROLE_CONTROLEUR"],));
+      this.addForm.addControl("password",new FormControl('password',));
+      this.methodeService.addUser(this.addForm.value).subscribe(
+        (data) => {
+          this.erreur = 'Ajout controleur avec success';
+          this.router.navigate(['/container/utilisateurs']); 
+        },(error) => {
+          // @ts-ignore
+          if (error.status === 403){this.erreur = error.error;}
+          else{this.erreur = 'Une erreur est produite !';}});
+    }else if(this.addForm.get('profil').value=="/api/coud/profils/3"){
+      this.addForm.addControl("roles",new FormControl(["ROLE_ASSISTANTE"],));
+      this.addForm.addControl("password",new FormControl('password',));
+      this.methodeService.addUser(this.addForm.value).subscribe(
+        (data) => {
+          this.erreur = 'Ajout assistante avec success';
+          this.router.navigate(['/container/utilisateurs']); 
+        },(error) => {
+          // @ts-ignore
+          if (error.status === 403){this.erreur = error.error;}
+          else{this.erreur = 'Une erreur est produite !';}});
+    }else if(this.addForm.get('profil').value=="/api/coud/profils/4"){
+      this.addForm.addControl("roles",new FormControl(["ROLE_ADJOINT_COORDONATEUR"],));
+      this.addForm.addControl("password",new FormControl('password',));
+      this.methodeService.addUser(this.addForm.value).subscribe(
+        (data) => {
+          this.erreur = 'Ajout adjoint coordonateur avec success';
+          this.router.navigate(['/container/utilisateurs']); 
+        },(error) => {
+          // @ts-ignore
+          if (error.status === 403){this.erreur = error.error;}
+          else{this.erreur = 'Une erreur est produite !';}});
+    }
   }
-
+  getProfilUser(): any{
+    this.methodeService.getProfils().subscribe(
+      (data) => {
+        this.profil=data['hydra:member'];
+      },
+      (error: any) => {
+        // console.log(error.message);
+    });
+  }
 }

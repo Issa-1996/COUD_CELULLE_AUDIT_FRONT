@@ -19,13 +19,9 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private authServive: AuthService) { }
 
   ngOnInit(): void {
-    // const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    // const username: string[] = decodedToken.username;
-    //console.log(localStorage.getItem('connectedUser'));
-    // const userConnect: string[] = JSON.parse(localStorage.getItem('connectedUser'));
-    // console.log(userConnect);
-    // this.prenom= userConnect["prenom"];
-    // this.nom= userConnect["nom"];
+    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    this.role = decodedToken.roles;
+    //console.log(this.role);
     this.connectUser();
     
   }

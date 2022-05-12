@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserModel } from 'app/Model/User.model';
 import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class CourierArriverComponent implements OnInit {
 
   addForm: FormGroup;
 
+  controleur:UserModel;
   erreurdateArriver = '';
   erreurexpediteur = '';
   erreurdateCorrespondance = '';
@@ -20,6 +22,7 @@ export class CourierArriverComponent implements OnInit {
   erreurnumeroReponse = '';
   erreurnumeroCourier = '';
   erreurobject = '';
+  erreurControleur =" ";
   erreur = '';
   code = '';
   sending = false;
@@ -27,6 +30,7 @@ export class CourierArriverComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private methodeService: MethodeService) { }
 
   ngOnInit(): void {
+    this.getControleurs();
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
       numeroCourier: ['', Validators.required],
@@ -36,6 +40,7 @@ export class CourierArriverComponent implements OnInit {
       dateCorrespondance: ['', Validators.required],
       numeroReponse: ['', Validators.required],
       dateReponse: ['', Validators.required],
+      controleur: ['', Validators.required]
     });
     this.addForm.get('object').valueChanges.subscribe(
       () => { this.erreurobject = ''; this.erreur = ''; }
@@ -59,6 +64,9 @@ export class CourierArriverComponent implements OnInit {
       () => { this.erreurnumeroReponse = ''; this.erreur = ''; }
     );
     this.addForm.get('dateReponse').valueChanges.subscribe(
+      () => { this.erreurdateReponse = ''; this.erreur = ''; }
+    );
+    this.addForm.get('controleur').valueChanges.subscribe(
       () => { this.erreurdateReponse = ''; this.erreur = ''; }
     );
   }
@@ -88,11 +96,15 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.get('dateReponse').value.trim() === ''){
       this.erreurdateReponse = 'Date Reponse obligatoire !';
     }
+    if (this.addForm.get('controleur').value.trim() === ''){
+      this.erreurdateReponse = 'Controleur obligatoire !';
+    }
     if (this.addForm.invalid){
       return;
     }
-    this.sending = true;
-    this.btnText = 'Vérification...';
+    this.addForm.addControl("controleurs",new FormControl([this.addForm.get('controleur').value],));
+    console.log(this.addForm.value);
+    
     this.subscribeCourierArriver(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: any){
@@ -110,9 +122,16 @@ export class CourierArriverComponent implements OnInit {
         else{
           this.erreur = 'Une erreur s\'est produite !';
         }
-        this.sending = false;
-        this.btnText = 'Envoyer';
-        return;
       });
+  }
+  getControleurs(): any{
+    this.methodeService.getControleurs().subscribe(
+      (data) => {
+        this.controleur=data['hydra:member'];
+        console.log(this.controleur);
+        
+      },
+      (error: any) => {
+    });
   }
 }
