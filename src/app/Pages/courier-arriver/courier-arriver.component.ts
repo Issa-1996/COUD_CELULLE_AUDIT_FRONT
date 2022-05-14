@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserModel } from 'app/Model/User.model';
+import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
@@ -13,7 +15,9 @@ export class CourierArriverComponent implements OnInit {
 
   addForm: FormGroup;
 
+  helper = new JwtHelperService();
   controleur:UserModel;
+  coordonateur:UserModel;
   erreurdateArriver = '';
   erreurexpediteur = '';
   erreurdateCorrespondance = '';
@@ -25,11 +29,18 @@ export class CourierArriverComponent implements OnInit {
   erreurControleur =" ";
   erreur = '';
   code = '';
-  sending = false;
-  btnText = 'Envoyer';
-  constructor(private formBuilder: FormBuilder, private router: Router, private methodeService: MethodeService) { }
+  Connecter:UserModel;
+  id:number;
+  constructor(
+    private formBuilder: FormBuilder, 
+    private router: Router, 
+    private methodeService: MethodeService, 
+    private authService: AuthService
+    ) { }
 
   ngOnInit(): void {
+    this.getCoordonateur();
+    this.connectUser();
     this.getControleurs();
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
@@ -102,9 +113,8 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.invalid){
       return;
     }
-    this.addForm.addControl("controleurs",new FormControl([this.addForm.get('controleur').value],));
-    console.log(this.addForm.value);
-    
+    this.addForm.addControl("assistante",new FormControl("/api/coud/assistantes/"+this.Connecter,));
+    this.addForm.addControl("coordinateur",new FormControl("/api/coud/coordinateurs/"+this.coordonateur,));
     this.subscribeCourierArriver(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: any){
@@ -128,10 +138,24 @@ export class CourierArriverComponent implements OnInit {
     this.methodeService.getControleurs().subscribe(
       (data) => {
         this.controleur=data['hydra:member'];
-        console.log(this.controleur);
-        
       },
       (error: any) => {
     });
+  }
+  getCoordonateur(): any{
+    this.methodeService.getCoordonateurs().subscribe(
+      (data) => {
+        this.coordonateur=data['hydra:member'][0]["id"];
+      },
+      (error: any) => {
+    });
+  }
+  connectUser(){
+    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    const username: string[] = decodedToken.username;
+    this.authService.getUserConnected(username)
+    .subscribe(data=>{
+     this.Connecter=data['hydra:member'][0]["id"];
+    })
   }
 }

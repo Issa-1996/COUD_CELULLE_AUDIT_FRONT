@@ -36,7 +36,7 @@
             <label>CONTROLEUR</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
             <select class="form-control" id="controleur" formControlName="controleur">
               <option disabled>choisir un controleur</option>
-            <option value="[/coud/controleurs/{{ ctrl.id }}]"  *ngFor="let ctrl of controleur">{{ctrl.prenom}} {{ctrl.nom}}</option>
+            <option value="/api/coud/controleurs/{{ ctrl.id }}"  *ngFor="let ctrl of controleur">{{ctrl.prenom}} {{ctrl.nom}}</option>
             </select>
             <span class="login-erreur" *ngIf="erreurControleur!=''" style="color: red;"> {{ erreurControleur }} </span>
           </div>

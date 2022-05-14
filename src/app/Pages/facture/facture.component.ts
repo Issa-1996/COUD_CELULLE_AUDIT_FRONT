@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CourierModel } from 'app/Model/Courier.model';
+import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
   selector: 'app-facture',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FactureComponent implements OnInit {
 
-  constructor() { }
+  courrier:CourierModel;
+  constructor(private methodeService: MethodeService) { }
 
   ngOnInit(): void {
+    this.getCourrierArrivers();
   }
 
+  getCourrierArrivers(): any{
+    this.methodeService.getCourriers().subscribe(
+      (data) => {
+        this.courrier=data['hydra:member'];
+        console.log(this.courrier);
+        
+      },
+      (error: any) => {
+    });
+  }
 }
