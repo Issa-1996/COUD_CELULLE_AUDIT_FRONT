@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/container/courier']);
               this.authService.getUserConnected(decodedToken.username).subscribe(
                 (res) => {
-                  localStorage.setItem('connectedUser', JSON.stringify(res['hydra:member'][0]));
+                  localStorage.setItem('connectedUser',res['hydra:member'][0]);
                   //const roles: string[] = decodedToken.roles;
                 }
               )

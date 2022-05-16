@@ -45,9 +45,6 @@ export class AddUserComponent implements OnInit {
     this.addForm.get('username').valueChanges.subscribe(
       () => { this.erreurusername = ''; this.erreur = ''; }
     );
-    this.addForm.get('roles').valueChanges.subscribe(
-      () => { this.erreurprofil = ''; this.erreur = ''; }
-    );
     this.addForm.get('matricule').valueChanges.subscribe(
       () => { this.erreurmatricule = ''; this.erreur = ''; }
     );
@@ -62,6 +59,9 @@ export class AddUserComponent implements OnInit {
     );
     this.addForm.get('email').valueChanges.subscribe(
       () => { this.erreuremail = ''; this.erreur = ''; }
+    );
+    this.addForm.get('profil').valueChanges.subscribe(
+      () => { this.erreurprofil = ''; this.erreur = ''; }
     );
   }
 
@@ -89,7 +89,8 @@ export class AddUserComponent implements OnInit {
     }
     if (this.addForm.invalid){
       return;
-    }    
+    }     
+
     if(this.addForm.get('profil').value=="1"){  
       this.addForm.addControl("roles",new FormControl(["ROLE_COORDONATEUR"],));
       this.addForm.addControl("password",new FormControl('password',));
@@ -120,17 +121,6 @@ export class AddUserComponent implements OnInit {
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
           this.erreur = 'Ajout assistante avec success';
-          this.router.navigate(['/container/utilisateurs']); 
-        },(error) => {
-          // @ts-ignore
-          if (error.status === 403){this.erreur = error.error;}
-          else{this.erreur = 'Une erreur est produite !';}});
-    }else if(this.addForm.get('profil').value=="/api/coud/profils/4"){
-      this.addForm.addControl("roles",new FormControl(["ROLE_ADJOINT_COORDONATEUR"],));
-      this.addForm.addControl("password",new FormControl('password',));
-      this.methodeService.addUser(this.addForm.value).subscribe(
-        (data) => {
-          this.erreur = 'Ajout adjoint coordonateur avec success';
           this.router.navigate(['/container/utilisateurs']); 
         },(error) => {
           // @ts-ignore

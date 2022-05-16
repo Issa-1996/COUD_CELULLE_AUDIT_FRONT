@@ -37,4 +37,10 @@ export class MethodeService {
   getControleurs(): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs`);
   }
+  getCoordonateurs(): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordinateurs`);
+  }
+  getCourriers(): Observable<CourierModel>{
+    return this.httpClient.get<CourierModel>(`${envVars.url}/coud/courier_arrivers`);
+  }
 }

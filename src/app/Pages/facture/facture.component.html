@@ -24,7 +24,13 @@
         <label style="font-size: 18px; color: black;">Bénéficiare</label><label  style="color: red; font-size: 20px;">*</label><br> 
         <input type="texte" class="form-control" placeholder="Bénéficiare :" name="saisir">
       </div>
-     
+     <div class="form-group">
+      <select class="form-control" id="courrier" formControlName="courrier">
+        <option disabled>choisir un controleur</option>
+        <option value="{{ courriersArriver.id}}" *ngFor="let courriersArriver of courrier">{{ courriersArriver.object}}</option>
+      <!-- <option value="/api/coud/controleurs/{{ ctrl.id }}"  *ngFor="let ctrl of controleur">{{ctrl.prenom}} {{ctrl.nom}}</option> -->
+      </select>
+     </div>
       <div class="text-center">
         <button type="submit" class="btn btn-success" name="submit">Annuler</button>
         <button type="submit" class="btn btn-success ml-5" name="submit">Enrégistrer</button>

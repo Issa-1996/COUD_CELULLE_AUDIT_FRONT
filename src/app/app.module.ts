@@ -41,6 +41,8 @@ import { AuthGuardGuard } from './auth-guard.guard';
 import { AfficheUserComponent } from './Pages/Agents/affiche-user/affiche-user.component';
 import { MethodeService } from './Service/methode.service';
 import { FooterComponent } from './footer/footer.component';
+import { CourierArriverAffichageComponent } from './Pages/courier-arriver-affichage/courier-arriver-affichage.component';
+import { FactureAffichageComponent } from './Pages/facture-affichage/facture-affichage.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { FooterComponent } from './footer/footer.component';
     CourierArriverComponent,
     FicheDeControleInterneComponent,
     AfficheUserComponent,
-    FooterComponent
+    FooterComponent,
+    CourierArriverAffichageComponent,
+    FactureAffichageComponent
   ],
   imports: [
     MaterialModule,
