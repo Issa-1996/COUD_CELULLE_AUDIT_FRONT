@@ -53,3 +53,7 @@
         bottom: 3%;
         text-align: center;
     }
+    td{
+        font-size: 20px;
+        color: black;
+    }

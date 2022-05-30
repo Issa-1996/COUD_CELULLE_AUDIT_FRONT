@@ -39,7 +39,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.clear()
   }
-  getUserConnected(codeEtudiant: any): Observable<UserModel>{
-    return this.httpClient.get<UserModel>(`${envVars.url}/coud/users?username=${codeEtudiant}`);
+  getUserConnected(username: any): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/users?username=${username}`);
   }
 }

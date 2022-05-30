@@ -2,7 +2,7 @@ import { RapportModel } from "./Rapport.model";
 import { UserModel } from "./User.model";
 
 export interface CourierModel{
-    id: number;
+    id: string;
     numeroCourier: string;
     object:string;
     nature: string;

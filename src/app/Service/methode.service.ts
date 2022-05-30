@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { Facture } from 'app/Model/Facture.model';
 import { FicheDeControlModel } from 'app/Model/FicheDeControl.model';
 import { ProfilModel } from 'app/Model/Profil.model';
 import { UserModel } from 'app/Model/User.model';
@@ -42,5 +43,17 @@ export class MethodeService {
   }
   getCourriers(): Observable<CourierModel>{
     return this.httpClient.get<CourierModel>(`${envVars.url}/coud/courier_arrivers`);
+  }
+  getAllCourriers(): Observable<CourierModel>{
+    return this.httpClient.get<CourierModel>(`${envVars.url}/coud/couriers`);
+  }
+  addFActure(facture: any): Observable<Facture> {
+    return this.httpClient.post<Facture>(`${envVars.url}/coud/factures`, facture, {headers: this.headers});
+  }
+  getFacture(): Observable<Facture>{
+    return this.httpClient.get<Facture>(`${envVars.url}/coud/factures`);
+  }
+  getFiche(): Observable<FicheDeControlModel>{
+    return this.httpClient.get<FicheDeControlModel>(`${envVars.url}/coud/fiche_de_controles`);
   }
 }

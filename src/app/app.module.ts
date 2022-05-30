@@ -43,6 +43,7 @@ import { MethodeService } from './Service/methode.service';
 import { FooterComponent } from './footer/footer.component';
 import { CourierArriverAffichageComponent } from './Pages/courier-arriver-affichage/courier-arriver-affichage.component';
 import { FactureAffichageComponent } from './Pages/facture-affichage/facture-affichage.component';
+import { CourrierListeComponent } from './Pages/courrier-liste/courrier-liste.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { FactureAffichageComponent } from './Pages/facture-affichage/facture-aff
     AfficheUserComponent,
     FooterComponent,
     CourierArriverAffichageComponent,
-    FactureAffichageComponent
+    FactureAffichageComponent,
+    CourrierListeComponent
   ],
   imports: [
     MaterialModule,

@@ -1,47 +1,49 @@
 <div class="container">
-    <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-        {{!isLinear ? 'Active la lecture' : 'Desactiver la lecture'}}
-    </button>
-    <mat-stepper [linear]="isLinear" #stepper>
-      <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>COURRIERS ARRIVES</ng-template>
-          <!-- <mat-form-field appearance="fill">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-          </mat-form-field> -->
-          <app-courier-arriver *ngIf="role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR')"></app-courier-arriver>
-          <app-courier-arriver-affichage *ngIf="role.includes('ROLE_CONTROLEUR')"></app-courier-arriver-affichage>
-
-          <div>
-              <button mat-button matStepperNext>Suivant</button>
-          </div>
-      </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" label="FACTURES">
-      <form [formGroup]="secondFormGroup">
-          <!-- <mat-form-field appearance="fill">
-            <mat-label>Address</mat-label>
-            <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-            required>
-          </mat-form-field> -->
-          <app-facture *ngIf="role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR')"></app-facture>
-          <app-facture-affichage *ngIf="role.includes('ROLE_CONTROLEUR')"></app-facture-affichage>
-          
-          <div>
-              <button mat-button matStepperPrevious>Retour</button>
-              <button mat-button matStepperNext>Suivant</button>
-          </div> 
-      </form>
-      </mat-step>
-      <mat-step *ngIf="role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR')">
-          <ng-template matStepLabel>COURRIERS DEPARTS</ng-template>
-          <app-courier-depart></app-courier-depart>
-          
-          <div>
-              <button mat-button matStepperPrevious>Retour</button>
-              <button mat-button (click)="stepper.reset()">Annuler</button>
+  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{ !isLinear ? "Active la lecture" : "Desactiver la lecture" }}
+  </button>
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>LISTES DES COURRIERS </ng-template>
+        <app-courrier-liste
+          *ngIf="
+            role.includes('ROLE_ASSISTANTE') ||
+            role.includes('ROLE_COORDINATEUR')
+          "
+        ></app-courrier-liste>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
         </div>
-      </mat-step>
-    </mat-stepper>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="COURRIERS ARRIVES">
+      <form [formGroup]="secondFormGroup">
+        <app-courier-arriver
+          *ngIf="
+            role.includes('ROLE_ASSISTANTE') ||
+            role.includes('ROLE_COORDINATEUR')
+          "
+        ></app-courier-arriver>
+        <app-courier-arriver-affichage
+          *ngIf="role.includes('ROLE_CONTROLEURS')"
+        ></app-courier-arriver-affichage>
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step
+      *ngIf="
+        role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR')
+      "
+    >
+      <ng-template matStepLabel>COURRIERS DEPARTS</ng-template>
+      <app-courier-depart></app-courier-depart>
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button (click)="stepper.reset()">Annuler</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
 </div>

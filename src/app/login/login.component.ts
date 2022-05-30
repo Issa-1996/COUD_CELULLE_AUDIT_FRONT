@@ -56,28 +56,16 @@ export class LoginComponent implements OnInit {
     this.sending = true;
       this.btnText = 'Patientez...';
       this.authService.isLogin(this.addForm.get('username').value, this.addForm.get('password').value).subscribe(
-        (data: any) => {
+        (data: any) => {          
             localStorage.setItem('token', data.token);
             const decodedToken = this.helper.decodeToken(data.token);
             const roles: string[] = decodedToken.roles;
 
             if (roles.includes('ROLE_COORDINATEUR')){
               this.router.navigate(['/container/accueil']);
-              this.authService.getUserConnected(decodedToken.username).subscribe(
-                (res) => {
-                  localStorage.setItem('connectedUser', JSON.stringify(res['hydra:member'][0]));
-                  //const roles: string[] = decodedToken.roles;
-                }
-              )
             }
-            if (roles.includes('ROLE_CONTROLEUR') || roles.includes('ROLE_ASSISTANTE')){
+            if (roles.includes('ROLE_CONTROLEURS') || roles.includes('ROLE_ASSISTANTE')){
               this.router.navigate(['/container/courier']);
-              this.authService.getUserConnected(decodedToken.username).subscribe(
-                (res) => {
-                  localStorage.setItem('connectedUser',res['hydra:member'][0]);
-                  //const roles: string[] = decodedToken.roles;
-                }
-              )
             }
         },
         (error) => {

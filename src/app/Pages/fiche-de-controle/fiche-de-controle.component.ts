@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CourierModel } from 'app/Model/Courier.model';
+import { UserModel } from 'app/Model/User.model';
+import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
@@ -12,31 +16,34 @@ export class FicheDeControleComponent implements OnInit {
   
 
   addForm: FormGroup;
-
+  helper = new JwtHelperService();
   erreurobjet = '';
-  erreurnomControleur = '';
   erreuravisControleur = '';
   erreurmotivation = '';
   erreurrecommandations = '';
+  erreurCourrier = '';
   erreur = '';
-  code = '';
-  sending = false;
-  btnText = 'Envoyer';
-  constructor(private formBuilder: FormBuilder, private router: Router, private methodeService: MethodeService) { }
+  objetCourier:CourierModel;
+  coordonateur:UserModel;
+  user:UserModel;
+  constructor(
+    private formBuilder: FormBuilder, 
+    private router: Router, 
+    private methodeService: MethodeService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.getCoordonateur();
+    this.connectUser();
     this.addForm = this.formBuilder.group({
       objet: ['', Validators.required],
-      nomControleur: ['', Validators.required],
       avisControleur: ['', Validators.required],
       motivation: ['', Validators.required],
-      recommandations: ['', [Validators.required]]
+      recommandations: ['', [Validators.required]],
+      courier: ['', [Validators.required]],
     });
     this.addForm.get('objet').valueChanges.subscribe(
       () => { this.erreurobjet = ''; this.erreur = ''; }
-    );
-    this.addForm.get('nomControleur').valueChanges.subscribe(
-      () => { this.erreurnomControleur = ''; this.erreur = ''; }
     );
     this.addForm.get('avisControleur').valueChanges.subscribe(
       () => { this.erreuravisControleur = ''; this.erreur = ''; }
@@ -47,14 +54,14 @@ export class FicheDeControleComponent implements OnInit {
     this.addForm.get('recommandations').valueChanges.subscribe(
       () => { this.erreurrecommandations = ''; this.erreur = ''; }
     );
+    this.addForm.get('courier').valueChanges.subscribe(
+      () => { this.erreurCourrier = ''; this.erreur = ''; }
+    );
   }
 
   onSignIn(): any{
     if (this.addForm.get('objet').value.trim() === ''){
       this.erreurobjet = 'Objet obligatoire !';
-    }
-    if (this.addForm.get('nomControleur').value.trim() === ''){
-      this.erreurnomControleur = 'Nom controleur obligatoire !';
     }
     if (this.addForm.get('avisControleur').value.trim() === ''){
       this.erreuravisControleur = 'Avis controleur obligatoire !';
@@ -63,13 +70,17 @@ export class FicheDeControleComponent implements OnInit {
       this.erreurmotivation = 'Motivation obligatoire !';
     }
     if (this.addForm.get('recommandations').value.trim() === ''){
-      this.erreurrecommandations = 'Recommandatio obligatoire !';
+      this.erreurrecommandations = 'Recommandation obligatoire !';
+    }
+    if (this.addForm.get('courier').value.trim() === ''){
+      this.erreurCourrier = 'Courrier obligatoire !';
     }
     if (this.addForm.invalid){
       return;
     }
-    this.sending = true;
-    this.btnText = 'Vérification...';
+    this.addForm.addControl("controleurs",new FormControl("/api/coud/controleurs/"+this.user,));
+    this.addForm.addControl("coordinateur",new FormControl("/api/coud/coordinateurs/"+this.coordonateur,));
+    
     this.subscribeFicheDeControle(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any){
@@ -80,17 +91,26 @@ export class FicheDeControleComponent implements OnInit {
         //this.router.navigate(['/']);
       },
       (error) => {
-        // @ts-ignore
-        if (error.status === 403){
-          this.erreur = error.error;
-        }
-        else{
-          this.erreur = 'Une erreur s\'est produite !';
-        }
-        this.sending = false;
-        this.btnText = 'Envoyer';
-        return;
-      });
+        if (error.status === 403){  this.erreur = error.error; }
+        else{  this.erreur = 'Une erreur s\'est produite !';  }});
   }
-
+  connectUser(){
+    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    const username: string[] = decodedToken.username;
+    this.authService.getUserConnected(username)
+    .subscribe(data=>{
+      const size=data['hydra:member'][0]["couriers"].length;
+      this.user=data['hydra:member'][0]["id"];
+      this.objetCourier=data['hydra:member'][0]['couriers'][size-1];
+      
+    })
+  }
+  getCoordonateur(): any{
+    this.methodeService.getCoordonateurs().subscribe(
+      (data) => {
+        this.coordonateur=data['hydra:member'][0]["id"];
+      },
+      (error: any) => {
+    });
+  }
 }
