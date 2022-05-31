@@ -8,14 +8,12 @@
           <span class="login-erreur" *ngIf="erreurobjet!=''" style="color: red;"> {{ erreurobjet }} </span>
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Controleur</label><label for="" style="color: red; font-size: 20px;">*</label><br>
-            <select class="form-control  col-md-120." id="nomControleur" name="nomControleur" formControlName="nomControleur">
-              <option>Choisir un controleur</option>
-              <option>controleur1</option>
-              <option>controleur2</option>
-              <option>controleur3</option>
+            <label for="exampleFormControlSelect1">Affecter un Courriers</label><label for="" style="color: red; font-size: 20px;">*</label><br>
+            <select class="form-control  col-md-120." id="courier" name="courier" formControlName="courier">
+              <option disabled>Choisir un Courriers</option>
+              <option value="/api/coud/courier_arrivers/{{ objetCourier.id }}">{{ objetCourier.object }}</option>
             </select>
-          <span class="login-erreur" *ngIf="erreurnomControleur!=''" style="color: red;"> {{ erreurnomControleur }} </span>
+          <span class="login-erreur" *ngIf="erreurCourrier!=''" style="color: red;"> {{ erreurCourrier }} </span>
           </div>
           <div class="mb-3">
             <label for="Avis Controleur:" class="form-label">Avis  controleur</label>
@@ -33,7 +31,7 @@
             <span class="login-erreur" *ngIf="erreurrecommandations!=''" style="color: red;"> {{ erreurrecommandations }} </span>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-info ml-5" name="submit" [disabled]="sending" (click)="onSignIn()">{{btnText}}</button>
+            <button type="submit" class="btn btn-info ml-5" name="submit" (click)="onSignIn()">Enregistrer</button>
           </div>
       </form>
      </div>

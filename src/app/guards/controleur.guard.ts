@@ -16,7 +16,7 @@ export class ControleurGuard implements CanActivate {
       const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
       // console.log(decodedToken.username);
       const roles: string[] = decodedToken.roles;
-      if (roles.includes('ROLE_CONTROLEUR')) {
+      if (roles.includes('ROLE_CONTROLEURS')) {
         this.router.navigate(['/']);
         return false;
       }

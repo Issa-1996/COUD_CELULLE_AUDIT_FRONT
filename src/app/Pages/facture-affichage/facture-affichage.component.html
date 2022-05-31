@@ -1,6 +1,37 @@
-<p>facture-affichage works!
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem iste odio facilis deleniti soluta, veritatis illo repellendus reiciendis distinctio harum velit placeat autem sunt voluptas aperiam cum similique doloribus.
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda tenetur rerum error dolores rem eveniet praesentium ex provident laborum fugiat reprehenderit quis non ad ullam odit, nemo dicta tempore cupiditate?
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci dolores quis, labore, iure unde cupiditate ea cum tempore est eaque numquam. Eligendi vero possimus nulla minus, sit qui ex praesentium.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. At iusto expedita culpa natus. Provident, consequuntur. Sed tempore, repellendus enim porro voluptatem dolor accusamus minima esse ducimus fugit? Repellendus, quidem iste.
-</p>
+<div class="container">
+    <div class="card-body ">
+        <div class="card text-center" style="width:100%; background-color: #28a745;">
+        <h3 style="color:white">FACTURE DU COURRIER</h3></div>
+    </div>
+   </div>
+   
+   <div class="container shadow-lg p-3" style=" background-color: white;">
+      
+       <form method="post">
+         <div class="form-group">
+           <label>Numéro de facture:</label><br>
+           <span > {{numerFac}} </span><br>
+           <!-- <input disabled type="texte" class="form-control" name="saisir" placeholder=""> -->
+         </div>
+         <div class="form-group">
+           <label>Montant:</label><br>
+           <span  >{{ montantFac }}</span><br> 
+           <!-- <input disabled type="texte" class="form-control" placeholder="  " name="saisir"> -->
+         </div>
+         <div class="form-group">
+           <label>Objet:</label><br>
+           <span  >{{objetFac}}</span><br> 
+           <!-- <input disabled type="texte" class="form-control" placeholder="" name="saisir"> -->
+         </div>
+         <div class="form-group">
+           <label>Bénéficiare</label><br>
+           <span>{{ beneficaire }} </span><br> 
+           <!-- <input disabled type="texte" class="form-control" placeholder=" " name="saisir"> -->
+         </div>
+     </form>
+    </div>
+   
+    
+   
+   
+   

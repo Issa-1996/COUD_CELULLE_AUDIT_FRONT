@@ -1,75 +1,218 @@
-
-    <div class="container col-md-9" style="box-shadow: 1px 5px 10px 3px beige;">
-      <h4 style="text-align:center; background-color: blue; width: 60%; margin-left: 20%; color: white; border-radius: 5px;"> COURRIER ARRIVER </h4>
-      <div *ngIf="erreur!=''" class="login-erreur-container text-center">
-        <span class="login-erreur" > {{ erreur }} </span>
+<div class="container col-md-9" style="box-shadow: 1px 5px 10px 3px beige">
+  <h4
+    style="
+      text-align: center;
+      background-color: blue;
+      width: 60%;
+      margin-left: 20%;
+      color: white;
+      border-radius: 5px;
+    "
+  >
+    COURRIER ARRIVER
+  </h4>
+  <div *ngIf="erreur != ''" class="login-erreur-container text-center">
+    <span class="login-erreur"> {{ erreur }} </span>
+  </div>
+  <form method="post" [formGroup]="addForm">
+    <div class="row">
+      <div class="col">
+        <label for="object:" class="form-label">Object</label>
+        <input
+          type="text"
+          class="form-control"
+          id="object"
+          formControlName="object"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurobject != ''"
+          style="color: red"
+        >
+          {{ erreurobject }}
+        </span>
       </div>
-      <form method="post" [formGroup]="addForm">
-        <div class="mb-3">
-          <label for="object:" class="form-label">Object</label>
-          <input type="text" class="form-control" id="object" formControlName="object">
-          <span class="login-erreur" *ngIf="erreurobject!=''" style="color: red;"> {{ erreurobject }} </span>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label>Numero Du Courier</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-            <input type="text" class="form-control" formControlName="numeroCourier" id="numeroCourier">
-            <span class="login-erreur" *ngIf="erreurnumeroCourier!=''" style="color: red;"> {{ erreurnumeroCourier }} </span>
-          </div>
-          <div class="col">
-            <label>Date Arriver du Courier</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-            <input type="date" class="form-control" formControlName="dateArriver" id="dateArriver">
-            <span class="login-erreur" *ngIf="erreurdateArriver!=''" style="color: red;"> {{ erreurdateArriver }} </span>
-          </div>
-        </div>
-        
+      <div class="col">
+        <label>Joindre un Facture</label
+        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <select class="form-control" name="facture" formControlName="facture">
+          <option disabled>choisir un facture</option>
+          <option value="/api/coud/factures/{{ id }}">{{ object }}</option>
+        </select>
+        <span
+          class="login-erreur"
+          *ngIf="erreurControleur != ''"
+          style="color: red"
+        >
+          {{ erreurControleur }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Numero Du Courier</label
+        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="numeroCourier"
+          id="numeroCourier"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurnumeroCourier != ''"
+          style="color: red"
+        >
+          {{ erreurnumeroCourier }}
+        </span>
+      </div>
+      <div class="col">
+        <label>Date Arriver du Courier</label
+        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <input
+          type="date"
+          class="form-control"
+          formControlName="dateArriver"
+          id="dateArriver"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurdateArriver != ''"
+          style="color: red"
+        >
+          {{ erreurdateArriver }}
+        </span>
+      </div>
+    </div>
 
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <label>Expediteur Du Courier</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-              <input type="text" class="form-control" formControlName="expediteur" id="expediteur">
-              <span class="login-erreur" *ngIf="erreurexpediteur!=''" style="color: red;"> {{ erreurexpediteur }} </span>
-            </div>
-          </div>
-          <div class="col">
-            <label>CONTROLEUR</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-            <select class="form-control" id="controleur" formControlName="controleur">
-              <option disabled>choisir un controleur</option>
-            <option value="/api/coud/controleurs/{{ ctrl.id }}"  *ngFor="let ctrl of controleur">{{ctrl.prenom}} {{ctrl.nom}}</option>
-            </select>
-            <span class="login-erreur" *ngIf="erreurControleur!=''" style="color: red;"> {{ erreurControleur }} </span>
-          </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label>Expediteur Du Courier</label
+          ><label for="" style="color: red; font-size: 20px">*</label><br />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="expediteur"
+            id="expediteur"
+          />
+          <span
+            class="login-erreur"
+            *ngIf="erreurexpediteur != ''"
+            style="color: red"
+          >
+            {{ erreurexpediteur }}
+          </span>
         </div>
+      </div>
+      <div class="col">
+        <label>CONTROLEUR</label
+        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <select
+          class="form-control"
+          id="controleur"
+          formControlName="controleur"
+        >
+          <option disabled>choisir un controleur</option>
+          <option
+            value="/api/coud/controleurs/{{ ctrl.id }}"
+            *ngFor="let ctrl of controleur"
+          >
+            {{ ctrl.prenom }} {{ ctrl.nom }}
+          </option>
+        </select>
+        <span
+          class="login-erreur"
+          *ngIf="erreurControleur != ''"
+          style="color: red"
+        >
+          {{ erreurControleur }}
+        </span>
+      </div>
+    </div>
 
-
-        <div class="row">
-          <div class="col">
-            <label>Numero Correspondance</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-            <input type="text" class="form-control" formControlName="numeroCorrespondance" id="numeroCorrespondance">
-            <span class="login-erreur" *ngIf="erreurnumeroCorrespondance!=''" style="color: red;"> {{ erreurnumeroCorrespondance }} </span>
-          </div>
-          <div class="col">
-            <label>Date Correspondance du Courier</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-            <input type="date" class="form-control" id="dateCorrespondance" formControlName="dateCorrespondance">
-            <span class="login-erreur" *ngIf="erreurdateCorrespondance!=''" style="color: red;"> {{ erreurdateCorrespondance }} </span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label>Numero Reponse</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-            <input type="text" class="form-control" formControlName="numeroReponse" id="numeroReponse">
-            <span class="login-erreur" *ngIf="erreurnumeroReponse!=''" style="color: red;"> {{ erreurnumeroReponse }} </span>
-          </div>
-          <div class="col">
-            <label>Date Reponse</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-            <input type="date" class="form-control" id="dateReponse" formControlName="dateReponse">
-            <span class="login-erreur" *ngIf="erreurdateReponse!=''" style="color: red;"> {{ erreurdateReponse }} </span>
-          </div>
-        </div>
-        <div class="text-center">
-          <!-- <button type="submit" class="btn btn-primary" name="submit">Annuler</button> -->
-          <button type="submit" class="btn btn-success btn-lg btn-block" name="submit" (click)="onSignIn()">Enregistrer</button>
-        </div> 
-    </form>
-   </div>
+    <div class="row">
+      <div class="col">
+        <label>Numero Correspondance</label
+        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="numeroCorrespondance"
+          id="numeroCorrespondance"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurnumeroCorrespondance != ''"
+          style="color: red"
+        >
+          {{ erreurnumeroCorrespondance }}
+        </span>
+      </div>
+      <div class="col">
+        <label>Date Correspondance du Courier</label
+        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <input
+          type="date"
+          class="form-control"
+          id="dateCorrespondance"
+          formControlName="dateCorrespondance"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurdateCorrespondance != ''"
+          style="color: red"
+        >
+          {{ erreurdateCorrespondance }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Numero Reponse</label
+        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="numeroReponse"
+          id="numeroReponse"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurnumeroReponse != ''"
+          style="color: red"
+        >
+          {{ erreurnumeroReponse }}
+        </span>
+      </div>
+      <div class="col">
+        <label>Date Reponse</label
+        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <input
+          type="date"
+          class="form-control"
+          id="dateReponse"
+          formControlName="dateReponse"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurdateReponse != ''"
+          style="color: red"
+        >
+          {{ erreurdateReponse }}
+        </span>
+      </div>
+    </div>
+    <div class="text-center">
+      <!-- <button type="submit" class="btn btn-primary" name="submit">Annuler</button> -->
+      <button
+        type="submit"
+        class="btn btn-info btn-lg btn-block"
+        name="submit"
+        (click)="onSignIn()"
+      >
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</div>

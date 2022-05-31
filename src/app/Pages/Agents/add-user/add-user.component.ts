@@ -92,10 +92,8 @@ export class AddUserComponent implements OnInit {
     }     
 
     if(this.addForm.get('profil').value=="1"){  
-      this.addForm.addControl("roles",new FormControl(["ROLE_COORDONATEUR"],));
+      this.addForm.addControl("roles",new FormControl(["ROLE_COORDINATEUR"],));
       this.addForm.addControl("password",new FormControl('password',));
-      
-      
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
           this.erreur = 'Ajout coordonateur avec success';
@@ -105,7 +103,7 @@ export class AddUserComponent implements OnInit {
           if (error.status === 403){this.erreur = error.error;}
           else{this.erreur = 'Une erreur est produite !';}});
     }else if(this.addForm.get('profil').value=="2"){
-      this.addForm.addControl("roles",new FormControl(["ROLE_CONTROLEUR"],));
+      this.addForm.addControl("roles",new FormControl(["ROLE_CONTROLEURS"],));
       this.addForm.addControl("password",new FormControl('password',));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
@@ -132,6 +130,7 @@ export class AddUserComponent implements OnInit {
     this.methodeService.getProfils().subscribe(
       (data) => {
         this.profil=data['hydra:member'];
+        // console.log(this.profil);
       },
       (error: any) => {
         // console.log(error.message);

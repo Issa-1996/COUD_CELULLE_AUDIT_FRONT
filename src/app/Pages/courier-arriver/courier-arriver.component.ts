@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Facture } from 'app/Model/Facture.model';
 import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
@@ -18,6 +19,7 @@ export class CourierArriverComponent implements OnInit {
   helper = new JwtHelperService();
   controleur:UserModel;
   coordonateur:UserModel;
+  facture:Facture;
   erreurdateArriver = '';
   erreurexpediteur = '';
   erreurdateCorrespondance = '';
@@ -27,10 +29,12 @@ export class CourierArriverComponent implements OnInit {
   erreurnumeroCourier = '';
   erreurobject = '';
   erreurControleur =" ";
+  erreurFacture="";
   erreur = '';
   code = '';
   Connecter:UserModel;
   id:number;
+  object:String;
   constructor(
     private formBuilder: FormBuilder, 
     private router: Router, 
@@ -39,11 +43,13 @@ export class CourierArriverComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.getFacture();
     this.getCoordonateur();
     this.connectUser();
     this.getControleurs();
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
+      facture: ['', Validators.required],
       numeroCourier: ['', Validators.required],
       dateArriver: ['', Validators.required],
       expediteur: ['', Validators.required],
@@ -55,6 +61,9 @@ export class CourierArriverComponent implements OnInit {
     });
     this.addForm.get('object').valueChanges.subscribe(
       () => { this.erreurobject = ''; this.erreur = ''; }
+    );
+    this.addForm.get('facture').valueChanges.subscribe(
+      () => { this.erreurdateReponse = ''; this.erreur = ''; }
     );
     this.addForm.get('numeroCourier').valueChanges.subscribe(
       () => { this.erreurnumeroCourier = ''; this.erreur = ''; }
@@ -85,6 +94,9 @@ export class CourierArriverComponent implements OnInit {
   onSignIn(): any{
     if (this.addForm.get('object').value.trim() === ''){
       this.erreurobject = 'Objet obligatoire !';
+    }
+    if (this.addForm.get('facture').value.trim() === ''){
+      this.erreurdateReponse = 'facture obligatoire !';
     }
     if (this.addForm.get('numeroCourier').value.trim() === ''){
       this.erreurnumeroCourier = 'Numero Courier obligatoire !';
@@ -157,5 +169,15 @@ export class CourierArriverComponent implements OnInit {
     .subscribe(data=>{
      this.Connecter=data['hydra:member'][0]["id"];
     })
+  }
+  getFacture(): any{
+    this.methodeService.getFacture().subscribe(
+      (data) => {
+        const size=data['hydra:member'].length;
+        this.id=data['hydra:member'][size-1]['id'];
+        this.object=data['hydra:member'][size-1]['object'];        
+      },
+      (error: any) => {
+    });
   }
 }

@@ -13,15 +13,14 @@ export class HeaderComponent implements OnInit {
 
   helper = new JwtHelperService();
   public  role: any[];
-  prenom:any;
-  nom:any;
+  prenom='';
+  nom='';
   user:UserModel;
   constructor(private router: Router, private authServive: AuthService) { }
 
   ngOnInit(): void {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     this.role = decodedToken.roles;
-    //console.log(this.role);
     this.connectUser();
     
   }
@@ -31,10 +30,10 @@ export class HeaderComponent implements OnInit {
   }
   connectUser(){
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    const username: string[] = decodedToken.username;
+    const username: string[] = decodedToken.username;  
+
     this.authServive.getUserConnected(username)
     .subscribe(data=>{
-      // console.log(data['hydra:member'][0]);
       this.user=data['hydra:member'][0];
       this.prenom=this.user["prenom"];
       this.nom=this.user["nom"];

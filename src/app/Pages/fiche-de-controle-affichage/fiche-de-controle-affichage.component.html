@@ -27,23 +27,23 @@
             </header>
             <h4 style="margin-top: 5%; margin-left: 35%; margin-bottom: 3%;"><u>FICHE DE CONTROLE INTERNE</u></h4>
             <section class="col-12">
-                <div class="objet" style="border: 2px solid black; margin-bottom: 5%; height: 50px;"><b>Document objet du controle:</b> </div>
+                <div class="objet" style="border: 2px solid black; margin-bottom: 5%; height: 50px; font-size: 20px;"><b>Document objet du controle:</b> {{ fiche['objet'] }} </div>
                 <table class="tables" border="1">
                 <tbody>
                     <tr>
-                        <td style="width: 50%; height: 100px; text-align: left; border: 1px solid black;"><b><u>Controleur</u>:</b></td>
-                        <td style="width: 50%; height: 100px; text-align: left; border: 1px solid black;"><b><u>Avis Controleur</u>:</b></td>
+                        <td style="width: 50%; height: 100px; text-align: left; border: 1px solid black;"><b><u>Controleur</u>:</b> {{fiche['controleurs']['prenom']}}  {{fiche['controleurs']['nom']}}</td>
+                        <td style="width: 50%; height: 100px; text-align: left; border: 1px solid black;"><b><u>Avis Controleur</u>:</b> {{fiche['avisControleur'] }} </td>
                     </tr> 
                     <tr>
-                        <td style="width: 50%; height: 200px; text-align: left; border: 1px solid black;"><b><u>Motivation de l'Avis</u>:</b></td>
-                        <td style="width: 50%; height: 200px; text-align: left; border: 1px solid black;"><b><u>Recommandations Controleur</u>:</b></td>
+                        <td style="width: 50%; height: 200px; text-align: left; border: 1px solid black;"><b><u>Motivation de l'Avis</u>:</b> {{fiche['motivation'] }}</td>
+                        <td style="width: 50%; height: 200px; text-align: left; border: 1px solid black;"><b><u>Recommandations Controleur</u>:</b> {{fiche['recommandations'] }}</td>
                     </tr> 
                     <tr>
-                        <td colspan="4" style="height: 100px; border: 1px solid black;"><b><u>Signature Controleur</u></b></td>
+                        <td colspan="4" style="height: 100px; border: 1px solid black;"><b><u>Signature Controleur</u></b> </td>
                     </tr> 
                     <tr>
                         <td style="width: 50%; height: 100px; border: 1px solid black;"><b><u>Le chef du Bureau</u></b></td>
-                        <td style="width: 50%; height: 100px; border: 1px solid black;"><b><u>Le coordonnateur CACG</u></b></td>
+                        <td style="width: 50%; height: 100px; border: 1px solid black;"><b><u>Le coordonnateur CACG</u></b> </td>
                     </tr> 
                     </tbody>
                 </table>
