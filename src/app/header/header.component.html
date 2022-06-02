@@ -11,13 +11,16 @@
                 <div class="marquee">
                     <marquee LOOP="10" *ngIf="role.includes('ROLE_ASSISTANTE')">GESTION DES COURRIERS</marquee>
                 </div>
+                <div class="marquee">
+                    <marquee LOOP="10" *ngIf="role.includes('ROLE_CONTROLEURS')">GESTION DU FICHE DE CONTROLE</marquee>
+                </div>
                 <li class="navbar-brand active" *ngIf="role.includes('ROLE_COORDINATEUR')">
                     <a class="nav-link active" routerLink="/container/accueil">Accueil</a>
                 </li>
-                <li class="navbar-brand active" *ngIf="role.includes('ROLE_CONTROLEURS') || role.includes('ROLE_COORDINATEUR')">
+                <li class="navbar-brand active" *ngIf="role.includes('ROLE_COORDINATEUR')">
                     <a class="nav-link active" routerLink="/container/courier" >Courriers</a>
                 </li>
-                <li class="navbar-brand active" *ngIf="role.includes('ROLE_CONTROLEURS') || role.includes('ROLE_COORDINATEUR')">
+                <li class="navbar-brand active" *ngIf="role.includes('ROLE_COORDINATEUR')">
                     <a class="nav-link active" routerLink="/container/fichedecontroleinterne" >Fiche de controle</a>
                 </li>
                 <li class="navbar-brand" *ngIf="role.includes('ROLE_COORDINATEUR')">

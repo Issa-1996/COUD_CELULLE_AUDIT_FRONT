@@ -44,6 +44,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CourierArriverAffichageComponent } from './Pages/courier-arriver-affichage/courier-arriver-affichage.component';
 import { FactureAffichageComponent } from './Pages/facture-affichage/facture-affichage.component';
 import { CourrierListeComponent } from './Pages/courrier-liste/courrier-liste.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { CourrierListeComponent } from './Pages/courrier-liste/courrier-liste.co
     FooterComponent,
     CourierArriverAffichageComponent,
     FactureAffichageComponent,
-    CourrierListeComponent
+    CourrierListeComponent,
+    PaginationComponent
   ],
   imports: [
     MaterialModule,

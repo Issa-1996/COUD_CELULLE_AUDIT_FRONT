@@ -9,7 +9,8 @@
         <app-courrier-liste
           *ngIf="
             role.includes('ROLE_ASSISTANTE') ||
-            role.includes('ROLE_COORDINATEUR')
+            role.includes('ROLE_COORDINATEUR') ||
+            role.includes('ROLE_CONTROLEURS')
           "
         ></app-courrier-liste>
         <div>
@@ -17,17 +18,47 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="COURRIERS ARRIVES">
+    <mat-step
+      [stepControl]="firstFormGroup"
+      *ngIf="
+        role.includes('ROLE_COORDINATEUR') || role.includes('ROLE_CONTROLEURS')
+      "
+    >
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>NOUVEAU FICHE DE CONTROLE </ng-template>
+        <app-fiche-de-controle></app-fiche-de-controle>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step
+      [stepControl]="secondFormGroup"
+      label="NOUVEAU COURRIERS ARRIVES"
+      *ngIf="
+        role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR')
+      "
+    >
       <form [formGroup]="secondFormGroup">
-        <app-courier-arriver
-          *ngIf="
-            role.includes('ROLE_ASSISTANTE') ||
-            role.includes('ROLE_COORDINATEUR')
-          "
-        ></app-courier-arriver>
+        <app-courier-arriver></app-courier-arriver>
         <app-courier-arriver-affichage
           *ngIf="role.includes('ROLE_CONTROLEURS')"
         ></app-courier-arriver-affichage>
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step
+      [stepControl]="secondFormGroup"
+      label="LISTE FICHE DE CONTROLE"
+      *ngIf="
+        role.includes('ROLE_CONTROLEURS') || role.includes('ROLE_COORDINATEUR')
+      "
+    >
+      <form [formGroup]="secondFormGroup">
+        <app-fiche-de-controle-interne></app-fiche-de-controle-interne>
+        <!-- <app-fiche-de-controle-affichage></app-fiche-de-controle-affichage> -->
         <div>
           <button mat-button matStepperPrevious>Retour</button>
         </div>

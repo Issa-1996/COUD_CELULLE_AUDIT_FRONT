@@ -1,68 +1,69 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CourierModel } from 'app/Model/Courier.model';
+import { UserModel } from 'app/Model/User.model';
+import { AuthService } from 'app/Service/auth.service';
+import { MethodeService } from 'app/Service/methode.service';
+import { data } from 'jquery';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
 
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
 @Component({
   selector: 'app-courrier-liste',
   templateUrl: './courrier-liste.component.html',
-  styleUrls: ['./courrier-liste.component.css']
+  styleUrls: ['./courrier-liste.component.css'],
 })
-export class CourrierListeComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<UserData>;
+export class CourrierListeComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = [
+    'id',
+    'objet',
+    'date',
+    'type',
+    'detail',
+    'modifier',
+  ];
+  displayedColumn: string[] = [
+    'id',
+    'objet',
+    'date',
+    'type',
+    'detail',
+  ];
+  dataSource: MatTableDataSource<CourierModel> = new MatTableDataSource([]);
+  database: CourierModel;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  myPageEvent: PageEvent;
+  myPageIndex = 1;
+  myPageSize = 5;
+  myPageLength: number;
+  showClose = false;
+  filter = '';
+  spinner = false;
+  helper = new JwtHelperService();
+  public role: any[];
+  controleur: UserModel;
+  Connecter: UserModel;
 
-  constructor() {
+  constructor(
+    private methodeService: MethodeService,
+    private authService: AuthService
+  ) {
     // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    const users = this.listeCourrier;
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  }
+  ngOnInit(): void {
+    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    this.role = decodedToken.roles;
   }
 
   ngAfterViewInit() {
+    this.listeCourrier();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -74,21 +75,60 @@ export class CourrierListeComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+    if (filterValue.length >= 6) {
+      this.spinner = true;
+      this.methodeService
+        .getOneCourriers(filterValue.trim())
+        .subscribe((courrier: CourierModel) => {
+          // tslint:disable-next-line:triple-equals
+          this.spinner = false;
+          if (courrier['hydra:member'].length != 0) {
+            this.dataSource = new MatTableDataSource(courrier['hydra:member']);
+            this.myPageLength = courrier['hydra:totalItems'];
+            this.showClose = true;
+          }
+        });
+    }
   }
-}
+  listeCourrier() {
+    if (this.role.includes('ROLE_CONTROLEURS')) {
+      const decodedToken = this.helper.decodeToken(
+        localStorage.getItem('token')
+      );
+      const username: string[] = decodedToken.username;
+      this.authService.getUserConnected(username).subscribe((data) => {
+        this.controleur = data['hydra:member'][0];
+        this.Connecter = data['hydra:member'][0]['couriers'];
+        console.log(this.Connecter);
+        
+        this.dataSource = new MatTableDataSource(data['hydra:member'][0]['couriers']);
+        
+      });
+    }
+    if (
+      this.role.includes('ROLE_ASSISTANTE') ||
+      this.role.includes('ROLE_COORDINATEUR')
+    ) {
+      this.methodeService.getAllCourriers().subscribe((data) => {
+        this.dataSource = new MatTableDataSource(data['hydra:member']);
+      });
+    }
+  }
+  // Pagination
+  public getServerData(event?: PageEvent): any {
+    // console.log(event);
+    if (event.pageIndex + 1 > this.myPageIndex) {
+      this.myPageIndex = event.pageIndex + 1;
+    } else if (event.pageIndex + 1 < this.myPageIndex) {
+      this.myPageIndex = event.pageIndex + 1;
+    }
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
+    // tslint:disable-next-line:triple-equals
+    // if (this.niveauChoisi != '') {
+    //   this.getReservationByNiveau(this.niveauChoisi, this.myPageIndex, event.pageSize);
+    // }
+    // else{
+    // this.getReservation( this.myPageIndex, event.pageSize);
+    // }
+  }
 }
