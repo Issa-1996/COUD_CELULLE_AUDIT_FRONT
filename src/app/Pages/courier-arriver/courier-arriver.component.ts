@@ -19,7 +19,6 @@ export class CourierArriverComponent implements OnInit {
   helper = new JwtHelperService();
   controleur:UserModel;
   coordonateur:UserModel;
-  facture:Facture;
   erreurdateArriver = '';
   erreurexpediteur = '';
   erreurdateCorrespondance = '';
@@ -29,7 +28,9 @@ export class CourierArriverComponent implements OnInit {
   erreurnumeroCourier = '';
   erreurobject = '';
   erreurControleur =" ";
+  erreurMontant="";
   erreurFacture="";
+  erreurBeneficiaire="";
   erreur = '';
   code = '';
   Connecter:UserModel;
@@ -43,15 +44,16 @@ export class CourierArriverComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.getFacture();
     this.getCoordonateur();
     this.connectUser();
     this.getControleurs();
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
-      facture: ['', Validators.required],
+      beneficiaire: ['', Validators.required],
+      NumeroFacture: ['', Validators.required],
       numeroCourier: ['', Validators.required],
-      dateArriver: ['', Validators.required],
+      montant: ['', Validators.required],
+      Date: ['', Validators.required],
       expediteur: ['', Validators.required],
       numeroCorrespondance: ['', [Validators.required]],
       dateCorrespondance: ['', Validators.required],
@@ -62,13 +64,19 @@ export class CourierArriverComponent implements OnInit {
     this.addForm.get('object').valueChanges.subscribe(
       () => { this.erreurobject = ''; this.erreur = ''; }
     );
-    this.addForm.get('facture').valueChanges.subscribe(
-      () => { this.erreurdateReponse = ''; this.erreur = ''; }
+    this.addForm.get('beneficiaire').valueChanges.subscribe(
+      () => { this.erreurBeneficiaire = ''; this.erreur = ''; }
+    );
+    this.addForm.get('NumeroFacture').valueChanges.subscribe(
+      () => { this.erreurFacture = ''; this.erreur = ''; }
+    );
+    this.addForm.get('montant').valueChanges.subscribe(
+      () => { this.erreurMontant = ''; this.erreur = ''; }
     );
     this.addForm.get('numeroCourier').valueChanges.subscribe(
       () => { this.erreurnumeroCourier = ''; this.erreur = ''; }
     );
-    this.addForm.get('dateArriver').valueChanges.subscribe(
+    this.addForm.get('Date').valueChanges.subscribe(
       () => { this.erreurdateArriver = ''; this.erreur = ''; }
     );
     this.addForm.get('expediteur').valueChanges.subscribe(
@@ -87,7 +95,7 @@ export class CourierArriverComponent implements OnInit {
       () => { this.erreurdateReponse = ''; this.erreur = ''; }
     );
     this.addForm.get('controleur').valueChanges.subscribe(
-      () => { this.erreurdateReponse = ''; this.erreur = ''; }
+      () => { this.erreurControleur = ''; this.erreur = ''; }
     );
   }
 
@@ -95,13 +103,19 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.get('object').value.trim() === ''){
       this.erreurobject = 'Objet obligatoire !';
     }
-    if (this.addForm.get('facture').value.trim() === ''){
-      this.erreurdateReponse = 'facture obligatoire !';
+    if (this.addForm.get('beneficiaire').value.trim() === ''){
+      this.erreurBeneficiaire = 'Bénéficiaire obligatoire !';
+    }
+    if (this.addForm.get('NumeroFacture').value.trim() === ''){
+      this.erreurFacture = 'Numero facture obligatoire !';
+    }
+    if (this.addForm.get('montant').value.trim() === ''){
+      this.erreurMontant = 'Montant obligatoire !';
     }
     if (this.addForm.get('numeroCourier').value.trim() === ''){
       this.erreurnumeroCourier = 'Numero Courier obligatoire !';
     }
-    if (this.addForm.get('dateArriver').value.trim() === ''){
+    if (this.addForm.get('Date').value.trim() === ''){
       this.erreurdateArriver = 'Date Arriver obligatoire !';
     }
     if (this.addForm.get('expediteur').value.trim() === ''){
@@ -120,7 +134,7 @@ export class CourierArriverComponent implements OnInit {
       this.erreurdateReponse = 'Date Reponse obligatoire !';
     }
     if (this.addForm.get('controleur').value.trim() === ''){
-      this.erreurdateReponse = 'Controleur obligatoire !';
+      this.erreurControleur = 'Controleur obligatoire !';
     }
     if (this.addForm.invalid){
       return;
@@ -169,15 +183,5 @@ export class CourierArriverComponent implements OnInit {
     .subscribe(data=>{
      this.Connecter=data['hydra:member'][0]["id"];
     })
-  }
-  getFacture(): any{
-    this.methodeService.getFacture().subscribe(
-      (data) => {
-        const size=data['hydra:member'].length;
-        this.id=data['hydra:member'][size-1]['id'];
-        this.object=data['hydra:member'][size-1]['object'];        
-      },
-      (error: any) => {
-    });
   }
 }

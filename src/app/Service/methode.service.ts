@@ -47,6 +47,9 @@ export class MethodeService {
   getAllCourriers(): Observable<CourierModel>{
     return this.httpClient.get<CourierModel>(`${envVars.url}/coud/couriers`);
   }
+  getOneCourriers(object1: any): Observable<CourierModel>{
+    return this.httpClient.get<CourierModel>(`${envVars.url}/coud/couriers?object=${object1}`);
+  }
   addFActure(facture: any): Observable<Facture> {
     return this.httpClient.post<Facture>(`${envVars.url}/coud/factures`, facture, {headers: this.headers});
   }

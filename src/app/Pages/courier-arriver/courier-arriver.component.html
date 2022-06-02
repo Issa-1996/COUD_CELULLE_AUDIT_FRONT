@@ -33,18 +33,53 @@
         </span>
       </div>
       <div class="col">
-        <label>Joindre un Facture</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
-        <select class="form-control" name="facture" formControlName="facture">
-          <option disabled>choisir un facture</option>
-          <option value="/api/coud/factures/{{ id }}">{{ object }}</option>
-        </select>
+        <label for="beneficiaire:" class="form-label">BENEFICIAIRE</label>
+        <input
+          type="text"
+          class="form-control"
+          id="beneficiaire"
+          formControlName="beneficiaire"
+        />
         <span
           class="login-erreur"
-          *ngIf="erreurControleur != ''"
+          *ngIf="erreurBeneficiaire != ''"
           style="color: red"
         >
-          {{ erreurControleur }}
+          {{ erreurBeneficiaire }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="NumeroFacture:" class="form-label">Numero Facture</label>
+        <input
+          type="text"
+          class="form-control"
+          id="NumeroFacture"
+          formControlName="NumeroFacture"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurFacture != ''"
+          style="color: red"
+        >
+          {{ erreurFacture }}
+        </span>
+      </div>
+      <div class="col">
+        <label for="montant" class="form-label">MONTANT</label>
+        <input
+          type="text"
+          class="form-control"
+          id="montant"
+          formControlName="montant"
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurMontant != ''"
+          style="color: red"
+        >
+          {{ erreurMontant }}
         </span>
       </div>
     </div>
@@ -70,10 +105,10 @@
         <label>Date Arriver du Courier</label
         ><label for="" style="color: red; font-size: 20px">*</label><br />
         <input
-          type="date"
+          type="Date"
           class="form-control"
-          formControlName="dateArriver"
-          id="dateArriver"
+          formControlName="Date"
+          id="Date"
         />
         <span
           class="login-erreur"
@@ -84,7 +119,6 @@
         </span>
       </div>
     </div>
-
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -106,7 +140,7 @@
         </div>
       </div>
       <div class="col">
-        <label>CONTROLEUR</label
+        <label>AFFECTER UN CONTROLEUR</label
         ><label for="" style="color: red; font-size: 20px">*</label><br />
         <select
           class="form-control"
@@ -130,7 +164,6 @@
         </span>
       </div>
     </div>
-
     <div class="row">
       <div class="col">
         <label>Numero Correspondance</label

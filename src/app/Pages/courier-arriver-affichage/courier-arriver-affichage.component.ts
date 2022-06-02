@@ -22,12 +22,9 @@ export class CourierArriverAffichageComponent implements OnInit {
   connectUser(){
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     const username: string[] = decodedToken.username;
-    console.log(username);
     
     this.authService.getUserConnected(username)
-    .subscribe(data=>{
-      console.log(data);
-      
+    .subscribe(data=>{      
       const size=data['hydra:member'][0]["couriers"].length;
       this.controleur=data['hydra:member'][0];
       this.Connecter=data['hydra:member'][0]["couriers"][size-1];

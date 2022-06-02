@@ -12,5 +12,6 @@ export interface UserModel {
     dateNaissance: string;
     email: string;
     roles: [];
+    FicheDeControle: FicheDeControlModel;
     
 }
