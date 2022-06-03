@@ -7,6 +7,7 @@ import { CourierModel } from 'app/Model/Courier.model';
 import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { log } from 'console';
 import { data } from 'jquery';
 
 export interface UserData {
@@ -129,9 +130,10 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
       this.authService.getUserConnected(username).subscribe((data) => {
         this.controleur = data['hydra:member'][0];
         this.Connecter = data['hydra:member'][0]["FicheDeControle"];
-        console.log(this.Connecter);
+       // console.log(this.Connecter);
         
         this.dataSource = new MatTableDataSource(data['hydra:member'][0]['FicheDeControle']);
+      //  console.log(this.dataSource);
         
       });
   }
