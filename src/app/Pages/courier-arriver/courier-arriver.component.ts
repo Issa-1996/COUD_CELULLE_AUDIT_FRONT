@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Facture } from 'app/Model/Facture.model';
 import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
+import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
@@ -40,7 +41,8 @@ export class CourierArriverComponent implements OnInit {
     private formBuilder: FormBuilder, 
     private router: Router, 
     private methodeService: MethodeService, 
-    private authService: AuthService
+    private authService: AuthService,
+    private bihavio: BehavioSubjetService
     ) { }
 
   ngOnInit(): void {
@@ -142,6 +144,7 @@ export class CourierArriverComponent implements OnInit {
     this.addForm.addControl("assistante",new FormControl("/api/coud/assistantes/"+this.Connecter,));
     this.addForm.addControl("coordinateur",new FormControl("/api/coud/coordinateurs/"+this.coordonateur,));
     this.subscribeCourierArriver(this.addForm.value);
+    this.bihavio.setValue(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: any){
     this.methodeService.addCourierArriver(objetCourierArriver)

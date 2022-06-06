@@ -9,45 +9,6 @@ import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { data } from 'jquery';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
 @Component({
   selector: 'app-fiche-de-controle-interne',
   templateUrl: './fiche-de-controle-interne.component.html',
@@ -63,8 +24,7 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     'modifier'
   ];
   dataSource: MatTableDataSource<CourierModel> = new MatTableDataSource([]);
-  database: CourierModel;
-
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   myPageEvent: PageEvent;
@@ -129,7 +89,7 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
       this.authService.getUserConnected(username).subscribe((data) => {
         this.controleur = data['hydra:member'][0];
         this.Connecter = data['hydra:member'][0]["FicheDeControle"];
-        console.log(this.Connecter);
+        // console.log(this.Connecter);
         
         this.dataSource = new MatTableDataSource(data['hydra:member'][0]['FicheDeControle']);
         

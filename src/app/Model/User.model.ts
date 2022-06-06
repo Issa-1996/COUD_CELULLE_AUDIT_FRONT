@@ -13,5 +13,6 @@ export interface UserModel {
     email: string;
     roles: [];
     FicheDeControle: FicheDeControlModel;
+    courier: CourierModel;
     
 }

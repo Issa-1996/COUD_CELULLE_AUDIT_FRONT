@@ -6,8 +6,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
 import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
+import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { data } from 'jquery';
+import { logWarnings } from 'protractor/built/driverProviders';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -32,7 +35,6 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     'detail',
   ];
   dataSource: MatTableDataSource<CourierModel> = new MatTableDataSource([]);
-  database: CourierModel;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -50,10 +52,12 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
 
   constructor(
     private methodeService: MethodeService,
-    private authService: AuthService
+    private authService: AuthService,
+    private bihavio: BehavioSubjetService
   ) {
     // Create 100 users
-    const users = this.listeCourrier;
+    //const users = this.listeCourrier;
+    // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
   }
@@ -80,9 +84,17 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       this.methodeService
         .getOneCourriers(filterValue.trim())
         .subscribe((courrier: CourierModel) => {
+          console.log(courrier);
+          
+          this.bihavio.getValue().subscribe(
+            (test)=>{
+              courrier['hydra:member']+=test;
+          })
+         console.log(courrier['hydra:member']);
+         
           // tslint:disable-next-line:triple-equals
           this.spinner = false;
-          if (courrier['hydra:member'].length != 0) {
+          if (courrier['hydra:member'].length != 0) {            
             this.dataSource = new MatTableDataSource(courrier['hydra:member']);
             this.myPageLength = courrier['hydra:totalItems'];
             this.showClose = true;
@@ -99,8 +111,6 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       this.authService.getUserConnected(username).subscribe((data) => {
         this.controleur = data['hydra:member'][0];
         this.Connecter = data['hydra:member'][0]['couriers'];
-        console.log(this.Connecter);
-        
         this.dataSource = new MatTableDataSource(data['hydra:member'][0]['couriers']);
         
       });
@@ -110,6 +120,15 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       this.role.includes('ROLE_COORDINATEUR')
     ) {
       this.methodeService.getAllCourriers().subscribe((data) => {
+        
+        this.bihavio.getValue().subscribe(
+          (test)=>{
+            if(test!=null){
+              console.log(test);
+              //data['hydra:member']["hydra:totalItems"]=test;            
+              console.log(data);
+            }         
+        }) 
         this.dataSource = new MatTableDataSource(data['hydra:member']);
       });
     }

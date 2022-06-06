@@ -138,13 +138,14 @@
     </tr>
   </table>
 
-  <app-pagination
+  <!-- <app-pagination
     [length]="myPageLength"
     [pageSize]="myPageSize"
     [pageIndex]=""
     (currentPage)="getServerData($event)"
   >
-  </app-pagination>
+  </app-pagination> -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
 <mat-spinner
   *ngIf="spinner"
