@@ -7,19 +7,19 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ContainerComponent } from './container/container.component';
-import { CouriersComponent } from './Pages/couriers/couriers.component';
-import { FicheDeControleComponent } from './Pages/fiche-de-controle/fiche-de-controle.component';
-import { FicheDeControleAffichageComponent } from './Pages/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { RapportsComponent } from './Pages/rapports/rapports.component';
 import { FactureComponent } from './Pages/facture/facture.component';
 import { AssistanteComponent } from './Pages/Agents/assistante/assistante.component';
 import { ControleursComponent } from './Pages/Agents/controleurs/controleurs.component';
 import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.component';
 import { UsersComponent } from './Pages/Agents/users/users.component';
-import { FicheDeControleInterneComponent } from './Pages/fiche-de-controle-interne/fiche-de-controle-interne.component';
 import { AuthGuard } from './auth.guard';
 import { AfficheUserComponent } from './Pages/Agents/affiche-user/affiche-user.component';
 import { FooterComponent } from './footer/footer.component';
+import { CouriersComponent } from './Pages/Courriers/couriers/couriers.component';
+import { FicheDeControleComponent } from './Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
+import { FicheDeControleAffichageComponent } from './Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
+import { FicheDeControleInterneComponent } from './Pages/FicheDEControles/fiche-de-controle-interne/fiche-de-controle-interne.component';
 
 const routes: Routes =[
   {path: '', redirectTo: 'login', pathMatch: 'full'},
