@@ -1,46 +1,89 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-    <div class="container-fluid">
-        <img src="../assets/logo_coud.png" alt="..." class="img" height="60" width="200">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            
-            <ul class="navbar-nav mr-auto">
-                <div class="marquee">
-                    <marquee LOOP="10" *ngIf="role.includes('ROLE_ASSISTANTE')">GESTION DES COURRIERS</marquee>
-                </div>
-                <div class="marquee">
-                    <marquee LOOP="10" *ngIf="role.includes('ROLE_CONTROLEURS')">GESTION DU FICHE DE CONTROLE</marquee>
-                </div>
-                <li class="navbar-brand active" *ngIf="role.includes('ROLE_COORDINATEUR')">
-                    <a class="nav-link active" routerLink="/container/accueil">Accueil</a>
-                </li>
-                <li class="navbar-brand active" *ngIf="role.includes('ROLE_COORDINATEUR')">
-                    <a class="nav-link active" routerLink="/container/courier" >Courriers</a>
-                </li>
-                <li class="navbar-brand active" *ngIf="role.includes('ROLE_COORDINATEUR')">
-                    <a class="nav-link active" routerLink="/container/fichedecontroleinterne" >Fiche de controle</a>
-                </li>
-                <li class="navbar-brand" *ngIf="role.includes('ROLE_COORDINATEUR')">
-                    <a class="nav-link    active" routerLink="/container/utilisateurs" tabindex="-1" aria-disabled="true">Gestion des utilisateurs</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav mr-auto active">
-            <div class="d-flex">
-                <div class="navbar-brand active" id="user">
-                    <a class="nav-link dropdown-toggle active"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ prenom }} {{ nom }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item">{{ prenom }} {{ nom }}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" (click)="logOout()">Deconnexion</a>
-                    </div>
-                </div>
-            </div>
-            </ul>
+  <div class="container-fluid">
+    <img
+      src="../assets/logo_coud.png"
+      alt="..."
+      class="img"
+      height="60"
+      width="200"
+    />
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <div class="marquee">
+          <marquee LOOP="10" *ngIf="role.includes('ROLE_ASSISTANTE')"
+            >GESTION DES COURRIERS</marquee
+          >
+          <marquee LOOP="10" *ngIf="role.includes('ROLE_CONTROLEURS')"
+            >GESTION DU FICHE DE CONTROLE</marquee
+          >
         </div>
+        <li
+          class="navbar-brand active"
+          *ngIf="role.includes('ROLE_COORDINATEUR')"
+        >
+          <a class="nav-link active" routerLink="/container/accueil">Accueil</a>
+        </li>
+        <li
+          class="navbar-brand active"
+          *ngIf="role.includes('ROLE_COORDINATEUR')"
+        >
+          <a class="nav-link active" routerLink="/container/courier"
+            >Courriers</a
+          >
+        </li>
+        <li
+          class="navbar-brand active"
+          *ngIf="role.includes('ROLE_COORDINATEUR')"
+        >
+          <a
+            class="nav-link active"
+            routerLink="/container/fichedecontroleinterne"
+            >Fiche de controle</a
+          >
+        </li>
+        <li class="navbar-brand" *ngIf="role.includes('ROLE_COORDINATEUR')">
+          <a
+            class="nav-link active"
+            routerLink="/container/utilisateurs"
+            tabindex="-1"
+            aria-disabled="true"
+            >Gestion des utilisateurs</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto active">
+        <div class="d-flex">
+          <div class="navbar-brand active" id="user">
+            <a
+              class="nav-link dropdown-toggle active"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {{ prenom }} {{ nom }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item">{{ prenom }} {{ nom }}</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="logOout()">Deconnexion</a>
+            </div>
+          </div>
+        </div>
+      </ul>
     </div>
+  </div>
 </nav>

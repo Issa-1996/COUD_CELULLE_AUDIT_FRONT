@@ -63,7 +63,8 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
   }
   ngOnInit(): void {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    this.role = decodedToken.roles;
+    this.role = decodedToken.roles;  
+    this.listeCourrier();  
   }
 
   ngAfterViewInit() {
