@@ -11,7 +11,7 @@ import { MethodeService } from 'app/Service/methode.service';
 import { log } from 'console';
 import { data } from 'jquery';
 import { FicheDeControleAffichageComponent } from '../fiche-de-controle-affichage/fiche-de-controle-affichage.component';
-import { FicheDeControleModifierComponent } from '../fiche-de-controle-modifier.component';
+import { FicheDeControleModifierComponent } from '../fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { FicheDeControleComponent } from '../fiche-de-controle/fiche-de-controle.component';
 
 @Component({

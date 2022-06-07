@@ -23,14 +23,11 @@ import { FactureComponent } from './Pages/facture/facture.component';
 import { AssistanteComponent } from './Pages/Agents/assistante/assistante.component';
 import { ControleursComponent } from './Pages/Agents/controleurs/controleurs.component';
 import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.component';
-import { FicheDeControleComponent } from './Pages/FicheDeControle/fiche-de-controle-modifier/fiche-de-controle/fiche-de-controle.component';
 import { UsersComponent } from './Pages/Agents/users/users.component';
-import { FicheDeControleAffichageComponent } from './Pages/FicheDeControle/fiche-de-controle-modifier/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './Material/matmodule.service';
 import { AddUserComponent } from './Pages/Agents/add-user/add-user.component';
 import { UpdateUserComponent } from './Pages/Agents/update-user/update-user.component';
-import { FicheDeControleInterneComponent } from './Pages/FicheDeControle/fiche-de-controle-modifier/fiche-de-controle-interne/fiche-de-controle-interne.component';
 import { AuthService } from './Service/auth.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TokeInterceptorService } from './Service/toke-interceptor.service';
@@ -41,11 +38,15 @@ import { FooterComponent } from './footer/footer.component';
 import { FactureAffichageComponent } from './Pages/FicheDEControles/facture-affichage/facture-affichage.component';
 import { CourrierListeComponent } from './Pages/Courriers/courrier-liste/courrier-liste.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { FicheDeControleModifierComponent } from './Pages/FicheDeControle/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { CouriersComponent } from './Pages/Courriers/couriers/couriers.component';
 import { CourierDepartComponent } from './Pages/Courriers/courier-depart/courier-depart.component';
 import { CourierArriverComponent } from './Pages/Courriers/courier-arriver/courier-arriver.component';
 import { CourierArriverAffichageComponent } from './Pages/Courriers/courier-arriver-affichage/courier-arriver-affichage.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FicheDeControleComponent } from './Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
+import { FicheDeControleAffichageComponent } from './Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
+import { FicheDeControleInterneComponent } from './Pages/FicheDEControles/fiche-de-controle-interne/fiche-de-controle-interne.component';
+import { FicheDeControleModifierComponent } from './Pages/FicheDEControles/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { CourierArriverAffichageComponent } from './Pages/Courriers/courier-arri
     MatTooltipModule,
     HttpClientModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthService,
