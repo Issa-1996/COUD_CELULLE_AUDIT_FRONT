@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +10,9 @@ import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { log } from 'console';
 import { data } from 'jquery';
+import { FicheDeControleAffichageComponent } from '../fiche-de-controle-affichage/fiche-de-controle-affichage.component';
+import { FicheDeControleModifierComponent } from '../FicheDeControle/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
+import { FicheDeControleComponent } from '../fiche-de-controle/fiche-de-controle.component';
 
 @Component({
   selector: 'app-fiche-de-controle-interne',
@@ -42,12 +46,27 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
 
   constructor(
     private methodeService: MethodeService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
   ) {
     // Create 100 users
     const users = this.listeFicheControle;
 
     // Assign the data to the data source for the table to render
+  }
+  modifier() {
+    const dialogRef = this.dialog.open(FicheDeControleModifierComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  detail() {
+    const dialogRef = this.dialog.open(FicheDeControleAffichageComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
   ngOnInit(): void {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));

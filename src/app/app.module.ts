@@ -43,8 +43,9 @@ import { MethodeService } from './Service/methode.service';
 import { FooterComponent } from './footer/footer.component';
 import { CourierArriverAffichageComponent } from './Pages/courier-arriver-affichage/courier-arriver-affichage.component';
 import { FactureAffichageComponent } from './Pages/facture-affichage/facture-affichage.component';
-import { CourrierListeComponent } from './Pages/courrier-liste/courrier-liste.component';
+import { CourrierListeComponent } from './Pages/Courriers/courrier-liste/courrier-liste.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { FicheDeControleModifierComponent } from './Pages/FicheDeControle/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     CourierArriverAffichageComponent,
     FactureAffichageComponent,
     CourrierListeComponent,
-    PaginationComponent
+    PaginationComponent,
+    FicheDeControleModifierComponent
   ],
   imports: [
     MaterialModule,
