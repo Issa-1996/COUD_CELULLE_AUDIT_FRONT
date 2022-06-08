@@ -1,3 +1,4 @@
+import { CourierModel } from "./Courier.model";
 import { UserModel } from "./User.model";
 
 export interface FicheDeControlModel{
@@ -5,7 +6,9 @@ export interface FicheDeControlModel{
     nomControleur:string;
     avisControleur: string;
     motivation:string;
+    objet:string;
     recommandations:string;
     controleurs:UserModel;
     coordinateur: UserModel;
+    courier:CourierModel;
 }

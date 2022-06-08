@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { FicheDeControlModel } from 'app/Model/FicheDeControl.model';
 import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
@@ -17,68 +18,30 @@ import { FicheDeControleComponent } from '../fiche-de-controle/fiche-de-controle
 @Component({
   selector: 'app-fiche-de-controle-interne',
   templateUrl: './fiche-de-controle-interne.component.html',
-  styleUrls: ['./fiche-de-controle-interne.component.css']
+  styleUrls: ['./fiche-de-controle-interne.component.css'],
 })
 export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
-  displayedColumn: string[] = [
-    'id',
-    'objet',
-    'date',
-    'type',
-    'detail',
-    'modifier'
-  ];
-  dataSource: MatTableDataSource<CourierModel> = new MatTableDataSource([]);
-  
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  myPageEvent: PageEvent;
-  myPageIndex = 1;
-  myPageSize = 5;
-  myPageLength: number;
-  showClose = false;
-  filter = '';
-  spinner = false;
-  helper = new JwtHelperService();
   public role: any[];
-  controleur: UserModel;
-  Connecter: UserModel;
+  database:FicheDeControlModel[]=[];
+  helper = new JwtHelperService();
+  dataSource = new MatTableDataSource<FicheDeControlModel>([]);
 
-  constructor(
-    private methodeService: MethodeService,
-    private authService: AuthService,
-    public dialog: MatDialog
-  ) {
-    // Create 100 users
-    const users = this.listeFicheControle;
 
-    // Assign the data to the data source for the table to render
-  }
-  modifier() {
-    const dialogRef = this.dialog.open(FicheDeControleModifierComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-  detail() {
-    const dialogRef = this.dialog.open(FicheDeControleAffichageComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
   ngOnInit(): void {
-    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    this.role = decodedToken.roles;
-  }
-
-  ngAfterViewInit() {
-    this.listeFicheControle();
+    this.listesFiches();
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
+  constructor(private methodeService: MethodeService) {}
+  listesFiches() {
+    this.methodeService.getFiche().subscribe((data) => {
+      this.database=data["hydra:member"];
+      // console.log(this.dataSource);
+      this.dataSource = new MatTableDataSource<FicheDeControlModel>(this.database);
+      this.dataSource.paginator = this.paginator;
+      console.log(this.dataSource);
 
+    });
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -86,52 +49,12 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-    if (filterValue.length >= 6) {
-      this.spinner = true;
-      this.methodeService
-        .getOneCourriers(filterValue.trim())
-        .subscribe((courrier: CourierModel) => {
-          // tslint:disable-next-line:triple-equals
-          this.spinner = false;
-          if (courrier['hydra:member'].length != 0) {
-            this.dataSource = new MatTableDataSource(courrier['hydra:member']);
-            this.myPageLength = courrier['hydra:totalItems'];
-            this.showClose = true;
-          }
-        });
-    }
   }
-  listeFicheControle() {
-      const decodedToken = this.helper.decodeToken(
-        localStorage.getItem('token')
-      );
-      const username: string[] = decodedToken.username;
-      this.authService.getUserConnected(username).subscribe((data) => {
-        this.controleur = data['hydra:member'][0];
-        this.Connecter = data['hydra:member'][0]["FicheDeControle"];
-        // console.log(this.Connecter);
-       // console.log(this.Connecter);
-        
-        this.dataSource = new MatTableDataSource(data['hydra:member'][0]['FicheDeControle']);
-      //  console.log(this.dataSource);
-        
-      });
-  }
-  // Pagination
-  public getServerData(event?: PageEvent): any {
-    // console.log(event);
-    if (event.pageIndex + 1 > this.myPageIndex) {
-      this.myPageIndex = event.pageIndex + 1;
-    } else if (event.pageIndex + 1 < this.myPageIndex) {
-      this.myPageIndex = event.pageIndex + 1;
-    }
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    // tslint:disable-next-line:triple-equals
-    // if (this.niveauChoisi != '') {
-    //   this.getReservationByNiveau(this.niveauChoisi, this.myPageIndex, event.pageSize);
-    // }
-    // else{
-    // this.getReservation( this.myPageIndex, event.pageSize);
-    // }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 }

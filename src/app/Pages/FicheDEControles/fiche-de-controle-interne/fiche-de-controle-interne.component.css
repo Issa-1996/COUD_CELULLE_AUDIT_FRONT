@@ -1,4 +1,4 @@
-table {
+/* table {
   width: 100%;
 }
 
@@ -9,4 +9,8 @@ table {
 
 td, th {
   width: 25%;
+} */
+table {
+  width: 100%;
 }
+

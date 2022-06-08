@@ -91,7 +91,6 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
             (test)=>{
               courrier['hydra:member']+=test;
           })
-         console.log(courrier['hydra:member']);
          
           // tslint:disable-next-line:triple-equals
           this.spinner = false;
