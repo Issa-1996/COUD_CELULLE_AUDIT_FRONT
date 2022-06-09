@@ -1,121 +1,154 @@
-<div
-  class="container col-md-12 mt-5"
-  style="box-shadow: 1px 5px 15px 3px beige; background-color: white"
->
-  <h4
-    style="
-      text-align: center;
-      background-color: blue;
-      width: 60%;
-      margin-left: 20%;
-      color: white;
-      border-radius: 5px;
-    "
-  >
-    FICHE DE CONTROLE INTERNE
-  </h4>
-  <span class="login-erreur"> {{ erreur }} </span>
-  <form method="post" [formGroup]="addForm">
-    <div class="form-group">
-      <label>Document objet du controle</label
-      ><label for="" style="color: red; font-size: 20px">*</label><br />
-      <input
-        type="texte"
-        class="form-control"
-        placeholder="Document objet du controle:"
-        name="objet"
-        formControlName="objet"
-      />
-      <span class="login-erreur" *ngIf="erreurobjet != ''" style="color: red">
-        {{ erreurobjet }}
-      </span>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <header>
+        <p>
+          REPUBLIQUE DU SENEGAL <br />
+          Un Peuple - Un But - Une Foi <br />
+          MINISTÈRE DE L'ENSEIGNEMENT SUPÉRIEUR, <br />
+          DE LA RECHERCHE ET DE L'INNOVATION <br />
+          CENTRE DES OEUVRES UNIVERSITAIRES DE DAKAR <br />
+          Dirction
+        </p>
+        <div class="logo">
+          <img src="../../../assets/logo_coud copy.png" alt="" width="100%" />
+        </div>
+      </header>
     </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Affecter un Courriers</label
-      ><label for="" style="color: red; font-size: 20px">*</label><br />
-      <select
-        class="form-control col-md-120."
-        id="courier"
-        name="courier"
-        formControlName="courier"
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h4
+        style="
+          text-align: center;
+          background-color: blue;
+          width: 60%;
+          margin-left: 20%;
+          color: white;
+          border-radius: 5px;
+        "
       >
-        <option disabled>Choisir un Courriers</option>
-        <option value="/api/coud/courier_arrivers/{{ objetCourier.id }}">
-          {{ objetCourier.object }}
-        </option>
-      </select>
-      <span
-        class="login-erreur"
-        *ngIf="erreurCourrier != ''"
-        style="color: red"
-      >
-        {{ erreurCourrier }}
-      </span>
+        FICHE DE CONTROLE INTERNE
+      </h4>
+      <span class="login-erreur"> {{ erreur }} </span>
+      <form method="post" [formGroup]="addForm">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Document objet du controle</label><br />
+            <textarea
+              type="texte"
+              class="form-control"
+              name="objet"
+              formControlName="objet"
+              rows="1.5"
+            ></textarea>
+            <span
+              class="login-erreur"
+              *ngIf="erreurobjet != ''"
+              style="color: red"
+            >
+              {{ erreurobjet }}
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label for="exampleFormControlSelect1">Affecter un Courriers</label
+            ><br />
+            <select
+              class="form-select"
+              id="courier"
+              name="courier"
+              formControlName="courier"
+            >
+              <option disabled>ATTACHER UN COURRIER</option>
+              <option value="">
+                <!-- {{ objetCourier.object }} -->
+              </option>
+            </select>
+            <span
+              class="login-erreur"
+              *ngIf="erreurCourrier != ''"
+              style="color: red"
+            >
+              {{ erreurCourrier }}
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="Avis Controleur:" class="form-label"
+              >Avis controleur</label
+            >
+            <select
+              name="avisControleur"
+              id="avisControleur"
+              class="form-select"
+              formControlName="avisControleur"
+            >
+              <option selected disabled>VEUILLER DONNER VOTRE AVIS</option>
+              <option value="RAS">RAS</option>
+              <option value="REJET">REJET</option>
+            </select>
+            <span
+              class="login-erreur"
+              *ngIf="erreuravisControleur != ''"
+              style="color: red"
+            >
+              {{ erreuravisControleur }}
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label for="Motivation de l'avis:" class="form-label"
+              >Motivation de l'avis</label
+            >
+            <textarea
+              class="form-control"
+              id="motivation"
+              name="motivation"
+              rows="1.5"
+              formControlName="motivation"
+            ></textarea>
+            <span
+              class="login-erreur"
+              *ngIf="erreurmotivation != ''"
+              style="color: red"
+            >
+              {{ erreurmotivation }}
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="Recommandations Controleur:" class="form-label"
+              >Recommandations Controleur</label
+            >
+            <textarea
+              class="form-control"
+              name="recommandations"
+              rows="1.5"
+              formControlName="recommandations"
+            ></textarea>
+            <span
+              class="login-erreur"
+              *ngIf="erreurrecommandations != ''"
+              style="color: red"
+            >
+              {{ erreurrecommandations }}
+            </span>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-info btn-sm"
+          name="submit"
+          (click)="onSignIn()"
+        >
+          Enregistrer
+        </button>
+      </form>
     </div>
-    <div class="mb-3">
-      <label for="Avis Controleur:" class="form-label">Avis controleur</label>
-      <textarea
-        class="form-control"
-        id="Avis controleur "
-        name="avisControleur"
-        formControlName="avisControleur"
-        rows="3"
-      ></textarea>
-      <span
-        class="login-erreur"
-        *ngIf="erreuravisControleur != ''"
-        style="color: red"
-      >
-        {{ erreuravisControleur }}
-      </span>
-    </div>
-    <div class="mb-3">
-      <label for="Motivation de l'avis:" class="form-label"
-        >Motivation de l'avis</label
-      >
-      <textarea
-        class="form-control"
-        id="motivation"
-        name="motivation"
-        rows="5"
-        formControlName="motivation"
-      ></textarea>
-      <span
-        class="login-erreur"
-        *ngIf="erreurmotivation != ''"
-        style="color: red"
-      >
-        {{ erreurmotivation }}
-      </span>
-    </div>
-    <div class="mb-3">
-      <label for="Recommandations Controleur:" class="form-label"
-        >Recommandations Controleur</label
-      >
-      <textarea
-        class="form-control"
-        id="recommandations"
-        name="recommandations"
-        rows="5"
-        formControlName="recommandations"
-      ></textarea>
-      <span
-        class="login-erreur"
-        *ngIf="erreurrecommandations != ''"
-        style="color: red"
-      >
-        {{ erreurrecommandations }}
-      </span>
-    </div>
-    <div class="text-center">
-      <button
-        type="submit"
-        class="btn btn-info ml-5"
-        name="submit"
-        (click)="onSignIn()"
-      >
-        Enregistrer
-      </button>
-    </div>
-  </form>
+  </div>
 </div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>ANNULER</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>FERMER</button>
+</mat-dialog-actions>

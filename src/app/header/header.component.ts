@@ -7,36 +7,34 @@ import { AuthService } from 'app/Service/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
   helper = new JwtHelperService();
-  public  role: any[];
-  prenom='';
-  nom='';
-  user:UserModel;
-  constructor(private router: Router, private authServive: AuthService) { }
+  public role: any[];
+  prenom = '';
+  nom = '';
+  user: UserModel;
+  decodedToken: any;
+  constructor(private router: Router, private authServive: AuthService) {}
 
   ngOnInit(): void {
-    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    this.role = decodedToken.roles;
+    this.decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    this.role = this.decodedToken.roles;
     this.connectUser();
-    
   }
   logOout(): any {
     this.authServive.isLogOut();
     this.router.navigate(['/']);
   }
-  connectUser(){
+  connectUser() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    const username: string[] = decodedToken.username;  
+    const username: string[] = decodedToken.username;
 
-    this.authServive.getUserConnected(username)
-    .subscribe(data=>{
-      this.user=data['hydra:member'][0];
-      this.prenom=this.user["prenom"];
-      this.nom=this.user["nom"];
-    })
+    this.authServive.getUserConnected(username).subscribe((data) => {
+      this.user = data['hydra:member'][0];
+      this.prenom = this.user['prenom'];
+      this.nom = this.user['nom'];
+    });
   }
 }

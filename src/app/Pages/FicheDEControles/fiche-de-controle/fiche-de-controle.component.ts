@@ -99,9 +99,9 @@ export class FicheDeControleComponent implements OnInit {
     const username: string[] = decodedToken.username;
     this.authService.getUserConnected(username)
     .subscribe(data=>{
-      const size=data['hydra:member'][0]["couriers"].length;
+      // const size=data['hydra:member'][0]["couriers"].length;
       this.user=data['hydra:member'][0]["id"];
-      this.objetCourier=data['hydra:member'][0]['couriers'][size-1];
+      this.objetCourier=data['hydra:member'][0]['couriers'];
       
     })
   }
