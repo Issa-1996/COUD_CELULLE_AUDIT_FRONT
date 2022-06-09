@@ -1,15 +1,17 @@
-<div class="container col-md-9" style="box-shadow: 1px 5px 10px 3px beige">
+<div class="container col-md-12 shadow-lg mt-3">
   <h4
     style="
       text-align: center;
       background-color: blue;
       width: 60%;
+      height: 50%;
       margin-left: 20%;
       color: white;
       border-radius: 5px;
+      padding: 5px;
     "
   >
-    COURRIER ARRIVER
+   AJOUTER UN COURRIER ARRIVER
   </h4>
   <div *ngIf="erreur != ''" class="login-erreur-container text-center">
     <span class="login-erreur"> {{ erreur }} </span>
@@ -33,7 +35,7 @@
         </span>
       </div>
       <div class="col">
-        <label for="beneficiaire:" class="form-label">BENEFICIAIRE</label>
+        <label for="beneficiaire:" class="form-label">Bénéficiaire</label>
         <input
           type="text"
           class="form-control"
@@ -51,7 +53,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <label for="NumeroFacture:" class="form-label">Numero Facture</label>
+        <label for="NumeroFacture:" class="form-label">Numéro Facture</label>
         <input
           type="text"
           class="form-control"
@@ -67,7 +69,7 @@
         </span>
       </div>
       <div class="col">
-        <label for="montant" class="form-label">MONTANT</label>
+        <label for="montant" class="form-label">Montant</label>
         <input
           type="text"
           class="form-control"
@@ -85,8 +87,8 @@
     </div>
     <div class="row">
       <div class="col">
-        <label>Numero Du Courier</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <label>Numéro Du Courier</label>
+        <label for="" style="color: red; font-size: 20px">*</label><br />
         <input
           type="text"
           class="form-control"
@@ -122,8 +124,8 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <label>Expediteur Du Courier</label
-          ><label for="" style="color: red; font-size: 20px">*</label><br />
+          <label>Expediteur Du Courier</label>
+          <label for="" style="color: red; font-size: 20px">*</label><br />
           <input
             type="text"
             class="form-control"
@@ -140,8 +142,8 @@
         </div>
       </div>
       <div class="col">
-        <label>AFFECTER UN CONTROLEUR</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <label>Affecter un controleur</label>
+        <label for="" style="color: red; font-size: 20px">*</label><br />
         <select
           class="form-control"
           id="controleur"
@@ -166,8 +168,8 @@
     </div>
     <div class="row">
       <div class="col">
-        <label>Numero Correspondance</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <label>Numéro Correspondance</label>
+        <label for="" style="color: red; font-size: 20px">*</label><br />
         <input
           type="text"
           class="form-control"
@@ -183,8 +185,8 @@
         </span>
       </div>
       <div class="col">
-        <label>Date Correspondance du Courier</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <label>Date Correspondance du Courier</label>
+        <label for="" style="color: red; font-size: 20px">*</label><br />
         <input
           type="date"
           class="form-control"
@@ -202,8 +204,8 @@
     </div>
     <div class="row">
       <div class="col">
-        <label>Numero Reponse</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <label>Numéro Réponse</label>
+        <label for="" style="color: red; font-size: 20px">*</label><br />
         <input
           type="text"
           class="form-control"
@@ -219,8 +221,8 @@
         </span>
       </div>
       <div class="col">
-        <label>Date Reponse</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
+        <label>Date Réponse</label>
+        <label for="" style="color: red; font-size: 20px">*</label><br />
         <input
           type="date"
           class="form-control"
@@ -240,8 +242,9 @@
       <!-- <button type="submit" class="btn btn-primary" name="submit">Annuler</button> -->
       <button
         type="submit"
-        class="btn btn-info btn-lg btn-block"
+        class="btn bg-primary btn-lg btn-block"
         name="submit"
+        style="color: white;"
         (click)="onSignIn()"
       >
         Enregistrer

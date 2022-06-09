@@ -48,6 +48,7 @@ import { FicheDeControleAffichageComponent } from './Pages/FicheDEControles/fich
 import { FicheDeControleInterneComponent } from './Pages/FicheDEControles/fiche-de-controle-interne/fiche-de-controle-interne.component';
 import { FicheDeControleModifierComponent } from './Pages/FicheDEControles/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { ListCourriersDepartComponent } from './Pages/Courriers/list-courriers-depart/list-courriers-depart.component';
+import { UpdateCourrierComponent } from './Pages/Courriers/update-courrier/update-courrier.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { ListCourriersDepartComponent } from './Pages/Courriers/list-courriers-d
     CourrierListeComponent,
     PaginationComponent,
     FicheDeControleModifierComponent,
-    ListCourriersDepartComponent
+    ListCourriersDepartComponent,
+    UpdateCourrierComponent,
   ],
   imports: [
     MaterialModule,

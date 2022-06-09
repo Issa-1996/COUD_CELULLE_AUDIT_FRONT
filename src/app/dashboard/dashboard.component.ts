@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -152,57 +153,61 @@ export class DashboardComponent implements OnInit {
 
 /*----------------------GENERER PDF------------------------- */
   generatePdf(){
-    const documentDefinition = { content: 'This is an sample PDF printed with pdfMakeThis is an sample PDF printed with pdfMakeThis is an sample PDF printed with pdfMakeThis is an sample PDF printed with pdfMakeThis is an sample PDF printed with pdfMakeThis is an sample PDF printed with pdfMakeThis is an sample PDF printed with pdfMakeThis is an sample PDF printed with pdfMake' };
+    var documentDefinition = {
+      content: [
+        {text: 'RAPPORT TRIMESTRIEL DES COURIERS DE DEPART', style:'subheader',},
+        {
+          style: 'tableExemple',
+          table:{
+             body:[
+               ['colonne1','colonne2','colonne3'],
+               [
+                 {
+                   stack:[
+                     'Donne moi mes cent frans',
+                     {
+                       ul:[ 
+                         'item1',
+                         'item2'
+                       ]
+                     }
+                   ]
+                 },
+                 [
+                   'Avec une autre table',
+                   {
+                     table:{
+                       body:[
+                         ['col1','col2','col3'],
+                         ['1','2','3'],
+                         ['1','2','3']
+                       ]
+                     }
+                   }
+                 ],
+                  {
+                    text:[
+                      'cherche une autre table\n',
+                      {text:'Merci beaucoup \n', italics: true},
+                      {text:'Merci beaucoup tu as tous compris', fontSize:15}
+                    ]
+                  }
+                
+               ]
+             ]
+          }
+         }
+        ],
+        styles: {
+          subheader: {
+            fontSize: 16,
+            bold: true
+          }
+        }
+    };
+    
     pdfMake.createPdf(documentDefinition).open();
    }
-
-   /*getDocumentDefinition() {
-    
-    sessionStorage.setItem('resume', JSON.stringify(this.resume));<br> ​    
-     return {
-       content: [
-         {
-           text: 'RESUME',
-           bold: true,
-           fontSize: 20,
-           alignment: 'center',
-           margin: [0, 0, 0, 20]
-         },
-         {
-           columns: [
-             [{
-               text: this.resume.name,
-               style: 'name'
-             },
-             {
-               text: this.resume.address
-             },
-             {
-               text: 'Email : ' + this.resume.email,
-             },
-             {
-               text: 'Contant No : ' + this.resume.contactNo,
-             },
-             {
-               text: 'GitHub: ' + this.resume.socialProfile,
-               link: this.resume.socialProfile,
-               color: 'blue',
-             }
-             ],
-             [
-               // Document definition for Profile pic
-             ]
-           ]
-         }],
-         styles: {
-           name: {
-             fontSize: 16,
-             bold: true
-           }
-         }
-     };
-   }*/
-
-
-
 }
+
+/*----------------------FIN GENERER PDF------------------------- */
