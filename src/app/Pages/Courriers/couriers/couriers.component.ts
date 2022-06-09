@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { FicheDeControleComponent } from 'app/Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
+import { CourierArriverComponent } from '../courier-arriver/courier-arriver.component';
 
 @Component({
   selector: 'app-couriers',
@@ -14,8 +17,22 @@ export class CouriersComponent implements OnInit {
   helper = new JwtHelperService();
   public  role: any[];
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder, public dialog: MatDialog) {}
 
+  nouveauCourrier() {
+    const dialogRef = this.dialog.open(CourierArriverComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  nouveauFicheControle() {
+    const dialogRef = this.dialog.open(FicheDeControleComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   ngOnInit() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     this.role = decodedToken.roles;

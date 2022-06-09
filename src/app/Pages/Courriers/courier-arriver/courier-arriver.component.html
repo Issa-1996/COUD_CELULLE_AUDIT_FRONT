@@ -1,4 +1,4 @@
-<div class="container col-md-12 shadow-lg mt-3">
+<div class="container col-md-12">
   <h4
     style="
       text-align: center;
@@ -252,3 +252,9 @@
     </div>
   </form>
 </div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>ANNULER</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+    APPLIQUER
+  </button>
+</mat-dialog-actions>
