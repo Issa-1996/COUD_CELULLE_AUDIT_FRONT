@@ -12,7 +12,7 @@
         <form class="form-signin" [formGroup]="addForm">
           <label >Username:</label><br>
           <span class="login-erreur" *ngIf="erreurusername!=''" style="color: red;"> {{ erreurusername }} </span>
-          <input type="text" class="form-control" formControlName="username" name="username"   /><br />
+          <input type="text" class="form-control" formControlName="username" name="username" /><br />
           
 
           <label >Choisir un profil:</label><br>
@@ -39,12 +39,12 @@
           
           <label >Date du jour:</label><br>
           <span class="login-erreur" *ngIf="erreurdateDeNaissance!=''" style="color: red;"> {{ erreurdateDeNaissance }} </span>
-          <input type="date" class="form-control" formControlName="dateDeNaissance" name="Date"   /><br />
+          <input type="date" class="form-control" formControlName="dateDeNaissance" name="Date" /><br />
         
           
           <label >Email:</label><br>
           <span class="login-erreur" *ngIf="erreuremail!=''" style="color: red;"> {{ erreuremail }} </span>
-          <input type="email" class="form-control" formControlName="email" name="email"   /><br />
+          <input type="email" class="form-control" formControlName="email" name="email" /><br />
          
           <div class="text-center">
             <button type="submit" class="btn btn-info ml-5" name="submit" (click)="onSignIn()">AJOUTER</button>
