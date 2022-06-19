@@ -125,6 +125,7 @@
             aria-hidden="true"
             data-toggle="modal"
             data-target="#exampleModal"
+            (click)="archive(row)"
           >
             <mat-icon>filter_list</mat-icon>
           </button>
@@ -151,20 +152,7 @@
     aria-label="Select page of periodic elements"
   >
   </mat-paginator>
-  <!-- <app-pagination
-    [length]="myPageLength"
-    [pageSize]="myPageSize"
-    [pageIndex]=""
-    (currentPage)="getServerData($event)"
-  >
-  </app-pagination> -->
-  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
 </div>
-<!-- <mat-spinner
-  *ngIf="spinner"
-  style="position: absolute; top: 50%; left: 50%"
-  color="accent"
-></mat-spinner> -->
 
 <!-- MODAL DETAIL -->
 <div
@@ -195,23 +183,23 @@
           <div class="form">
             <div class="row">
               <label for="object:" class="form-label">Object:</label>
-              <span class="form-control"> <h4>Doudou</h4> </span>
+              <span class="form-control"><h4> {{ dataCourrierDetailControleur["object"] }} </h4></span>
             </div>
             <div class="row">
               <div class="col">
                 <label>Numero Du Courier:</label>
-                <span class="form-control"><h4>Fatou</h4></span>
+                <span class="form-control"><h4>{{ dataCourrierDetailControleur["numeroCourier"] }}</h4></span>
               </div>
               <div class="col">
                 <label>Date Arriver du Courier:</label>
-                <span class="form-control"><h4>Astou</h4></span>
+                <span class="form-control"><h4>{{ dataCourrierDetailControleur["Date"] }}</h4></span>
               </div>
             </div>
             <div class="row">
               <div class="col">
                 <div class="form-group">
                   <label>Expediteur Du Courier:</label>
-                  <span class="form-control"><h4>Mamadou</h4></span>
+                  <span class="form-control"><h4>{{ dataCourrierDetailControleur["expediteur"] }}</h4></span>
                 </div>
               </div>
               <div class="col">
@@ -222,21 +210,21 @@
             <div class="row">
               <div class="col">
                 <label>Numero Correspondance:</label>
-                <span class="form-control"><h4>Gnilane</h4></span>
+                <span class="form-control"><h4>{{ dataCourrierDetailControleur["numeroCorrespondance"] }}</h4></span>
               </div>
               <div class="col">
                 <label>Date Correspondance du Courier:</label>
-                <span class="form-control"><h4>Adama</h4></span>
+                <span class="form-control"><h4>{{ dataCourrierDetailControleur["dateCorrespondance"] }}</h4></span>
               </div>
             </div>
             <div class="row">
               <div class="col">
                 <label>Numero Reponse:</label>
-                <span class="form-control"><h4>Numroreponse</h4></span>
+                <span class="form-control"><h4>{{ dataCourrierDetailControleur["numeroReponse"] }}</h4></span>
               </div>
               <div class="col">
                 <label>Date Reponse:</label>
-                <span class="form-control"><h4>Reponse</h4></span>
+                <span class="form-control"><h4>{{ dataCourrierDetailControleur["dateReponse"] }}</h4></span>
               </div>
             </div>
           </div>

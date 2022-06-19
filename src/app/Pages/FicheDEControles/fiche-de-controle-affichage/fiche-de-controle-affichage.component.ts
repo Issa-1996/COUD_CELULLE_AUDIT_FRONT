@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FicheDeControlModel } from 'app/Model/FicheDeControl.model';
-import { MethodeService } from 'app/Service/methode.service';
+import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 
 @Component({
   selector: 'app-fiche-de-controle-affichage',
@@ -9,17 +9,16 @@ import { MethodeService } from 'app/Service/methode.service';
 })
 export class FicheDeControleAffichageComponent implements OnInit {
 
-  fiche:FicheDeControlModel;
-  constructor(private methodeService: MethodeService) { }
+  fiche:any;
+  constructor(private behavio: BehavioSubjetService) { }
 
   ngOnInit(): void {
     this.getFicheDeControle();
   }
   getFicheDeControle(): any{
-    this.methodeService.getFiche().subscribe(
+    this.behavio.getValue().subscribe(
       (data) => {
-        const size=data['hydra:member'].length;
-        this.fiche=data['hydra:member'][size-1];
+        this.fiche=data;
       },
       (error: any) => {
     });

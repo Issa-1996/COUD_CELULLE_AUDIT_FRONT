@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { FicheDeControlModel } from 'app/Model/FicheDeControl.model';
 import { MethodeService } from 'app/Service/methode.service';
-import { FicheDeControleAffichageComponent } from '../fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { FicheDeControleComponent } from '../fiche-de-controle/fiche-de-controle.component';
+import { FicheDeControleAffichageComponent } from '../fiche-de-controle-affichage/fiche-de-controle-affichage.component';
+import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 
 @Component({
   selector: 'app-fiche-de-controle-interne',
@@ -17,6 +18,7 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
   public role: any[];
   database: FicheDeControlModel[] = [];
   helper = new JwtHelperService();
+  // detailFiche: FicheDeControlModel;
   dataSource = new MatTableDataSource<FicheDeControlModel>([]);
 
   ngOnInit(): void {
@@ -25,7 +27,8 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
   }
   constructor(
     private methodeService: MethodeService, 
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private behavio: BehavioSubjetService
   ) {}
   detailFicheDeControle() {
     const dialogRef = this.dialog.open(FicheDeControleAffichageComponent);
@@ -33,6 +36,9 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+  archive(fiche: any): any{
+    this.behavio.setValue(fiche);
   }
   modifierFicheDeControle() {
     const dialogRef = this.dialog.open(FicheDeControleComponent);

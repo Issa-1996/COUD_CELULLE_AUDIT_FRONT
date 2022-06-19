@@ -28,6 +28,14 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
     public dialog: MatDialog,
     private methodeService: MethodeService
   ) {}
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   openDialog() {
     const dialogRef = this.dialog.open(CourierDepartComponent);
 

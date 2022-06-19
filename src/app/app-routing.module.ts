@@ -10,7 +10,6 @@ import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.
 import { UsersComponent } from './Pages/Agents/users/users.component';
 import { CourierArriverComponent } from './Pages/Courriers/courier-arriver/courier-arriver.component';
 import { CouriersComponent } from './Pages/Courriers/couriers/couriers.component';
-import { FactureComponent } from './Pages/facture/facture.component';
 import { FicheDeControleAffichageComponent } from './Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { FicheDeControleComponent } from './Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
 import { RapportsComponent } from './Pages/rapports/rapports.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
     {path: 'fichedecontrole', component: FicheDeControleComponent, canActivate:[AuthGuardGuard] },
     {path: 'fichedecontroleaffichage', component: FicheDeControleAffichageComponent, canActivate:[AuthGuardGuard] },
     {path: 'rapport', component: RapportsComponent, canActivate:[AuthGuardGuard] },
-    {path: 'facture', component: FactureComponent, canActivate:[AuthGuardGuard] },
     {path: 'assistante', component: AssistanteComponent, canActivate:[AuthGuardGuard] },
     {path: 'cotroleur', component: ControleursComponent, canActivate:[AuthGuardGuard] },
     {path: 'coordinateur', component: CoordinateurComponent, canActivate:[AuthGuardGuard] },

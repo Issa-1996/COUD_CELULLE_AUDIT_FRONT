@@ -3,7 +3,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { FicheDeControlModel } from 'app/Model/FicheDeControl.model';
 import { AuthService } from 'app/Service/auth.service';
+import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
@@ -24,11 +26,29 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
   public role: any[];
   database: CourierModel[] = [];
   helper = new JwtHelperService();
+  detailCourrierControleur:any;
   dataSource = new MatTableDataSource<CourierModel>([]);
+  dataCourrierDetailControleur=[
+    {
+      "Date": "",
+      "NumeroFacture": "",
+      "beneficiaire": "",
+      "dateCorrespondance": "",
+      "dateReponse": "",
+      "expediteur": "",
+      "id": "",
+      "montant": "",
+      "numeroCorrespondance": "",
+      "numeroCourier": "",
+      "numeroReponse": "",
+      "object": ""
+    },
+  ];
 
   constructor(
     private methodeService: MethodeService,
-    private authService: AuthService
+    private authService: AuthService,
+    private behavio: BehavioSubjetService
   ) {}
   ngOnInit(): void {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
@@ -59,6 +79,11 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
         this.dataSource.paginator = this.paginator;
       });
     }
+  }
+  archive(fiche: any): any{
+    this.dataCourrierDetailControleur=fiche; 
+    console.log(this.dataCourrierDetailControleur);
+       
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

@@ -19,7 +19,6 @@ import { LoginComponent } from './login/login.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { AccueilComponent } from './Pages/accueil/accueil.component';
 import { RapportsComponent } from './Pages/rapports/rapports.component';
-import { FactureComponent } from './Pages/facture/facture.component';
 import { AssistanteComponent } from './Pages/Agents/assistante/assistante.component';
 import { ControleursComponent } from './Pages/Agents/controleurs/controleurs.component';
 import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.component';
@@ -35,7 +34,6 @@ import { AuthGuardGuard } from './auth-guard.guard';
 import { AfficheUserComponent } from './Pages/Agents/affiche-user/affiche-user.component';
 import { MethodeService } from './Service/methode.service';
 import { FooterComponent } from './footer/footer.component';
-import { FactureAffichageComponent } from './Pages/FicheDEControles/facture-affichage/facture-affichage.component';
 import { CourrierListeComponent } from './Pages/Courriers/courrier-liste/courrier-liste.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { CouriersComponent } from './Pages/Courriers/couriers/couriers.component';
@@ -44,11 +42,11 @@ import { CourierArriverComponent } from './Pages/Courriers/courier-arriver/couri
 import { CourierArriverAffichageComponent } from './Pages/Courriers/courier-arriver-affichage/courier-arriver-affichage.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FicheDeControleComponent } from './Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
-import { FicheDeControleAffichageComponent } from './Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { FicheDeControleInterneComponent } from './Pages/FicheDEControles/fiche-de-controle-interne/fiche-de-controle-interne.component';
 import { FicheDeControleModifierComponent } from './Pages/FicheDEControles/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { ListCourriersDepartComponent } from './Pages/Courriers/list-courriers-depart/list-courriers-depart.component';
 import { UpdateCourrierComponent } from './Pages/Courriers/update-courrier/update-courrier.component';
+import { FicheDeControleAffichageComponent } from './Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +58,6 @@ import { UpdateCourrierComponent } from './Pages/Courriers/update-courrier/updat
     AccueilComponent,
     RapportsComponent,
     CouriersComponent,
-    FactureComponent,
     AssistanteComponent,
     ControleursComponent,
     CoordinateurComponent,
@@ -75,7 +72,6 @@ import { UpdateCourrierComponent } from './Pages/Courriers/update-courrier/updat
     AfficheUserComponent,
     FooterComponent,
     CourierArriverAffichageComponent,
-    FactureAffichageComponent,
     CourrierListeComponent,
     PaginationComponent,
     FicheDeControleModifierComponent,
