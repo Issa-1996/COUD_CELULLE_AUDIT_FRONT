@@ -2,7 +2,7 @@
   <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
     {{!isLinear ? 'Activer la lecture' : 'Desactiver la lecture'}}
   </button>
-  <mat-stepper [linear]="isLinear" #stepper>
+  <mat-stepper [linear]="isLinear" #stepper  class="shadow-lg">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>LISTES DES UTILISATEURS</ng-template>

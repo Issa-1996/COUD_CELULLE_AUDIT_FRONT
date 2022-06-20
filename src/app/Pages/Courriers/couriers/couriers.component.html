@@ -2,7 +2,7 @@
   <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
     {{ !isLinear ? "Active la lecture" : "Desactiver la lecture" }}
   </button>
-  <mat-stepper [linear]="isLinear" #stepper>
+  <mat-stepper [linear]="isLinear" #stepper class="shadow-lg">
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>LISTES COURRIERS ARRIVES</ng-template>
@@ -13,7 +13,7 @@
             role.includes('ROLE_CONTROLEURS')
           "
         ></app-courrier-liste>
-        <div class="example-button-row">
+        <div class="example-button-row mt-3">
           <button
             mat-raised-button
             color="primary"
