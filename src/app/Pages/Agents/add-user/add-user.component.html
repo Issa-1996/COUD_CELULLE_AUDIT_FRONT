@@ -1,6 +1,6 @@
 
  <!------------------------------- -------------VOILA LE MODAL --------------------------------------------->
- <div class="container">
+ <div class="container col-md-11">
   <div class="card-body">
       <div class="card text-center" style="width:100%; background-color: #17A2B4;">
         <h3 style="color:white">AJOUTER UTILISATEURS</h3>
@@ -10,35 +10,47 @@
         <span class="login-erreur" > {{ erreur }} </span>
 
         <form class="form-signin" [formGroup]="addForm">
-          <input type="text" class="form-control" formControlName="username" name="username" placeholder="Username"  /><br />
+          <label >Username:</label><br>
           <span class="login-erreur" *ngIf="erreurusername!=''" style="color: red;"> {{ erreurusername }} </span>
+          <input type="text" class="form-control" formControlName="username" name="username" /><br />
           
-          <select class="form-control" id="profil" name="profil" formControlName="profil" >
-            <option disabled>choisir un profile</option>
-            <option value="{{ pro.id }}"  *ngFor="let pro of profil">{{pro.libelle}}</option>
-          </select>
+
+          <label >Choisir un profil:</label><br>
           <span class="login-erreur" *ngIf="erreurprofil!=''" style="color: red;"> {{ erreurprofil }} </span>
-          
-          <input type="text" class="form-control" formControlName="matricule" name="matricule" placeholder="matricule"  autofocus="" /><br />
+          <select class="form-control" id="profil" name="profil" formControlName="profil" >
+            <option disabled>Choisir un profile</option>
+            <option value="{{ pro.id }}"  *ngFor="let pro of profil">{{pro.libelle}}</option>
+          </select><br />
+         
+          <label >Matricule:</label><br>
           <span class="login-erreur" *ngIf="erreurmatricule!=''" style="color: red;"> {{ erreurmatricule }} </span>
+          <input type="text" class="form-control" formControlName="matricule" name="matricule"  autofocus="" /><br />
+        
           
-          <input type="text" class="form-control" formControlName="nom" name="nom" placeholder="Nom"  /><br />
+          <label >Nom:</label><br>
           <span class="login-erreur" *ngIf="erreurnom!=''" style="color: red;"> {{ erreurnom }} </span>
+          <input type="text" class="form-control" formControlName="nom" name="nom" /><br/>
           
-          <input type="text" class="form-control" formControlName="prenom" name="prenom" placeholder="Prenom"  /><br />
+          
+          <label >Prénom:</label><br>
           <span class="login-erreur" *ngIf="erreurprenom!=''" style="color: red;"> {{ erreurprenom }} </span>
+          <input type="text" class="form-control" formControlName="prenom" name="prenom" /><br />
+         
           
-          <input type="date" class="form-control" formControlName="dateDeNaissance" name="dateDeNaissance" placeholder="Date Naissance"  /><br />
+          <label >Date du jour:</label><br>
           <span class="login-erreur" *ngIf="erreurdateDeNaissance!=''" style="color: red;"> {{ erreurdateDeNaissance }} </span>
+          <input type="date" class="form-control" formControlName="dateDeNaissance" name="Date" /><br />
+        
           
-          <input type="email" class="form-control" formControlName="email" name="email" placeholder="Email"   /><br />
+          <label >Email:</label><br>
           <span class="login-erreur" *ngIf="erreuremail!=''" style="color: red;"> {{ erreuremail }} </span>
-          
+          <input type="email" class="form-control" formControlName="email" name="email" /><br />
+         
           <div class="text-center">
             <button type="submit" class="btn btn-info ml-5" name="submit" (click)="onSignIn()">AJOUTER</button>
           </div>
-      </form>
+       </form>
       </div>
     </div>
-</div> 
+  </div> 
 </div>

@@ -17,6 +17,9 @@ export class MethodeService {
   headers = new HttpHeaders({Accept: '*/*'});
   constructor(private httpClient: HttpClient, public jwtHelper: JwtHelperService) { }
 
+  updateCourrierArriver(objetCourierArriver: any): Observable<any>{
+    return this.httpClient.put<any>(`${envVars.url}/coud/courier_arrivers/`+ objetCourierArriver.id, objetCourierArriver, {headers: this.headers});
+  }
   addCourierArriver(CourierArriver: any): Observable<CourierModel> {
     return this.httpClient.post<CourierModel>(`${envVars.url}/coud/courier_arrivers`, CourierArriver, {headers: this.headers});
   }
@@ -55,9 +58,6 @@ export class MethodeService {
   }
   addFActure(facture: any): Observable<Facture> {
     return this.httpClient.post<Facture>(`${envVars.url}/coud/factures`, facture, {headers: this.headers});
-  }
-  getFacture(): Observable<Facture>{
-    return this.httpClient.get<Facture>(`${envVars.url}/coud/factures`);
   }
   getFiche(): Observable<FicheDeControlModel>{
     return this.httpClient.get<FicheDeControlModel>(`${envVars.url}/coud/fiche_de_controles`);

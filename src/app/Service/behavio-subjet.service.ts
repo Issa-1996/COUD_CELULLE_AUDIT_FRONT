@@ -7,14 +7,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class BehavioSubjetService {
 
-  private routerInfo: BehaviorSubject<UserModel>;
+  private routerInfo: BehaviorSubject<any>;
   constructor() { 
-    this.routerInfo = new BehaviorSubject<UserModel>(null);
+    this.routerInfo = new BehaviorSubject<any>([]);
   }
-  getValue(): Observable<UserModel> {
+  getValue(): Observable<any> {
     return this.routerInfo.asObservable();
   }
-  setValue(newValue: UserModel): void {
+  setValue(newValue: any): void {
     this.routerInfo.next(newValue);
   }
 }

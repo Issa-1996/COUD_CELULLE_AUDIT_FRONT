@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>COURRIER ARRIVER</h1>
+    </div>
+  </div>
+
+  <div class="form">
+    <div class="row">
+      <div class="col-md-12">
+        <label for="object:" class="form-label">Object</label>
+        <span class="form-control">
+          <h4>{{ courrierDetail["object"] }}</h4>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Numero Du Courier</label>
+        <span class="form-control"
+          ><h4>{{ courrierDetail["numeroCourier"] }}</h4></span
+        >
+      </div>
+      <div class="col-md-6">
+        <label>Date Arriver du Courier</label>
+        <span class="form-control"
+          ><h4>{{ courrierDetail["Date"] }}</h4></span
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Expediteur Du Courier</label>
+          <span class="form-control"
+            ><h4>{{ courrierDetail["expediteur"] }}</h4></span
+          >
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label>NOM DU CONTROLEUR</label>
+        <span class="form-control"
+          ><h4>
+            {{ courrierDetail["controleur"]["prenom"] }}
+            {{ courrierDetail["controleur"]["nom"] }}
+          </h4></span
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Numero Correspondance</label>
+        <span class="form-control"
+          ><h4>{{ courrierDetail["numeroCorrespondance"] }}</h4></span
+        >
+      </div>
+      <div class="col-md-6">
+        <label>Date Correspondance du Courier</label>
+        <span class="form-control"
+          ><h4>{{ courrierDetail["dateCorrespondance"] }}</h4></span
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Numero Reponse</label>
+        <span class="form-control"
+          ><h4>{{ courrierDetail["numeroReponse"] }}</h4></span
+        >
+      </div>
+      <div class="col-md-6">
+        <label>Date Reponse</label>
+        <span class="form-control"
+          ><h4>{{ courrierDetail["dateReponse"] }}</h4></span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>ANNULER</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>FERMER</button>
+</mat-dialog-actions>

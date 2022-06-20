@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FicheDeControlModel } from 'app/Model/FicheDeControl.model';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 
 @Component({
