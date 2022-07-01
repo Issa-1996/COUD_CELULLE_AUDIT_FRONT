@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -12,37 +12,65 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from 'express';
 import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { LoginComponent } from './login/login.component';
-import { InscriptionComponent } from './inscription/inscription.component';
-import { AccueilComponent } from './Pages/accueil/accueil.component';
-import { RapportsComponent } from './Pages/rapports/rapports.component';
-import { CouriersComponent } from './Pages/couriers/couriers.component';
-import { FactureComponent } from './Pages/facture/facture.component';
-import { AssistanteComponent } from './Pages/Agents/assistante/assistante.component';
-import { ControleursComponent } from './Pages/Agents/controleurs/controleurs.component';
-import { CoordinateurComponent } from './Pages/Agents/coordinateur/coordinateur.component';
-import { FicheDeControleComponent } from './Pages/fiche-de-controle/fiche-de-controle.component';
 import { UsersComponent } from './Pages/Agents/users/users.component';
-import { FicheDeControleAffichageComponent } from './Pages/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './Material/matmodule.service';
 import { AddUserComponent } from './Pages/Agents/add-user/add-user.component';
 import { UpdateUserComponent } from './Pages/Agents/update-user/update-user.component';
-import { CourierDepartComponent } from './Pages/courier-depart/courier-depart.component';
-import { CourierArriverComponent } from './Pages/courier-arriver/courier-arriver.component';
-import { FicheDeControleInterneComponent } from './Pages/fiche-de-controle-interne/fiche-de-controle-interne.component';
+import { AuthService } from './Service/auth.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { TokeInterceptorService } from './Service/toke-interceptor.service';
+import { AfficheUserComponent } from './Pages/Agents/affiche-user/affiche-user.component';
+import { MethodeService } from './Service/methode.service';
+import { FooterComponent } from './footer/footer.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { CourierDepartComponent } from './Pages/Courriers/CourriersDeparts/courier-depart/courier-depart.component';
+import { CourierArriverComponent } from './Pages/Courriers/CourriersArrivers/courier-arriver/courier-arriver.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FicheDeControleComponent } from './Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
+import { FicheDeControleInterneComponent } from './Pages/FicheDEControles/fiche-de-controle-interne/fiche-de-controle-interne.component';
+import { FicheDeControleModifierComponent } from './Pages/FicheDEControles/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
+import { UpdateCourrierComponent } from './Pages/Courriers/CourriersArrivers/update-courrier/update-courrier.component';
+import { FicheDeControleAffichageComponent } from './Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
+import { CourierArriverAffichageComponent } from './Pages/Courriers/CourriersArrivers/courier-arriver-affichage/courier-arriver-affichage.component';
+import { CourrierListeComponent } from './Pages/Courriers/CourriersArrivers/courrier-liste/courrier-liste.component';
+import { ListCourriersDepartComponent } from './Pages/Courriers/CourriersDeparts/list-courriers-depart/list-courriers-depart.component';
+import { CouriersComponent } from './Pages/Courriers/CourriersArrivers/couriers/couriers.component';
 
 @NgModule({
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    LoginComponent,
+    ContainerComponent,
+    FicheDeControleComponent,
+    UsersComponent,
+    FicheDeControleAffichageComponent,
+    AddUserComponent,
+    UpdateUserComponent,
+    CourierDepartComponent,
+    CourierArriverComponent,
+    FicheDeControleInterneComponent,
+    AfficheUserComponent,
+    FooterComponent,
+    CourierArriverAffichageComponent,
+    CourrierListeComponent,
+    PaginationComponent,
+    FicheDeControleModifierComponent,
+    ListCourriersDepartComponent,
+    UpdateCourrierComponent,
+    CouriersComponent
+  ],
   imports: [
+    ReactiveFormsModule,
     MaterialModule,
     BrowserModule,
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,
@@ -51,31 +79,21 @@ import { FicheDeControleInterneComponent } from './Pages/fiche-de-controle-inter
     MatTooltipModule,
     HttpClientModule,
     RouterModule,
-    AppRoutingModule, 
+    AppRoutingModule,
+    MatPaginatorModule,
   ],
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    LoginComponent,
-    ContainerComponent,
-    InscriptionComponent,
-    AccueilComponent,
-    RapportsComponent,
-    CouriersComponent,
-    FactureComponent,
-    AssistanteComponent,
-    ControleursComponent,
-    CoordinateurComponent,
-    FicheDeControleComponent,
-    UsersComponent,
-    FicheDeControleAffichageComponent,
-    AddUserComponent,
-    UpdateUserComponent,
-    CourierDepartComponent,
-    CourierArriverComponent,
-    FicheDeControleInterneComponent
+  providers: [
+    AuthService,
+    MethodeService,
+    JwtHelperService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    TokeInterceptorService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokeInterceptorService,
+      multi: true
+    }
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

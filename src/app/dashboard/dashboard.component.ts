@@ -1,5 +1,10 @@
+import { style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-dashboard',
@@ -69,9 +74,9 @@ export class DashboardComponent implements OnInit {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
       const dataDailySalesChart: any = {
-          labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+          labels: ['J', 'F', 'Mars', 'A', 'M', 'Juin', 'J','A','Septembre','O', 'N', 'Decembre'],
           series: [
-              [12, 17, 7, 17, 23, 18, 38]
+              [12, 17, 7, 17, 23, 18, 38, 45, 19, 45, 27, 1]
           ]
       };
 
@@ -147,4 +152,63 @@ export class DashboardComponent implements OnInit {
       this.startAnimationForBarChart(websiteViewsChart);
   }
 
+/*----------------------GENERER PDF------------------------- */
+  generatePdf(){
+    var documentDefinition = {
+      content: [
+        {text: 'RAPPORT TRIMESTRIEL DES COURIERS DE DEPART', style:'subheader',},
+        {
+          style: 'tableExemple',
+          table:{
+             body:[
+               ['colonne1','colonne2','colonne3'],
+               [
+                 {
+                   stack:[
+                     'Donne moi mes cent frans',
+                     {
+                       ul:[ 
+                         'item1',
+                         'item2'
+                       ]
+                     }
+                   ]
+                 },
+                 [
+                   'Avec une autre table',
+                   {
+                     table:{
+                       body:[
+                         ['col1','col2','col3'],
+                         ['1','2','3'],
+                         ['1','2','3']
+                       ]
+                     }
+                   }
+                 ],
+                  {
+                    text:[
+                      'cherche une autre table\n',
+                      {text:'Merci beaucoup \n', italics: true},
+                      {text:'Merci beaucoup tu as tous compris', fontSize:15}
+                    ]
+                  }
+                
+               ]
+             ]
+          }
+         }
+        ],
+        styles: {
+          subheader: {
+            fontSize: 16,
+            bold: true
+          }
+        }
+    };
+    
+    pdfMake.createPdf(documentDefinition).open();
+   }
 }
+
+/*----------------------FIN GENERER PDF------------------------- */

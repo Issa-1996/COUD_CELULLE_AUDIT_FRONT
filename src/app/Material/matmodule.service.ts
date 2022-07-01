@@ -66,7 +66,6 @@ const MaterialComponents = [
   MatStepperModule,
   MatTabsModule,
   MatSnackBarModule,
- 
 ];
 
 @NgModule({
