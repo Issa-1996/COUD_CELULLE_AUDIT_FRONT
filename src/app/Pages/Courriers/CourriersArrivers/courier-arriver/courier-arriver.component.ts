@@ -60,7 +60,7 @@ export class CourierArriverComponent implements OnInit {
       dateCorrespondance: ['', Validators.required],
       numeroReponse: ['', Validators.required],
       dateReponse: ['', Validators.required],
-      controleur: ['', Validators.required]
+      controleurs: ['', Validators.required]
     });
     this.addForm.get('object').valueChanges.subscribe(
       () => { this.erreurobject = ''; this.erreur = ''; }
@@ -95,7 +95,7 @@ export class CourierArriverComponent implements OnInit {
     this.addForm.get('dateReponse').valueChanges.subscribe(
       () => { this.erreurdateReponse = ''; this.erreur = ''; }
     );
-    this.addForm.get('controleur').valueChanges.subscribe(
+    this.addForm.get('controleurs').valueChanges.subscribe(
       () => { this.erreurControleur = ''; this.erreur = ''; }
     );
   }
@@ -134,7 +134,7 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.get('dateReponse').value.trim() === ''){
       this.erreurdateReponse = 'Date Reponse obligatoire !';
     }
-    if (this.addForm.get('controleur').value.trim() === ''){
+    if (this.addForm.get('controleurs').value.trim() === ''){
       this.erreurControleur = 'Controleur obligatoire !';
     }
     if (this.addForm.invalid){

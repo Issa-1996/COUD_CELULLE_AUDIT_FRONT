@@ -1,56 +1,157 @@
-
- <!------------------------------- -------------VOILA LE MODAL --------------------------------------------->
- <div class="container col-md-11">
-  <div class="card-body">
-      <div class="card text-center" style="width:100%; background-color: #17A2B4;">
-        <h3 style="color:white">AJOUTER UTILISATEURS</h3>
-      </div> 
-    <div class="modal-content">
-      <div class="modal-body">
-        <span class="login-erreur" > {{ erreur }} </span>
-
-        <form class="form-signin" [formGroup]="addForm">
-          <label >Username:</label><br>
-          <span class="login-erreur" *ngIf="erreurusername!=''" style="color: red;"> {{ erreurusername }} </span>
-          <input type="text" class="form-control" formControlName="username" name="username" /><br />
-          
-
-          <label >Choisir un profil:</label><br>
-          <span class="login-erreur" *ngIf="erreurprofil!=''" style="color: red;"> {{ erreurprofil }} </span>
-          <select class="form-control" id="profil" name="profil" formControlName="profil" >
-            <option disabled>Choisir un profile</option>
-            <option value="{{ pro.id }}"  *ngFor="let pro of profil">{{pro.libelle}}</option>
-          </select><br />
-         
-          <label >Matricule:</label><br>
-          <span class="login-erreur" *ngIf="erreurmatricule!=''" style="color: red;"> {{ erreurmatricule }} </span>
-          <input type="text" class="form-control" formControlName="matricule" name="matricule"  autofocus="" /><br />
-        
-          
-          <label >Nom:</label><br>
-          <span class="login-erreur" *ngIf="erreurnom!=''" style="color: red;"> {{ erreurnom }} </span>
-          <input type="text" class="form-control" formControlName="nom" name="nom" /><br/>
-          
-          
-          <label >Prénom:</label><br>
-          <span class="login-erreur" *ngIf="erreurprenom!=''" style="color: red;"> {{ erreurprenom }} </span>
-          <input type="text" class="form-control" formControlName="prenom" name="prenom" /><br />
-         
-          
-          <label >Date du jour:</label><br>
-          <span class="login-erreur" *ngIf="erreurdateDeNaissance!=''" style="color: red;"> {{ erreurdateDeNaissance }} </span>
-          <input type="date" class="form-control" formControlName="dateDeNaissance" name="Date" /><br />
-        
-          
-          <label >Email:</label><br>
-          <span class="login-erreur" *ngIf="erreuremail!=''" style="color: red;"> {{ erreuremail }} </span>
-          <input type="email" class="form-control" formControlName="email" name="email" /><br />
-         
-          <div class="text-center">
-            <button type="submit" class="btn btn-info ml-5" name="submit" (click)="onSignIn()">AJOUTER</button>
-          </div>
-       </form>
-      </div>
+<!------------------------------- -------------VOILA LE MODAL --------------------------------------------->
+<div class="container-fluid">
+  <div class="modal-body">
+    <div class="text-center" style="width: 100%; background-color: #17a2b4">
+      <h3 style="color: white">AJOUTER UTILISATEURS</h3>
     </div>
-  </div> 
+    <span class="login-erreur"> {{ erreur }} </span>
+    <form class="form-signin" [formGroup]="addForm">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Nom utilisateur</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="username"
+            name="username"
+          />
+          <span
+            class="login-erreur"
+            *ngIf="erreurusername != ''"
+            style="color: red"
+          >
+            {{ erreurusername }}
+          </span>
+        </div>
+        <div class="col-md-6">
+          <label>Choisir un profil</label>
+          <select
+            class="form-control"
+            id="profil"
+            name="profil"
+            formControlName="profil"
+          >
+            <option disabled>Choisir un profil</option>
+            <option value="{{ pro.id }}" *ngFor="let pro of profil">
+              {{ pro.libelle }}
+            </option>
+          </select>
+          <span
+            class="login-erreur"
+            *ngIf="erreurprofil != ''"
+            style="color: red"
+          >
+            {{ erreurprofil }}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Matricule</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="matricule"
+            name="matricule"
+            autofocus=""
+          />
+          <span
+            class="login-erreur"
+            *ngIf="erreurmatricule != ''"
+            style="color: red"
+          >
+            {{ erreurmatricule }}
+          </span>
+        </div>
+        <div class="col-md-6">
+          <label>Nom:</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nom"
+            name="nom"
+          />
+          <span class="login-erreur" *ngIf="erreurnom != ''" style="color: red">
+            {{ erreurnom }}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Prénom</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="prenom"
+            name="prenom"
+          />
+          <span
+            class="login-erreur"
+            *ngIf="erreurprenom != ''"
+            style="color: red"
+          >
+            {{ erreurprenom }}
+          </span>
+        </div>
+        <div class="col-md-6">
+          <label>Date du jour</label>
+          <input
+            type="date"
+            class="form-control"
+            formControlName="dateDeNaissance"
+            name="Date"
+            id="date-picker"
+          />
+          {{ today }}
+          <span
+            class="login-erreur"
+            *ngIf="erreurdateDeNaissance != ''"
+            style="color: red"
+          >
+            {{ erreurdateDeNaissance }}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Email</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            name="email"
+          />
+          <span
+            class="login-erreur"
+            *ngIf="erreuremail != ''"
+            style="color: red"
+          >
+            {{ erreuremail }}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="text-center">
+            <button
+              type="submit"
+              class="btn btn-info"
+              name="submit"
+              (click)="onSignIn()"
+            >
+              AJOUTER
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+<script>
+  var date =new Date();
+  var year =date.getFullYear();
+  var month =date.getMonth();
+  var todayDate = String(date.getDate()).padStart(2,'0');
+  var datePattern = year + '-' + month + '-' + todayDate;
+  document.getElementById("date-picker").value=datePattern;
+</script>
