@@ -1,4 +1,4 @@
-<div class="container-fluid col-md-8">
+<div class="container-fluid col-md-12">
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
@@ -20,10 +20,16 @@
       <td mat-cell *matCellDef="let element">{{ element.motivation }}</td>
     </ng-container>
 
-    <!-- NOM DU CONTROLEUR Column -->
+    <!-- avis DU CONTROLEUR Column -->
     <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef>NOM CONTROLEUR</th>
-      <td mat-cell *matCellDef="let element">{{ element.nomControleur }}</td>
+      <th mat-header-cell *matHeaderCellDef>AVIS DU CONTROLEUR</th>
+      <td mat-cell *matCellDef="let element">{{ element.avisControleur }}</td>
+    </ng-container>
+
+    <!-- NOM DU CONTROLEUR Column -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef>NOM DU CONTROLEUR</th>
+      <td mat-cell *matCellDef="let element">{{ element.controleurs.prenom }}</td>
     </ng-container>
 
     <!-- DETAIL Column -->
@@ -35,7 +41,7 @@
             mat-mini-fab
             color="warn"
             aria-label="Example icon button with a filter list icon"
-            (click)="detailFicheDeControle()"
+            (click)="detailFicheDeControle(element)"
             (click)="archive(element)"
           >
             <mat-icon>filter_list</mat-icon>
@@ -53,7 +59,7 @@
             mat-mini-fab
             color="primary"
             aria-label="Example icon button with a menu icon"
-            (click)="modifierFicheDeControle()"
+            (click)="modifierFicheDeControle(element)"
           >
             <mat-icon>menu</mat-icon>
           </button>

@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +14,7 @@ import { MethodeService } from 'app/Service/methode.service';
 import { FicheDeControleComponent } from '../fiche-de-controle/fiche-de-controle.component';
 import { FicheDeControleAffichageComponent } from '../fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
+import { FicheDeControleModifierComponent } from '../fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 
 @Component({
   selector: 'app-fiche-de-controle-interne',
@@ -26,24 +33,25 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
   constructor(
-    private methodeService: MethodeService, 
+    private methodeService: MethodeService,
     public dialog: MatDialog,
     private behavio: BehavioSubjetService
   ) {}
   detailFicheDeControle() {
     const dialogRef = this.dialog.open(FicheDeControleAffichageComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  archive(fiche: any): any{
+  detailFiche(fiche: any): any {
     this.behavio.setValue(fiche);
   }
-  modifierFicheDeControle() {
-    const dialogRef = this.dialog.open(FicheDeControleComponent);
+  modifierFicheDeControle(fiche:any) {
+    this.behavio.setValue(fiche);
+    const dialogRef = this.dialog.open(FicheDeControleModifierComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
@@ -69,6 +77,7 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     'name',
     'weight',
     'symbol',
+    'nom',
     'detail',
     'modifier',
   ];

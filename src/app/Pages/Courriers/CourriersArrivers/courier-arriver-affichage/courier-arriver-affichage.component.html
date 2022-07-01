@@ -38,11 +38,28 @@
         </div>
       </div>
       <div class="col-md-6">
-        <label>NOM DU CONTROLEUR</label>
+        <label>BENEFICIAIRE</label>
         <span class="form-control"
           ><h4>
-            {{ courrierDetail["controleur"]["prenom"] }}
-            {{ courrierDetail["controleur"]["nom"] }}
+            <h4>{{ courrierDetail["beneficiaire"] }}</h4>
+          </h4></span
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>NUMERO FACTURE</label>
+          <span class="form-control"
+            ><h4>{{ courrierDetail["NumeroFacture"] }}</h4></span
+          >
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label>MONTANT</label>
+        <span class="form-control"
+          ><h4>
+            <h4>{{ courrierDetail["montant"] }}</h4>
           </h4></span
         >
       </div>

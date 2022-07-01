@@ -8,29 +8,23 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-fiche-de-controle-affichage',
   templateUrl: './fiche-de-controle-affichage.component.html',
-  styleUrls: ['./fiche-de-controle-affichage.component.css']
+  styleUrls: ['./fiche-de-controle-affichage.component.css'],
 })
 export class FicheDeControleAffichageComponent implements OnInit {
-
-  fiche:any;
-  constructor(private behavio: BehavioSubjetService) { }
+  fiche: any;
+  constructor(private behavio: BehavioSubjetService) {}
 
   ngOnInit(): void {
     this.getFicheDeControle();
   }
-  getFicheDeControle(): any{
+  getFicheDeControle(): any {
     this.behavio.getValue().subscribe(
       (data) => {
-        this.fiche=data;
+        this.fiche = data;
       },
-      (error: any) => {
-    });
+      (error: any) => {}
+    );
   }
 
-  generatePdf(){
-
-  }
-
-
+  generatePdf() {}
 }
-
