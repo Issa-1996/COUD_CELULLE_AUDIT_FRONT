@@ -23,6 +23,8 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     'beneficiaire',
     'detail',
     'modifier',
+    'depart',
+    'rejet',
   ];
   displayedColumn: string[] = ['id', 'objet', 'date', 'type', 'detail'];
   public role: any[];
@@ -61,7 +63,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-  modifierCourrierArriver(fiche: any): any {
+  modifierCourrierArriver(fiche: any): any {    
     this.behavio.setValue(fiche);
     const dialogRef = this.dialog.open(UpdateCourrierComponent);
 
@@ -83,7 +85,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       );
       const username: string[] = decodedToken.username;
       this.authService.getUserConnected(username).subscribe((data) => {
-        this.database = data['hydra:member'][0]['couriers'];
+        this.database = data['hydra:member'][0]['courierArrivers'];
         this.dataSource = new MatTableDataSource<CourierModel>(this.database);
         this.dataSource.paginator = this.paginator;
       });
@@ -96,12 +98,15 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
         this.database = data['hydra:member'];
         this.behavio.getValue().subscribe((d) => {
           if (d.length != 0) {
-            console.log(d);
             this.database.push(d);
-            this.dataSource = new MatTableDataSource<CourierModel>(this.database);
+            this.dataSource = new MatTableDataSource<CourierModel>(
+              this.database
+            );
             this.dataSource.paginator = this.paginator;
-          } else{
-            this.dataSource = new MatTableDataSource<CourierModel>(this.database);
+          } else {
+            this.dataSource = new MatTableDataSource<CourierModel>(
+              this.database
+            );
             this.dataSource.paginator = this.paginator;
           }
         });

@@ -55,13 +55,16 @@
             ><br />
             <select
               class="form-select"
-              id="courier"
-              name="courier"
-              formControlName="courier"
+              id="courrierArriver"
+              name="courrierArriver"
+              formControlName="courrierArriver"
             >
               <option disabled>ATTACHER UN COURRIER</option>
-              <option value="">
-                <!-- {{ objetCourier.object }} -->
+              <option
+                value="/api/coud/courier_arrivers/{{courrier.id}}"
+                *ngFor="let courrier of objetCourier"
+              >
+                {{ courrier.object }}
               </option>
             </select>
             <span

@@ -33,7 +33,6 @@ export class UpdateCourrierComponent implements OnInit {
     private behavio: BehavioSubjetService) { }
 
   ngOnInit(): void {
-    
     this.addForm = this.formBuilder.group({
       id:[''],
       object: ['', Validators.required],
@@ -130,10 +129,10 @@ export class UpdateCourrierComponent implements OnInit {
     // this.addForm.addControl("assistante",new FormControl("/api/coud/assistantes/"+this.Connecter,));
     // this.addForm.addControl("coordinateur",new FormControl("/api/coud/coordinateurs/"+this.coordonateur,));
    
-    this.behavio.setValue(this.addForm.value);
     this.updateCourierArriver(this.addForm.value);
   }
   updateCourierArriver(objetCourierArriver: any){
+    this.behavio.setValue(objetCourierArriver);
     this.methodeService.updateCourrierArriver(objetCourierArriver)
       .subscribe(
         (data) => {

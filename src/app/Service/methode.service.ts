@@ -62,4 +62,7 @@ export class MethodeService {
   getFiche(): Observable<FicheDeControlModel>{
     return this.httpClient.get<FicheDeControlModel>(`${envVars.url}/coud/fiche_de_controles`);
   }
+  getAllUsers(): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/users`);
+  }
 }
