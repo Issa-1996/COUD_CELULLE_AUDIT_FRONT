@@ -184,7 +184,7 @@ export class CourierArriverComponent implements OnInit {
       (data) => {
         this.bihavio.setValue(this.addForm.value);
         this.success = 'Courier arriver avec success';
-        this.addForm.value.reset;
+        // this.addForm.value.reset;
         //this.router.navigate(['/container/courier']);
       },
       (error) => {
@@ -192,7 +192,7 @@ export class CourierArriverComponent implements OnInit {
         if (error.status === 403) {
           this.erreur = error.error;
         } else {
-          this.addForm.value.reset;
+          // this.addForm.value.reset;
           this.erreur = "Une erreur s'est produite !";
         }
       }
