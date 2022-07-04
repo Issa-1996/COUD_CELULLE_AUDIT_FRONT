@@ -19,41 +19,24 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" *ngIf="role.includes('ROLE_COORDINATEUR')">
-        <div class="marquee">
-          <!-- <marquee LOOP="10" *ngIf="role.includes('ROLE_ASSISTANTE')"
-            >GESTION DES COURRIERS</marquee
-          >
-          <marquee LOOP="10" *ngIf="role.includes('ROLE_CONTROLEURS')"
-            >GESTION DU FICHE DE CONTROLE</marquee
-          > -->
-        </div>
-        <li
-          class="navbar-brand active"
-          
-        >
+        <li class="navbar-brand active">
           <a class="nav-link active" routerLink="/container/accueil">Accueil</a>
         </li>
-        <li
-          class="navbar-brand active"
-          
-        >
+        <li class="navbar-brand active">
           <a class="nav-link active" routerLink="/container/courier"
             >Courriers</a
           >
         </li>
-        <li
-          class="navbar-brand active"
-          
-        >
+        <li class="navbar-brand active">
           <a
             class="nav-link active"
             routerLink="/container/fichedecontroleinterne"
             >Fiche de controle</a
           >
         </li>
-        <li class="navbar-brand" >
+        <li class="navbar-brand">
           <a
             class="nav-link active"
             routerLink="/container/utilisateurs"
@@ -63,9 +46,16 @@
           >
         </li>
       </ul>
+      <div class="marquee">
+        <marquee LOOP="10" *ngIf="role.includes('ROLE_ASSISTANTE')"
+          >GESTION DES COURRIERS</marquee
+        >
+        <marquee LOOP="10" *ngIf="role.includes('ROLE_CONTROLEURS')"
+          >GESTION DU FICHE DE CONTROLE</marquee
+        >
+      </div>
     </div>
     <div class="col-md-3">
-      
       <ul class="navbar-nav mr-auto active">
         <div class="d-flex">
           <div class="navbar-brand active" id="user">

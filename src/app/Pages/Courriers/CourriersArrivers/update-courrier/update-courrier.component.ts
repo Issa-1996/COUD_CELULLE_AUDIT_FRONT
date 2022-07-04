@@ -12,7 +12,7 @@ import { MethodeService } from 'app/Service/methode.service';
 export class UpdateCourrierComponent implements OnInit {
 
   addForm: FormGroup;
-  controleur:UserModel;
+  controleurs:UserModel;
   coordonateur:UserModel;
   erreurdateArriver = '';
   erreurexpediteur = '';
@@ -33,6 +33,7 @@ export class UpdateCourrierComponent implements OnInit {
     private behavio: BehavioSubjetService) { }
 
   ngOnInit(): void {
+    this.getControleurs();
     this.addForm = this.formBuilder.group({
       id:[''],
       object: ['', Validators.required],
@@ -46,7 +47,7 @@ export class UpdateCourrierComponent implements OnInit {
       dateCorrespondance: ['', Validators.required],
       numeroReponse: ['', Validators.required],
       dateReponse: ['', Validators.required],
-      controleur: ['', Validators.required]
+      controleurs: ['', Validators.required]
     });
     this.addForm.get('object').valueChanges.subscribe(
       () => { this.erreurobject = ''; this.erreur = ''; }
@@ -81,11 +82,11 @@ export class UpdateCourrierComponent implements OnInit {
     this.addForm.get('dateReponse').valueChanges.subscribe(
       () => { this.erreurdateReponse = ''; this.erreur = ''; }
     );
-    this.addForm.get('controleur').valueChanges.subscribe(
+    this.addForm.get('controleurs').valueChanges.subscribe(
       () => { this.erreurControleur = ''; this.erreur = ''; }
     );
     this.behavio.getValue().subscribe(
-      (data)=>{        
+      (data)=>{
         this.addForm.patchValue(data);
       })
   }
@@ -132,7 +133,7 @@ export class UpdateCourrierComponent implements OnInit {
     this.updateCourierArriver(this.addForm.value);
   }
   updateCourierArriver(objetCourierArriver: any){
-    this.behavio.setValue(objetCourierArriver);
+    // this.behavio.setValue(objetCourierArriver);
     this.methodeService.updateCourrierArriver(objetCourierArriver)
       .subscribe(
         (data) => {
@@ -148,6 +149,14 @@ export class UpdateCourrierComponent implements OnInit {
           this.erreur = 'Une erreur s\'est produite !';
         }
       });
+  }
+  getControleurs(): any{
+    this.methodeService.getControleurs().subscribe(
+      (data) => {
+        this.controleurs=data['hydra:member'];
+      },
+      (error: any) => {
+    });
   }
   start = Date.now();
 }

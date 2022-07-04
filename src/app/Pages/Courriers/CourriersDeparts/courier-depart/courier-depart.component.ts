@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
@@ -21,29 +22,44 @@ export class CourierDepartComponent implements OnInit {
   erreurnumeroCourier = '';
   erreurobject = '';
   erreur = '';
+  erreurNumeroFacture="";
+  erreurmontant="";
+  erreurbeneficiaire="";
   code = '';
   sending = false;
   btnText = 'Envoyer';
-  constructor(private formBuilder: FormBuilder, private router: Router, private methodeService: MethodeService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private router: Router, 
+    private methodeService: MethodeService,
+    private behavio: BehavioSubjetService) { }
 
   ngOnInit(): void {
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
+      beneficiaire: ['', Validators.required],
       numeroCourier: ['', Validators.required],
-      dateDepart: ['', Validators.required],
+      Date: ['', Validators.required],
       destination: ['', Validators.required],
       observation: ['', [Validators.required]],
       numeroArchive: ['', Validators.required],
       nombrePiece: ['', Validators.required],
       numeroOrdre: ['', Validators.required],
+      NumeroFacture: ['', Validators.required],
+      montant: ['', Validators.required],
+      assistante: ['', Validators.required],
+      coordinateur: ['', Validators.required],
     });
     this.addForm.get('object').valueChanges.subscribe(
       () => { this.erreurobject = ''; this.erreur = ''; }
     );
+    this.addForm.get('beneficiaire').valueChanges.subscribe(
+      () => { this.erreurbeneficiaire = ''; this.erreur = ''; }
+    );
     this.addForm.get('numeroCourier').valueChanges.subscribe(
       () => { this.erreurnumeroCourier = ''; this.erreur = ''; }
     );
-    this.addForm.get('dateDepart').valueChanges.subscribe(
+    this.addForm.get('Date').valueChanges.subscribe(
       () => { this.erreurdateDepart = ''; this.erreur = ''; }
     );
     this.addForm.get('destination').valueChanges.subscribe(
@@ -61,6 +77,16 @@ export class CourierDepartComponent implements OnInit {
     this.addForm.get('numeroOrdre').valueChanges.subscribe(
       () => { this.erreurnumeroOrdre = ''; this.erreur = ''; }
     );
+    this.addForm.get('NumeroFacture').valueChanges.subscribe(
+      () => { this.erreurnombrePiece = ''; this.erreur = ''; }
+    );
+    this.addForm.get('montant').valueChanges.subscribe(
+      () => { this.erreurnumeroOrdre = ''; this.erreur = ''; }
+    );
+    this.behavio.getValue().subscribe(
+      (data)=>{
+        this.addForm.patchValue(data);
+      })
   }
 
   onSignIn(): any{
@@ -70,14 +96,14 @@ export class CourierDepartComponent implements OnInit {
     if (this.addForm.get('numeroCourier').value.trim() === ''){
       this.erreurnumeroCourier = 'Numero courier obligatoire !';
     }
-    if (this.addForm.get('dateDepart').value.trim() === ''){
+    if (this.addForm.get('Date').value.trim() === ''){
       this.erreurdateDepart = 'Date départ obligatoire !';
     }
     if (this.addForm.get('destination').value.trim() === ''){
       this.erreurdestination = 'Destination obligatoire !';
     }
     if (this.addForm.get('observation').value.trim() === ''){
-      this.erreurobservation = 'Numero Correspondance obligatoire !';
+      this.erreurobservation = 'Observation obligatoire !';
     }
     if (this.addForm.get('numeroArchive').value.trim() === ''){
       this.erreurnumeroArchive = 'Numero archive obligatoire !';
@@ -91,8 +117,7 @@ export class CourierDepartComponent implements OnInit {
     if (this.addForm.invalid){
       return;
     }
-    this.sending = true;
-    this.btnText = 'Vérification...';
+    console.log(this.addForm.value);
     this.subscribeCourierDepart(this.addForm.value);
   }
   subscribeCourierDepart(objetCourierDepart: any){
@@ -100,7 +125,7 @@ export class CourierDepartComponent implements OnInit {
       .subscribe(
         (data) => {
         this.erreur = 'Courier depart avec success';
-        //this.router.navigate(['/']);
+        this.router.navigate(['/']);
       },
       (error) => {
         // @ts-ignore
@@ -110,9 +135,6 @@ export class CourierDepartComponent implements OnInit {
         else{
           this.erreur = 'Une erreur s\'est produite !';
         }
-        this.sending = false;
-        this.btnText = 'Envoyer';
-        return;
       });
   }
 }

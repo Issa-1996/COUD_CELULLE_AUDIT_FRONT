@@ -37,17 +37,15 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     public dialog: MatDialog,
     private behavio: BehavioSubjetService
   ) {}
-  detailFicheDeControle() {
+  detailFicheDeControle(fiche: any) {
+    this.behavio.setValue(fiche);
     const dialogRef = this.dialog.open(FicheDeControleAffichageComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  detailFiche(fiche: any): any {
-    this.behavio.setValue(fiche);
-  }
-  modifierFicheDeControle(fiche:any) {
+  modifierFicheDeControle(fiche: any) {
     this.behavio.setValue(fiche);
     const dialogRef = this.dialog.open(FicheDeControleModifierComponent);
 
@@ -58,6 +56,11 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
   listesFiches() {
     this.methodeService.getFiche().subscribe((data) => {
       this.database = data['hydra:member'];
+      this.behavio.getValue().subscribe((d) => {
+        if (d.length != 0) {
+          this.database.push(d);
+        }
+      });
       this.dataSource = new MatTableDataSource<FicheDeControlModel>(
         this.database
       );

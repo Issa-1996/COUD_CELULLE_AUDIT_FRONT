@@ -19,9 +19,9 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private authServive: AuthService) {}
 
   ngOnInit(): void {
+    this.connectUser();
     this.decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     this.role = this.decodedToken.roles;
-    this.connectUser();
   }
   logOout(): any {
     this.authServive.isLogOut();
@@ -30,11 +30,10 @@ export class HeaderComponent implements OnInit {
   connectUser() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     const username: string[] = decodedToken.username;
-
     this.authServive.getUserConnected(username).subscribe((data) => {
       this.user = data['hydra:member'][0];
       this.prenom = this.user['prenom'];
-      this.nom = this.user['nom'];
+      this.nom = this.user['nom'];  
     });
   }
 }

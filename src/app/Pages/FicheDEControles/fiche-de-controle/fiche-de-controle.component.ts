@@ -10,6 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
 import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
+import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 
 @Component({
@@ -34,7 +35,8 @@ export class FicheDeControleComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private methodeService: MethodeService,
-    private authService: AuthService
+    private authService: AuthService,
+    private bihavio: BehavioSubjetService
   ) {}
 
   ngOnInit(): void {
@@ -98,7 +100,7 @@ export class FicheDeControleComponent implements OnInit {
     );
 
     this.subscribeFicheDeControle(this.addForm.value);
-    console.log(this.addForm.value);
+    this.bihavio.setValue(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {
     this.methodeService.addFicheDeControle(objetFicheDeControle).subscribe(
