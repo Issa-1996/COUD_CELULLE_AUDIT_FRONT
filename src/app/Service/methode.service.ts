@@ -29,6 +29,9 @@ export class MethodeService {
   addFicheDeControle(FicheDeControle: any): Observable<FicheDeControlModel> {
     return this.httpClient.post<FicheDeControlModel>(`${envVars.url}/coud/fiche_de_controles`, FicheDeControle, {headers: this.headers});
   }
+  updateFicheDeControle(FicheDeControle: any): Observable<any>{
+    return this.httpClient.put<any>(envVars.url+'/coud/fiche_de_controles' + '/' + FicheDeControle.id, FicheDeControle, {headers: this.headers});
+  }
   addUser(ObjetUser: any): Observable<UserModel> {
     return this.httpClient.post<UserModel>(`${envVars.url}/coud/users`, ObjetUser, {headers: this.headers});
   }

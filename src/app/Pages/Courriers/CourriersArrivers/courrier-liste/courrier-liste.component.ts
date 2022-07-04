@@ -7,6 +7,7 @@ import { CourierModel } from 'app/Model/Courier.model';
 import { AuthService } from 'app/Service/auth.service';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { CourierDepartComponent } from '../../CourriersDeparts/courier-depart/courier-depart.component';
 import { CourierArriverAffichageComponent } from '../courier-arriver-affichage/courier-arriver-affichage.component';
 import { UpdateCourrierComponent } from '../update-courrier/update-courrier.component';
 
@@ -26,7 +27,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     'depart',
     'rejet',
   ];
-  displayedColumn: string[] = ['id', 'objet', 'date', 'type', 'detail'];
+  displayedColumn: string[] = ['id', 'objet', 'date', 'beneficiaire', 'detail'];
   public role: any[];
   database: CourierModel[] = [];
   helper = new JwtHelperService();
@@ -63,6 +64,14 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+  departCourrierArriver(fiche: any) {    
+    this.behavio.setValue(fiche);
+    const dialogRef = this.dialog.open(CourierDepartComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   modifierCourrierArriver(fiche: any): any {    
     this.behavio.setValue(fiche);
     const dialogRef = this.dialog.open(UpdateCourrierComponent);
@@ -77,7 +86,6 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     this.listeCourrier();
     this.dataSource.paginator = this.paginator;
   }
-
   listeCourrier() {
     if (this.role.includes('ROLE_CONTROLEURS')) {
       const decodedToken = this.helper.decodeToken(

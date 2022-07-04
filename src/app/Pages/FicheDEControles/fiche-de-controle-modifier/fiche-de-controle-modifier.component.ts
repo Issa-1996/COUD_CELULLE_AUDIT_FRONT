@@ -39,11 +39,12 @@ export class FicheDeControleModifierComponent implements OnInit {
     this.getCoordonateur();
     this.connectUser();
     this.addForm = this.formBuilder.group({
+      id: [''],
       objet: ['', Validators.required],
       avisControleur: ['', Validators.required],
       motivation: ['', Validators.required],
       recommandations: ['', [Validators.required]],
-      courrierArriver: ['', [Validators.required]],
+      courrierArriver: [''],
     });
     this.addForm.get('objet').valueChanges.subscribe(() => {
       this.erreurobjet = '';
@@ -84,9 +85,6 @@ export class FicheDeControleModifierComponent implements OnInit {
     if (this.addForm.get('recommandations').value.trim() === '') {
       this.erreurrecommandations = 'Recommandation obligatoire !';
     }
-    if (this.addForm.get('courrierArriver').value.trim() === '') {
-      this.erreurCourrier = 'Courrier Arriver obligatoire !';
-    }
     if (this.addForm.invalid) {
       return;
     }
@@ -98,15 +96,13 @@ export class FicheDeControleModifierComponent implements OnInit {
       'coordinateur',
       new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
     );
-
     this.subscribeFicheDeControle(this.addForm.value);
-    console.log(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {
-    this.methodeService.addFicheDeControle(objetFicheDeControle).subscribe(
+    this.methodeService.updateFicheDeControle(objetFicheDeControle).subscribe(
       (data) => {
         this.erreur = 'Fiche de control Modifier avec success';
-        //this.router.navigate(['/']);
+        this.router.navigate(['/']);
       },
       (error) => {
         if (error.status === 403) {
@@ -120,7 +116,7 @@ export class FicheDeControleModifierComponent implements OnInit {
   connectUser() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     const username: string[] = decodedToken.username;
-    this.authService.getUserConnected(username).subscribe((data) => {
+    this.authService.getUserConnected(username).subscribe((data) => {      
       this.user = data['hydra:member'][0]['id'];
       for (
         let i = 0;
@@ -134,7 +130,9 @@ export class FicheDeControleModifierComponent implements OnInit {
           this.tabObjet[i] = data['hydra:member'][0]['courierArrivers'][i];
         }
       }
-      this.objetCourier = this.tabObjet;
+      this.objetCourier = this.tabObjet.filter(function (el) {
+        return el != null;
+      });
     });
   }
   getCoordonateur(): any {

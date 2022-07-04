@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserModel } from 'app/Model/User.model';
@@ -10,15 +15,14 @@ import { MethodeService } from 'app/Service/methode.service';
 @Component({
   selector: 'app-courier-arriver',
   templateUrl: './courier-arriver.component.html',
-  styleUrls: ['./courier-arriver.component.css']
+  styleUrls: ['./courier-arriver.component.css'],
 })
 export class CourierArriverComponent implements OnInit {
-
   addForm: FormGroup;
 
   helper = new JwtHelperService();
-  controleur:UserModel;
-  coordonateur:UserModel;
+  controleur: UserModel;
+  coordonateur: UserModel;
   erreurdateArriver = '';
   erreurexpediteur = '';
   erreurdateCorrespondance = '';
@@ -27,22 +31,23 @@ export class CourierArriverComponent implements OnInit {
   erreurnumeroReponse = '';
   erreurnumeroCourier = '';
   erreurobject = '';
-  erreurControleur =" ";
-  erreurMontant="";
-  erreurFacture="";
-  erreurBeneficiaire="";
+  erreurControleur = ' ';
+  erreurMontant = '';
+  erreurFacture = '';
+  erreurBeneficiaire = '';
   erreur = '';
+  success='';
   code = '';
-  Connecter:UserModel;
-  id:number;
-  object:String;
+  Connecter: UserModel;
+  id: number;
+  object: String;
   constructor(
-    private formBuilder: FormBuilder, 
-    private router: Router, 
-    private methodeService: MethodeService, 
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private methodeService: MethodeService,
     private authService: AuthService,
     private bihavio: BehavioSubjetService
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getCoordonateur();
@@ -60,130 +65,160 @@ export class CourierArriverComponent implements OnInit {
       dateCorrespondance: ['', Validators.required],
       numeroReponse: ['', Validators.required],
       dateReponse: ['', Validators.required],
-      controleurs: ['', Validators.required]
+      controleurs: ['', Validators.required],
     });
-    this.addForm.get('object').valueChanges.subscribe(
-      () => { this.erreurobject = ''; this.erreur = ''; }
-    );
-    this.addForm.get('beneficiaire').valueChanges.subscribe(
-      () => { this.erreurBeneficiaire = ''; this.erreur = ''; }
-    );
-    this.addForm.get('NumeroFacture').valueChanges.subscribe(
-      () => { this.erreurFacture = ''; this.erreur = ''; }
-    );
-    this.addForm.get('montant').valueChanges.subscribe(
-      () => { this.erreurMontant = ''; this.erreur = ''; }
-    );
-    this.addForm.get('numeroCourier').valueChanges.subscribe(
-      () => { this.erreurnumeroCourier = ''; this.erreur = ''; }
-    );
-    this.addForm.get('Date').valueChanges.subscribe(
-      () => { this.erreurdateArriver = ''; this.erreur = ''; }
-    );
-    this.addForm.get('expediteur').valueChanges.subscribe(
-      () => { this.erreurexpediteur = ''; this.erreur = ''; }
-    );
-    this.addForm.get('numeroCorrespondance').valueChanges.subscribe(
-      () => { this.erreurnumeroCorrespondance = ''; this.erreur = ''; }
-    );
-    this.addForm.get('dateCorrespondance').valueChanges.subscribe(
-      () => { this.erreurdateCorrespondance = ''; this.erreur = ''; }
-    );
-    this.addForm.get('numeroReponse').valueChanges.subscribe(
-      () => { this.erreurnumeroReponse = ''; this.erreur = ''; }
-    );
-    this.addForm.get('dateReponse').valueChanges.subscribe(
-      () => { this.erreurdateReponse = ''; this.erreur = ''; }
-    );
-    this.addForm.get('controleurs').valueChanges.subscribe(
-      () => { this.erreurControleur = ''; this.erreur = ''; }
-    );
+    this.addForm.get('object').valueChanges.subscribe(() => {
+      this.erreurobject = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('beneficiaire').valueChanges.subscribe(() => {
+      this.erreurBeneficiaire = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('NumeroFacture').valueChanges.subscribe(() => {
+      this.erreurFacture = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('montant').valueChanges.subscribe(() => {
+      this.erreurMontant = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('numeroCourier').valueChanges.subscribe(() => {
+      this.erreurnumeroCourier = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('Date').valueChanges.subscribe(() => {
+      this.erreurdateArriver = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('expediteur').valueChanges.subscribe(() => {
+      this.erreurexpediteur = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('numeroCorrespondance').valueChanges.subscribe(() => {
+      this.erreurnumeroCorrespondance = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('dateCorrespondance').valueChanges.subscribe(() => {
+      this.erreurdateCorrespondance = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('numeroReponse').valueChanges.subscribe(() => {
+      this.erreurnumeroReponse = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('dateReponse').valueChanges.subscribe(() => {
+      this.erreurdateReponse = '';
+      this.erreur = '';
+      this.success='';
+    });
+    this.addForm.get('controleurs').valueChanges.subscribe(() => {
+      this.erreurControleur = '';
+      this.erreur = '';
+      this.success='';
+    });
   }
 
-  onSignIn(): any{
-    if (this.addForm.get('object').value.trim() === ''){
+  onSignIn(): any {
+    if (this.addForm.get('object').value.trim() === '') {
       this.erreurobject = 'Objet obligatoire !';
     }
-    if (this.addForm.get('beneficiaire').value.trim() === ''){
+    if (this.addForm.get('beneficiaire').value.trim() === '') {
       this.erreurBeneficiaire = 'Bénéficiaire obligatoire !';
     }
-    if (this.addForm.get('NumeroFacture').value.trim() === ''){
+    if (this.addForm.get('NumeroFacture').value.trim() === '') {
       this.erreurFacture = 'Numero facture obligatoire !';
     }
-    if (this.addForm.get('montant').value.trim() === ''){
+    if (this.addForm.get('montant').value.trim() === '') {
       this.erreurMontant = 'Montant obligatoire !';
     }
-    if (this.addForm.get('numeroCourier').value.trim() === ''){
+    if (this.addForm.get('numeroCourier').value.trim() === '') {
       this.erreurnumeroCourier = 'Numero Courier obligatoire !';
     }
-    if (this.addForm.get('Date').value.trim() === ''){
+    if (this.addForm.get('Date').value.trim() === '') {
       this.erreurdateArriver = 'Date Arriver obligatoire !';
     }
-    if (this.addForm.get('expediteur').value.trim() === ''){
+    if (this.addForm.get('expediteur').value.trim() === '') {
       this.erreurexpediteur = 'Expediteur obligatoire !';
     }
-    if (this.addForm.get('numeroCorrespondance').value.trim() === ''){
+    if (this.addForm.get('numeroCorrespondance').value.trim() === '') {
       this.erreurnumeroCorrespondance = 'Numero Correspondance obligatoire !';
     }
-    if (this.addForm.get('dateCorrespondance').value.trim() === ''){
+    if (this.addForm.get('dateCorrespondance').value.trim() === '') {
       this.erreurdateCorrespondance = 'Date Correspondance obligatoire !';
     }
-    if (this.addForm.get('numeroReponse').value.trim() === ''){
+    if (this.addForm.get('numeroReponse').value.trim() === '') {
       this.erreurnumeroReponse = 'Numero Reponse obligatoire !';
     }
-    if (this.addForm.get('dateReponse').value.trim() === ''){
+    if (this.addForm.get('dateReponse').value.trim() === '') {
       this.erreurdateReponse = 'Date Reponse obligatoire !';
     }
-    if (this.addForm.get('controleurs').value.trim() === ''){
+    if (this.addForm.get('controleurs').value.trim() === '') {
       this.erreurControleur = 'Controleur obligatoire !';
     }
-    if (this.addForm.invalid){
+    if (this.addForm.invalid) {
       return;
     }
-    this.addForm.addControl("assistante",new FormControl("/api/coud/assistantes/"+this.Connecter,));
-    this.addForm.addControl("coordinateur",new FormControl("/api/coud/coordinateurs/"+this.coordonateur,));
+    this.addForm.addControl(
+      'assistante',
+      new FormControl('/api/coud/assistantes/' + this.Connecter)
+    );
+    this.addForm.addControl(
+      'coordinateur',
+      new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
+    );
     this.subscribeCourierArriver(this.addForm.value);
-    this.bihavio.setValue(this.addForm.value);
   }
-  subscribeCourierArriver(objetCourierArriver: any){
-    this.methodeService.addCourierArriver(objetCourierArriver)
-      .subscribe(
-        (data) => {
-        this.erreur = 'Courier arriver avec success';
+  subscribeCourierArriver(objetCourierArriver: any) {
+    this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
+      (data) => {
+        this.bihavio.setValue(this.addForm.value);
+        this.success = 'Courier arriver avec success';
+        this.addForm.value.reset;
         //this.router.navigate(['/container/courier']);
       },
       (error) => {
         // @ts-ignore
-        if (error.status === 403){
+        if (error.status === 403) {
           this.erreur = error.error;
+        } else {
+          this.addForm.value.reset;
+          this.erreur = "Une erreur s'est produite !";
         }
-        else{
-          this.erreur = 'Une erreur s\'est produite !';
-        }
-      });
+      }
+    );
   }
-  getControleurs(): any{
+  getControleurs(): any {
     this.methodeService.getControleurs().subscribe(
       (data) => {
-        this.controleur=data['hydra:member'];
+        this.controleur = data['hydra:member'];
       },
-      (error: any) => {
-    });
+      (error: any) => {}
+    );
   }
-  getCoordonateur(): any{
+  getCoordonateur(): any {
     this.methodeService.getCoordonateurs().subscribe(
       (data) => {
-        this.coordonateur=data['hydra:member'][0]["id"];
+        this.coordonateur = data['hydra:member'][0]['id'];
       },
-      (error: any) => {
-    });
+      (error: any) => {}
+    );
   }
-  connectUser(){
+  connectUser() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     const username: string[] = decodedToken.username;
-    this.authService.getUserConnected(username)
-    .subscribe(data=>{
-     this.Connecter=data['hydra:member'][0]["id"];
-    })
+    this.authService.getUserConnected(username).subscribe((data) => {
+      this.Connecter = data['hydra:member'][0]['id'];
+    });
   }
 }

@@ -17,7 +17,6 @@ export class CourierArriverAffichageComponent implements OnInit {
   detailCourrierArriver(): any {
     this.behavio.getValue().subscribe(
       (data) => {
-        console.log(data);
         this.courrierDetail = data;
       },
       (error: any) => {}
