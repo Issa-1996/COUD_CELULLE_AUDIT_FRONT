@@ -26,6 +26,7 @@ export class AddUserComponent implements OnInit {
   erreurprofil = '';
   erreuremail = '';
   erreur = '';
+  success='';
   code = '';
   sending = false;
   btnText = 'Envoyer';
@@ -52,30 +53,37 @@ export class AddUserComponent implements OnInit {
     this.addForm.get('username').valueChanges.subscribe(() => {
       this.erreurusername = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('matricule').valueChanges.subscribe(() => {
       this.erreurmatricule = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('nom').valueChanges.subscribe(() => {
       this.erreurnom = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('prenom').valueChanges.subscribe(() => {
       this.erreurprenom = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('dateDeNaissance').valueChanges.subscribe(() => {
       this.erreurdateDeNaissance = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('email').valueChanges.subscribe(() => {
       this.erreuremail = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('profil').valueChanges.subscribe(() => {
       this.erreurprofil = '';
       this.erreur = '';
+      this.success = '';
     });
   }
 
@@ -110,7 +118,7 @@ export class AddUserComponent implements OnInit {
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
-          this.erreur = 'Ajout coordonateur avec success';
+          this.success = 'Ajout coordonateur avec success';
           this.router.navigate(['/container/utilisateurs']);
         },
         (error) => {
@@ -127,7 +135,7 @@ export class AddUserComponent implements OnInit {
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
-          this.erreur = 'Ajout controleur avec success';
+          this.success = 'Ajout controleur avec success';
           this.router.navigate(['/container/utilisateurs']);
         },
         (error) => {
@@ -144,7 +152,7 @@ export class AddUserComponent implements OnInit {
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
-          this.erreur = 'Ajout assistante avec success';
+          this.success = 'Ajout assistante avec success';
           this.router.navigate(['/container/utilisateurs']);
         },
         (error) => {

@@ -30,7 +30,12 @@
       >
         FICHE DE CONTROLE INTERNE
       </h4>
-      <span class="login-erreur"> {{ erreur }} </span>
+      <div *ngIf="erreur != ''" class="login-erreur-container text-center bg-danger">
+        <span class="login-erreur"> {{ erreur }} </span>
+      </div>
+      <div *ngIf="success != ''" class="login-erreur-container text-center bg-success">
+        <span class="login-erreur"> {{ success }} </span>
+      </div>
       <form method="post" [formGroup]="addForm">
         <div class="row">
           <div class="col-md-6">

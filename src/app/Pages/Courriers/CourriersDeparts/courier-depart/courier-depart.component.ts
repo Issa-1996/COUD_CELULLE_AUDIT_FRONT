@@ -22,6 +22,7 @@ export class CourierDepartComponent implements OnInit {
   erreurnumeroCourier = '';
   erreurobject = '';
   erreur = '';
+  success='';
   erreurNumeroFacture="";
   erreurmontant="";
   erreurbeneficiaire="";
@@ -51,37 +52,37 @@ export class CourierDepartComponent implements OnInit {
       coordinateur: ['', Validators.required],
     });
     this.addForm.get('object').valueChanges.subscribe(
-      () => { this.erreurobject = ''; this.erreur = ''; }
+      () => { this.erreurobject = ''; this.erreur = ''; this.success = ''; }
     );
     this.addForm.get('beneficiaire').valueChanges.subscribe(
-      () => { this.erreurbeneficiaire = ''; this.erreur = ''; }
+      () => { this.erreurbeneficiaire = ''; this.erreur = ''; this.success = '';}
     );
     this.addForm.get('numeroCourier').valueChanges.subscribe(
-      () => { this.erreurnumeroCourier = ''; this.erreur = ''; }
+      () => { this.erreurnumeroCourier = ''; this.erreur = ''; this.success = ''; }
     );
     this.addForm.get('Date').valueChanges.subscribe(
-      () => { this.erreurdateDepart = ''; this.erreur = ''; }
+      () => { this.erreurdateDepart = ''; this.erreur = '';  this.success = '';}
     );
     this.addForm.get('destination').valueChanges.subscribe(
-      () => { this.erreurdestination = ''; this.erreur = ''; }
+      () => { this.erreurdestination = ''; this.erreur = ''; this.success = ''; }
     );
     this.addForm.get('observation').valueChanges.subscribe(
-      () => { this.erreurobservation = ''; this.erreur = ''; }
+      () => { this.erreurobservation = ''; this.erreur = ''; this.success = ''; }
     );
     this.addForm.get('numeroArchive').valueChanges.subscribe(
-      () => { this.erreurnumeroArchive = ''; this.erreur = ''; }
+      () => { this.erreurnumeroArchive = ''; this.erreur = ''; this.success = ''; }
     );
     this.addForm.get('nombrePiece').valueChanges.subscribe(
-      () => { this.erreurnombrePiece = ''; this.erreur = ''; }
+      () => { this.erreurnombrePiece = ''; this.erreur = ''; this.success = ''; }
     );
     this.addForm.get('numeroOrdre').valueChanges.subscribe(
-      () => { this.erreurnumeroOrdre = ''; this.erreur = ''; }
+      () => { this.erreurnumeroOrdre = ''; this.erreur = ''; this.success = ''; }
     );
     this.addForm.get('NumeroFacture').valueChanges.subscribe(
-      () => { this.erreurnombrePiece = ''; this.erreur = ''; }
+      () => { this.erreurnombrePiece = ''; this.erreur = ''; this.success = ''; }
     );
     this.addForm.get('montant').valueChanges.subscribe(
-      () => { this.erreurnumeroOrdre = ''; this.erreur = ''; }
+      () => { this.erreurnumeroOrdre = ''; this.erreur = ''; this.success = ''; }
     );
     this.behavio.getValue().subscribe(
       (data)=>{
@@ -124,7 +125,7 @@ export class CourierDepartComponent implements OnInit {
     this.methodeService.addCourierDepart(objetCourierDepart)
       .subscribe(
         (data) => {
-        this.erreur = 'Courier depart avec success';
+          this.success = 'Courier depart avec success';
         this.router.navigate(['/']);
       },
       (error) => {

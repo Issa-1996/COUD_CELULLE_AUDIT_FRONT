@@ -23,6 +23,7 @@ export class FicheDeControleModifierComponent implements OnInit {
   erreurrecommandations = '';
   erreurCourrier = '';
   erreur = '';
+  success = '';
   objetCourier: CourierModel[];
   tabObjet = [];
   coordonateur: UserModel;
@@ -53,18 +54,22 @@ export class FicheDeControleModifierComponent implements OnInit {
     this.addForm.get('avisControleur').valueChanges.subscribe(() => {
       this.erreuravisControleur = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('motivation').valueChanges.subscribe(() => {
       this.erreurmotivation = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('recommandations').valueChanges.subscribe(() => {
       this.erreurrecommandations = '';
       this.erreur = '';
+      this.success = '';
     });
     this.addForm.get('courrierArriver').valueChanges.subscribe(() => {
       this.erreurCourrier = '';
       this.erreur = '';
+      this.success = '';
     });
     this.behavio.getValue().subscribe(
       (data)=>{        
@@ -101,7 +106,7 @@ export class FicheDeControleModifierComponent implements OnInit {
   subscribeFicheDeControle(objetFicheDeControle: any) {
     this.methodeService.updateFicheDeControle(objetFicheDeControle).subscribe(
       (data) => {
-        this.erreur = 'Fiche de control Modifier avec success';
+        this.success = 'Fiche de control Modifier avec success';
         this.router.navigate(['/']);
       },
       (error) => {

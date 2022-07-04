@@ -4,7 +4,12 @@
     <div class="text-center" style="width: 100%; background-color: #17a2b4">
       <h3 style="color: white">AJOUTER UTILISATEURS</h3>
     </div>
-    <span class="login-erreur"> {{ erreur }} </span>
+    <div *ngIf="erreur != ''" class="login-erreur-container text-center bg-danger">
+      <span class="login-erreur"> {{ erreur }} </span>
+    </div>
+    <div *ngIf="success != ''" class="login-erreur-container text-center bg-success">
+      <span class="login-erreur"> {{ success }} </span>
+    </div>
     <form class="form-signin" [formGroup]="addForm">
       <div class="row">
         <div class="col-md-6">
@@ -102,7 +107,6 @@
             name="Date"
             id="date-picker"
           />
-          {{ today }}
           <span
             class="login-erreur"
             *ngIf="erreurdateDeNaissance != ''"

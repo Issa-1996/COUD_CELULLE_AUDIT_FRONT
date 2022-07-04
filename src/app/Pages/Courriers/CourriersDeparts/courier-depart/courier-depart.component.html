@@ -1,7 +1,12 @@
     <div class="container col-md-9" style="box-shadow: 1px 5px 10px 3px beige;">
       <h4 style="text-align:center; background-color: blue; width: 60%; margin-left: 20%; color: white; border-radius: 5px;"> COURRIER DEPART </h4>
       <div *ngIf="erreur!=''" class="login-erreur-container text-center">
+      </div>
+      <div *ngIf="success != ''" class="login-erreur-container text-center bg-danger">
         <span class="login-erreur" > {{ erreur }} </span>
+      </div>
+      <div *ngIf="success != ''" class="login-erreur-container text-center bg-success">
+        <span class="login-erreur"> {{ success }} </span>
       </div>
       <form method="post" [formGroup]="addForm">
         <div class="row">
