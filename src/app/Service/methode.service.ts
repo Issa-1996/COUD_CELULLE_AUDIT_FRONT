@@ -26,6 +26,9 @@ export class MethodeService {
   addCourierDepart(CourierDepart: any): Observable<CourierModel> {
     return this.httpClient.post<CourierModel>(`${envVars.url}/coud/courier_departs`, CourierDepart, {headers: this.headers});
   }
+  updateCourrierDepart(objetCourierDepart: any): Observable<any>{
+    return this.httpClient.put<any>(`${envVars.url}/coud/courier_departs/`+ objetCourierDepart.id, objetCourierDepart, {headers: this.headers});
+  }
   addFicheDeControle(FicheDeControle: any): Observable<FicheDeControlModel> {
     return this.httpClient.post<FicheDeControlModel>(`${envVars.url}/coud/fiche_de_controles`, FicheDeControle, {headers: this.headers});
   }

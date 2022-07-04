@@ -39,6 +39,8 @@ import { CourierArriverAffichageComponent } from './Pages/Courriers/CourriersArr
 import { CourrierListeComponent } from './Pages/Courriers/CourriersArrivers/courrier-liste/courrier-liste.component';
 import { ListCourriersDepartComponent } from './Pages/Courriers/CourriersDeparts/list-courriers-depart/list-courriers-depart.component';
 import { CouriersComponent } from './Pages/Courriers/CourriersArrivers/couriers/couriers.component';
+import { UpdateCourrierDepartComponent } from './Pages/Courriers/CourriersDeparts/update-courrier-depart/update-courrier-depart.component';
+import { CourrierDepartAffichageComponent } from './Pages/Courriers/CourriersDeparts/courrier-depart-affichage/courrier-depart-affichage.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,10 @@ import { CouriersComponent } from './Pages/Courriers/CourriersArrivers/couriers/
     FicheDeControleModifierComponent,
     ListCourriersDepartComponent,
     UpdateCourrierComponent,
-    CouriersComponent
+    CouriersComponent,
+    UpdateCourrierDepartComponent,
+    CourrierDepartAffichageComponent
+    
   ],
   imports: [
     ReactiveFormsModule,

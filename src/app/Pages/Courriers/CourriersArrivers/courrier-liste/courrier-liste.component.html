@@ -143,6 +143,12 @@
       <td mat-cell *matCellDef="let row">{{ row.object }}</td>
     </ng-container>
 
+    <!-- Expediteur Column -->
+    <ng-container matColumnDef="expediteur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>EXPEDITEUR</th>
+      <td mat-cell *matCellDef="let row">{{ row.expediteur }}</td>
+    </ng-container>
+
     <!-- Type Column -->
     <ng-container matColumnDef="beneficiaire">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>BENEFICIAIRE</th>

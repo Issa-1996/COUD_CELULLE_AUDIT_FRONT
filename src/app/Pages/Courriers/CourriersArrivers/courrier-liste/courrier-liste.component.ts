@@ -27,7 +27,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     'depart',
     'rejet',
   ];
-  displayedColumn: string[] = ['id', 'objet', 'date', 'beneficiaire', 'detail'];
+  displayedColumn: string[] = ['id', 'objet', 'date', 'beneficiaire', 'expediteur', 'detail'];
   public role: any[];
   database: CourierModel[] = [];
   helper = new JwtHelperService();
