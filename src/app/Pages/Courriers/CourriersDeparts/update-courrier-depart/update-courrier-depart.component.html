@@ -16,7 +16,7 @@
           <span class="login-erreur" *ngIf="erreurobject!=''" style="color: red;"> {{ erreurobject }} </span>
         </div>
         <div class="col-md-6">
-          <label for="beneficiaire" class="form-label">BENEFICIAIRE</label>
+          <label for="beneficiaire" class="form-label">Bénéficiaire</label>
           <input type="text" class="form-control" id="beneficiaire" formControlName="beneficiaire" disabled>
           <span class="login-erreur" *ngIf="erreurbeneficiaire!=''" style="color: red;"> {{ erreurbeneficiaire }} </span>
         </div>
@@ -28,7 +28,7 @@
           <span class="login-erreur" *ngIf="erreurnumeroCourier!=''" style="color: red;"> {{ erreurnumeroCourier }} </span>
         </div>
         <div class="col">
-          <label>Date départ</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+          <label>Date Départ</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
           <input type="date" class="form-control" formControlName="Date" id="Date">
           <span class="login-erreur" *ngIf="erreurdateDepart!=''" style="color: red;"> {{ erreurdateDepart }} </span>
         </div>
@@ -40,19 +40,19 @@
       </div>
       <div class="row">
         <div class="col">
-          <label>NUMERO FACTURE </label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+          <label>Numéro Facture </label><label for="" style="color: red; font-size: 20px;">*</label><br> 
           <input type="text" class="form-control" formControlName="NumeroFacture" id="NumeroFacture" disabled>
           <span class="login-erreur" *ngIf="erreurNumeroFacture!=''" style="color: red;"> {{ erreurNumeroFacture }} </span>
         </div>
         <div class="col">
-          <label>MONTANT</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+          <label>Montant</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
           <input type="text" class="form-control" id="montant" formControlName="montant" disabled>
           <span class="login-erreur" *ngIf="erreurmontant!=''" style="color: red;"> {{ erreurmontant }} </span>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <label>Numéro archive </label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+          <label>Numéro Archive </label><label for="" style="color: red; font-size: 20px;">*</label><br> 
           <input type="text" class="form-control" formControlName="numeroArchive" id="numeroArchive">
           <span class="login-erreur" *ngIf="erreurnumeroArchive!=''" style="color: red;"> {{ erreurnumeroArchive }} </span>
         </div>
@@ -64,7 +64,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <label>Nombre de pieces</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
+          <label>Nombre de Piéces</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
           <input type="text" class="form-control" formControlName="nombrePiece" id="nombrePiece">
           <span class="login-erreur" *ngIf="erreurnombrePiece!=''" style="color: red;"> {{ erreurnombrePiece }} </span>
         </div>
