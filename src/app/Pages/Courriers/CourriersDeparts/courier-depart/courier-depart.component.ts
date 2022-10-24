@@ -126,7 +126,6 @@ export class CourierDepartComponent implements OnInit {
     this.methodeService.addCourierDepart(objetCourierDepart)
       .subscribe(
         (data) => {
-          console.log(data);
           this.erreur="";
           this.success = 'Courier depart avec success';
         // this.router.navigate(['/']);
