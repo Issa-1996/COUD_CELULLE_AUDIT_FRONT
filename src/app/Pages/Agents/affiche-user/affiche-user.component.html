@@ -1,28 +1,21 @@
-<div class="container ">
+<div class="container">
   <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Activer la lecture' : 'Desactiver la lecture'}}
+    {{ !isLinear ? "Activer la lecture" : "Desactiver la lecture" }}
   </button>
-  <mat-stepper [linear]="isLinear" #stepper  class="shadow-lg">
-   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>LISTES DES UTILISATEURS</ng-template>
-          <app-users></app-users>
-      <div>
-        <button mat-button matStepperNext>Suivant</button>
-      </div>
-    </form>
-   </mat-step>
-   <mat-step [stepControl]="secondFormGroup" label="Ajout utilisateurs">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>AJOUTER UTILISATEURS</ng-template>
-      <app-add-user></app-add-user>
-      <div>
-        <button mat-button matStepperPrevious>Retour</button>
-        <button mat-button matStepperNext>Suivant</button>
-      </div>
-    </form>
-  </mat-step>
-   <!-- <mat-step>
+  <mat-stepper [linear]="isLinear" #stepper class="shadow-lg">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>LISTES DES UTILISATEURS</ng-template>
+        <app-users></app-users>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Ajout utilisateurs">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>AJOUTER UTILISATEURS</ng-template>
+        <app-add-user></app-add-user>
+      </form>
+    </mat-step>
+    <!-- <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
     <div>
@@ -30,7 +23,5 @@
       <button mat-button (click)="stepper.reset()">Annuler</button>
     </div>
   </mat-step> -->
- </mat-stepper>
+  </mat-stepper>
 </div>
-
-

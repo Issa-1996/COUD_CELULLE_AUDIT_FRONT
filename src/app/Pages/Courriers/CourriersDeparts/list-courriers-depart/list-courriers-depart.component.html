@@ -2,6 +2,7 @@
   <mat-label>RECHERCHE</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. COUD" #input />
 </mat-form-field>
+
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
     <!-- Position Column -->
@@ -47,7 +48,7 @@
         <div class="example-button-container">
           <button
             mat-mini-fab
-            color="primary"
+            style="background-color: #3B5998;"
             aria-label="Example icon button with a plus one icon"
             (click)="detailCourrierDepart(element)"
           >
@@ -64,7 +65,7 @@
         <div class="example-button-container">
           <button
             mat-mini-fab
-            color="accent"
+            style="background-color: #FFFF00;"
             aria-label="Example icon button with a plus one icon"
             (click)="modifierCourrierDepart(element)"
           >

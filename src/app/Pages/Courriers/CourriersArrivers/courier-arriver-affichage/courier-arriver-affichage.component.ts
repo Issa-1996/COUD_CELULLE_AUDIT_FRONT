@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CourierModel } from 'app/Model/Courier.model';
 import { UserModel } from 'app/Model/User.model';
-import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
 
 @Component({
   selector: 'app-courier-arriver-affichage',
@@ -8,18 +9,13 @@ import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
   styleUrls: ['./courier-arriver-affichage.component.css'],
 })
 export class CourierArriverAffichageComponent implements OnInit {
-  courrierDetail: UserModel;
-  constructor(private behavio: BehavioSubjetService) {}
+  courrierDetail: CourierModel;
+  constructor(private transferdata: TransferDataService) {}
 
   ngOnInit(): void {
     this.detailCourrierArriver();
   }
   detailCourrierArriver(): any {
-    this.behavio.getValue().subscribe(
-      (data) => {
-        this.courrierDetail = data;
-      },
-      (error: any) => {}
-    );
+    this.courrierDetail=this.transferdata.getData();
   }
 }

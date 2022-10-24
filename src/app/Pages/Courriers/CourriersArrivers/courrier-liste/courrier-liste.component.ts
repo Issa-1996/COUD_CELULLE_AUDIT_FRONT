@@ -7,6 +7,8 @@ import { CourierModel } from 'app/Model/Courier.model';
 import { AuthService } from 'app/Service/auth.service';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { SearchService } from 'app/Service/search.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
 import { CourierDepartComponent } from '../../CourriersDeparts/courier-depart/courier-depart.component';
 import { CourierArriverAffichageComponent } from '../courier-arriver-affichage/courier-arriver-affichage.component';
 import { UpdateCourrierComponent } from '../update-courrier/update-courrier.component';
@@ -27,7 +29,14 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     'depart',
     'rejet',
   ];
-  displayedColumn: string[] = ['id', 'objet', 'date', 'beneficiaire', 'expediteur', 'detail'];
+  displayedColumn: string[] = [
+    'id',
+    'objet',
+    'date',
+    'beneficiaire',
+    'expediteur',
+    'detail',
+  ];
   public role: any[];
   database: CourierModel[] = [];
   helper = new JwtHelperService();
@@ -53,27 +62,28 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
   constructor(
     private methodeService: MethodeService,
     private authService: AuthService,
-    private behavio: BehavioSubjetService,
+    private transferdata: TransferDataService,
+    private searchVS: SearchService,
     public dialog: MatDialog
   ) {}
-  detailCourrierArriver(fiche: any) {
-    this.behavio.setValue(fiche);
+  detailCourrierArriver(fiche: CourierModel) {
     const dialogRef = this.dialog.open(CourierArriverAffichageComponent);
+    this.transferdata.setData(fiche);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  departCourrierArriver(fiche: any) {    
-    this.behavio.setValue(fiche);
+  departCourrierArriver(fiche: any) {
     const dialogRef = this.dialog.open(CourierDepartComponent);
+    this.transferdata.setData(fiche);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  modifierCourrierArriver(fiche: any): any {    
-    this.behavio.setValue(fiche);
+  modifierCourrierArriver(fiche: any): any {
+    this.transferdata.setData(fiche);
     const dialogRef = this.dialog.open(UpdateCourrierComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -85,8 +95,12 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     this.role = decodedToken.roles;
     this.listeCourrier();
     this.dataSource.paginator = this.paginator;
+    // if(this.accessService.hasToken()){
+    //   this.isLoggedIn="true";
+    // }
   }
   listeCourrier() {
+    var compt = 0;
     if (this.role.includes('ROLE_CONTROLEURS')) {
       const decodedToken = this.helper.decodeToken(
         localStorage.getItem('token')
@@ -98,29 +112,47 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
         this.dataSource.paginator = this.paginator;
       });
     }
+
     if (
       this.role.includes('ROLE_ASSISTANTE') ||
       this.role.includes('ROLE_COORDINATEUR')
     ) {
       this.methodeService.getCourriers().subscribe((data) => {
         this.database = data['hydra:member'];
-        this.behavio.getValue().subscribe((d) => {
-          if (d.length != 0) {
-            this.database.push(d);
-            this.dataSource = new MatTableDataSource<CourierModel>(
-              this.database
-            );
-            this.dataSource.paginator = this.paginator;
-          } else {
-            this.dataSource = new MatTableDataSource<CourierModel>(
-              this.database
-            );
-            this.dataSource.paginator = this.paginator;
-          }
-        });
+        for (let index = 0; index < this.database.length; index++) {
+          this.searchVS.currentSearch.subscribe((data: any) => {
+            if (data != 0) {
+              if (this.database[index]['id'] == data['id']) {
+                this.database[index] = data;
+                this.dataSource = new MatTableDataSource<CourierModel>(
+                  this.database
+                );
+                this.dataSource.paginator = this.paginator;
+              } else {
+                if (data.length != 0) {
+                  if (this.database.includes(data)) {
+                    // console.log("OUIIII");
+                  } else if (!this.database.includes(data)) {
+                    compt++;
+                  }
+                }
+              }
+              if (compt == this.database.length) {
+                this.database[index + 1] = data;
+                this.dataSource = new MatTableDataSource<CourierModel>(
+                  this.database
+                );
+                this.dataSource.paginator = this.paginator;
+              }
+            }
+          });
+        }
+        this.dataSource = new MatTableDataSource<CourierModel>(this.database);
+        this.dataSource.paginator = this.paginator;
       });
     }
   }
+
   detailFiche(fiche: any): any {
     this.dataCourrierDetailControleur = fiche;
   }

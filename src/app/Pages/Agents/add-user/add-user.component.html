@@ -1,9 +1,7 @@
 <!------------------------------- -------------VOILA LE MODAL --------------------------------------------->
 <div class="container-fluid">
   <div class="modal-body">
-    <div class="text-center" style="width: 100%; background-color: #17a2b4">
-      <h3 style="color: white">AJOUTER UTILISATEURS</h3>
-    </div>
+    <div class="menu text-center">AJOUTER UTILISATEURS</div>
     <div *ngIf="erreur != ''" class="login-erreur-container text-center bg-danger">
       <span class="login-erreur"> {{ erreur }} </span>
     </div>
@@ -136,16 +134,14 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="text-center">
             <button
               type="submit"
-              class="btn btn-info"
+              class="btn btn-success"
               name="submit"
               (click)="onSignIn()"
             >
-              AJOUTER
+              ENREGISTRER
             </button>
-          </div>
         </div>
       </div>
     </form>

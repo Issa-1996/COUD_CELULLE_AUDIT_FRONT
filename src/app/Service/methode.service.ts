@@ -20,7 +20,7 @@ export class MethodeService {
   updateCourrierArriver(objetCourierArriver: any): Observable<any>{
     return this.httpClient.put<any>(`${envVars.url}/coud/courier_arrivers/`+ objetCourierArriver.id, objetCourierArriver, {headers: this.headers});
   }
-  addCourierArriver(CourierArriver: any): Observable<CourierModel> {
+  addCourierArriver(CourierArriver: CourierModel): Observable<CourierModel> {
     return this.httpClient.post<CourierModel>(`${envVars.url}/coud/courier_arrivers`, CourierArriver, {headers: this.headers});
   }
   addCourierDepart(CourierDepart: any): Observable<CourierModel> {
@@ -47,8 +47,14 @@ export class MethodeService {
   getControleurs(): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs`);
   }
+  getControleursByUsername(username: UserModel): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs?username=${username}`);
+  }
   getCoordonateurs(): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordinateurs`);
+  }
+  getCoordonateursByUsername(username: UserModel): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordinateurs?username=${username}`);
   }
   getCourriers(): Observable<CourierModel>{
     return this.httpClient.get<CourierModel>(`${envVars.url}/coud/courier_arrivers`);

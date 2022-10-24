@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
@@ -7,14 +12,15 @@ import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { SearchService } from 'app/Service/search.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
 
 @Component({
   selector: 'app-fiche-de-controle-modifier',
   templateUrl: './fiche-de-controle-modifier.component.html',
-  styleUrls: ['./fiche-de-controle-modifier.component.css']
+  styleUrls: ['./fiche-de-controle-modifier.component.css'],
 })
 export class FicheDeControleModifierComponent implements OnInit {
-
   addForm: FormGroup;
   helper = new JwtHelperService();
   erreurobjet = '';
@@ -28,15 +34,17 @@ export class FicheDeControleModifierComponent implements OnInit {
   tabObjet = [];
   coordonateur: UserModel;
   user: UserModel;
+  search: string;
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private methodeService: MethodeService,
     private authService: AuthService,
-    private behavio: BehavioSubjetService
+    private searchVS: SearchService,
+    private transferdata: TransferDataService
   ) {}
 
   ngOnInit(): void {
+    this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.getCoordonateur();
     this.connectUser();
     this.addForm = this.formBuilder.group({
@@ -71,10 +79,7 @@ export class FicheDeControleModifierComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.behavio.getValue().subscribe(
-      (data)=>{        
-        this.addForm.patchValue(data);
-      })
+    this.addForm.patchValue(this.transferdata.getData());
   }
 
   onSignIn(): any {
@@ -93,21 +98,22 @@ export class FicheDeControleModifierComponent implements OnInit {
     if (this.addForm.invalid) {
       return;
     }
-    this.addForm.addControl(
-      'controleurs',
-      new FormControl('/api/coud/controleurs/' + this.user)
-    );
-    this.addForm.addControl(
-      'coordinateur',
-      new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
-    );
+    // this.addForm.addControl(
+    //   'controleurs',
+    //   new FormControl('/api/coud/controleurs/' + this.user)
+    // );
+    // this.addForm.addControl(
+    //   'coordinateur',
+    //   new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
+    // );
     this.subscribeFicheDeControle(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {
     this.methodeService.updateFicheDeControle(objetFicheDeControle).subscribe(
       (data) => {
         this.success = 'Fiche de control Modifier avec success';
-        this.router.navigate(['/']);
+        this.newValue(data);
+        // this.router.navigate(['/']);
       },
       (error) => {
         if (error.status === 403) {
@@ -121,23 +127,58 @@ export class FicheDeControleModifierComponent implements OnInit {
   connectUser() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     const username: string[] = decodedToken.username;
-    this.authService.getUserConnected(username).subscribe((data) => {      
-      this.user = data['hydra:member'][0]['id'];
-      for (
-        let i = 0;
-        i < data['hydra:member'][0]['courierArrivers'].length;
-        i++
+    this.authService.getUserConnected(username).subscribe((data) => {
+      if (data['hydra:member'][0]['roles'].includes('ROLE_COORDINATEUR')) {
+        this.methodeService
+          .getCoordonateursByUsername(data['hydra:member'][0]['username'])
+          .subscribe((coord) => {
+            this.user = coord['hydra:member'][0]['courier'];
+            for (
+              let i = 0;
+              i < coord['hydra:member'][0]['courier'].length;
+              i++
+            ) {
+              if (
+                coord['hydra:member'][0]['courier'][i]['@type'] ==
+                'CourierArriver'
+              ) {
+                if (
+                  coord['hydra:member'][0]['courier'][i]['ficheDeControle'] ==
+                  null
+                ) {
+                  this.tabObjet[i] = coord['hydra:member'][0]['courier'][i];
+                }
+              }
+            }
+            this.objetCourier = this.tabObjet.filter(function (el) {
+              return el != null;
+            });
+          });
+      } else if (
+        data['hydra:member'][0]['roles'].includes('ROLE_CONTROLEURS')
       ) {
-        if (
-          data['hydra:member'][0]['courierArrivers'][i]['ficheDeControle'] ==
-          null
-        ) {
-          this.tabObjet[i] = data['hydra:member'][0]['courierArrivers'][i];
-        }
+        this.methodeService
+          .getControleursByUsername(data['hydra:member'][0]['username'])
+          .subscribe((coord) => {
+            this.user = coord['hydra:member'][0]['courierArrivers'];
+            for (
+              let i = 0;
+              i < coord['hydra:member'][0]['courierArrivers'].length;
+              i++
+            ) {
+              if (
+                coord['hydra:member'][0]['courierArrivers'][i][
+                  'ficheDeControle'
+                ] == null
+              ) {
+                this.tabObjet[i] = coord['hydra:member'][0]['courierArrivers'][i];
+              }
+            }
+            this.objetCourier = this.tabObjet.filter(function (el) {
+              return el != null;
+            });
+          });
       }
-      this.objetCourier = this.tabObjet.filter(function (el) {
-        return el != null;
-      });
     });
   }
   getCoordonateur(): any {
@@ -148,5 +189,7 @@ export class FicheDeControleModifierComponent implements OnInit {
       (error: any) => {}
     );
   }
+  newValue(search) {
+    this.searchVS.changeValue(search);
+  }
 }
-

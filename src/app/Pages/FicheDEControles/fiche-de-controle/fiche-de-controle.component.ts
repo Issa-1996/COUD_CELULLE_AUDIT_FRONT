@@ -12,6 +12,8 @@ import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { SearchService } from 'app/Service/search.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
 
 @Component({
   selector: 'app-fiche-de-controle',
@@ -32,15 +34,18 @@ export class FicheDeControleComponent implements OnInit {
   tabObjet = [];
   coordonateur: UserModel;
   user: UserModel;
+  search: string;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private methodeService: MethodeService,
     private authService: AuthService,
-    private bihavio: BehavioSubjetService
+    private searchVS: SearchService,
+    private transferdata: TransferDataService
   ) {}
 
   ngOnInit(): void {
+    this.searchVS.currentSearch.subscribe(search=>this.search=search);
     this.getCoordonateur();
     this.connectUser();
     this.addForm = this.formBuilder.group({
@@ -106,12 +111,13 @@ export class FicheDeControleComponent implements OnInit {
     );
 
     this.subscribeFicheDeControle(this.addForm.value);
-    this.bihavio.setValue(this.addForm.value);
+    this.transferdata.setData(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {
     this.methodeService.addFicheDeControle(objetFicheDeControle).subscribe(
       (data) => {
         this.success = 'Fiche de control avec success';
+        this.newValue(data);
         //this.router.navigate(['/']);
       },
       (error) => {
@@ -140,7 +146,10 @@ export class FicheDeControleComponent implements OnInit {
           this.tabObjet[i] = data['hydra:member'][0]['courierArrivers'][i];
         }
       }
-      this.objetCourier = this.tabObjet;
+
+      this.objetCourier = this.tabObjet.filter(function (el) {
+        return el != null;
+      });
     });
   }
   getCoordonateur(): any {
@@ -150,5 +159,8 @@ export class FicheDeControleComponent implements OnInit {
       },
       (error: any) => {}
     );
+  }
+  newValue(search){
+    this.searchVS.changeValue(search);
   }
 }

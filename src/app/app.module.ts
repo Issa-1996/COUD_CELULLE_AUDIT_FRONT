@@ -41,6 +41,8 @@ import { ListCourriersDepartComponent } from './Pages/Courriers/CourriersDeparts
 import { CouriersComponent } from './Pages/Courriers/CourriersArrivers/couriers/couriers.component';
 import { UpdateCourrierDepartComponent } from './Pages/Courriers/CourriersDeparts/update-courrier-depart/update-courrier-depart.component';
 import { CourrierDepartAffichageComponent } from './Pages/Courriers/CourriersDeparts/courrier-depart-affichage/courrier-depart-affichage.component';
+import { TransferDataService } from './Service/transfer-data.service';
+import { SearchService } from './Service/search.service';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,8 @@ import { CourrierDepartAffichageComponent } from './Pages/Courriers/CourriersDep
     AuthService,
     MethodeService,
     JwtHelperService,
+    TransferDataService,
+    SearchService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     TokeInterceptorService,
     {

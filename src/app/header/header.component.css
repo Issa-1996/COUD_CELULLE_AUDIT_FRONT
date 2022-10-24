@@ -1,11 +1,15 @@
+nav{
+    background-color: #3B5998;
+}
 a:link {  
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 20px;
 }
 #user{
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 20px;
 } 
 marquee{
-    font-size: 26px;
+    color: white;
+    font-size: 20px;
+    margin-left: 130%;
+    width: 150%;
 }

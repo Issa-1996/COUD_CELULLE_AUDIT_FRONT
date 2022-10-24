@@ -2,6 +2,7 @@
   <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
     {{ !isLinear ? "Active la lecture" : "Desactiver la lecture" }}
   </button>
+
   <mat-stepper [linear]="isLinear" #stepper class="shadow-lg">
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
@@ -16,7 +17,7 @@
         <div class="example-button-row mt-3">
           <button
             mat-raised-button
-            color="primary"
+            style="background-color: #3b5998; color: white"
             (click)="nouveauCourrier()"
             *ngIf="
               role.includes('ROLE_ASSISTANTE') ||
@@ -26,49 +27,43 @@
             NOUVEAU COURRIER ARRIVE
           </button>
         </div>
-        <div>
-          <button mat-button matStepperNext>SUIVANT</button>
-        </div>
       </form>
     </mat-step>
+
     <mat-step
-      *ngIf="role.includes('ROLE_CONTROLEURS')"
+      *ngIf="
+        role.includes('ROLE_CONTROLEURS') || role.includes('ROLE_COORDINATEUR')
+      "
       [stepControl]="secondFormGroup"
       label="LISTE FICHE DE CONTROLE"
+      style="width: 100%"
     >
+      <app-fiche-de-controle-interne></app-fiche-de-controle-interne>
       <form [formGroup]="secondFormGroup">
-        <app-fiche-de-controle-interne></app-fiche-de-controle-interne>
         <div class="example-button-row">
           <button
             id="buttonFiche"
             mat-raised-button
-            color="primary"
+            style="background-color: #3b5998; color: white"
             (click)="nouveauFicheControle()"
             *ngIf="
               role.includes('ROLE_CONTROLEURS') ||
               role.includes('ROLE_COORDINATEUR')
             "
           >
-            NOUVEAU FICHE DE CONTROLE INTERNE
+            NOUVEAU FICHE
           </button>
-        </div>
-        <div>
-          <button mat-button matStepperPrevious>RETOUR</button>
         </div>
       </form>
     </mat-step>
+
     <mat-step
       *ngIf="
         role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR')
       "
     >
       <ng-template matStepLabel>LISTES COURRIERS DEPARTS</ng-template>
-      <!-- <app-courier-depart></app-courier-depart> -->
       <app-list-courriers-depart></app-list-courriers-depart>
-      <div>
-        <button mat-button matStepperPrevious>RETOUR</button>
-        <button mat-button (click)="stepper.reset()">ANNULER</button>
-      </div>
     </mat-step>
   </mat-stepper>
 </div>

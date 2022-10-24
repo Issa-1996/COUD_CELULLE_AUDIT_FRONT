@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
 
 @Component({
   selector: 'app-update-courrier-depart',
@@ -33,9 +34,11 @@ export class UpdateCourrierDepartComponent implements OnInit {
     private formBuilder: FormBuilder, 
     private router: Router, 
     private methodeService: MethodeService,
-    private behavio: BehavioSubjetService) { }
+    private transferData: TransferDataService) { }
 
   ngOnInit(): void {
+    console.log(this.transferData.getData());
+    
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
       beneficiaire: ['', Validators.required],
@@ -84,10 +87,7 @@ export class UpdateCourrierDepartComponent implements OnInit {
     this.addForm.get('montant').valueChanges.subscribe(
       () => { this.erreurnumeroOrdre = ''; this.erreur = ''; this.success = ''; }
     );
-    this.behavio.getValue().subscribe(
-      (data)=>{
-        this.addForm.patchValue(data);
-      })
+    this.addForm.patchValue(this.transferData.getData());
   }
 
   onSignIn(): any{

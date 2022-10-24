@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CourierModel } from 'app/Model/Courier.model';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
 
 @Component({
   selector: 'app-courier-depart',
@@ -26,16 +28,14 @@ export class CourierDepartComponent implements OnInit {
   erreurNumeroFacture="";
   erreurmontant="";
   erreurbeneficiaire="";
-  code = '';
-  sending = false;
-  btnText = 'Envoyer';
+
   constructor(
     private formBuilder: FormBuilder, 
-    private router: Router, 
     private methodeService: MethodeService,
-    private behavio: BehavioSubjetService) { }
+    private transferData: TransferDataService) { }
 
   ngOnInit(): void {
+    
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
       beneficiaire: ['', Validators.required],
@@ -50,6 +50,7 @@ export class CourierDepartComponent implements OnInit {
       montant: ['', Validators.required],
       assistante: ['', Validators.required],
       coordinateur: ['', Validators.required],
+      etat:['1', Validators.required],
     });
     this.addForm.get('object').valueChanges.subscribe(
       () => { this.erreurobject = ''; this.erreur = ''; this.success = ''; }
@@ -84,10 +85,7 @@ export class CourierDepartComponent implements OnInit {
     this.addForm.get('montant').valueChanges.subscribe(
       () => { this.erreurnumeroOrdre = ''; this.erreur = ''; this.success = ''; }
     );
-    this.behavio.getValue().subscribe(
-      (data)=>{
-        this.addForm.patchValue(data);
-      })
+    this.addForm.patchValue(this.transferData.getData());
   }
 
   onSignIn(): any{
@@ -118,15 +116,20 @@ export class CourierDepartComponent implements OnInit {
     if (this.addForm.invalid){
       return;
     }
-    console.log(this.addForm.value);
+    // this.addForm.addControl('etat', new FormControl('1'));
+    // console.log(this.addForm.value);
+    
     this.subscribeCourierDepart(this.addForm.value);
+    
   }
   subscribeCourierDepart(objetCourierDepart: any){
     this.methodeService.addCourierDepart(objetCourierDepart)
       .subscribe(
         (data) => {
+          console.log(data);
+          this.erreur="";
           this.success = 'Courier depart avec success';
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
       },
       (error) => {
         // @ts-ignore
@@ -134,6 +137,7 @@ export class CourierDepartComponent implements OnInit {
           this.erreur = error.error;
         }
         else{
+          this.success="";
           this.erreur = 'Une erreur s\'est produite !';
         }
       });

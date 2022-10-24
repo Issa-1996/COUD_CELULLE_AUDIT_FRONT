@@ -15,6 +15,8 @@ import { FicheDeControleComponent } from '../fiche-de-controle/fiche-de-controle
 import { FicheDeControleAffichageComponent } from '../fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { FicheDeControleModifierComponent } from '../fiche-de-controle-modifier/fiche-de-controle-modifier.component';
+import { TransferDataService } from 'app/Service/transfer-data.service';
+import { SearchService } from 'app/Service/search.service';
 
 @Component({
   selector: 'app-fiche-de-controle-interne',
@@ -31,36 +33,61 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.listesFiches();
     this.dataSource.paginator = this.paginator;
-  }
+  }     
   constructor(
     private methodeService: MethodeService,
     public dialog: MatDialog,
-    private behavio: BehavioSubjetService
+    private transferdata: TransferDataService,
+    private searchVS: SearchService,
   ) {}
   detailFicheDeControle(fiche: any) {
-    this.behavio.setValue(fiche);
     const dialogRef = this.dialog.open(FicheDeControleAffichageComponent);
+    this.transferdata.setData(fiche);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
   modifierFicheDeControle(fiche: any) {
-    this.behavio.setValue(fiche);
     const dialogRef = this.dialog.open(FicheDeControleModifierComponent);
+    this.transferdata.setData(fiche);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
   listesFiches() {
+    var compt = 0;
     this.methodeService.getFiche().subscribe((data) => {
       this.database = data['hydra:member'];
-      this.behavio.getValue().subscribe((d) => {
-        if (d.length != 0) {
-          this.database.push(d);
-        }
-      });
+      for (let index = 0; index < this.database.length; index++) {
+        this.searchVS.currentSearch.subscribe((data: any) => {
+          if (data != 0) {
+            if (this.database[index]['id'] == data['id']) {
+              this.database[index] = data;
+              this.dataSource = new MatTableDataSource<FicheDeControlModel>(
+                this.database
+              );
+              this.dataSource.paginator = this.paginator;
+            } else {
+              if (data.length != 0) {
+                if (this.database.includes(data)) {
+                  // console.log("OUIIII");
+                } else if (!this.database.includes(data)) {
+                  compt++;
+                }
+              }
+            }
+            if (compt == this.database.length) {
+              this.database[index + 1] = data;
+              this.dataSource = new MatTableDataSource<FicheDeControlModel>(
+                this.database
+              );
+              this.dataSource.paginator = this.paginator;
+            }
+          }
+        });
+      }
       this.dataSource = new MatTableDataSource<FicheDeControlModel>(
         this.database
       );

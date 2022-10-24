@@ -1,4 +1,7 @@
 table {
-    width: 100%;
-  }
-  
+  width: 100%;
+}
+th {
+  background-color: #3b5998;
+  color: white;
+}

@@ -7,10 +7,11 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { CourierModel } from 'app/Model/Courier.model';
 import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
-import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { SearchService } from 'app/Service/search.service';
 
 @Component({
   selector: 'app-courier-arriver',
@@ -41,15 +42,17 @@ export class CourierArriverComponent implements OnInit {
   Connecter: UserModel;
   id: number;
   object: String;
+  search: string;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private methodeService: MethodeService,
     private authService: AuthService,
-    private bihavio: BehavioSubjetService
+    private searchVS: SearchService
   ) {}
 
   ngOnInit(): void {
+    this.searchVS.currentSearch.subscribe(search=>this.search=search);
     this.getCoordonateur();
     this.connectUser();
     this.getControleurs();
@@ -177,13 +180,15 @@ export class CourierArriverComponent implements OnInit {
       'coordinateur',
       new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
     );
-    this.subscribeCourierArriver(this.addForm.value);
+    // this.subscribeCourierArriver(this.addForm.value);
+    console.log(this.addForm.value);
+    
   }
-  subscribeCourierArriver(objetCourierArriver: any) {
+  subscribeCourierArriver(objetCourierArriver: CourierModel) {
     this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
       (data) => {
-        this.bihavio.setValue(this.addForm.value);
         this.success = 'Courier arriver avec success';
+        this.newValue(data);
         // this.addForm.value.reset;
         //this.router.navigate(['/container/courier']);
       },
@@ -220,5 +225,8 @@ export class CourierArriverComponent implements OnInit {
     this.authService.getUserConnected(username).subscribe((data) => {
       this.Connecter = data['hydra:member'][0]['id'];
     });
+  }
+  newValue(search){
+    this.searchVS.changeValue(search);
   }
 }

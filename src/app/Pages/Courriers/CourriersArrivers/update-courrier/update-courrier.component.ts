@@ -8,6 +8,8 @@ import {
 import { UserModel } from 'app/Model/User.model';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { SearchService } from 'app/Service/search.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
 
 @Component({
   selector: 'app-update-courrier',
@@ -32,13 +34,16 @@ export class UpdateCourrierComponent implements OnInit {
   erreurBeneficiaire = '';
   erreur = '';
   success = '';
+  search: string;
   constructor(
     private formBuilder: FormBuilder,
     private methodeService: MethodeService,
-    private behavio: BehavioSubjetService
+    private searchVS: SearchService,
+    private transferdata: TransferDataService
   ) {}
 
   ngOnInit(): void {
+    this.searchVS.currentSearch.subscribe(search=>this.search=search);
     this.getControleurs();
     this.addForm = this.formBuilder.group({
       id: [''],
@@ -116,9 +121,7 @@ export class UpdateCourrierComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.behavio.getValue().subscribe((data) => {
-      this.addForm.patchValue(data);
-    });
+    this.addForm.patchValue(this.transferdata.getData());
   }
   onSignIn(): any {
     if (this.addForm.get('object').value.trim() === '') {
@@ -163,10 +166,10 @@ export class UpdateCourrierComponent implements OnInit {
     this.updateCourierArriver(this.addForm.value);
   }
   updateCourierArriver(objetCourierArriver: any) {
-    // this.behavio.setValue(objetCourierArriver);
     this.methodeService.updateCourrierArriver(objetCourierArriver).subscribe(
       (data) => {
         this.success = 'Courier arriver modifier avec success';
+        this.newValue(data);
         //this.router.navigate(['/container/courier']);
       },
       (error) => {
@@ -188,4 +191,7 @@ export class UpdateCourrierComponent implements OnInit {
     );
   }
   start = Date.now();
+  newValue(search){
+    this.searchVS.changeValue(search);
+  }
 }
