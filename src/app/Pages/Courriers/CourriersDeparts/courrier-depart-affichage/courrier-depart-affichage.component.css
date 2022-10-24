@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 h4{
     text-align: center;
     background-color: #3B5998;
@@ -13,4 +14,10 @@ span{
 }
 label{
     font-size: 20px;
+=======
+label{
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+>>>>>>> b55fd640c58e64fc77168726ece57989c0174802
 }
