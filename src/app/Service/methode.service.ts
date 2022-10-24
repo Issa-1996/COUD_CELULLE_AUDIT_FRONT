@@ -20,14 +20,20 @@ export class MethodeService {
   updateCourrierArriver(objetCourierArriver: any): Observable<any>{
     return this.httpClient.put<any>(`${envVars.url}/coud/courier_arrivers/`+ objetCourierArriver.id, objetCourierArriver, {headers: this.headers});
   }
-  addCourierArriver(CourierArriver: any): Observable<CourierModel> {
+  addCourierArriver(CourierArriver: CourierModel): Observable<CourierModel> {
     return this.httpClient.post<CourierModel>(`${envVars.url}/coud/courier_arrivers`, CourierArriver, {headers: this.headers});
   }
   addCourierDepart(CourierDepart: any): Observable<CourierModel> {
     return this.httpClient.post<CourierModel>(`${envVars.url}/coud/courier_departs`, CourierDepart, {headers: this.headers});
   }
+  updateCourrierDepart(objetCourierDepart: any): Observable<any>{
+    return this.httpClient.put<any>(`${envVars.url}/coud/courier_departs/`+ objetCourierDepart.id, objetCourierDepart, {headers: this.headers});
+  }
   addFicheDeControle(FicheDeControle: any): Observable<FicheDeControlModel> {
     return this.httpClient.post<FicheDeControlModel>(`${envVars.url}/coud/fiche_de_controles`, FicheDeControle, {headers: this.headers});
+  }
+  updateFicheDeControle(FicheDeControle: any): Observable<any>{
+    return this.httpClient.put<any>(envVars.url+'/coud/fiche_de_controles' + '/' + FicheDeControle.id, FicheDeControle, {headers: this.headers});
   }
   addUser(ObjetUser: any): Observable<UserModel> {
     return this.httpClient.post<UserModel>(`${envVars.url}/coud/users`, ObjetUser, {headers: this.headers});
@@ -41,8 +47,14 @@ export class MethodeService {
   getControleurs(): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs`);
   }
+  getControleursByUsername(username: UserModel): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs?username=${username}`);
+  }
   getCoordonateurs(): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordinateurs`);
+  }
+  getCoordonateursByUsername(username: UserModel): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordinateurs?username=${username}`);
   }
   getCourriers(): Observable<CourierModel>{
     return this.httpClient.get<CourierModel>(`${envVars.url}/coud/courier_arrivers`);

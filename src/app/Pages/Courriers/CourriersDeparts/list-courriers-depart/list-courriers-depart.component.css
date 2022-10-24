@@ -1,4 +1,12 @@
 table {
-    width: 100%;
-  }
-  
+  width: 100%;
+}
+
+th{
+  background-color: #3b5998;
+  color: white;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}

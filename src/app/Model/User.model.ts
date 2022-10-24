@@ -14,5 +14,4 @@ export interface UserModel {
     roles: [];
     FicheDeControle: FicheDeControlModel;
     courier: CourierModel;
-    
 }

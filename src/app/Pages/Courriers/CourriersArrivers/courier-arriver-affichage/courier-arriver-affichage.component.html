@@ -1,78 +1,80 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>COURRIER ARRIVER</h1>
+      <h4>COURRIER ARRIVER</h4>
     </div>
   </div>
-
   <div class="form">
     <div class="row">
       <div class="col-md-12">
         <label for="object:" class="form-label">Object</label>
         <span class="form-control">
-          <h4>{{ courrierDetail["object"] }}</h4>
+          {{ courrierDetail["object"] }}
         </span>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <label>Numero Du Courier</label>
-        <span class="form-control"
-          ><h4>{{ courrierDetail["numeroCourier"] }}</h4></span
-        >
+        <span class="form-control">{{ courrierDetail["numeroCourier"] }}</span>
       </div>
       <div class="col-md-6">
         <label>Date Arriver du Courier</label>
-        <span class="form-control"
-          ><h4>{{ courrierDetail["Date"] }}</h4></span
-        >
+        <span class="form-control">{{ courrierDetail["Date"] }}</span>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
           <label>Expediteur Du Courier</label>
-          <span class="form-control"
-            ><h4>{{ courrierDetail["expediteur"] }}</h4></span
-          >
+          <span class="form-control">{{ courrierDetail["expediteur"] }}</span>
         </div>
       </div>
       <div class="col-md-6">
-        <label>NOM DU CONTROLEUR</label>
-        <span class="form-control"
-          ><h4>
-            {{ courrierDetail["controleur"]["prenom"] }}
-            {{ courrierDetail["controleur"]["nom"] }}
-          </h4></span
-        >
+        <label>BENEFICIAIRE</label>
+        <span class="form-control">
+          {{ courrierDetail["beneficiaire"] }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>NUMERO FACTURE</label>
+          <span class="form-control">{{
+            courrierDetail["NumeroFacture"]
+          }}</span>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label>MONTANT</label>
+        <span class="form-control">
+          {{ courrierDetail["montant"] }}
+        </span>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <label>Numero Correspondance</label>
-        <span class="form-control"
-          ><h4>{{ courrierDetail["numeroCorrespondance"] }}</h4></span
-        >
+        <span class="form-control">{{
+          courrierDetail["numeroCorrespondance"]
+        }}</span>
       </div>
       <div class="col-md-6">
         <label>Date Correspondance du Courier</label>
-        <span class="form-control"
-          ><h4>{{ courrierDetail["dateCorrespondance"] }}</h4></span
-        >
+        <span class="form-control">{{
+          courrierDetail["dateCorrespondance"]
+        }}</span>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <label>Numero Reponse</label>
-        <span class="form-control"
-          ><h4>{{ courrierDetail["numeroReponse"] }}</h4></span
-        >
+        <span class="form-control">{{ courrierDetail["numeroReponse"] }}</span>
       </div>
       <div class="col-md-6">
         <label>Date Reponse</label>
-        <span class="form-control"
-          ><h4>{{ courrierDetail["dateReponse"] }}</h4></span
-        >
+        <span class="form-control">{{ courrierDetail["dateReponse"] }}</span>
       </div>
     </div>
   </div>

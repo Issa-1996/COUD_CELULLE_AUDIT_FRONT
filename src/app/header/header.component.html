@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+<nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
     <img
       src="../assets/logo_coud.png"
@@ -19,53 +19,43 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" *ngIf="role.includes('ROLE_COORDINATEUR')">
-        <div class="marquee">
-          <!-- <marquee LOOP="10" *ngIf="role.includes('ROLE_ASSISTANTE')"
-            >GESTION DES COURRIERS</marquee
-          >
-          <marquee LOOP="10" *ngIf="role.includes('ROLE_CONTROLEURS')"
-            >GESTION DU FICHE DE CONTROLE</marquee
-          > -->
-        </div>
-        <li
-          class="navbar-brand active"
-          
-        >
-          <a class="nav-link active" routerLink="/container/accueil">Accueil</a>
+        <li class="navbar-brand active">
+          <a class="nav-link active" routerLink="/container/accueil">ACCUEIL</a>
         </li>
-        <li
-          class="navbar-brand active"
-          
-        >
+        <li class="navbar-brand active">
           <a class="nav-link active" routerLink="/container/courier"
-            >Courriers</a
+            >GESTION DES COURRIERS</a
           >
         </li>
-        <li
-          class="navbar-brand active"
-          
-        >
+        <!-- <li class="navbar-brand active">
           <a
             class="nav-link active"
             routerLink="/container/fichedecontroleinterne"
             >Fiche de controle</a
           >
-        </li>
-        <li class="navbar-brand" >
+        </li> -->
+        <li class="navbar-brand">
           <a
             class="nav-link active"
             routerLink="/container/utilisateurs"
             tabindex="-1"
             aria-disabled="true"
-            >Gestion des utilisateurs</a
+            >GESTION DES UTILISATEURS</a
           >
         </li>
       </ul>
+      <div class="marquee">
+        <marquee width="50%"  *ngIf="role.includes('ROLE_ASSISTANTE')"
+          >GESTION DES COURRIERS ARRIVER</marquee
+        >
+        <marquee width="50%"  *ngIf="role.includes('ROLE_CONTROLEURS')"
+          >GESTION DES FICHES DE CONTROLES</marquee
+        >
+      </div>
     </div>
     <div class="col-md-3">
-      
       <ul class="navbar-nav mr-auto active">
         <div class="d-flex">
           <div class="navbar-brand active" id="user">

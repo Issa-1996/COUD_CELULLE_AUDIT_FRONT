@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CourierModel } from 'app/Model/Courier.model';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { TransferDataService } from 'app/Service/transfer-data.service';
 
 @Component({
-  selector: 'app-courier-depart',
-  templateUrl: './courier-depart.component.html',
-  styleUrls: ['./courier-depart.component.css']
+  selector: 'app-update-courrier-depart',
+  templateUrl: './update-courrier-depart.component.html',
+  styleUrls: ['./update-courrier-depart.component.css']
 })
-export class CourierDepartComponent implements OnInit {
+export class UpdateCourrierDepartComponent implements OnInit {
 
   addForm: FormGroup;
 
@@ -28,13 +27,17 @@ export class CourierDepartComponent implements OnInit {
   erreurNumeroFacture="";
   erreurmontant="";
   erreurbeneficiaire="";
-
+  code = '';
+  sending = false;
+  btnText = 'Envoyer';
   constructor(
     private formBuilder: FormBuilder, 
+    private router: Router, 
     private methodeService: MethodeService,
     private transferData: TransferDataService) { }
 
   ngOnInit(): void {
+    console.log(this.transferData.getData());
     
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
@@ -50,7 +53,6 @@ export class CourierDepartComponent implements OnInit {
       montant: ['', Validators.required],
       assistante: ['', Validators.required],
       coordinateur: ['', Validators.required],
-      etat:['1', Validators.required],
     });
     this.addForm.get('object').valueChanges.subscribe(
       () => { this.erreurobject = ''; this.erreur = ''; this.success = ''; }
@@ -116,19 +118,15 @@ export class CourierDepartComponent implements OnInit {
     if (this.addForm.invalid){
       return;
     }
-    // this.addForm.addControl('etat', new FormControl('1'));
-    // console.log(this.addForm.value);
-    
-    this.subscribeCourierDepart(this.addForm.value);
-    
+    console.log(this.addForm.value);
+    this.updateCourierDepart(this.addForm.value);
   }
-  subscribeCourierDepart(objetCourierDepart: any){
-    this.methodeService.addCourierDepart(objetCourierDepart)
+  updateCourierDepart(objetCourierDepart: any){
+    this.methodeService.updateCourrierDepart(objetCourierDepart)
       .subscribe(
         (data) => {
-          this.erreur="";
-          this.success = 'Courier depart avec success';
-        // this.router.navigate(['/']);
+          this.success = 'COURRIER DEPART MOFIFIER AVEC SUCCESS !!!';
+        //this.router.navigate(['/']);
       },
       (error) => {
         // @ts-ignore
@@ -136,8 +134,7 @@ export class CourierDepartComponent implements OnInit {
           this.erreur = error.error;
         }
         else{
-          this.success="";
-          this.erreur = 'Une erreur s\'est produite !';
+          this.erreur = 'UNE ERREUR S\'EST PRODUITE !!!';
         }
       });
   }

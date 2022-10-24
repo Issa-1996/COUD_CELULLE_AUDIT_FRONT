@@ -6,7 +6,10 @@ table {
   font-size: 14px;
   width: 100%;
 }
-
+th{
+  background-color: #3b5998;
+  color: white;
+}
 td,
 th {
   width: 15%;

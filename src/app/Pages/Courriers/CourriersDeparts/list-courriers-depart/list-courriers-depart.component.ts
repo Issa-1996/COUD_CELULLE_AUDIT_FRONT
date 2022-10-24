@@ -4,8 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { CourierDepartComponent } from '../courier-depart/courier-depart.component';
+import { CourrierDepartAffichageComponent } from '../courrier-depart-affichage/courrier-depart-affichage.component';
+import { UpdateCourrierDepartComponent } from '../update-courrier-depart/update-courrier-depart.component';
 
 @Component({
   selector: 'app-list-courriers-depart',
@@ -26,7 +29,8 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
   }
   constructor(
     public dialog: MatDialog,
-    private methodeService: MethodeService
+    private methodeService: MethodeService,
+    private behavio: BehavioSubjetService
   ) {}
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -36,8 +40,17 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  openDialog() {
-    const dialogRef = this.dialog.open(CourierDepartComponent);
+  detailCourrierDepart(objet: any) {
+    this.behavio.setValue(objet);
+    const dialogRef = this.dialog.open(CourrierDepartAffichageComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  modifierCourrierDepart(objet: any) {
+    this.behavio.setValue(objet);
+    const dialogRef = this.dialog.open(UpdateCourrierDepartComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
@@ -55,9 +68,10 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
     'name',
     'weight',
     'symbol',
+    'destination',
+    'beneficiaire',
     'detail',
     'modifier',
-    'etat',
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

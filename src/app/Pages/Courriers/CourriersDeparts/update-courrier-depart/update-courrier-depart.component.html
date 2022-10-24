@@ -1,0 +1,210 @@
+<div class="container col-md-12">
+  <h4>MODIFIER COURRIER DEPART</h4>
+  <div *ngIf="erreur != ''" class="login-erreur-container text-center"></div>
+  <div
+    *ngIf="success != ''"
+    class="login-erreur-container text-center bg-danger"
+  >
+    <span class="login-erreur"> {{ erreur }} </span>
+  </div>
+  <div
+    *ngIf="success != ''"
+    class="login-erreur-container text-center bg-success"
+  >
+    <span class="login-erreur"> {{ success }} </span>
+  </div>
+  <form method="post" [formGroup]="addForm">
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label>Object</label>
+        <input
+          type="text"
+          class="form-control"
+          id="object"
+          formControlName="object"
+          disabled
+        />
+        <span class="login-erreur" *ngIf="erreurobject != ''">
+          {{ erreurobject }}
+        </span>
+      </div>
+      <div class="col-md-6">
+        <label>BENEFICIAIRE</label>
+        <input
+          type="text"
+          class="form-control"
+          id="beneficiaire"
+          formControlName="beneficiaire"
+          disabled
+        />
+        <span class="login-erreur" *ngIf="erreurbeneficiaire != ''">
+          {{ erreurbeneficiaire }}
+        </span>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label>Numéro Courier</label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="numeroCourier"
+          id="numeroCourier"
+          disabled
+        />
+        <span class="login-erreur" *ngIf="erreurnumeroCourier != ''">
+          {{ erreurnumeroCourier }}
+        </span>
+      </div>
+      <div class="col-md-6">
+        <label>Date départ</label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
+        <input
+          type="date"
+          class="form-control"
+          formControlName="Date"
+          id="Date"
+        />
+        <span class="login-erreur" *ngIf="erreurdateDepart != ''">
+          {{ erreurdateDepart }}
+        </span>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-12">
+        <label>Observation Courier</label
+          ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+            >*</label
+          ><br />
+          <textarea
+            class="form-control"
+            formControlName="observation"
+            id="observation"
+            rows="3"
+          ></textarea>
+          <span class="login-erreur" *ngIf="erreurobservation != ''">
+            {{ erreurobservation }}
+          </span>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label>NUMERO FACTURE </label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="NumeroFacture"
+          id="NumeroFacture"
+          disabled
+        />
+        <span class="login-erreur" *ngIf="erreurNumeroFacture != ''">
+          {{ erreurNumeroFacture }}
+        </span>
+      </div>
+      <div class="col-md-6">
+        <label>MONTANT</label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
+        <input
+          type="text"
+          class="form-control"
+          id="montant"
+          formControlName="montant"
+          disabled
+        />
+        <span class="login-erreur" *ngIf="erreurmontant != ''">
+          {{ erreurmontant }}
+        </span>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label>Numéro archive </label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="numeroArchive"
+          id="numeroArchive"
+        />
+        <span class="login-erreur" *ngIf="erreurnumeroArchive != ''">
+          {{ erreurnumeroArchive }}
+        </span>
+      </div>
+      <div class="col-md-6">
+        <label>Destination</label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
+        <input
+          type="text"
+          class="form-control"
+          id="destination"
+          formControlName="destination"
+        />
+        <span class="login-erreur" *ngIf="erreurdestination != ''">
+          {{ erreurdestination }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Nombre de pieces</label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="nombrePiece"
+          id="nombrePiece"
+        />
+        <span class="login-erreur" *ngIf="erreurnombrePiece != ''">
+          {{ erreurnombrePiece }}
+        </span>
+      </div>
+      <div class="col-md-6">
+        <label>Numéro Ordre</label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
+        <input
+          type="text"
+          class="form-control"
+          id="numeroOrdre"
+          formControlName="numeroOrdre"
+        />
+        <span class="login-erreur" *ngIf="erreurnumeroOrdre != ''">
+          {{ erreurnumeroOrdre }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          <button
+            type="submit"
+            class="btn btn-success btn-lg btn-block"
+            name="submit"
+            (click)="onSignIn()"
+          >
+            MODIFIER
+          </button>
+      </div>
+    </div>
+  </form>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>ANNULER</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>FERMER</button>
+</mat-dialog-actions>
