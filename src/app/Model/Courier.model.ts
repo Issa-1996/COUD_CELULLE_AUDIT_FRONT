@@ -6,6 +6,7 @@ export interface CourierModel{
     numeroCourier: string;
     object:string;
     nature: string;
+    etat:string;
 
     dateArriver: string;
     expediteur: string;
@@ -20,6 +21,7 @@ export interface CourierModel{
     numeroArchive:string;
     observation:string;
     numeroOrdre:string;
+    statut:string;
     
     rapport: RapportModel;
     controleurs: UserModel;

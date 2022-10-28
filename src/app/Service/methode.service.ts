@@ -56,6 +56,12 @@ export class MethodeService {
   getCoordonateursByUsername(username: UserModel): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordinateurs?username=${username}`);
   }
+  getAssistanteByUsername(username: UserModel): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/assistantes?username=${username}`);
+  }
+  getAssistantes(): Observable<UserModel>{
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/assistantes`);
+  }
   getCourriers(): Observable<CourierModel>{
     return this.httpClient.get<CourierModel>(`${envVars.url}/coud/courier_arrivers`);
   }

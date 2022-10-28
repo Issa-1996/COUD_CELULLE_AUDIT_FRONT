@@ -24,6 +24,7 @@ export class CourierArriverComponent implements OnInit {
   helper = new JwtHelperService();
   controleur: UserModel;
   coordonateur: UserModel;
+  assistante: UserModel;
   erreurdateArriver = '';
   erreurexpediteur = '';
   erreurdateCorrespondance = '';
@@ -37,9 +38,10 @@ export class CourierArriverComponent implements OnInit {
   erreurFacture = '';
   erreurBeneficiaire = '';
   erreur = '';
-  success='';
+  success = '';
   code = '';
-  Connecter: UserModel;
+  ConnecterAssistante: UserModel;
+  ConnecterCoordinateur: UserModel;
   id: number;
   object: String;
   search: string;
@@ -52,10 +54,11 @@ export class CourierArriverComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchVS.currentSearch.subscribe(search=>this.search=search);
-    this.getCoordonateur();
     this.connectUser();
+    this.getAssistante();
+    this.getCoordonateur();
     this.getControleurs();
+    this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
       beneficiaire: ['', Validators.required],
@@ -73,62 +76,62 @@ export class CourierArriverComponent implements OnInit {
     this.addForm.get('object').valueChanges.subscribe(() => {
       this.erreurobject = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('beneficiaire').valueChanges.subscribe(() => {
       this.erreurBeneficiaire = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('NumeroFacture').valueChanges.subscribe(() => {
       this.erreurFacture = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('montant').valueChanges.subscribe(() => {
       this.erreurMontant = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('numeroCourier').valueChanges.subscribe(() => {
       this.erreurnumeroCourier = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('Date').valueChanges.subscribe(() => {
       this.erreurdateArriver = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('expediteur').valueChanges.subscribe(() => {
       this.erreurexpediteur = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('numeroCorrespondance').valueChanges.subscribe(() => {
       this.erreurnumeroCorrespondance = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('dateCorrespondance').valueChanges.subscribe(() => {
       this.erreurdateCorrespondance = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('numeroReponse').valueChanges.subscribe(() => {
       this.erreurnumeroReponse = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('dateReponse').valueChanges.subscribe(() => {
       this.erreurdateReponse = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
     this.addForm.get('controleurs').valueChanges.subscribe(() => {
       this.erreurControleur = '';
       this.erreur = '';
-      this.success='';
+      this.success = '';
     });
   }
 
@@ -172,23 +175,36 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.invalid) {
       return;
     }
-    this.addForm.addControl(
-      'assistante',
-      new FormControl('/api/coud/assistantes/' + this.Connecter)
-    );
-    this.addForm.addControl(
-      'coordinateur',
-      new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
-    );
-    // this.subscribeCourierArriver(this.addForm.value);
-    console.log(this.addForm.value);
-    
+    this.addForm.addControl('etat', new FormControl('0'));
+    this.addForm.addControl('statut', new FormControl('0'));
+    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    if (decodedToken.roles.includes('ROLE_ASSISTANTE')) {
+      this.addForm.addControl(
+        'assistante',
+        new FormControl('/api/coud/assistantes/' + this.ConnecterAssistante)
+      );
+      this.addForm.addControl(
+        'coordinateur',
+        new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
+      );
+    }
+    //  else if (decodedToken.roles.includes('ROLE_COORDINATEUR')) {
+    //   this.addForm.addControl(
+    //     'coordinateur',
+    //     new FormControl('/api/coud/coordinateurs/' + this.ConnecterCoordinateur)
+    //   );
+    //   this.addForm.addControl(
+    //     'assistante',
+    //     new FormControl('/api/coud/assistantes/' + this.assistante)
+    //   );
+    // }
+    this.subscribeCourierArriver(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: CourierModel) {
     this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
       (data) => {
-        this.success = 'Courier arriver avec success';
         this.newValue(data);
+        this.success = 'NOUVEAU COURRIER ARRIVER AVEC SUCCESS';
         // this.addForm.value.reset;
         //this.router.navigate(['/container/courier']);
       },
@@ -197,8 +213,7 @@ export class CourierArriverComponent implements OnInit {
         if (error.status === 403) {
           this.erreur = error.error;
         } else {
-          // this.addForm.value.reset;
-          this.erreur = "Une erreur s'est produite !";
+          this.erreur = "UNE ERREUR S'EST PRODUITE !";
         }
       }
     );
@@ -219,14 +234,32 @@ export class CourierArriverComponent implements OnInit {
       (error: any) => {}
     );
   }
+  getAssistante(): any {
+    this.methodeService.getAssistantes().subscribe(
+      (data) => {
+        this.assistante = data['hydra:member'][0]['id'];
+      },
+      (error: any) => {}
+    );
+  }
   connectUser() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    const username: string[] = decodedToken.username;
-    this.authService.getUserConnected(username).subscribe((data) => {
-      this.Connecter = data['hydra:member'][0]['id'];
-    });
+    if (decodedToken.roles.includes('ROLE_ASSISTANTE')) {
+      this.methodeService
+        .getAssistanteByUsername(decodedToken.username)
+        .subscribe((data) => {
+          this.ConnecterAssistante = data['hydra:member'][0]['id'];
+        });
+    }
+    if (decodedToken.roles.includes('ROLE_COORDINATEUR')) {
+      this.methodeService
+        .getCoordonateursByUsername(decodedToken.username)
+        .subscribe((data) => {
+          this.ConnecterCoordinateur = data['hydra:member'][0]['id'];
+        });
+    }
   }
-  newValue(search){
+  newValue(search) {
     this.searchVS.changeValue(search);
   }
 }

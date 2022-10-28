@@ -13,6 +13,7 @@ import { AuthService } from 'app/Service/auth.service';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { SearchService } from 'app/Service/search.service';
+import { TempoData } from 'app/Service/tempoData.service';
 import { TransferDataService } from 'app/Service/transfer-data.service';
 
 @Component({
@@ -27,25 +28,26 @@ export class FicheDeControleComponent implements OnInit {
   erreuravisControleur = '';
   erreurmotivation = '';
   erreurrecommandations = '';
-  erreurCourrier = '';
   erreur = '';
-  success='';
+  success = '';
   objetCourier: CourierModel[];
   tabObjet = [];
   coordonateur: UserModel;
   user: UserModel;
   search: string;
+  courrierArriverStatut: CourierModel;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private methodeService: MethodeService,
     private authService: AuthService,
     private searchVS: SearchService,
+    private dataDepot: TempoData,
     private transferdata: TransferDataService
   ) {}
 
   ngOnInit(): void {
-    this.searchVS.currentSearch.subscribe(search=>this.search=search);
+    this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.getCoordonateur();
     this.connectUser();
     this.addForm = this.formBuilder.group({
@@ -53,7 +55,6 @@ export class FicheDeControleComponent implements OnInit {
       avisControleur: ['', Validators.required],
       motivation: ['', Validators.required],
       recommandations: ['', [Validators.required]],
-      courrierArriver: ['', [Validators.required]],
     });
     this.addForm.get('objet').valueChanges.subscribe(() => {
       this.erreurobjet = '';
@@ -75,11 +76,6 @@ export class FicheDeControleComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('courrierArriver').valueChanges.subscribe(() => {
-      this.erreurCourrier = '';
-      this.erreur = '';
-      this.success = '';
-    });
   }
 
   onSignIn(): any {
@@ -95,9 +91,6 @@ export class FicheDeControleComponent implements OnInit {
     if (this.addForm.get('recommandations').value.trim() === '') {
       this.erreurrecommandations = 'Recommandation obligatoire !';
     }
-    if (this.addForm.get('courrierArriver').value.trim() === '') {
-      this.erreurCourrier = 'Courrier Arriver obligatoire !';
-    }
     if (this.addForm.invalid) {
       return;
     }
@@ -109,15 +102,23 @@ export class FicheDeControleComponent implements OnInit {
       'coordinateur',
       new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
     );
+    this.addForm.addControl(
+      'courrierArriver',
+      new FormControl(
+        '/api/coud/courier_arrivers/' + this.transferdata.getData().id
+      )
+    );
+
+    this.courrierArriverStatut = this.dataDepot['data'];
+    this.courrierArriverStatut.statut = '1';
+    this.updateCourierArriver(this.courrierArriverStatut);
 
     this.subscribeFicheDeControle(this.addForm.value);
-    this.transferdata.setData(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {
     this.methodeService.addFicheDeControle(objetFicheDeControle).subscribe(
       (data) => {
         this.success = 'Fiche de control avec success';
-        this.newValue(data);
         //this.router.navigate(['/']);
       },
       (error) => {
@@ -160,7 +161,16 @@ export class FicheDeControleComponent implements OnInit {
       (error: any) => {}
     );
   }
-  newValue(search){
+
+  updateCourierArriver(objetCourierArriver: any) {
+    this.methodeService
+      .updateCourrierArriver(objetCourierArriver)
+      .subscribe((data) => {
+        this.newValue(data);
+      });
+  }
+
+  newValue(search) {
     this.searchVS.changeValue(search);
   }
 }

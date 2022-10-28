@@ -43,6 +43,8 @@ import { UpdateCourrierDepartComponent } from './Pages/Courriers/CourriersDepart
 import { CourrierDepartAffichageComponent } from './Pages/Courriers/CourriersDeparts/courrier-depart-affichage/courrier-depart-affichage.component';
 import { TransferDataService } from './Service/transfer-data.service';
 import { SearchService } from './Service/search.service';
+import { CourriersValiderComponent } from './Pages/Courriers/courriers-valider/courriers-valider.component';
+import { TotalArriverComponent } from './Pages/Courriers/CourriersArrivers/total-arriver/total-arriver.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { SearchService } from './Service/search.service';
     UpdateCourrierComponent,
     CouriersComponent,
     UpdateCourrierDepartComponent,
-    CourrierDepartAffichageComponent
+    CourrierDepartAffichageComponent,
+    CourriersValiderComponent,
+    TotalArriverComponent
     
   ],
   imports: [

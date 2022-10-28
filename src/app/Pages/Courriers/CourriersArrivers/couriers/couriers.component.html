@@ -6,7 +6,7 @@
   <mat-stepper [linear]="isLinear" #stepper class="shadow-lg">
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>LISTES COURRIERS ARRIVES</ng-template>
+        <ng-template matStepLabel>COURRIERS-ENCOURS</ng-template>
         <app-courrier-liste
           *ngIf="
             role.includes('ROLE_ASSISTANTE') ||
@@ -19,10 +19,7 @@
             mat-raised-button
             style="background-color: #3b5998; color: white"
             (click)="nouveauCourrier()"
-            *ngIf="
-              role.includes('ROLE_ASSISTANTE') ||
-              role.includes('ROLE_COORDINATEUR')
-            "
+            *ngIf="role.includes('ROLE_ASSISTANTE')"
           >
             NOUVEAU COURRIER ARRIVE
           </button>
@@ -34,6 +31,13 @@
       *ngIf="
         role.includes('ROLE_CONTROLEURS') || role.includes('ROLE_COORDINATEUR')
       "
+    >
+      <ng-template matStepLabel>COURRIERS-VALIDER</ng-template>
+      <courriers-valider></courriers-valider>
+    </mat-step>
+
+    <mat-step
+      *ngIf="role.includes('ROLE_CONTROLEURS')"
       [stepControl]="secondFormGroup"
       label="LISTE FICHE DE CONTROLE"
       style="width: 100%"
@@ -59,10 +63,21 @@
 
     <mat-step
       *ngIf="
+        role.includes('ROLE_ASSISTANTE') ||
+        role.includes('ROLE_COORDINATEUR') ||
+        role.includes('ROLE_CONTROLEURS')
+      "
+    >
+      <ng-template matStepLabel>COURRIERS-ARRIVERS</ng-template>
+      <total-arriver></total-arriver>
+    </mat-step>
+
+    <mat-step
+      *ngIf="
         role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR')
       "
     >
-      <ng-template matStepLabel>LISTES COURRIERS DEPARTS</ng-template>
+      <ng-template matStepLabel>COURRIERS-DEPARTS</ng-template>
       <app-list-courriers-depart></app-list-courriers-depart>
     </mat-step>
   </mat-stepper>
