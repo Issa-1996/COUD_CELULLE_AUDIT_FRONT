@@ -2,131 +2,51 @@
   <h4>DETAIL COURRIER DEPART</h4>
   <form method="post" [formGroup]="addForm">
     <div class="mb-3">
-<<<<<<< HEAD
       <label class="form-label">Object</label>
-      <input disabled type="text" class="form-control" />
-=======
-      <label for="object:" class="">Object</label>
-      <input
-        disabled
-        type="text"
-        class="form-control"
-        id="object"
-        formControlName="object"
-      />
-      <span class="login-erreur" *ngIf="erreurobject != ''" style="color: red">
-        {{ erreurobject }}
-      </span>
->>>>>>> b55fd640c58e64fc77168726ece57989c0174802
+      <input disabled type="text" class="form-control" formControlName="object" />
     </div>
     <div class="row">
       <div class="col">
         <label>Numéro Courier</label>
-        <input type="text" disabled class="form-control" />
+        <input type="text" disabled class="form-control" formControlName="numeroCourier"/>
       </div>
       <div class="col">
-<<<<<<< HEAD
         <label>Date départ</label>
-        <input type="date" disabled class="form-control" />
-=======
-        <label>Date Départ</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
-        <input
-          type="date"
-          disabled
-          class="form-control"
-          formControlName="dateDepart"
-          id="dateDepart"
-        />
-        <span
-          class="login-erreur"
-          *ngIf="erreurdateDepart != ''"
-          style="color: red"
-        >
-          {{ erreurdateDepart }}
-        </span>
->>>>>>> b55fd640c58e64fc77168726ece57989c0174802
+        <input type="date" disabled class="form-control" formControlName="dateDepart" />
       </div>
     </div>
     <div class="form-group">
       <label>Observation Courier</label>
-      <textarea class="form-control" disabled rows="3"></textarea>
+      <textarea class="form-control" disabled rows="3" formControlName="observation"></textarea>
     </div>
     <div class="row">
       <div class="col">
-<<<<<<< HEAD
         <label>NUMERO FACTURE </label>
-        <input type="text" class="form-control" disabled />
+        <input type="text" class="form-control" disabled  formControlName="NumeroFacture"/>
       </div>
       <div class="col">
         <label>MONTANT</label>
-        <input type="text" class="form-control" disabled />
-=======
-        <label>Numéro Facture </label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-        <input type="text" class="form-control" formControlName="NumeroFacture" id="NumeroFacture" disabled>
-      </div>
-      <div class="col">
-        <label>Montant</label><label for="" style="color: red; font-size: 20px;">*</label><br> 
-        <input type="text" class="form-control" id="montant" formControlName="montant" disabled>
->>>>>>> b55fd640c58e64fc77168726ece57989c0174802
+        <input type="text" class="form-control" disabled  formControlName="montant"/>
       </div>
     </div>
     <div class="row">
       <div class="col">
-<<<<<<< HEAD
         <label>Numéro archive </label>
-        <input type="text" disabled class="form-control" />
-=======
-        <label>Numéro Archive </label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
-        <input
-          type="text"
-          disabled
-          class="form-control"
-          formControlName="numeroArchive"
-          id="numeroArchive"
-        />
-        <span
-          class="login-erreur"
-          *ngIf="erreurnumeroArchive != ''"
-          style="color: red"
-        >
-          {{ erreurnumeroArchive }}
-        </span>
->>>>>>> b55fd640c58e64fc77168726ece57989c0174802
+        <input type="text" disabled class="form-control"  formControlName="numeroArchive"/>
       </div>
       <div class="col">
         <label>Destination</label>
-        <input type="text" disabled class="form-control" />
+        <input type="text" disabled class="form-control" formControlName="destination"/>
       </div>
     </div>
     <div class="row">
       <div class="col">
-<<<<<<< HEAD
         <label>Nombre de pieces</label>
-        <input type="text" disabled class="form-control" />
-=======
-        <label>Nombre de Pieces</label
-        ><label for="" style="color: red; font-size: 20px">*</label><br />
-        <input
-          type="text"
-          disabled
-          class="form-control"
-          formControlName="nombrePiece"
-          id="nombrePiece"
-        />
-        <span
-          class="login-erreur"
-          *ngIf="erreurnombrePiece != ''"
-          style="color: red"
-        >
-          {{ erreurnombrePiece }}
-        </span>
->>>>>>> b55fd640c58e64fc77168726ece57989c0174802
+        <input type="text" disabled class="form-control" formControlName="nombrePiece"/>
       </div>
       <div class="col">
         <label>Numéro Ordre</label>
-        <input type="text" disabled class="form-control" />
+        <input type="text" disabled class="form-control" formControlName="numeroOrdre"/>
       </div>
     </div>
   </form>

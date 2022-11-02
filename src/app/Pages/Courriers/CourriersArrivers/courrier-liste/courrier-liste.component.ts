@@ -28,7 +28,6 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     'detail',
     'modifier',
     'depart',
-    'rejet',
   ];
   displayedColumn: string[] = [
     'id',

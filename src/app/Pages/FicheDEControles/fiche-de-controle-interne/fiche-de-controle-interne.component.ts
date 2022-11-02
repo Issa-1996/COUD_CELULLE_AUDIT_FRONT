@@ -109,7 +109,6 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     'symbol',
     'nom',
     'detail',
-    'modifier',
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -39,16 +39,17 @@ export class CourierDepartComponent implements OnInit {
   assistante: UserModel;
   helper = new JwtHelperService();
   Connecter: UserModel;
+  courrierArrier: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private methodeService: MethodeService,
-    private dataDepot: TempoData,
     private transferData: TransferDataService,
     private searchVS: SearchService
   ) {}
 
   ngOnInit(): void {
+    this.courrierArrier = this.transferData.getData();
     this.getAssistante();
     this.connectUser();
     this.addForm = this.formBuilder.group({
@@ -119,7 +120,7 @@ export class CourierDepartComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.patchValue(this.transferData.getData());
+    this.addForm.patchValue(this.courrierArrier);
   }
 
   onSignIn(): any {
@@ -158,16 +159,24 @@ export class CourierDepartComponent implements OnInit {
       'coordinateur',
       new FormControl('/api/coud/coordinateurs/' + this.Connecter)
     );
-    this.courrierArriverArchiver = this.dataDepot['data'];
-    this.courrierArriverArchiver.etat = '1';
-    // console.log(this.courrierArriverArchiver);
-    
-    this.updateCourierArriver(this.courrierArriverArchiver);
+    if(this.courrierArrier.ficheDeControle.avisControleur=="RAS"){
+      this.addForm.addControl(
+        'type',
+        new FormControl('RAS')
+      );      
+    }else if(this.courrierArrier.ficheDeControle.avisControleur=="REJET"){
+      this.addForm.addControl(
+        'type',
+        new FormControl('REJET')
+      );       
+    }
     this.subscribeCourierDepart(this.addForm.value);
   }
   subscribeCourierDepart(objetCourierDepart: any) {
     this.methodeService.addCourierDepart(objetCourierDepart).subscribe(
       (data) => {
+        this.courrierArrier.etat = '1';
+        this.updateCourierArriver(this.courrierArrier);
         this.erreur = '';
         this.success = 'COURRIER VALIDER COME DEPART AVEC SUCCESS ';
         // this.router.navigate(['/']);
@@ -188,6 +197,7 @@ export class CourierDepartComponent implements OnInit {
     this.methodeService
       .updateCourrierArriver(objetCourierArriver)
       .subscribe((data) => {
+        console.log(data);        
         this.newValue(data);
       });
   }
@@ -195,7 +205,7 @@ export class CourierDepartComponent implements OnInit {
   getAssistante(): any {
     this.methodeService.getAssistantes().subscribe(
       (data) => {
-        this.assistante = data['hydra:member'][0]['id'];        
+        this.assistante = data['hydra:member'][0]['id'];
       },
       (error: any) => {}
     );

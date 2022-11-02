@@ -18,9 +18,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h4>
-        FICHE DE CONTROLE INTERNE
-      </h4>
+      <h4>FICHE DE CONTROLE INTERNE</h4>
       <div
         *ngIf="erreur != ''"
         class="login-erreur-container text-center bg-danger"
@@ -53,28 +51,21 @@
             </span>
           </div>
           <div class="col-md-6">
-            <label for="exampleFormControlSelect1">Affecter un Courriers</label
-            ><br />
-            <select
-              class="form-control"
-              id="courrierArriver"
-              name="courrierArriver"
-              formControlName="courrierArriver"
+            <label for="Recommandations Controleur:" class="form-label"
+              >Recommandations Controleur</label
             >
-              <option disabled>ATTACHER UN COURRIER</option>
-              <option selected
-                value="/api/coud/courier_arrivers/{{ courrier.id }}"
-                *ngFor="let courrier of objetCourier"
-              >
-                {{ courrier.object }}
-              </option>
-            </select>
+            <textarea
+              class="form-control"
+              name="recommandations"
+              rows="1.5"
+              formControlName="recommandations"
+            ></textarea>
             <span
               class="login-erreur"
-              *ngIf="erreurCourrier != ''"
+              *ngIf="erreurrecommandations != ''"
               style="color: red"
             >
-              {{ erreurCourrier }}
+              {{ erreurrecommandations }}
             </span>
           </div>
         </div>
@@ -118,26 +109,6 @@
               style="color: red"
             >
               {{ erreurmotivation }}
-            </span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <label for="Recommandations Controleur:" class="form-label"
-              >Recommandations Controleur</label
-            >
-            <textarea
-              class="form-control"
-              name="recommandations"
-              rows="1.5"
-              formControlName="recommandations"
-            ></textarea>
-            <span
-              class="login-erreur"
-              *ngIf="erreurrecommandations != ''"
-              style="color: red"
-            >
-              {{ erreurrecommandations }}
             </span>
           </div>
         </div>

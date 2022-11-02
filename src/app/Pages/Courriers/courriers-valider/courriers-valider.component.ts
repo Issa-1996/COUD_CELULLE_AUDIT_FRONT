@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { FicheDeControleModifierComponent } from 'app/Pages/FicheDEControles/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { FicheDeControleComponent } from 'app/Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
 import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
@@ -26,8 +27,8 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
     'beneficiaire',
     'expediteur',
     'detail',
+    'fiche',
     'depart',
-    'rejet',
   ];
   public role: any[];
   database: CourierModel[] = [];
@@ -95,6 +96,15 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
       });
       this.dataDepot.setData(fiche);
     }
+  }
+
+  modifierFicheDeControle(fiche: any) {
+    const dialogRef = this.dialog.open(FicheDeControleModifierComponent);
+    this.transferdata.setData(fiche);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   listeCourrier() {
@@ -193,6 +203,7 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
             }
           });
         }
+
         this.dataSource = new MatTableDataSource<CourierModel>(
           this.objetCourier
         );

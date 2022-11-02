@@ -58,6 +58,29 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="fiche">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <p *ngIf="role.includes('ROLE_COORDINATEUR')">FICHE</p>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="example-button-container">
+          <button
+            mat-mini-fab
+            style="background-color: #3b5998"
+            aria-hidden="true"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            style="background-color: #ffff00"
+            aria-label="Example icon button with a menu icon"
+            (click)="modifierFicheDeControle(row)"
+            *ngIf="role.includes('ROLE_COORDINATEUR')"
+          >
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
     <!-- valider Column -->
     <ng-container matColumnDef="depart">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -72,27 +95,6 @@
             *ngIf="role.includes('ROLE_COORDINATEUR')"
           >
             <mat-icon>bookmark</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
-
-    <!-- rejeter Column -->
-    <ng-container matColumnDef="rejet">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <p *ngIf="role.includes('ROLE_COORDINATEUR')">REJET</p>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <div class="example-button-container">
-          <button
-            (click)="detailCourrierArriver(row)"
-            mat-mini-fab
-            style="background-color: red"
-            aria-label="Example icon button with a plus one icon"
-            aria-hidden="true"
-            *ngIf="role.includes('ROLE_COORDINATEUR') "
-          >
-            <mat-icon>delete</mat-icon>
           </button>
         </div>
       </td>

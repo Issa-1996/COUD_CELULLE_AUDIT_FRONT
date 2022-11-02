@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { FicheDeControlModel } from 'app/Model/FicheDeControl.model';
 import { UserModel } from 'app/Model/User.model';
 import { AuthService } from 'app/Service/auth.service';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
@@ -35,6 +36,7 @@ export class FicheDeControleModifierComponent implements OnInit {
   coordonateur: UserModel;
   user: UserModel;
   search: string;
+  ficheModifier: FicheDeControlModel;
   constructor(
     private formBuilder: FormBuilder,
     private methodeService: MethodeService,
@@ -43,7 +45,8 @@ export class FicheDeControleModifierComponent implements OnInit {
     private transferdata: TransferDataService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.ficheModifier=this.transferdata.getData().ficheDeControle;    
     this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.getCoordonateur();
     this.connectUser();
@@ -53,7 +56,6 @@ export class FicheDeControleModifierComponent implements OnInit {
       avisControleur: ['', Validators.required],
       motivation: ['', Validators.required],
       recommandations: ['', [Validators.required]],
-      courrierArriver: [''],
     });
     this.addForm.get('objet').valueChanges.subscribe(() => {
       this.erreurobjet = '';
@@ -74,12 +76,7 @@ export class FicheDeControleModifierComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('courrierArriver').valueChanges.subscribe(() => {
-      this.erreurCourrier = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.patchValue(this.transferdata.getData());
+    this.addForm.patchValue(this.ficheModifier);
   }
 
   onSignIn(): any {
@@ -106,6 +103,8 @@ export class FicheDeControleModifierComponent implements OnInit {
     //   'coordinateur',
     //   new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
     // );
+    // console.log(this.addForm.value);
+    
     this.subscribeFicheDeControle(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {

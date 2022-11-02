@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
     {{ !isLinear ? "Active la lecture" : "Desactiver la lecture" }}
   </button>
@@ -32,19 +32,19 @@
         role.includes('ROLE_CONTROLEURS') || role.includes('ROLE_COORDINATEUR')
       "
     >
-      <ng-template matStepLabel>COURRIERS-VALIDER</ng-template>
+      <ng-template matStepLabel>COURRIERS-TRAITÉS </ng-template>
       <courriers-valider></courriers-valider>
     </mat-step>
 
     <mat-step
       *ngIf="role.includes('ROLE_CONTROLEURS')"
       [stepControl]="secondFormGroup"
-      label="LISTE FICHE DE CONTROLE"
+      label="FICHES DE CONTROLES"
       style="width: 100%"
     >
       <app-fiche-de-controle-interne></app-fiche-de-controle-interne>
       <form [formGroup]="secondFormGroup">
-        <div class="example-button-row">
+        <!-- <div class="example-button-row">
           <button
             id="buttonFiche"
             mat-raised-button
@@ -57,7 +57,7 @@
           >
             NOUVEAU FICHE
           </button>
-        </div>
+        </div> -->
       </form>
     </mat-step>
 
@@ -68,13 +68,15 @@
         role.includes('ROLE_CONTROLEURS')
       "
     >
-      <ng-template matStepLabel>COURRIERS-ARRIVERS</ng-template>
+      <ng-template matStepLabel>TOTAL-COURRIERS-ARRIVÉS</ng-template>
       <total-arriver></total-arriver>
     </mat-step>
 
     <mat-step
       *ngIf="
-        role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR')
+        role.includes('ROLE_ASSISTANTE') ||
+        role.includes('ROLE_COORDINATEUR') ||
+        role.includes('ROLE_CONTROLEURS')
       "
     >
       <ng-template matStepLabel>COURRIERS-DEPARTS</ng-template>

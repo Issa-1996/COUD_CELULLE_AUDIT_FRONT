@@ -1,6 +1,6 @@
 <mat-form-field appearance="standard">
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input />
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex: COUD" #input />
 </mat-form-field>
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
@@ -37,7 +37,7 @@
             mat-mini-fab
             style="background-color: #3B5998;"
             aria-label="Example icon button with a plus one icon"
-            (click)="openDialog()"
+            (click)="detailAgent(element)"
           >
             <mat-icon>filter_list</mat-icon>
           </button>
@@ -54,7 +54,7 @@
             mat-mini-fab
             style="background-color: #FFFF00;"
             aria-label="Example icon button with a plus one icon"
-            (click)="openDialog()"
+            (click)="modifierAgent(element)"
           >
             <mat-icon>menu</mat-icon>
           </button>
@@ -71,4 +71,14 @@
     aria-label="Select page of periodic elements"
   >
   </mat-paginator>
+  <div class="example-button-row">
+    <button
+      id="buttonFiche"
+      mat-raised-button
+      style="background-color: #3b5998; color: white"
+      (click)="ajoutNewAgent()"
+    >
+      NOUVEAU AGENT
+    </button>
+  </div>
 </div>

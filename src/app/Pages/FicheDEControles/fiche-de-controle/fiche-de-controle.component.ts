@@ -35,23 +35,24 @@ export class FicheDeControleComponent implements OnInit {
   coordonateur: UserModel;
   user: UserModel;
   search: string;
-  courrierArriverStatut: CourierModel;
+  courrierArriverStatut: any;
+  hiddenInput = 'true';
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private methodeService: MethodeService,
     private authService: AuthService,
     private searchVS: SearchService,
-    private dataDepot: TempoData,
     private transferdata: TransferDataService
   ) {}
 
   ngOnInit(): void {
+    this.courrierArriverStatut = this.transferdata.getData();
     this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.getCoordonateur();
     this.connectUser();
     this.addForm = this.formBuilder.group({
-      objet: ['', Validators.required],
+      objet: [this.courrierArriverStatut.object, Validators.required],
       avisControleur: ['', Validators.required],
       motivation: ['', Validators.required],
       recommandations: ['', [Validators.required]],
@@ -62,20 +63,23 @@ export class FicheDeControleComponent implements OnInit {
       this.success = '';
     });
     this.addForm.get('avisControleur').valueChanges.subscribe(() => {
+      // if (this.addForm.get('avisControleur').value.trim() === 'REJET') {
+      // }
+      this.hiddenInput = 'true';
       this.erreuravisControleur = '';
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('motivation').valueChanges.subscribe(() => {
-      this.erreurmotivation = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('recommandations').valueChanges.subscribe(() => {
-      this.erreurrecommandations = '';
-      this.erreur = '';
-      this.success = '';
-    });
+    // this.addForm.get('motivation').valueChanges.subscribe(() => {
+    //   this.erreurmotivation = '';
+    //   this.erreur = '';
+    //   this.success = '';
+    // });
+    // this.addForm.get('recommandations').valueChanges.subscribe(() => {
+    //   this.erreurrecommandations = '';
+    //   this.erreur = '';
+    //   this.success = '';
+    // });
   }
 
   onSignIn(): any {
@@ -85,12 +89,12 @@ export class FicheDeControleComponent implements OnInit {
     if (this.addForm.get('avisControleur').value.trim() === '') {
       this.erreuravisControleur = 'Avis controleur obligatoire !';
     }
-    if (this.addForm.get('motivation').value.trim() === '') {
-      this.erreurmotivation = 'Motivation obligatoire !';
-    }
-    if (this.addForm.get('recommandations').value.trim() === '') {
-      this.erreurrecommandations = 'Recommandation obligatoire !';
-    }
+    // if (this.addForm.get('motivation').value.trim() === '') {
+    //   this.erreurmotivation = 'Motivation obligatoire !';
+    // }
+    // if (this.addForm.get('recommandations').value.trim() === '') {
+    //   this.erreurrecommandations = 'Recommandation obligatoire !';
+    // }
     if (this.addForm.invalid) {
       return;
     }
@@ -105,19 +109,17 @@ export class FicheDeControleComponent implements OnInit {
     this.addForm.addControl(
       'courrierArriver',
       new FormControl(
-        '/api/coud/courier_arrivers/' + this.transferdata.getData().id
+        '/api/coud/courier_arrivers/' + this.courrierArriverStatut.id
       )
     );
-
-    this.courrierArriverStatut = this.dataDepot['data'];
-    this.courrierArriverStatut.statut = '1';
-    this.updateCourierArriver(this.courrierArriverStatut);
-
     this.subscribeFicheDeControle(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {
     this.methodeService.addFicheDeControle(objetFicheDeControle).subscribe(
       (data) => {
+        this.courrierArriverStatut.ficheDeControle = data;
+        this.courrierArriverStatut.statut = '1';
+        this.updateCourierArriver(this.courrierArriverStatut);
         this.success = 'Fiche de control avec success';
         //this.router.navigate(['/']);
       },
