@@ -21,7 +21,7 @@
             (click)="nouveauCourrier()"
             *ngIf="role.includes('ROLE_ASSISTANTE')"
           >
-            NOUVEAU COURRIER ARRIVE
+            NOUVEAU COURRIER ARRIVEE
           </button>
         </div>
       </form>
@@ -68,7 +68,7 @@
         role.includes('ROLE_CONTROLEURS')
       "
     >
-      <ng-template matStepLabel>TOTAL-COURRIERS-ARRIVÉS</ng-template>
+      <ng-template matStepLabel>TOTAL-COURRIERS-ARRIVÉE</ng-template>
       <total-arriver></total-arriver>
     </mat-step>
 
@@ -79,7 +79,7 @@
         role.includes('ROLE_CONTROLEURS')
       "
     >
-      <ng-template matStepLabel>COURRIERS-DEPARTS</ng-template>
+      <ng-template matStepLabel>COURRIERS-DEPART</ng-template>
       <app-list-courriers-depart></app-list-courriers-depart>
     </mat-step>
   </mat-stepper>
