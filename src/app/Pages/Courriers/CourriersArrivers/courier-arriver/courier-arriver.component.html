@@ -21,7 +21,7 @@
       >
         <span class="login-erreur"> {{ success }} </span>
       </div>
-      <form method="post" [formGroup]="addForm">
+      <form [formGroup]="addForm">
         <div class="row">
           <div class="col">
             <label for="object:" class="form-label">Object</label>
@@ -149,14 +149,14 @@
             </div>
           </div>
           <div class="col">
-            <label>Affecter un controleur</label>
+            <label>AFFECTER UN CONTROLEUR</label>
             <label for="" style="color: red; font-size: 20px">*</label><br />
             <select
               class="form-control"
               id="controleurs"
               formControlName="controleurs"
             >
-              <option disabled>choisir un controleur</option>
+              <option disabled>CHOISIR UN CONTROLEUR</option>
               <option
                 value="/api/coud/controleurs/{{ ctrl.id }}"
                 *ngFor="let ctrl of controleur"
@@ -246,14 +246,13 @@
           </div>
         </div>
         <div class="text-center">
-          <!-- <button type="submit" class="btn btn-primary" name="submit">Annuler</button> -->
           <button
             type="submit"
             class="btn btn-lg btn-block"
             name="submit"
             (click)="onSignIn()"
           >
-            Enregistrer
+            ENREGISTRER
           </button>
         </div>
       </form>

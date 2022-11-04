@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator, } from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { UserModel } from 'app/Model/User.model';
 import { MethodeService } from 'app/Service/methode.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
+import { AddUserComponent } from '../add-user/add-user.component';
+import { UpdateUserComponent } from '../update-user/update-user.component';
 
 
 @Component({
@@ -19,7 +23,9 @@ export class UsersComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
   constructor(
-    private methodeService: MethodeService
+    private methodeService: MethodeService,
+    public dialog: MatDialog,
+    private transferdata: TransferDataService
   ) {}
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -35,6 +41,27 @@ export class UsersComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ajoutNewAgent() {
+    const dialogRef = this.dialog.open(AddUserComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  modifierAgent(user:any) {
+    const dialogRef = this.dialog.open(UpdateUserComponent);
+    this.transferdata.setData(user);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  detailAgent(user:any) {
+    const dialogRef = this.dialog.open(UpdateUserComponent);
+    this.transferdata.setData(user);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   listeUsers() {

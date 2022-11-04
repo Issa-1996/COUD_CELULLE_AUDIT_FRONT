@@ -6,6 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
+import { TransferDataService } from 'app/Service/transfer-data.service';
 import { CourierDepartComponent } from '../courier-depart/courier-depart.component';
 import { CourrierDepartAffichageComponent } from '../courrier-depart-affichage/courrier-depart-affichage.component';
 import { UpdateCourrierDepartComponent } from '../update-courrier-depart/update-courrier-depart.component';
@@ -30,7 +31,7 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
   constructor(
     public dialog: MatDialog,
     private methodeService: MethodeService,
-    private behavio: BehavioSubjetService
+    private transferData: TransferDataService
   ) {}
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -41,7 +42,7 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
     }
   }
   detailCourrierDepart(objet: any) {
-    this.behavio.setValue(objet);
+    this.transferData.setData(objet);
     const dialogRef = this.dialog.open(CourrierDepartAffichageComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -49,7 +50,7 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
     });
   }
   modifierCourrierDepart(objet: any) {
-    this.behavio.setValue(objet);
+    this.transferData.setData(objet);
     const dialogRef = this.dialog.open(UpdateCourrierDepartComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -72,6 +73,7 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
     'beneficiaire',
     'detail',
     'modifier',
+    'imprimer',
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

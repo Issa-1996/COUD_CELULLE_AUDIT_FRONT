@@ -4,31 +4,22 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { FicheDeControleModifierComponent } from 'app/Pages/FicheDEControles/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { FicheDeControleComponent } from 'app/Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
 import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { SearchService } from 'app/Service/search.service';
 import { TempoData } from 'app/Service/tempoData.service';
 import { TransferDataService } from 'app/Service/transfer-data.service';
-import { CourierDepartComponent } from '../../CourriersDeparts/courier-depart/courier-depart.component';
-import { CourierArriverAffichageComponent } from '../courier-arriver-affichage/courier-arriver-affichage.component';
-import { UpdateCourrierComponent } from '../update-courrier/update-courrier.component';
+import { CourierArriverAffichageComponent } from '../CourriersArrivers/courier-arriver-affichage/courier-arriver-affichage.component';
+import { CourierDepartComponent } from '../CourriersDeparts/courier-depart/courier-depart.component';
 
 @Component({
-  selector: 'app-courrier-liste',
-  templateUrl: './courrier-liste.component.html',
-  styleUrls: ['./courrier-liste.component.css'],
+  selector: 'courriers-valider',
+  templateUrl: './courriers-valider.component.html',
+  styleUrls: ['./courriers-valider.component.css'],
 })
-export class CourrierListeComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = [
-    'numeroCourier',
-    'objet',
-    'Date',
-    'beneficiaire',
-    'detail',
-    'modifier',
-    'depart',
-  ];
+export class CourriersValiderComponent implements AfterViewInit, OnInit {
   displayedColumn: string[] = [
     'id',
     'objet',
@@ -36,6 +27,8 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     'beneficiaire',
     'expediteur',
     'detail',
+    'fiche',
+    'depart',
   ];
   public role: any[];
   database: CourierModel[] = [];
@@ -65,6 +58,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     private methodeService: MethodeService,
     private authService: AuthService,
     private transferdata: TransferDataService,
+    // private dataDepot: TempoData,
     private dataDepot: TempoData,
     private searchVS: SearchService,
     public dialog: MatDialog
@@ -77,6 +71,13 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+  ngOnInit(): void {
+    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    this.role = decodedToken.roles;
+    this.listeCourrier();
+    this.dataSource.paginator = this.paginator;
+  }
+
   validerCourrierArriver(fiche: any) {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     if (decodedToken.roles.includes('ROLE_CONTROLEURS')) {
@@ -96,20 +97,16 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       this.dataDepot.setData(fiche);
     }
   }
-  modifierCourrierArriver(fiche: any): any {
+
+  modifierFicheDeControle(fiche: any) {
+    const dialogRef = this.dialog.open(FicheDeControleModifierComponent);
     this.transferdata.setData(fiche);
-    const dialogRef = this.dialog.open(UpdateCourrierComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  ngOnInit(): void {
-    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    this.role = decodedToken.roles;
-    this.listeCourrier();
-    this.dataSource.paginator = this.paginator;
-  }
+
   listeCourrier() {
     var compt = 0;
     if (this.role.includes('ROLE_CONTROLEURS')) {
@@ -122,7 +119,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
 
         for (let index = 0; index < this.database.length; index++) {
           if (this.database[index].etat == '0') {
-            if (this.database[index].statut == '0') {
+            if (this.database[index].statut == '1') {
               this.datacourrier[index] = this.database[index];
               this.objetCourier = this.datacourrier.filter(function (el) {
                 return el != null;
@@ -165,74 +162,56 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       });
     }
 
-    if (
-      this.role.includes('ROLE_ASSISTANTE') ||
-      this.role.includes('ROLE_COORDINATEUR')
-    ) {
+    if (this.role.includes('ROLE_COORDINATEUR')) {
       this.methodeService.getCourriers().subscribe((data) => {
         this.database = data['hydra:member'];
-
-        if (this.database.length == 0) {
-          this.searchVS.currentSearch.subscribe((dataa: any) => {
-            if (dataa) {
-              this.database = dataa;
-              this.dataSource = new MatTableDataSource<CourierModel>(
-                this.database
-              );
-              this.dataSource.paginator = this.paginator;
-            }
-          });
-        } else {
-          for (let index = 0; index < this.database.length; index++) {
-            if (this.database[index].etat == '0') {
-              if (this.database[index].statut == '0') {
-                this.datacourrier[index] = this.database[index];
-                this.objetCourier = this.datacourrier.filter(function (el) {
-                  return el != null;
-                });
-              }
+        for (let index = 0; index < this.database.length; index++) {
+          if (this.database[index].etat == '0') {
+            if (this.database[index].statut == '1') {
+              this.datacourrier[index] = this.database[index];
+              this.objetCourier = this.datacourrier.filter(function (el) {
+                return el != null;
+              });
             }
           }
-          for (let index = 0; index < this.objetCourier.length; index++) {
-            this.searchVS.currentSearch.subscribe((data: any) => {
-              if (data != 0) {
-                if (this.objetCourier[index]['id'] == data['id']) {
-                  this.objetCourier[index] = data;
-                  this.dataSource = new MatTableDataSource<CourierModel>(
-                    this.objetCourier
-                  );
-                  this.dataSource.paginator = this.paginator;
-                } else {
-                  if (data.length != 0) {
-                    if (this.objetCourier.includes(data)) {
-                      // console.log("OUIIII");
-                    } else if (!this.objetCourier.includes(data)) {
-                      compt++;
-                    }
+        }
+        for (let index = 0; index < this.objetCourier.length; index++) {
+          this.searchVS.currentSearch.subscribe((data: any) => {
+            if (data != 0) {
+              if (this.objetCourier[index]['id'] == data['id']) {
+                this.objetCourier[index] = data;
+                this.dataSource = new MatTableDataSource<CourierModel>(
+                  this.objetCourier
+                );
+                this.dataSource.paginator = this.paginator;
+              } else {
+                if (data.length != 0) {
+                  if (this.objetCourier.includes(data)) {
+                    // console.log("OUIIII");
+                  } else if (!this.objetCourier.includes(data)) {
+                    compt++;
                   }
                 }
-                if (compt == this.objetCourier.length) {
-                  this.objetCourier[index + 1] = data;
-                  this.dataSource = new MatTableDataSource<CourierModel>(
-                    this.objetCourier
-                  );
-                  this.dataSource.paginator = this.paginator;
-                }
               }
-            });
-          }
-          this.dataSource = new MatTableDataSource<CourierModel>(
-            this.objetCourier
-          );
-          this.dataSource.paginator = this.paginator;
+              if (compt == this.objetCourier.length) {
+                this.objetCourier[index + 1] = data;
+                this.dataSource = new MatTableDataSource<CourierModel>(
+                  this.objetCourier
+                );
+                this.dataSource.paginator = this.paginator;
+              }
+            }
+          });
         }
+
+        this.dataSource = new MatTableDataSource<CourierModel>(
+          this.objetCourier
+        );
+        this.dataSource.paginator = this.paginator;
       });
     }
   }
 
-  detailFiche(fiche: any): any {
-    this.dataCourrierDetailControleur = fiche;
-  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

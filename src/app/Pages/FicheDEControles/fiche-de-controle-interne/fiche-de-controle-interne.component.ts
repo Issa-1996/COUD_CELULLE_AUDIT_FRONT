@@ -17,6 +17,7 @@ import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { FicheDeControleModifierComponent } from '../fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { TransferDataService } from 'app/Service/transfer-data.service';
 import { SearchService } from 'app/Service/search.service';
+import { AuthService } from 'app/Service/auth.service';
 
 @Component({
   selector: 'app-fiche-de-controle-interne',
@@ -24,7 +25,7 @@ import { SearchService } from 'app/Service/search.service';
   styleUrls: ['./fiche-de-controle-interne.component.css'],
 })
 export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
-  public role: any[];
+  public username: any[];
   database: FicheDeControlModel[] = [];
   helper = new JwtHelperService();
   // detailFiche: FicheDeControlModel;
@@ -35,7 +36,7 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }     
   constructor(
-    private methodeService: MethodeService,
+    private authService: AuthService,
     public dialog: MatDialog,
     private transferdata: TransferDataService,
     private searchVS: SearchService,
@@ -58,8 +59,10 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
   }
   listesFiches() {
     var compt = 0;
-    this.methodeService.getFiche().subscribe((data) => {
-      this.database = data['hydra:member'];
+    const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
+    this.username = decodedToken.username;
+    this.authService.getUserConnected(this.username).subscribe((data) => {
+      this.database = data['hydra:member'][0]["courierArrivers"][0];      
       for (let index = 0; index < this.database.length; index++) {
         this.searchVS.currentSearch.subscribe((data: any) => {
           if (data != 0) {
@@ -109,7 +112,6 @@ export class FicheDeControleInterneComponent implements AfterViewInit, OnInit {
     'symbol',
     'nom',
     'detail',
-    'modifier',
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

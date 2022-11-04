@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CourierModel } from 'app/Model/Courier.model';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { TransferDataService } from 'app/Service/transfer-data.service';
@@ -30,6 +31,7 @@ export class UpdateCourrierDepartComponent implements OnInit {
   code = '';
   sending = false;
   btnText = 'Envoyer';
+  courrierDepartModifier:CourierModel;
   constructor(
     private formBuilder: FormBuilder, 
     private router: Router, 
@@ -37,9 +39,9 @@ export class UpdateCourrierDepartComponent implements OnInit {
     private transferData: TransferDataService) { }
 
   ngOnInit(): void {
-    console.log(this.transferData.getData());
-    
+    this.courrierDepartModifier=this.transferData.getData();    
     this.addForm = this.formBuilder.group({
+      id:[''],
       object: ['', Validators.required],
       beneficiaire: ['', Validators.required],
       numeroCourier: ['', Validators.required],
@@ -87,7 +89,7 @@ export class UpdateCourrierDepartComponent implements OnInit {
     this.addForm.get('montant').valueChanges.subscribe(
       () => { this.erreurnumeroOrdre = ''; this.erreur = ''; this.success = ''; }
     );
-    this.addForm.patchValue(this.transferData.getData());
+    this.addForm.patchValue(this.courrierDepartModifier);
   }
 
   onSignIn(): any{
@@ -118,7 +120,6 @@ export class UpdateCourrierDepartComponent implements OnInit {
     if (this.addForm.invalid){
       return;
     }
-    console.log(this.addForm.value);
     this.updateCourierDepart(this.addForm.value);
   }
   updateCourierDepart(objetCourierDepart: any){
@@ -126,7 +127,6 @@ export class UpdateCourrierDepartComponent implements OnInit {
       .subscribe(
         (data) => {
           this.success = 'COURRIER DEPART MOFIFIER AVEC SUCCESS !!!';
-        //this.router.navigate(['/']);
       },
       (error) => {
         // @ts-ignore

@@ -15,12 +15,11 @@ export class FicheDeControleAffichageComponent implements OnInit {
   fiche: any;
   constructor(private transferdata: TransferDataService) {}
 
-  ngOnInit(): void {
-    this.getFicheDeControle();
+  ngOnInit(): void { 
+    this.getFicheDeControle();       
   }
   getFicheDeControle(): any {
-    this.fiche=this.transferdata.getData();
+    this.fiche=this.transferdata.getData().ficheDeControle;
   }
-
   generatePdf() {}
 }
