@@ -1,3 +1,4 @@
+import { FicheDeControlModel } from "./FicheDeControl.model";
 import { RapportModel } from "./Rapport.model";
 import { UserModel } from "./User.model";
 
@@ -27,4 +28,5 @@ export interface CourierModel{
     controleurs: UserModel;
     assistante: UserModel;
     coordinateur: UserModel;
+    ficheDeControle: FicheDeControlModel;
 }

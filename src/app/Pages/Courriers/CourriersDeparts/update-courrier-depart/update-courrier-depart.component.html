@@ -1,17 +1,16 @@
 <div class="container col-md-12">
   <h4>MODIFIER COURRIER DEPART</h4>
-  <div *ngIf="erreur != ''" class="login-erreur-container text-center"></div>
   <div
-    *ngIf="success != ''"
+    *ngIf="erreur != ''"
     class="login-erreur-container text-center bg-danger"
   >
-    <span class="login-erreur"> {{ erreur }} </span>
+    <p class="login-erreur"> {{ erreur }} </p>
   </div>
   <div
     *ngIf="success != ''"
     class="login-erreur-container text-center bg-success"
   >
-    <span class="login-erreur"> {{ success }} </span>
+    <p class="login-erreur"> {{ success }} </p>
   </div>
   <form method="post" [formGroup]="addForm">
     <div class="row mb-2">

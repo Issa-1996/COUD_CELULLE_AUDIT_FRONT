@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { FicheDeControleAffichageComponent } from 'app/Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { SearchService } from 'app/Service/search.service';
@@ -23,9 +24,11 @@ export class TotalArriverComponent implements OnInit {
     'Date',
     'beneficiaire',
     'detail',
+    'fiche',
   ];
   public role: any[];
   database: CourierModel[] = [];
+  dataTempo: CourierModel[] = [];
   datacourrier: CourierModel[] = [];
   objetCourier: CourierModel[] = [];
   helper = new JwtHelperService();
@@ -63,6 +66,14 @@ export class TotalArriverComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+  detailFiche(fiche: CourierModel) {
+    const dialogRef = this.dialog.open(FicheDeControleAffichageComponent);
+    this.transferdata.setData(fiche);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   ngOnInit(): void {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     this.role = decodedToken.roles;
@@ -78,13 +89,19 @@ export class TotalArriverComponent implements OnInit {
       const username: string[] = decodedToken.username;
       this.authService.getUserConnected(username).subscribe((data) => {
         this.database = data['hydra:member'][0]['courierArrivers'];
+        for (let i = 0; i < this.database.length; i++) {
+          if (this.database[i].ficheDeControle != null) {
+            this.dataTempo[i] = this.database[i];
+          }
+        }
 
-        for (let index = 0; index < this.database.length; index++) {
-          this.datacourrier[index] = this.database[index];
+        for (let index = 0; index < this.dataTempo.length; index++) {
+          this.datacourrier[index] = this.dataTempo[index];
           this.objetCourier = this.datacourrier.filter(function (el) {
             return el != null;
           });
         }
+
         this.dataSource = new MatTableDataSource<CourierModel>(
           this.objetCourier
         );
@@ -98,8 +115,13 @@ export class TotalArriverComponent implements OnInit {
     ) {
       this.methodeService.getCourriers().subscribe((data) => {
         this.database = data['hydra:member'];
-        for (let index = 0; index < this.database.length; index++) {
-          this.datacourrier[index] = this.database[index];
+        for (let i = 0; i < this.database.length; i++) {
+          if (this.database[i].ficheDeControle != null) {
+            this.dataTempo[i] = this.database[i];
+          }
+        }
+        for (let index = 0; index < this.dataTempo.length; index++) {
+          this.datacourrier[index] = this.dataTempo[index];
           this.objetCourier = this.datacourrier.filter(function (el) {
             return el != null;
           });

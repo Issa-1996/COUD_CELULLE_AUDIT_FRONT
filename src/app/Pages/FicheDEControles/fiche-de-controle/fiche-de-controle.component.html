@@ -18,20 +18,9 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h4
-        style="
-          text-align: center;
-          background-color: #3b5998;
-          width: 60%;
-          margin-left: 20%;
-          color: white;
-          border-radius: 5px;
-        "
-      >
-        FICHE DE CONTROLE INTERNE
-      </h4>
+      <h4>FICHE DE CONTROLE INTERNE</h4>
       <div
-        *ngIf="success != ''"
+        *ngIf="erreur != ''"
         class="login-erreur-container text-center bg-danger"
       >
         <span class="login-erreur"> {{ erreur }} </span>
@@ -83,12 +72,16 @@
             </span>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6" hidden='{{ hiddenInput }}'>
+        <div class="row" *ngIf="hiddenInput == 'true'">
+          <div class="col-md-6">
             <label for="Recommandations Controleur:" class="form-label"
               >Recommandations Controleur</label
             >
-            <input class="form-control" formControlName="recommandations" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="recommandations"
+            />
             <span
               class="login-erreur"
               *ngIf="erreurrecommandations != ''"
@@ -97,7 +90,7 @@
               {{ erreurrecommandations }}
             </span>
           </div>
-          <div class="col-md-6" hidden='{{ hiddenInput }}'>
+          <div class="col-md-6">
             <label for="Motivation de l'avis:" class="form-label"
               >Motivation de l'avis</label
             >
@@ -117,11 +110,7 @@
             </span>
           </div>
         </div>
-        <button
-          type="submit"
-          class="btn btn-sm"
-          (click)="onSignIn()"
-        >
+        <button type="submit" class="btn btn-sm" (click)="onSignIn()">
           ENREGISTRER
         </button>
       </form>

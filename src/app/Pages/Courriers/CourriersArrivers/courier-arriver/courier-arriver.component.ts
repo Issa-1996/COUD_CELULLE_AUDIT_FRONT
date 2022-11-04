@@ -204,15 +204,15 @@ export class CourierArriverComponent implements OnInit {
     this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
       (data) => {
         this.newValue(data);
+        this.erreur="";
         this.success = 'NOUVEAU COURRIER ARRIVER AVEC SUCCESS';
-        // this.addForm.value.reset;
-        //this.router.navigate(['/container/courier']);
       },
       (error) => {
         // @ts-ignore
         if (error.status === 403) {
           this.erreur = error.error;
         } else {
+          this.success="";
           this.erreur = "UNE ERREUR S'EST PRODUITE !";
         }
       }

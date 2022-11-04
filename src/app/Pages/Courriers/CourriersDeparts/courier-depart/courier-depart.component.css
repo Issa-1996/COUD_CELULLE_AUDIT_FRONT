@@ -10,7 +10,9 @@ h4{
 .btn{
     margin-top: 5%;
 }
-#alerte{
-    font-size: 20px;
+.login-erreur-container{
+    margin-top: -2%;
+    height: 30px;
     color: white;
-}
+    font-size: 20px;
+  }

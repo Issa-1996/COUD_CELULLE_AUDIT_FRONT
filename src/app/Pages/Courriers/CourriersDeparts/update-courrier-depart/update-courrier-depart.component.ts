@@ -127,7 +127,6 @@ export class UpdateCourrierDepartComponent implements OnInit {
       .subscribe(
         (data) => {
           this.success = 'COURRIER DEPART MOFIFIER AVEC SUCCESS !!!';
-        //this.router.navigate(['/']);
       },
       (error) => {
         // @ts-ignore
