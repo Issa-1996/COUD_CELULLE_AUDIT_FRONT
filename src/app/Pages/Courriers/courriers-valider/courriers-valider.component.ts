@@ -23,6 +23,7 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
   displayedColumn: string[] = [
     'id',
     'objet',
+    'type',
     'date',
     'beneficiaire',
     'expediteur',

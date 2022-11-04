@@ -37,6 +37,7 @@ export class CourierArriverComponent implements OnInit {
   erreurMontant = '';
   erreurFacture = '';
   erreurBeneficiaire = '';
+  erreurtypeDeCourrier='';
   erreur = '';
   success = '';
   code = '';
@@ -65,6 +66,7 @@ export class CourierArriverComponent implements OnInit {
       NumeroFacture: ['', Validators.required],
       numeroCourier: ['', Validators.required],
       montant: ['', Validators.required],
+      typeDeCourrier:['', Validators.required],
       Date: ['', Validators.required],
       expediteur: ['', Validators.required],
       numeroCorrespondance: ['', [Validators.required]],
@@ -75,6 +77,11 @@ export class CourierArriverComponent implements OnInit {
     });
     this.addForm.get('object').valueChanges.subscribe(() => {
       this.erreurobject = '';
+      this.erreur = '';
+      this.success = '';
+    });
+    this.addForm.get('typeDeCourrier').valueChanges.subscribe(() => {
+      this.erreurtypeDeCourrier = '';
       this.erreur = '';
       this.success = '';
     });
@@ -139,6 +146,9 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.get('object').value.trim() === '') {
       this.erreurobject = 'Objet obligatoire !';
     }
+    if (this.addForm.get('typeDeCourrier').value.trim() === '') {
+      this.erreurtypeDeCourrier = 'Type courrier obligatoire !';
+    }
     if (this.addForm.get('beneficiaire').value.trim() === '') {
       this.erreurBeneficiaire = 'Bénéficiaire obligatoire !';
     }
@@ -187,32 +197,22 @@ export class CourierArriverComponent implements OnInit {
         'coordinateur',
         new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
       );
-    }
-    //  else if (decodedToken.roles.includes('ROLE_COORDINATEUR')) {
-    //   this.addForm.addControl(
-    //     'coordinateur',
-    //     new FormControl('/api/coud/coordinateurs/' + this.ConnecterCoordinateur)
-    //   );
-    //   this.addForm.addControl(
-    //     'assistante',
-    //     new FormControl('/api/coud/assistantes/' + this.assistante)
-    //   );
-    // }
+    } 
     this.subscribeCourierArriver(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: CourierModel) {
     this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
       (data) => {
         this.newValue(data);
+        this.erreur="";
         this.success = 'NOUVEAU COURRIER ARRIVER AVEC SUCCESS';
-        // this.addForm.value.reset;
-        //this.router.navigate(['/container/courier']);
       },
       (error) => {
         // @ts-ignore
         if (error.status === 403) {
           this.erreur = error.error;
         } else {
+          this.success="";
           this.erreur = "UNE ERREUR S'EST PRODUITE !";
         }
       }

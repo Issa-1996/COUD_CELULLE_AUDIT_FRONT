@@ -26,7 +26,7 @@ export class AddUserComponent implements OnInit {
   erreurprofil = '';
   erreuremail = '';
   erreur = '';
-  success='';
+  success = '';
   code = '';
   sending = false;
   btnText = 'Envoyer';
@@ -118,15 +118,16 @@ export class AddUserComponent implements OnInit {
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
-          this.success = 'Ajout coordonateur avec success';
-          this.router.navigate(['/container/utilisateurs']);
+          this.erreur = '';
+          this.success = 'AJOUT  COORDONATEUR AVEC SUCCESS !';
         },
         (error) => {
           // @ts-ignore
           if (error.status === 403) {
             this.erreur = error.error;
           } else {
-            this.erreur = 'Une erreur est produite !';
+            this.success = '';
+            this.erreur = " UNE ERREUR S'EST PRODUITE !";
           }
         }
       );
@@ -135,15 +136,16 @@ export class AddUserComponent implements OnInit {
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
-          this.success = 'Ajout controleur avec success';
-          this.router.navigate(['/container/utilisateurs']);
+          this.erreur = '';
+          this.success = 'AJOUT CONTROLEUR AVEC SUCCESS';
         },
         (error) => {
           // @ts-ignore
           if (error.status === 403) {
             this.erreur = error.error;
           } else {
-            this.erreur = 'Une erreur est produite !';
+            this.success = '';
+            this.erreur = "UNE ERREUR S'EST PRODUITE !";
           }
         }
       );
@@ -152,15 +154,16 @@ export class AddUserComponent implements OnInit {
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
-          this.success = 'Ajout assistante avec success';
-          this.router.navigate(['/container/utilisateurs']);
+          this.erreur = '';
+          this.success = 'AJOUT ASSISTANTE AVEC  SUCCESS !';
         },
         (error) => {
           // @ts-ignore
           if (error.status === 403) {
             this.erreur = error.error;
           } else {
-            this.erreur = 'Une erreur est produite !';
+            this.success = '';
+            this.erreur = "UNE ERREUR S'EST PRODUITE !";
           }
         }
       );
@@ -170,10 +173,9 @@ export class AddUserComponent implements OnInit {
     this.methodeService.getProfils().subscribe(
       (data) => {
         this.profil = data['hydra:member'];
-        // console.log(this.profil);
       },
       (error: any) => {
-        // console.log(error.message);
+        console.log(error.message);
       }
     );
   }

@@ -178,8 +178,7 @@ export class CourierDepartComponent implements OnInit {
         this.courrierArrier.etat = '1';
         this.updateCourierArriver(this.courrierArrier);
         this.erreur = '';
-        this.success = 'COURRIER VALIDER COME DEPART AVEC SUCCESS ';
-        // this.router.navigate(['/']);
+        this.success = 'COURRIER DEPART AVEC SUCCESS ';
       },
       (error) => {
         // @ts-ignore

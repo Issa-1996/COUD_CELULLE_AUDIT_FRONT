@@ -73,6 +73,7 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
     'beneficiaire',
     'detail',
     'modifier',
+    'imprimer',
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

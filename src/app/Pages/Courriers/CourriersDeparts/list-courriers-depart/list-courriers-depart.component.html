@@ -78,6 +78,25 @@
       </td>
     </ng-container>
 
+     <!-- Name Column -->
+     <ng-container matColumnDef="imprimer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <p *ngIf="role.includes('ROLE_ASSISTANTE')">IMPRIMER</p>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="example-button-container">
+          <button
+            mat-mini-fab
+            style="background-color: green;"
+            aria-label="Example icon button with a plus one icon"
+            *ngIf="role.includes('ROLE_ASSISTANTE')"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>

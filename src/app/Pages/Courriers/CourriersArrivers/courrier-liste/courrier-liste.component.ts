@@ -23,19 +23,12 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'numeroCourier',
     'objet',
+    'type',
     'Date',
     'beneficiaire',
     'detail',
     'modifier',
     'depart',
-  ];
-  displayedColumn: string[] = [
-    'id',
-    'objet',
-    'date',
-    'beneficiaire',
-    'expediteur',
-    'detail',
   ];
   public role: any[];
   database: CourierModel[] = [];

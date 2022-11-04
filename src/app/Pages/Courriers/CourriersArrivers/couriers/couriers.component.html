@@ -21,7 +21,7 @@
             (click)="nouveauCourrier()"
             *ngIf="role.includes('ROLE_ASSISTANTE')"
           >
-            NOUVEAU COURRIER ARRIVEE
+            NOUVEAU COURRIER ARRIVÉE
           </button>
         </div>
       </form>
@@ -37,38 +37,13 @@
     </mat-step>
 
     <mat-step
-      *ngIf="role.includes('ROLE_CONTROLEURS')"
-      [stepControl]="secondFormGroup"
-      label="FICHES DE CONTROLES"
-      style="width: 100%"
-    >
-      <app-fiche-de-controle-interne></app-fiche-de-controle-interne>
-      <form [formGroup]="secondFormGroup">
-        <!-- <div class="example-button-row">
-          <button
-            id="buttonFiche"
-            mat-raised-button
-            style="background-color: #3b5998; color: white"
-            (click)="nouveauFicheControle()"
-            *ngIf="
-              role.includes('ROLE_CONTROLEURS') ||
-              role.includes('ROLE_COORDINATEUR')
-            "
-          >
-            NOUVEAU FICHE
-          </button>
-        </div> -->
-      </form>
-    </mat-step>
-
-    <mat-step
       *ngIf="
         role.includes('ROLE_ASSISTANTE') ||
         role.includes('ROLE_COORDINATEUR') ||
         role.includes('ROLE_CONTROLEURS')
       "
     >
-      <ng-template matStepLabel>TOTAL-COURRIERS-ARRIVÉE</ng-template>
+      <ng-template matStepLabel>TOTAL-COURRIERS-ARRIVÉS</ng-template>
       <total-arriver></total-arriver>
     </mat-step>
 
