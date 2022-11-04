@@ -31,6 +31,12 @@
       </ng-container>
   
       <!-- Type Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>TYPE</th>
+        <td mat-cell *matCellDef="let row">{{ row.typeDeCourrier }}</td>
+      </ng-container>
+
+      <!-- Type Column -->
       <ng-container matColumnDef="beneficiaire">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>BENEFICIAIRE</th>
         <td mat-cell *matCellDef="let row">{{ row.beneficiaire }}</td>

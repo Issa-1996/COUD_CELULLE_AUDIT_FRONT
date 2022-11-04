@@ -15,6 +15,7 @@ export interface CourierModel{
     numeroCorrespondance:string;
     dateReponse:string;
     numeroReponse:string;
+    typeDeCourrier:string;
 
     dateDepart:string;
     destination:string;

@@ -21,6 +21,7 @@ export class TotalArriverComponent implements OnInit {
   displayedColumns: string[] = [
     'numeroCourier',
     'objet',
+    'type',
     'Date',
     'beneficiaire',
     'detail',

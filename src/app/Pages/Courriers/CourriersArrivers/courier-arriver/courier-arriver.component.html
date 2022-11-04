@@ -23,6 +23,28 @@
       </div>
       <form [formGroup]="addForm">
         <div class="row">
+          <div class="col-md-12">
+            <label for="object:" class="form-label">TYPE DE COURRIER</label>
+            <select
+              name="typeDeCourrier"
+              class="form-control"
+              formControlName="typeDeCourrier"
+            >
+              <option selected disabled>CHOISIR LE TYPE DU COURRIER</option>
+              <option value="MEDICALE">MEDICALE</option>
+              <option value="FACTURE">FACTURE</option>
+              <option value="TRAVEAUX">TRAVEAUX</option>
+            </select>
+            <span
+              class="login-erreur"
+              *ngIf="erreurtypeDeCourrier != ''"
+              style="color: red"
+            >
+              {{ erreurtypeDeCourrier }}
+            </span>
+          </div>
+        </div>
+        <div class="row">
           <div class="col">
             <label for="object:" class="form-label">Object</label>
             <input
@@ -95,7 +117,6 @@
         <div class="row">
           <div class="col">
             <label>Numéro Du Courier</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="text"
               class="form-control"
@@ -111,8 +132,7 @@
             </span>
           </div>
           <div class="col">
-            <label>Date Arriver du Courier</label
-            ><label for="" style="color: red; font-size: 20px">*</label><br />
+            <label>Date Arriver du Courier</label>
             <input
               type="Date"
               class="form-control"
@@ -132,7 +152,6 @@
           <div class="col">
             <div class="form-group">
               <label>Expediteur Du Courier</label>
-              <label for="" style="color: red; font-size: 20px">*</label><br />
               <input
                 type="text"
                 class="form-control"
@@ -150,7 +169,6 @@
           </div>
           <div class="col">
             <label>AFFECTER UN CONTROLEUR</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <select
               class="form-control"
               id="controleurs"
@@ -176,7 +194,6 @@
         <div class="row">
           <div class="col">
             <label>Numéro Correspondance</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="text"
               class="form-control"
@@ -193,7 +210,6 @@
           </div>
           <div class="col">
             <label>Date Corres Courier</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="date"
               class="form-control"
@@ -212,7 +228,6 @@
         <div class="row">
           <div class="col">
             <label>Numéro Réponse</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="text"
               class="form-control"
@@ -229,7 +244,6 @@
           </div>
           <div class="col">
             <label>Date Réponse</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="date"
               class="form-control"
