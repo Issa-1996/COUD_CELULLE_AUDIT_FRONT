@@ -36,7 +36,7 @@ export class CourierArriverComponent implements OnInit {
   erreurControleur = ' ';
   erreurMontant = '';
   erreurFacture = '';
-  erreurBeneficiaire = '';
+  erreurdestinataire= '';
   erreurtypeDeCourrier='';
   erreur = '';
   success = '';
@@ -62,7 +62,7 @@ export class CourierArriverComponent implements OnInit {
     this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
-      beneficiaire: ['', Validators.required],
+      destinataire: ['', Validators.required],
       NumeroFacture: ['', Validators.required],
       numeroCourier: ['', Validators.required],
       montant: ['', Validators.required],
@@ -85,8 +85,8 @@ export class CourierArriverComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('beneficiaire').valueChanges.subscribe(() => {
-      this.erreurBeneficiaire = '';
+    this.addForm.get('destinataire').valueChanges.subscribe(() => {
+      this.erreurdestinataire = '';
       this.erreur = '';
       this.success = '';
     });
@@ -150,7 +150,7 @@ export class CourierArriverComponent implements OnInit {
       this.erreurtypeDeCourrier = 'Type courrier obligatoire !';
     }
     if (this.addForm.get('beneficiaire').value.trim() === '') {
-      this.erreurBeneficiaire = 'Bénéficiaire obligatoire !';
+      this.erreurdestinataire = 'Destinataire obligatoire !';
     }
     if (this.addForm.get('NumeroFacture').value.trim() === '') {
       this.erreurFacture = 'Numero facture obligatoire !';

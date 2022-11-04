@@ -81,7 +81,7 @@
             </span>
           </div>
           <div class="col">
-            <label for="destinataire:" class="form-label">Destinataire</label>
+            <label for="destinataire:" class="form-label">DESTINATAIRE</label>
             <input
               type="text"
               class="form-control"
@@ -90,7 +90,7 @@
             />
             <span
               class="login-erreur"
-              *ngIf="erreurDestinataire != ''"
+              *ngIf="erreurdestinataire != ''"
               style="color: red"
             >
               {{ erreurDestinataire }}
@@ -162,8 +162,7 @@
               <span
                 class="login-erreur"
                 *ngIf="erreurexpediteur != ''"
-                style="color: red"
-              >
+                style="color: red">
                 {{ erreurexpediteur }}
               </span>
             </div>
