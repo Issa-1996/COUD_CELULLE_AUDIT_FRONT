@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
 import { FicheDeControleAffichageComponent } from 'app/Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
+import { FicheDeControleModifierComponent } from 'app/Pages/FicheDEControles/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { AuthService } from 'app/Service/auth.service';
 import { MethodeService } from 'app/Service/methode.service';
 import { SearchService } from 'app/Service/search.service';
@@ -75,6 +76,14 @@ export class TotalArriverComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+  modifierFicheDeControle(fiche: any) {
+    const dialogRef = this.dialog.open(FicheDeControleModifierComponent);
+    this.transferdata.setData(fiche);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   ngOnInit(): void {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     this.role = decodedToken.roles;
@@ -92,7 +101,9 @@ export class TotalArriverComponent implements OnInit {
         this.database = data['hydra:member'][0]['courierArrivers'];
         for (let i = 0; i < this.database.length; i++) {
           if (this.database[i].ficheDeControle != null) {
-            this.dataTempo[i] = this.database[i];
+            if (this.database[i].etat == '1') {
+              this.dataTempo[i] = this.database[i];
+            }
           }
         }
 
@@ -118,7 +129,9 @@ export class TotalArriverComponent implements OnInit {
         this.database = data['hydra:member'];
         for (let i = 0; i < this.database.length; i++) {
           if (this.database[i].ficheDeControle != null) {
-            this.dataTempo[i] = this.database[i];
+            if (this.database[i].etat == '1') {
+              this.dataTempo[i] = this.database[i];
+            }
           }
         }
         for (let index = 0; index < this.dataTempo.length; index++) {

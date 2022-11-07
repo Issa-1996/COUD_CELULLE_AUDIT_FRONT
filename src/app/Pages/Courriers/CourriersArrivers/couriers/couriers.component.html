@@ -29,7 +29,9 @@
 
     <mat-step
       *ngIf="
-        role.includes('ROLE_CONTROLEURS') || role.includes('ROLE_COORDINATEUR')
+        role.includes('ROLE_CONTROLEURS') ||
+        role.includes('ROLE_COORDINATEUR') ||
+        role.includes('ROLE_ASSISTANTE')
       "
     >
       <ng-template matStepLabel>COURRIERS-TRAITÉS </ng-template>
