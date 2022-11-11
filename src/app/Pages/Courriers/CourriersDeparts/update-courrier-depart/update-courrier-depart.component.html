@@ -15,7 +15,35 @@
   <form method="post" [formGroup]="addForm">
     <div class="row mb-2">
       <div class="col-md-6">
-        <label>Numéro Courier</label
+        <label>OBJET</label>
+        <input
+          type="text"
+          class="form-control"
+          id="object"
+          formControlName="object"
+          disabled
+        />
+        <span class="login-erreur" *ngIf="erreurobject != ''">
+          {{ erreurobject }}
+        </span>
+      </div>
+      <div class="col-md-6">
+        <label>BENEFICIAIRE</label>
+        <input
+          type="text"
+          class="form-control"
+          id="beneficiaire"
+          formControlName="beneficiaire"
+          disabled
+        />
+        <span class="login-erreur" *ngIf="erreurbeneficiaire != ''">
+          {{ erreurbeneficiaire }}
+        </span>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label>NUMERO COURRIER</label
         ><label for="" style="color: red; font-size: 16px; font-weight: bold"
           >*</label
         ><br />
@@ -31,7 +59,10 @@
         </span>
       </div>
       <div class="col-md-6">
-        <label>Object</label>
+        <label>DATE DEPART</label
+        ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+          >*</label
+        ><br />
         <input
           type="text"
           class="form-control"
@@ -42,6 +73,23 @@
         <span class="login-erreur" *ngIf="erreurobject != ''">
           {{ erreurobject }}
         </span>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-12">
+        <label>OBSERVATION COURRIER</label
+          ><label for="" style="color: red; font-size: 16px; font-weight: bold"
+            >*</label
+          ><br />
+          <textarea
+            class="form-control"
+            formControlName="observation"
+            id="observation"
+            rows="3"
+          ></textarea>
+          <span class="login-erreur" *ngIf="erreurobservation != ''">
+            {{ erreurobservation }}
+          </span>
       </div>
     </div>
     <div class="row mb-2">
@@ -144,7 +192,7 @@
     </div> -->
     <!-- <div class="row">
       <div class="col-md-6">
-        <label>Nombre de pieces</label
+        <label>NOMBRE DE PIECES</label
         ><label for="" style="color: red; font-size: 16px; font-weight: bold"
           >*</label
         ><br />
@@ -159,7 +207,7 @@
         </span>
       </div>
       <div class="col-md-6">
-        <label>Numéro Ordre</label
+        <label>NUMERO ORDRE</label
         ><label for="" style="color: red; font-size: 16px; font-weight: bold"
           >*</label
         ><br />
@@ -176,14 +224,15 @@
     </div> -->
     <div class="row">
       <div class="col-md-12">
-        <button
-          type="submit"
-          class="btn btn-success btn-lg btn-block"
-          name="submit"
-          (click)="onSignIn()"
-        >
-          MODIFIER
-        </button>
+          <button
+            type="submit"
+            title="Modifier le courrier"
+            class="btn btn-success btn-lg btn-block"
+            name="submit"
+            (click)="onSignIn()"
+          >
+            MODIFIER
+          </button>
       </div>
     </div>
   </form>

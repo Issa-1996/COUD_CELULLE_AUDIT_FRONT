@@ -15,7 +15,7 @@
   <form method="post" [formGroup]="addForm">
     <div class="row">
       <div class="col">
-        <label>Numéro Courier</label>
+        <label>NUMERO COURRIER</label>
         <input
           type="text"
           class="form-control"
@@ -31,8 +31,8 @@
           {{ erreurnumeroCourier }}
         </span>
       </div>
-      <div class="col-md-6">
-        <label for="object:" class="form-label">Object</label>
+      <div class="col">
+        <label>DATE DEPART</label>
         <input
           type="text"
           class="form-control"
@@ -48,6 +48,22 @@
           {{ erreurobject }}
         </span>
       </div>
+    </div>
+    <div class="form-group">
+      <label>OBSERVATION COURRIER</label>
+      <textarea
+        class="form-control"
+        formControlName="observation"
+        id="observation"
+        rows="3"
+      ></textarea>
+      <span
+        class="login-erreur"
+        *ngIf="erreurobservation != ''"
+        style="color: red"
+      >
+        {{ erreurobservation }}
+      </span>
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -103,8 +119,10 @@
           {{ erreurmontant }}
         </span>
       </div>
-      <div class="col-md-6">
-        <label>Date départ</label>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>NUMERO ARCHIVE </label>
         <input
           type="date"
           class="form-control"

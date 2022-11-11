@@ -43,6 +43,7 @@
           <button
             mat-mini-fab
             style="background-color: #3B5998;"
+            title="détail courrier de départ"
             aria-label="Example icon button with a plus one icon"
             (click)="detailCourrierDepart(element)"
           >
@@ -62,6 +63,7 @@
           <button
             mat-mini-fab
             style="background-color: #FFFF00;"
+            title="Modifier courrier de départ"
             aria-label="Example icon button with a plus one icon"
             (click)="modifierCourrierDepart(element)"
             *ngIf="role.includes('ROLE_COORDINATEUR')"
@@ -81,6 +83,7 @@
         <div class="example-button-container">
           <button
             mat-mini-fab
+            title="Imprimer courrier de départ"
             style="background-color: green;"
             aria-label="Example icon button with a plus one icon"
             *ngIf="role.includes('ROLE_ASSISTANTE')"

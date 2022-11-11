@@ -1,48 +1,24 @@
 <div class="container col-md-12">
   <h4>DETAIL COURRIER DEPART</h4>
   <form method="post" [formGroup]="addForm">
-    <div class="row">
-      <div class="col-md-6">
-        <label>Numéro Courier</label>
-        <input
-          type="text"
-          disabled
-          class="form-control"
-          formControlName="numeroCourier"
-        />
-      </div>
-      <div class="col-md-6">
-        <label class="form-label">Object</label>
-        <input
-          disabled
-          type="text"
-          class="form-control"
-          formControlName="object"
-        />
-      </div>
+    <div class="mb-3">
+      <label class="form-label">OBJET</label>
+      <input disabled type="text" class="form-control" formControlName="object" />
     </div>
     <div class="row">
-      <div class="col-md-6">
-        <label>Destinataire</label>
-        <input
-          type="text"
-          disabled
-          class="form-control"
-          formControlName="destinataire"
-        />
+      <div class="col">
+        <label>NUMERO COURRIER</label>
+        <input type="text" disabled class="form-control" formControlName="numeroCourier"/>
       </div>
-
-      <div class="col-md-6">
-        <label>Date départ</label>
-        <input
-          type="date"
-          disabled
-          class="form-control"
-          formControlName="Date"
-        />
+      <div class="col">
+        <label>DATE DEPART</label>
+        <input type="date" disabled class="form-control" formControlName="dateDepart" />
       </div>
     </div>
-
+    <div class="form-group">
+      <label>OBSERVATION COURRIER</label>
+      <textarea class="form-control" disabled rows="3" formControlName="observation"></textarea>
+    </div>
     <div class="row">
       <div class="col">
         <label>NUMERO FACTURE </label>
@@ -76,11 +52,11 @@
     </div>
     <!-- <div class="row">
       <div class="col">
-        <label>Nombre de pieces</label>
+        <label>NOMBRE DE PIECES</label>
         <input type="text" disabled class="form-control" formControlName="nombrePiece"/>
       </div>
       <div class="col">
-        <label>Numéro Ordre</label>
+        <label>NUMERO ORDRE</label>
         <input type="text" disabled class="form-control" formControlName="numeroOrdre"/>
       </div>
     </div> -->

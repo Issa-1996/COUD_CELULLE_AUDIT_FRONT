@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container-fluid col-md-12">
-      <h4>AJOUTER UN COURRIER ARRIVEE</h4>
+      <h4>AJOUTER UN COURRIER ARRIVÉ</h4>
       <div
         *ngIf="erreur != ''"
         class="login-erreur-container text-center bg-danger"
@@ -81,7 +81,7 @@
         <div class="row">
           <div class="col-md-6">
             <label for="NumeroFacture:" class="form-label"
-              >Numéro Facture</label
+              >NUMÉRO COURRIER</label
             >
             <input
               type="text"
@@ -97,9 +97,43 @@
               {{ erreurFacture }}
             </span>
           </div>
-
-          <div class="col-md-6">
-            <label for="montant" class="form-label">Montant</label>
+        <div class="row">
+          <div class="col">
+            <label for="object:" class="form-label">OBJET</label>
+            <input
+              type="text"
+              class="form-control"
+              id="object"
+              formControlName="object"
+            />
+            <span
+              class="login-erreur"
+              *ngIf="erreurobject != ''"
+              style="color: red"
+            >
+              {{ erreurobject }}
+            </span>
+          </div>
+          <div class="col">
+            <label for="destinataire:" class="form-label">DESTINATAIRE</label>
+            <input
+              type="text"
+              class="form-control"
+              id="destinataire"
+              formControlName="destinataire"
+            />
+            <span
+              class="login-erreur"
+              *ngIf="erreurdestinataire != ''"
+              style="color: red"
+            >
+              {{ erreurDestinataire }}
+            </span>
+          </div>
+        </div>
+        
+          <div class="col">
+            <label for="montant" class="form-label">MONTANT</label>
             <input
               type="text"
               class="form-control"
@@ -134,7 +168,7 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label>Expediteur Du Courier</label>
+              <label>EXPÉDITEUR DU COURRIER</label>
               <input
                 type="text"
                 class="form-control"
@@ -192,9 +226,9 @@
             </span>
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="col-md-6">
-            <label>Numéro Correspondance</label>
+        <div class="row">
+          <div class="col">
+            <label>NUMÉRO CORRESPONDANT</label>
             <input
               type="text"
               class="form-control"
@@ -209,8 +243,8 @@
               {{ erreurnumeroCorrespondance }}
             </span>
           </div>
-          <div class="col-md-6">
-            <label>Date Corres Courier</label>
+          <div class="col">
+            <label>DATE CORRESPONDANT DU COURRIER</label>
             <input
               type="date"
               class="form-control"
@@ -225,10 +259,10 @@
               {{ erreurdateCorrespondance }}
             </span>
           </div>
-        </div> -->
-        <!-- <div class="row">
-          <div class="col-md-6">
-            <label>Numéro Réponse</label>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>NUMÉRO RÉPONSE</label>
             <input
               type="text"
               class="form-control"
@@ -243,8 +277,8 @@
               {{ erreurnumeroReponse }}
             </span>
           </div>
-          <div class="col-md-6">
-            <label>Date Réponse</label>
+          <div class="col">
+            <label>DATE RÉPONSE</label>
             <input
               type="date"
               class="form-control"
@@ -265,6 +299,7 @@
             type="submit"
             class="btn btn-lg btn-block"
             name="submit"
+            title="Enrégistrer un courrier"
             (click)="onSignIn()"
           >
             ENREGISTRER
