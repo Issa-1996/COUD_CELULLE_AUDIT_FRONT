@@ -23,19 +23,12 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'numeroCourier',
     'objet',
+    'type',
     'Date',
     'beneficiaire',
     'detail',
     'modifier',
     'depart',
-  ];
-  displayedColumn: string[] = [
-    'id',
-    'objet',
-    'date',
-    'beneficiaire',
-    'expediteur',
-    'detail',
   ];
   public role: any[];
   database: CourierModel[] = [];
@@ -118,6 +111,8 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       );
       const username: string[] = decodedToken.username;
       this.authService.getUserConnected(username).subscribe((data) => {
+        console.log(data['hydra:member'][0]);
+
         this.database = data['hydra:member'][0]['courierArrivers'];
 
         for (let index = 0; index < this.database.length; index++) {
@@ -169,6 +164,20 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       this.role.includes('ROLE_ASSISTANTE') ||
       this.role.includes('ROLE_COORDINATEUR')
     ) {
+      const decodedToken = this.helper.decodeToken(
+        localStorage.getItem('token')
+      );
+      const username: string[] = decodedToken.username;
+      this.authService.getUserConnected(username).subscribe((data) => {
+        this.database = data['hydra:member'][0]['courier'];
+        for (let index = 0; index < this.database.length; index++) {
+          const element = this.database[index];
+          if(element["@type"]=="CourierArriver"){
+            console.log(element);
+          }
+        }
+      });
+
       this.methodeService.getCourriers().subscribe((data) => {
         this.database = data['hydra:member'];
 

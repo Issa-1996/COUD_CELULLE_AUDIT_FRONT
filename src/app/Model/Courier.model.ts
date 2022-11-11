@@ -1,3 +1,4 @@
+import { FicheDeControlModel } from "./FicheDeControl.model";
 import { RapportModel } from "./Rapport.model";
 import { UserModel } from "./User.model";
 
@@ -14,6 +15,7 @@ export interface CourierModel{
     numeroCorrespondance:string;
     dateReponse:string;
     numeroReponse:string;
+    typeDeCourrier:string;
 
     dateDepart:string;
     destination:string;
@@ -27,4 +29,5 @@ export interface CourierModel{
     controleurs: UserModel;
     assistante: UserModel;
     coordinateur: UserModel;
+    ficheDeControle: FicheDeControlModel;
 }

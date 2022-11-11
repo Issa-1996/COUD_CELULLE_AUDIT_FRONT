@@ -21,7 +21,11 @@
             (click)="nouveauCourrier()"
             *ngIf="role.includes('ROLE_ASSISTANTE')"
           >
+<<<<<<< HEAD
             NOUVEAU COURRIER ARRIVÉ
+=======
+            NOUVEAU COURRIER ARRIVÉE
+>>>>>>> 3278060bce9343b8d980d33329de189d10d0d40d
           </button>
         </div>
       </form>
@@ -29,36 +33,13 @@
 
     <mat-step
       *ngIf="
-        role.includes('ROLE_CONTROLEURS') || role.includes('ROLE_COORDINATEUR')
+        role.includes('ROLE_CONTROLEURS') ||
+        role.includes('ROLE_COORDINATEUR') ||
+        role.includes('ROLE_ASSISTANTE')
       "
     >
       <ng-template matStepLabel>COURRIERS-TRAITÉS </ng-template>
       <courriers-valider></courriers-valider>
-    </mat-step>
-
-    <mat-step
-      *ngIf="role.includes('ROLE_CONTROLEURS')"
-      [stepControl]="secondFormGroup"
-      label="FICHES DE CONTROLES"
-      style="width: 100%"
-    >
-      <app-fiche-de-controle-interne></app-fiche-de-controle-interne>
-      <form [formGroup]="secondFormGroup">
-        <!-- <div class="example-button-row">
-          <button
-            id="buttonFiche"
-            mat-raised-button
-            style="background-color: #3b5998; color: white"
-            (click)="nouveauFicheControle()"
-            *ngIf="
-              role.includes('ROLE_CONTROLEURS') ||
-              role.includes('ROLE_COORDINATEUR')
-            "
-          >
-            NOUVEAU FICHE
-          </button>
-        </div> -->
-      </form>
     </mat-step>
 
     <mat-step
@@ -68,7 +49,7 @@
         role.includes('ROLE_CONTROLEURS')
       "
     >
-      <ng-template matStepLabel>TOTAL-COURRIERS-ARRIVÉS</ng-template>
+      <ng-template matStepLabel>COURRIERS-ARRIVÉS</ng-template>
       <total-arriver></total-arriver>
     </mat-step>
 
@@ -79,7 +60,7 @@
         role.includes('ROLE_CONTROLEURS')
       "
     >
-      <ng-template matStepLabel>COURRIERS-DEPARTS</ng-template>
+      <ng-template matStepLabel>COURRIERS-DEPART</ng-template>
       <app-list-courriers-depart></app-list-courriers-depart>
     </mat-step>
   </mat-stepper>

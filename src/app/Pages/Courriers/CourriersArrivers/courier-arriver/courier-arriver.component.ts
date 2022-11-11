@@ -36,7 +36,8 @@ export class CourierArriverComponent implements OnInit {
   erreurControleur = ' ';
   erreurMontant = '';
   erreurFacture = '';
-  erreurBeneficiaire = '';
+  erreurdestinataire= '';
+  erreurtypeDeCourrier='';
   erreur = '';
   success = '';
   code = '';
@@ -61,10 +62,11 @@ export class CourierArriverComponent implements OnInit {
     this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
-      beneficiaire: ['', Validators.required],
+      destinataire: ['', Validators.required],
       NumeroFacture: ['', Validators.required],
       numeroCourier: ['', Validators.required],
       montant: ['', Validators.required],
+      typeDeCourrier:['', Validators.required],
       Date: ['', Validators.required],
       expediteur: ['', Validators.required],
       numeroCorrespondance: ['', [Validators.required]],
@@ -78,8 +80,13 @@ export class CourierArriverComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('beneficiaire').valueChanges.subscribe(() => {
-      this.erreurBeneficiaire = '';
+    this.addForm.get('typeDeCourrier').valueChanges.subscribe(() => {
+      this.erreurtypeDeCourrier = '';
+      this.erreur = '';
+      this.success = '';
+    });
+    this.addForm.get('destinataire').valueChanges.subscribe(() => {
+      this.erreurdestinataire = '';
       this.erreur = '';
       this.success = '';
     });
@@ -139,8 +146,11 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.get('object').value.trim() === '') {
       this.erreurobject = 'Objet obligatoire !';
     }
+    if (this.addForm.get('typeDeCourrier').value.trim() === '') {
+      this.erreurtypeDeCourrier = 'Type courrier obligatoire !';
+    }
     if (this.addForm.get('beneficiaire').value.trim() === '') {
-      this.erreurBeneficiaire = 'Bénéficiaire obligatoire !';
+      this.erreurdestinataire = 'Destinataire obligatoire !';
     }
     if (this.addForm.get('NumeroFacture').value.trim() === '') {
       this.erreurFacture = 'Numero facture obligatoire !';
@@ -187,32 +197,22 @@ export class CourierArriverComponent implements OnInit {
         'coordinateur',
         new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
       );
-    }
-    //  else if (decodedToken.roles.includes('ROLE_COORDINATEUR')) {
-    //   this.addForm.addControl(
-    //     'coordinateur',
-    //     new FormControl('/api/coud/coordinateurs/' + this.ConnecterCoordinateur)
-    //   );
-    //   this.addForm.addControl(
-    //     'assistante',
-    //     new FormControl('/api/coud/assistantes/' + this.assistante)
-    //   );
-    // }
+    } 
     this.subscribeCourierArriver(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: CourierModel) {
     this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
       (data) => {
         this.newValue(data);
+        this.erreur="";
         this.success = 'NOUVEAU COURRIER ARRIVER AVEC SUCCESS';
-        // this.addForm.value.reset;
-        //this.router.navigate(['/container/courier']);
       },
       (error) => {
         // @ts-ignore
         if (error.status === 403) {
           this.erreur = error.error;
         } else {
+          this.success="";
           this.erreur = "UNE ERREUR S'EST PRODUITE !";
         }
       }

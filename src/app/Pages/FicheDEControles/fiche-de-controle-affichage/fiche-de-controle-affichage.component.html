@@ -39,7 +39,7 @@
                 font-size: 20px;
               "
             >
-              <b>Document objet du controle:</b> {{ fiche["objet"] }}
+              <b>Document objet du controle:</b> {{ fiche.objet }}
             </div>
             <table class="tables" border="1">
               <tbody>
@@ -53,8 +53,7 @@
                     "
                   >
                     <b><u>Controleur</u>:</b>
-                    {{ fiche["controleurs"]["prenom"] }}
-                    {{ fiche["controleurs"]["nom"] }}
+                    {{ fiche.nomControleur }}
                   </td>
                   <td
                     style="
@@ -64,7 +63,7 @@
                       border: 1px solid black;
                     "
                   >
-                    <b><u>Avis Controleur</u>:</b> {{ fiche["avisControleur"] }}
+                    <b><u>Avis Controleur</u>:</b> {{ fiche.avisControleur }}
                   </td>
                 </tr>
                 <tr>
@@ -77,7 +76,7 @@
                     "
                   >
                     <b><u>Motivation de l'Avis</u>:</b>
-                    {{ fiche["motivation"] }}
+                    {{ fiche.motivation }}
                   </td>
                   <td
                     style="
@@ -88,7 +87,7 @@
                     "
                   >
                     <b><u>Recommandations Controleur</u>:</b>
-                    {{ fiche["recommandations"] }}
+                    {{ fiche.recommandations }}
                   </td>
                 </tr>
                 <tr>

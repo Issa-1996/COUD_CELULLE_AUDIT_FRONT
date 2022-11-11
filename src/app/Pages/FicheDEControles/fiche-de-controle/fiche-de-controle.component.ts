@@ -34,28 +34,28 @@ export class FicheDeControleComponent implements OnInit {
   tabObjet = [];
   coordonateur: UserModel;
   user: UserModel;
+  controleurConnect: UserModel;
   search: string;
   courrierArriverStatut: any;
-  hiddenInput = 'true';
+  hiddenInput = 'false';
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private methodeService: MethodeService,
     private authService: AuthService,
     private searchVS: SearchService,
     private transferdata: TransferDataService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {      
+    this.connectUser();
     this.courrierArriverStatut = this.transferdata.getData();
     this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.getCoordonateur();
-    this.connectUser();
     this.addForm = this.formBuilder.group({
       objet: [this.courrierArriverStatut.object, Validators.required],
       avisControleur: ['', Validators.required],
       motivation: ['', Validators.required],
-      recommandations: ['', [Validators.required]],
+      recommandations: ['', Validators.required],
     });
     this.addForm.get('objet').valueChanges.subscribe(() => {
       this.erreurobjet = '';
@@ -63,23 +63,25 @@ export class FicheDeControleComponent implements OnInit {
       this.success = '';
     });
     this.addForm.get('avisControleur').valueChanges.subscribe(() => {
-      // if (this.addForm.get('avisControleur').value.trim() === 'REJET') {
-      // }
-      this.hiddenInput = 'true';
+      if (this.addForm.get('avisControleur').value.trim() === 'REJET') {
+        this.hiddenInput = 'true';
+      } else if (this.addForm.get('avisControleur').value.trim() === 'RAS') {
+        this.hiddenInput = 'false';
+      }
       this.erreuravisControleur = '';
       this.erreur = '';
       this.success = '';
     });
-    // this.addForm.get('motivation').valueChanges.subscribe(() => {
-    //   this.erreurmotivation = '';
-    //   this.erreur = '';
-    //   this.success = '';
-    // });
-    // this.addForm.get('recommandations').valueChanges.subscribe(() => {
-    //   this.erreurrecommandations = '';
-    //   this.erreur = '';
-    //   this.success = '';
-    // });
+    this.addForm.get('motivation').valueChanges.subscribe(() => {
+      this.erreurmotivation = '';
+      this.erreur = '';
+      this.success = '';
+    });
+    this.addForm.get('recommandations').valueChanges.subscribe(() => {
+      this.erreurrecommandations = '';
+      this.erreur = '';
+      this.success = '';
+    });
   }
 
   onSignIn(): any {
@@ -88,15 +90,6 @@ export class FicheDeControleComponent implements OnInit {
     }
     if (this.addForm.get('avisControleur').value.trim() === '') {
       this.erreuravisControleur = 'Avis controleur obligatoire !';
-    }
-    // if (this.addForm.get('motivation').value.trim() === '') {
-    //   this.erreurmotivation = 'Motivation obligatoire !';
-    // }
-    // if (this.addForm.get('recommandations').value.trim() === '') {
-    //   this.erreurrecommandations = 'Recommandation obligatoire !';
-    // }
-    if (this.addForm.invalid) {
-      return;
     }
     this.addForm.addControl(
       'controleurs',
@@ -112,7 +105,31 @@ export class FicheDeControleComponent implements OnInit {
         '/api/coud/courier_arrivers/' + this.courrierArriverStatut.id
       )
     );
-    this.subscribeFicheDeControle(this.addForm.value);
+    this.addForm.addControl(
+      'nomControleur',
+      new FormControl(this.controleurConnect.prenom+' '+this.controleurConnect.nom)
+    );
+    if (this.addForm.get('avisControleur').value.trim() === 'RAS') {
+      this.addForm.addControl('motivation', new FormControl(' '));
+      this.addForm.addControl('recommandations', new FormControl(' '));
+      this.subscribeFicheDeControle(this.addForm.value);
+    } else if (this.addForm.get('avisControleur').value.trim() === 'REJET') {
+      if (this.addForm.get('motivation').value.trim() === '') {
+        this.erreurmotivation = 'Motivation obligatoire !';
+      }
+      if (this.addForm.get('recommandations').value.trim() === '') {
+        this.erreurrecommandations = 'Recommandation obligatoire !';
+      }
+      if (
+        this.addForm.get('motivation').value.trim() != '' ||
+        this.addForm.get('recommandations').value.trim() != ''
+      ) {
+        this.subscribeFicheDeControle(this.addForm.value);
+      }
+    }
+    if (this.addForm.invalid) {
+      return;
+    }
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {
     this.methodeService.addFicheDeControle(objetFicheDeControle).subscribe(
@@ -120,22 +137,21 @@ export class FicheDeControleComponent implements OnInit {
         this.courrierArriverStatut.ficheDeControle = data;
         this.courrierArriverStatut.statut = '1';
         this.updateCourierArriver(this.courrierArriverStatut);
-        this.success = 'Fiche de control avec success';
-        //this.router.navigate(['/']);
+        this.erreur = '';
+        this.success = 'AJOUT FICHE DE CONTROLE  AVEC SUCCESS';
       },
       (error) => {
-        if (error.status === 403) {
-          this.erreur = error.error;
-        } else {
-          this.erreur = "Une erreur s'est produite !";
-        }
+        this.erreur = "UNE ERREUR S'EST PRODUITE !";
+        this.success = '';
       }
     );
   }
+
   connectUser() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     const username: string[] = decodedToken.username;
     this.authService.getUserConnected(username).subscribe((data) => {
+      this.controleurConnect=data['hydra:member'][0];
       this.user = data['hydra:member'][0]['id'];
       for (
         let i = 0;
@@ -149,7 +165,6 @@ export class FicheDeControleComponent implements OnInit {
           this.tabObjet[i] = data['hydra:member'][0]['courierArrivers'][i];
         }
       }
-
       this.objetCourier = this.tabObjet.filter(function (el) {
         return el != null;
       });

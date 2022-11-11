@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container-fluid col-md-12">
-      <h4>AJOUTER UN COURRIER ARRIVER</h4>
+      <h4>AJOUTER UN COURRIER ARRIVEE</h4>
       <div
         *ngIf="erreur != ''"
         class="login-erreur-container text-center bg-danger"
@@ -23,36 +23,24 @@
       </div>
       <form [formGroup]="addForm">
         <div class="row">
-          <div class="col">
-            <label for="object:" class="form-label">Object</label>
-            <input
-              type="text"
+          <div class="col-md-12">
+            <label for="object:" class="form-label">TYPE DE COURRIER</label>
+            <select
+              name="typeDeCourrier"
               class="form-control"
-              id="object"
-              formControlName="object"
-            />
+              formControlName="typeDeCourrier"
+            >
+              <option selected disabled>CHOISIR LE TYPE DU COURRIER</option>
+              <option value="MEDICALE">MEDICALE</option>
+              <option value="FACTURE">FACTURE</option>
+              <option value="TRAVEAUX">TRAVEAUX</option>
+            </select>
             <span
               class="login-erreur"
-              *ngIf="erreurobject != ''"
+              *ngIf="erreurtypeDeCourrier != ''"
               style="color: red"
             >
-              {{ erreurobject }}
-            </span>
-          </div>
-          <div class="col">
-            <label for="beneficiaire:" class="form-label">Bénéficiaire</label>
-            <input
-              type="text"
-              class="form-control"
-              id="beneficiaire"
-              formControlName="beneficiaire"
-            />
-            <span
-              class="login-erreur"
-              *ngIf="erreurBeneficiaire != ''"
-              style="color: red"
-            >
-              {{ erreurBeneficiaire }}
+              {{ erreurtypeDeCourrier }}
             </span>
           </div>
         </div>
@@ -75,6 +63,41 @@
               {{ erreurFacture }}
             </span>
           </div>
+        <div class="row">
+          <div class="col">
+            <label for="object:" class="form-label">Object</label>
+            <input
+              type="text"
+              class="form-control"
+              id="object"
+              formControlName="object"
+            />
+            <span
+              class="login-erreur"
+              *ngIf="erreurobject != ''"
+              style="color: red"
+            >
+              {{ erreurobject }}
+            </span>
+          </div>
+          <div class="col">
+            <label for="destinataire:" class="form-label">DESTINATAIRE</label>
+            <input
+              type="text"
+              class="form-control"
+              id="destinataire"
+              formControlName="destinataire"
+            />
+            <span
+              class="login-erreur"
+              *ngIf="erreurdestinataire != ''"
+              style="color: red"
+            >
+              {{ erreurDestinataire }}
+            </span>
+          </div>
+        </div>
+        
           <div class="col">
             <label for="montant" class="form-label">Montant</label>
             <input
@@ -95,7 +118,6 @@
         <div class="row">
           <div class="col">
             <label>Numéro Du Courier</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="text"
               class="form-control"
@@ -111,8 +133,7 @@
             </span>
           </div>
           <div class="col">
-            <label>Date Arriver du Courier</label
-            ><label for="" style="color: red; font-size: 20px">*</label><br />
+            <label>Date Arriver du Courier</label>
             <input
               type="Date"
               class="form-control"
@@ -132,7 +153,6 @@
           <div class="col">
             <div class="form-group">
               <label>Expediteur Du Courier</label>
-              <label for="" style="color: red; font-size: 20px">*</label><br />
               <input
                 type="text"
                 class="form-control"
@@ -142,15 +162,13 @@
               <span
                 class="login-erreur"
                 *ngIf="erreurexpediteur != ''"
-                style="color: red"
-              >
+                style="color: red">
                 {{ erreurexpediteur }}
               </span>
             </div>
           </div>
           <div class="col">
             <label>AFFECTER UN CONTROLEUR</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <select
               class="form-control"
               id="controleurs"
@@ -176,7 +194,6 @@
         <div class="row">
           <div class="col">
             <label>Numéro Correspondance</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="text"
               class="form-control"
@@ -193,7 +210,6 @@
           </div>
           <div class="col">
             <label>Date Corres Courier</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="date"
               class="form-control"
@@ -212,7 +228,6 @@
         <div class="row">
           <div class="col">
             <label>Numéro Réponse</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="text"
               class="form-control"
@@ -229,7 +244,6 @@
           </div>
           <div class="col">
             <label>Date Réponse</label>
-            <label for="" style="color: red; font-size: 20px">*</label><br />
             <input
               type="date"
               class="form-control"

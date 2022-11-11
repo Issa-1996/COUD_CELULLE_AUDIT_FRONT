@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'container', component: ContainerComponent, canActivate:[AuthGuardGuard],
     children: [
     {path: 'courier', component: CouriersComponent, canActivate:[AuthGuardGuard] },
-    {path: 'courierArriver', component: CourierArriverComponent, canActivate:[AuthGuardGuard] },
+    {path: 'courierArrivee', component: CourierArriverComponent, canActivate:[AuthGuardGuard] },
     {path: 'fichedecontrole', component: FicheDeControleComponent, canActivate:[AuthGuardGuard] },
     {path: 'fichedecontroleaffichage', component: FicheDeControleAffichageComponent, canActivate:[AuthGuardGuard] },
     {path: 'users', component: UsersComponent, canActivate:[AuthGuardGuard] }

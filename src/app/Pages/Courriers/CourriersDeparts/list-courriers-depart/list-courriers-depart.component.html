@@ -37,7 +37,7 @@
 
     <!-- beneficiaire Column -->
     <ng-container matColumnDef="beneficiaire">
-      <th mat-header-cell *matHeaderCellDef>BENEFICIAIRE</th>
+      <th mat-header-cell *matHeaderCellDef>DESTINATAIRE</th>
       <td mat-cell *matCellDef="let element">{{ element.beneficiaire }}</td>
     </ng-container>
 
@@ -73,6 +73,25 @@
             aria-label="Example icon button with a plus one icon"
             (click)="modifierCourrierDepart(element)"
             *ngIf="role.includes('ROLE_COORDINATEUR')"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+     <!-- Name Column -->
+     <ng-container matColumnDef="imprimer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <p *ngIf="role.includes('ROLE_ASSISTANTE')">IMPRIMER</p>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="example-button-container">
+          <button
+            mat-mini-fab
+            style="background-color: green;"
+            aria-label="Example icon button with a plus one icon"
+            *ngIf="role.includes('ROLE_ASSISTANTE')"
           >
             <mat-icon>menu</mat-icon>
           </button>

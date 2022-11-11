@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CourierModel } from 'app/Model/Courier.model';
+import { FicheDeControleAffichageComponent } from 'app/Pages/FicheDEControles/fiche-de-controle-affichage/fiche-de-controle-affichage.component';
 import { FicheDeControleModifierComponent } from 'app/Pages/FicheDEControles/fiche-de-controle-modifier/fiche-de-controle-modifier.component';
 import { FicheDeControleComponent } from 'app/Pages/FicheDEControles/fiche-de-controle/fiche-de-controle.component';
 import { AuthService } from 'app/Service/auth.service';
@@ -23,11 +24,13 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
   displayedColumn: string[] = [
     'id',
     'objet',
+    'type',
     'date',
     'beneficiaire',
     'expediteur',
     'detail',
     'fiche',
+    'fiches',
     'depart',
   ];
   public role: any[];
@@ -106,6 +109,14 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+  getFicheDeControle(fiche: any) {
+    const dialogRef = this.dialog.open(FicheDeControleAffichageComponent);
+    this.transferdata.setData(fiche);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   listeCourrier() {
     var compt = 0;
@@ -162,7 +173,10 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
       });
     }
 
-    if (this.role.includes('ROLE_COORDINATEUR')) {
+    if (
+      this.role.includes('ROLE_COORDINATEUR') ||
+      this.role.includes('ROLE_ASSISTANTE')
+    ) {
       this.methodeService.getCourriers().subscribe((data) => {
         this.database = data['hydra:member'];
         for (let index = 0; index < this.database.length; index++) {
