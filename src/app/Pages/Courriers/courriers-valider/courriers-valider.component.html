@@ -47,6 +47,7 @@
             mat-mini-fab
             style="background-color: #3b5998"
             aria-label="Example icon button with a plus one icon"
+            title="Détail courrier départ"
             aria-hidden="true"
             data-toggle="modal"
             data-target="#exampleModal"
@@ -67,6 +68,7 @@
           <button
             mat-mini-fab
             style="background-color: #3b5998"
+            title="Modifier fiche de controle"
             aria-hidden="true"
             data-toggle="modal"
             data-target="#exampleModal"
@@ -91,6 +93,7 @@
           <button
             (click)="validerCourrierArriver(row)"
             mat-mini-fab
+            title="Valider un fiche de controle"
             style="background-color: green"
             *ngIf="role.includes('ROLE_COORDINATEUR')"
           >

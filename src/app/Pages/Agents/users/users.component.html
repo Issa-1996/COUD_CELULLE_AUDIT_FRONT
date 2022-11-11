@@ -36,6 +36,7 @@
           <button
             mat-mini-fab
             style="background-color: #3B5998;"
+            title="Détail des informations de l'utilisateur"
             aria-label="Example icon button with a plus one icon"
             (click)="detailAgent(element)"
           >
@@ -53,6 +54,7 @@
           <button
             mat-mini-fab
             style="background-color: #FFFF00;"
+            title="Modifier un utilisateur"
             aria-label="Example icon button with a plus one icon"
             (click)="modifierAgent(element)"
           >
@@ -76,6 +78,7 @@
       id="buttonFiche"
       mat-raised-button
       style="background-color: #3b5998; color: white"
+      title="Ajouter d'un agent"
       (click)="ajoutNewAgent()"
     >
       NOUVEAU AGENT
