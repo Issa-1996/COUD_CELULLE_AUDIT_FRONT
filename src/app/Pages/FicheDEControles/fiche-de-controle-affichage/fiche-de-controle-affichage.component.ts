@@ -51,8 +51,6 @@ export class FicheDeControleAffichageComponent implements OnInit {
   
 // Fin de fonction
 
-  //image= "../../../assets/logo_coud copy.png";
- 
   async generateFiche(){
    var  documentFiche={
       content:[
@@ -64,8 +62,8 @@ export class FicheDeControleAffichageComponent implements OnInit {
              },
           
              {
-             // image: await this.getBase64ImageFromURL("https://images.pexels.com/photos/209640/pexels-photo-209640.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=300"),
-             image: await this.getBase64ImageFromURL("../assets/logo_coud.png"),
+            //  image: await this.getBase64ImageFromURL("https://images.pexels.com/photos/209640/pexels-photo-209640.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=300"),
+            //  image: await this.getBase64ImageFromURL("../assets/logo_coud.png"),
              },
 
 
@@ -99,7 +97,7 @@ export class FicheDeControleAffichageComponent implements OnInit {
             widths:['*','*'],
             heights:[50,100],
              body: [
-              [ ` Controleur:  ${ this.fiche["controleurs"]["prenom"] } ${ this.fiche["controleurs"]["nom"] }` ,` Avis controleur:  ${ this.fiche["avisControleur"] }` ],
+              [ ` Controleur:  ${ this.fiche["nomControleur"] }` ,` Avis controleur:  ${ this.fiche["avisControleur"] }` ],
               [ ` Motivation de l\'avis:\n ${ this.fiche["motivation"] }` , ` Recommandation controleur:\n ${ this.fiche["recommandations"] }`,],
             ]
           }

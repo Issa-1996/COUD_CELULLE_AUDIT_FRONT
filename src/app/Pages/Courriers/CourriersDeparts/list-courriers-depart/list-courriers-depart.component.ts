@@ -140,7 +140,6 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
         this.objetCourier = this.datacourrier.filter(function (el) {
           return el != null;
         });
-        console.log(this.objetCourier);
         
         for (let index = 0; index < this.objetCourier.length; index++) {
           this.searchVS.currentSearch.subscribe((data: any) => {

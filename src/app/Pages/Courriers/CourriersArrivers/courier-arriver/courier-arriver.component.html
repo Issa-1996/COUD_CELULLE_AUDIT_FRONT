@@ -46,7 +46,7 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <label>Numéro Du Courier</label>
+            <label>NUMERO COURRIER</label>
             <input
               type="text"
               class="form-control"
@@ -81,7 +81,7 @@
         <div class="row">
           <div class="col-md-6">
             <label for="NumeroFacture:" class="form-label"
-              >NUMÉRO COURRIER</label
+              >NUMÉRO FACTURE</label
             >
             <input
               type="text"
@@ -97,43 +97,9 @@
               {{ erreurFacture }}
             </span>
           </div>
-        <div class="row">
-          <div class="col">
-            <label for="object:" class="form-label">OBJET</label>
-            <input
-              type="text"
-              class="form-control"
-              id="object"
-              formControlName="object"
-            />
-            <span
-              class="login-erreur"
-              *ngIf="erreurobject != ''"
-              style="color: red"
-            >
-              {{ erreurobject }}
-            </span>
-          </div>
-          <div class="col">
-            <label for="destinataire:" class="form-label">DESTINATAIRE</label>
-            <input
-              type="text"
-              class="form-control"
-              id="destinataire"
-              formControlName="destinataire"
-            />
-            <span
-              class="login-erreur"
-              *ngIf="erreurdestinataire != ''"
-              style="color: red"
-            >
-              {{ erreurDestinataire }}
-            </span>
-          </div>
-        </div>
-        
-          <div class="col">
-            <label for="montant" class="form-label">MONTANT</label>
+
+          <div class="col-md-6">
+            <label for="montant" class="form-label">Montant</label>
             <input
               type="text"
               class="form-control"
@@ -226,9 +192,9 @@
             </span>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <label>NUMÉRO CORRESPONDANT</label>
+        <!-- <div class="row">
+          <div class="col-md-6">
+            <label>Numéro Correspondance</label>
             <input
               type="text"
               class="form-control"
@@ -243,8 +209,8 @@
               {{ erreurnumeroCorrespondance }}
             </span>
           </div>
-          <div class="col">
-            <label>DATE CORRESPONDANT DU COURRIER</label>
+          <div class="col-md-6">
+            <label>Date Corres Courier</label>
             <input
               type="date"
               class="form-control"
@@ -259,10 +225,10 @@
               {{ erreurdateCorrespondance }}
             </span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label>NUMÉRO RÉPONSE</label>
+        </div> -->
+        <!-- <div class="row">
+          <div class="col-md-6">
+            <label>Numéro Réponse</label>
             <input
               type="text"
               class="form-control"
@@ -277,8 +243,8 @@
               {{ erreurnumeroReponse }}
             </span>
           </div>
-          <div class="col">
-            <label>DATE RÉPONSE</label>
+          <div class="col-md-6">
+            <label>Date Réponse</label>
             <input
               type="date"
               class="form-control"

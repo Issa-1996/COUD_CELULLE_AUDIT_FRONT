@@ -75,7 +75,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     if (decodedToken.roles.includes('ROLE_CONTROLEURS')) {
       const dialogRef = this.dialog.open(FicheDeControleComponent);
       this.transferdata.setData(fiche);
-      this.dataDepot.setData(fiche);
+      this.dataDepot.setData(fiche);      
       dialogRef.afterClosed().subscribe((result) => {
         console.log(`Dialog result: ${result}`);
       });

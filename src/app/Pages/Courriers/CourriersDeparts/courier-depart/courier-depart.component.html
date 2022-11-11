@@ -31,8 +31,8 @@
           {{ erreurnumeroCourier }}
         </span>
       </div>
-      <div class="col">
-        <label>DATE DEPART</label>
+      <div class="col-md-6">
+        <label for="object:" class="form-label">Object</label>
         <input
           type="text"
           class="form-control"
@@ -48,22 +48,6 @@
           {{ erreurobject }}
         </span>
       </div>
-    </div>
-    <div class="form-group">
-      <label>OBSERVATION COURRIER</label>
-      <textarea
-        class="form-control"
-        formControlName="observation"
-        id="observation"
-        rows="3"
-      ></textarea>
-      <span
-        class="login-erreur"
-        *ngIf="erreurobservation != ''"
-        style="color: red"
-      >
-        {{ erreurobservation }}
-      </span>
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -119,10 +103,8 @@
           {{ erreurmontant }}
         </span>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>NUMERO ARCHIVE </label>
+      <div class="col-md-6">
+        <label>Date départ</label>
         <input
           type="date"
           class="form-control"
