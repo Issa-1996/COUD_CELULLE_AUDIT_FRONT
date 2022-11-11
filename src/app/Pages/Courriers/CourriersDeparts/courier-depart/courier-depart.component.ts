@@ -23,7 +23,6 @@ import { TransferDataService } from 'app/Service/transfer-data.service';
 export class CourierDepartComponent implements OnInit {
   addForm: FormGroup;
   erreurdateDepart = '';
-  erreurdestination = '';
   erreurnumeroArchive = '';
   erreurobservation = '';
   erreurnumeroOrdre = '';
@@ -34,7 +33,7 @@ export class CourierDepartComponent implements OnInit {
   success = '';
   erreurNumeroFacture = '';
   erreurmontant = '';
-  erreurbeneficiaire = '';
+  erreurdestinataire = '';
   courrierArriverArchiver: CourierModel;
   assistante: UserModel;
   helper = new JwtHelperService();
@@ -54,64 +53,23 @@ export class CourierDepartComponent implements OnInit {
     this.connectUser();
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
-      beneficiaire: ['', Validators.required],
+      destinataire: ['', Validators.required],
       numeroCourier: ['', Validators.required],
-      Date: ['', Validators.required],
-      destination: ['', Validators.required],
+      dateDepart: ['', Validators.required],
       observation: ['', [Validators.required]],
-      numeroArchive: ['', Validators.required],
-      nombrePiece: ['', Validators.required],
-      numeroOrdre: ['', Validators.required],
       NumeroFacture: ['', Validators.required],
       montant: ['', Validators.required],
+      controleurs: ['', Validators.required],
+      coordinateur: ['', Validators.required],
+      assistante: ['', Validators.required],
     });
-    this.addForm.get('object').valueChanges.subscribe(() => {
-      this.erreurobject = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('beneficiaire').valueChanges.subscribe(() => {
-      this.erreurbeneficiaire = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('numeroCourier').valueChanges.subscribe(() => {
-      this.erreurnumeroCourier = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('Date').valueChanges.subscribe(() => {
+    this.addForm.get('dateDepart').valueChanges.subscribe(() => {
       this.erreurdateDepart = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('destination').valueChanges.subscribe(() => {
-      this.erreurdestination = '';
       this.erreur = '';
       this.success = '';
     });
     this.addForm.get('observation').valueChanges.subscribe(() => {
       this.erreurobservation = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('numeroArchive').valueChanges.subscribe(() => {
-      this.erreurnumeroArchive = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('nombrePiece').valueChanges.subscribe(() => {
-      this.erreurnombrePiece = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('numeroOrdre').valueChanges.subscribe(() => {
-      this.erreurnumeroOrdre = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('NumeroFacture').valueChanges.subscribe(() => {
-      this.erreurnombrePiece = '';
       this.erreur = '';
       this.success = '';
     });
@@ -124,57 +82,29 @@ export class CourierDepartComponent implements OnInit {
   }
 
   onSignIn(): any {
-    if (this.addForm.get('object').value.trim() === '') {
-      this.erreurobject = 'Objet obligatoire !';
-    }
-    if (this.addForm.get('numeroCourier').value.trim() === '') {
-      this.erreurnumeroCourier = 'Numero courier obligatoire !';
-    }
-    if (this.addForm.get('Date').value.trim() === '') {
-      this.erreurdateDepart = 'Date départ obligatoire !';
-    }
-    if (this.addForm.get('destination').value.trim() === '') {
-      this.erreurdestination = 'Destination obligatoire !';
+    if (this.addForm.get('dateDepart').value.trim() === '') {
+      this.erreurdateDepart = 'Date Depart obligatoire !';
     }
     if (this.addForm.get('observation').value.trim() === '') {
       this.erreurobservation = 'Observation obligatoire !';
     }
-    if (this.addForm.get('numeroArchive').value.trim() === '') {
-      this.erreurnumeroArchive = 'Numero archive obligatoire !';
-    }
-    if (this.addForm.get('nombrePiece').value.trim() === '') {
-      this.erreurnombrePiece = 'Nombre Piece obligatoire !';
-    }
-    if (this.addForm.get('numeroOrdre').value.trim() === '') {
-      this.erreurnumeroOrdre = 'Numero ordre obligatoire !';
-    }
+    this.addForm.addControl(
+      'numeroDepart',
+      new FormControl(this.addForm.get('numeroCourier').value)
+    );
     if (this.addForm.invalid) {
       return;
     }
-    this.addForm.addControl(
-      'assistante',
-      new FormControl('/api/coud/assistantes/' + this.assistante)
-    );
-    this.addForm.addControl(
-      'coordinateur',
-      new FormControl('/api/coud/coordinateurs/' + this.Connecter)
-    );
-    if(this.courrierArrier.ficheDeControle.avisControleur=="RAS"){
-      this.addForm.addControl(
-        'type',
-        new FormControl('RAS')
-      );      
-    }else if(this.courrierArrier.ficheDeControle.avisControleur=="REJET"){
-      this.addForm.addControl(
-        'type',
-        new FormControl('REJET')
-      );       
+    if (this.courrierArrier.ficheDeControle.avisControleur == 'RAS') {
+      this.addForm.addControl('type', new FormControl('RAS'));
+    } else if (this.courrierArrier.ficheDeControle.avisControleur == 'REJET') {
+      this.addForm.addControl('type', new FormControl('REJET'));
     }
     this.subscribeCourierDepart(this.addForm.value);
   }
   subscribeCourierDepart(objetCourierDepart: any) {
     this.methodeService.addCourierDepart(objetCourierDepart).subscribe(
-      (data) => {
+      (data) => {       
         this.courrierArrier.etat = '1';
         this.updateCourierArriver(this.courrierArrier);
         this.erreur = '';
@@ -196,7 +126,7 @@ export class CourierDepartComponent implements OnInit {
     this.methodeService
       .updateCourrierArriver(objetCourierArriver)
       .subscribe((data) => {
-        console.log(data);        
+        console.log(data);
         this.newValue(data);
       });
   }

@@ -24,7 +24,7 @@ export class TotalArriverComponent implements OnInit {
     'objet',
     'type',
     'Date',
-    'beneficiaire',
+    'destinataire',
     'detail',
     'fiche',
   ];
@@ -98,22 +98,22 @@ export class TotalArriverComponent implements OnInit {
       );
       const username: string[] = decodedToken.username;
       this.authService.getUserConnected(username).subscribe((data) => {
-        this.database = data['hydra:member'][0]['courierArrivers'];
+        this.database = data['hydra:member'][0]['courrier'];
         for (let i = 0; i < this.database.length; i++) {
-          if (this.database[i].ficheDeControle != null) {
-            if (this.database[i].etat == '1') {
-              this.dataTempo[i] = this.database[i];
+          if (this.database[i]['@type'] == 'CourierArriver') {
+            if (this.database[i].ficheDeControle != null) {
+              if (this.database[i].etat == '1') {
+                this.dataTempo[i] = this.database[i];
+              }
             }
           }
         }
-
         for (let index = 0; index < this.dataTempo.length; index++) {
           this.datacourrier[index] = this.dataTempo[index];
           this.objetCourier = this.datacourrier.filter(function (el) {
             return el != null;
           });
         }
-
         this.dataSource = new MatTableDataSource<CourierModel>(
           this.objetCourier
         );
@@ -121,10 +121,67 @@ export class TotalArriverComponent implements OnInit {
       });
     }
 
-    if (
-      this.role.includes('ROLE_ASSISTANTE') ||
-      this.role.includes('ROLE_COORDINATEUR')
-    ) {
+    if (this.role.includes('ROLE_ASSISTANTE')) {
+      const decodedToken = this.helper.decodeToken(
+        localStorage.getItem('token')
+      );
+      const username: string[] = decodedToken.username;
+      this.authService.getUserConnected(username).subscribe((data) => {
+        this.database = data['hydra:member'][0]['courier'];
+        for (let index = 0; index < this.database.length; index++) {
+          const element = this.database[index];
+          if (element['@type'] == 'CourierArriver') {
+            if (element.ficheDeControle != null) {
+              if (element.etat == '1') {
+                this.dataTempo[index] = element;
+              }
+            }
+          }
+        }
+        this.dataTempo = this.dataTempo.filter(function (el) {
+          return el != null;
+        });   
+        for (let index = 0; index < this.dataTempo.length; index++) {
+          this.datacourrier[index] = this.dataTempo[index];
+          this.objetCourier = this.datacourrier.filter(function (el) {
+            return el != null;
+          });
+        }
+        for (let index = 0; index < this.objetCourier.length; index++) {
+          this.searchVS.currentSearch.subscribe((data: any) => {
+            if (data != 0) {
+              if (this.objetCourier[index]['id'] == data['id']) {
+                this.objetCourier[index] = data;
+                this.dataSource = new MatTableDataSource<CourierModel>(
+                  this.objetCourier
+                );
+                this.dataSource.paginator = this.paginator;
+              } else {
+                if (data.length != 0) {
+                  if (this.objetCourier.includes(data)) {
+                    // console.log("OUIIII");
+                  } else if (!this.objetCourier.includes(data)) {
+                    compt++;
+                  }
+                }
+              }
+              if (compt == this.objetCourier.length) {
+                this.objetCourier[index + 1] = data;
+                this.dataSource = new MatTableDataSource<CourierModel>(
+                  this.objetCourier
+                );
+                this.dataSource.paginator = this.paginator;
+              }
+            }
+          });
+        }
+        this.dataSource = new MatTableDataSource<CourierModel>(
+          this.objetCourier
+        );
+        this.dataSource.paginator = this.paginator;
+      });
+    }
+    if (this.role.includes('ROLE_COORDINATEUR')) {
       this.methodeService.getCourriers().subscribe((data) => {
         this.database = data['hydra:member'];
         for (let i = 0; i < this.database.length; i++) {

@@ -14,42 +14,6 @@
   </div>
   <form method="post" [formGroup]="addForm">
     <div class="row">
-      <div class="col-md-6">
-        <label for="object:" class="form-label">Object</label>
-        <input
-          type="text"
-          class="form-control"
-          id="object"
-          formControlName="object"
-          disabled
-        />
-        <span
-          class="login-erreur"
-          *ngIf="erreurobject != ''"
-          style="color: red"
-        >
-          {{ erreurobject }}
-        </span>
-      </div>
-      <div class="col-md-6">
-        <label for="beneficiaire" class="form-label">DESTINATAIRE</label>
-        <input
-          type="text"
-          class="form-control"
-          id="beneficiaire"
-          formControlName="beneficiaire"
-          disabled
-        />
-        <span
-          class="login-erreur"
-          *ngIf="erreurbeneficiaire != ''"
-          style="color: red"
-        >
-          {{ erreurbeneficiaire }}
-        </span>
-      </div>
-    </div>
-    <div class="row">
       <div class="col">
         <label>Numéro Courier</label>
         <input
@@ -67,41 +31,26 @@
           {{ erreurnumeroCourier }}
         </span>
       </div>
-      <div class="col">
-        <label>Date départ</label>
+      <div class="col-md-6">
+        <label for="object:" class="form-label">Object</label>
         <input
-          type="date"
+          type="text"
           class="form-control"
-          formControlName="Date"
-          id="Date"
+          id="object"
+          formControlName="object"
+          disabled
         />
         <span
           class="login-erreur"
-          *ngIf="erreurdateDepart != ''"
+          *ngIf="erreurobject != ''"
           style="color: red"
         >
-          {{ erreurdateDepart }}
+          {{ erreurobject }}
         </span>
       </div>
     </div>
-    <div class="form-group">
-      <label>Observation Courier</label>
-      <textarea
-        class="form-control"
-        formControlName="observation"
-        id="observation"
-        rows="3"
-      ></textarea>
-      <span
-        class="login-erreur"
-        *ngIf="erreurobservation != ''"
-        style="color: red"
-      >
-        {{ erreurobservation }}
-      </span>
-    </div>
     <div class="row">
-      <div class="col">
+      <div class="col-md-6">
         <label>NUMERO FACTURE </label>
         <input
           type="text"
@@ -118,7 +67,26 @@
           {{ erreurNumeroFacture }}
         </span>
       </div>
-      <div class="col">
+      <div class="col-md-6">
+        <label for="destinataire" class="form-label">DESTINATAIRE</label>
+        <input
+          type="text"
+          class="form-control"
+          id="destinataire"
+          formControlName="destinataire"
+          disabled
+        />
+        <span
+          class="login-erreur"
+          *ngIf="erreurdestinataire != ''"
+          style="color: red"
+        >
+          {{ erreurdestinataire }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
         <label>MONTANT</label>
         <input
           type="text"
@@ -135,72 +103,37 @@
           {{ erreurmontant }}
         </span>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>Numéro archive </label>
+      <div class="col-md-6">
+        <label>Date départ</label>
         <input
-          type="text"
+          type="date"
           class="form-control"
-          formControlName="numeroArchive"
-          id="numeroArchive"
+          formControlName="dateDepart"
+          id="dateDepart"
         />
         <span
           class="login-erreur"
-          *ngIf="erreurnumeroArchive != ''"
+          *ngIf="erreurdateDepart != ''"
           style="color: red"
         >
-          {{ erreurnumeroArchive }}
-        </span>
-      </div>
-      <div class="col">
-        <label>Destination</label>
-        <input
-          type="text"
-          class="form-control"
-          id="destination"
-          formControlName="destination"
-        />
-        <span
-          class="login-erreur"
-          *ngIf="erreurdestination != ''"
-          style="color: red"
-        >
-          {{ erreurdestination }}
+          {{ erreurdateDepart }}
         </span>
       </div>
     </div>
     <div class="row">
-      <div class="col">
-        <label>Nombre de pieces</label>
+      <div class="col-md-12">
+        <label>Observation Courier</label>
         <input
-          type="text"
           class="form-control"
-          formControlName="nombrePiece"
-          id="nombrePiece"
+          formControlName="observation"
+          id="observation"
         />
         <span
           class="login-erreur"
-          *ngIf="erreurnombrePiece != ''"
+          *ngIf="erreurobservation != ''"
           style="color: red"
         >
-          {{ erreurnombrePiece }}
-        </span>
-      </div>
-      <div class="col">
-        <label>Numéro Ordre</label>
-        <input
-          type="text"
-          class="form-control"
-          id="numeroOrdre"
-          formControlName="numeroOrdre"
-        />
-        <span
-          class="login-erreur"
-          *ngIf="erreurnumeroOrdre != ''"
-          style="color: red"
-        >
-          {{ erreurnumeroOrdre }}
+          {{ erreurobservation }}
         </span>
       </div>
     </div>

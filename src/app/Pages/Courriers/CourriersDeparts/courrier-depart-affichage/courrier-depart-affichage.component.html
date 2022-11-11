@@ -1,45 +1,80 @@
 <div class="container col-md-12">
   <h4>DETAIL COURRIER DEPART</h4>
   <form method="post" [formGroup]="addForm">
-    <div class="mb-3">
-      <label class="form-label">Object</label>
-      <input disabled type="text" class="form-control" formControlName="object" />
+    <div class="row">
+      <div class="col-md-6">
+        <label>Numéro Courier</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          formControlName="numeroCourier"
+        />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Object</label>
+        <input
+          disabled
+          type="text"
+          class="form-control"
+          formControlName="object"
+        />
+      </div>
     </div>
     <div class="row">
-      <div class="col">
-        <label>Numéro Courier</label>
-        <input type="text" disabled class="form-control" formControlName="numeroCourier"/>
+      <div class="col-md-6">
+        <label>Destinataire</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          formControlName="destinataire"
+        />
       </div>
-      <div class="col">
+
+      <div class="col-md-6">
         <label>Date départ</label>
-        <input type="date" disabled class="form-control" formControlName="dateDepart" />
+        <input
+          type="date"
+          disabled
+          class="form-control"
+          formControlName="Date"
+        />
       </div>
     </div>
-    <div class="form-group">
-      <label>Observation Courier</label>
-      <textarea class="form-control" disabled rows="3" formControlName="observation"></textarea>
-    </div>
+
     <div class="row">
       <div class="col">
         <label>NUMERO FACTURE </label>
-        <input type="text" class="form-control" disabled  formControlName="NumeroFacture"/>
+        <input
+          type="text"
+          class="form-control"
+          disabled
+          formControlName="NumeroFacture"
+        />
       </div>
       <div class="col">
         <label>MONTANT</label>
-        <input type="text" class="form-control" disabled  formControlName="montant"/>
+        <input
+          type="text"
+          class="form-control"
+          disabled
+          formControlName="montant"
+        />
       </div>
     </div>
     <div class="row">
-      <div class="col">
-        <label>Numéro archive </label>
-        <input type="text" disabled class="form-control"  formControlName="numeroArchive"/>
-      </div>
-      <div class="col">
-        <label>Destination</label>
-        <input type="text" disabled class="form-control" formControlName="destination"/>
+      <div class="col-md-12">
+        <label>Observation Courier</label>
+        <textarea
+          class="form-control"
+          disabled
+          rows="3"
+          formControlName="observation"
+        ></textarea>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col">
         <label>Nombre de pieces</label>
         <input type="text" disabled class="form-control" formControlName="nombrePiece"/>
@@ -48,7 +83,7 @@
         <label>Numéro Ordre</label>
         <input type="text" disabled class="form-control" formControlName="numeroOrdre"/>
       </div>
-    </div>
+    </div> -->
   </form>
 </div>
 <mat-dialog-actions align="end">

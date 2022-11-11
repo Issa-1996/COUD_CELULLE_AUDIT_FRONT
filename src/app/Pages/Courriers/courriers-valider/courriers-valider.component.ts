@@ -26,7 +26,7 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
     'objet',
     'type',
     'date',
-    'beneficiaire',
+    'destinataire',
     'expediteur',
     'detail',
     'fiche',
@@ -61,7 +61,6 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
     private methodeService: MethodeService,
     private authService: AuthService,
     private transferdata: TransferDataService,
-    // private dataDepot: TempoData,
     private dataDepot: TempoData,
     private searchVS: SearchService,
     public dialog: MatDialog
@@ -126,15 +125,16 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
       );
       const username: string[] = decodedToken.username;
       this.authService.getUserConnected(username).subscribe((data) => {
-        this.database = data['hydra:member'][0]['courierArrivers'];
-
+        this.database = data['hydra:member'][0]['courrier'];
         for (let index = 0; index < this.database.length; index++) {
-          if (this.database[index].etat == '0') {
-            if (this.database[index].statut == '1') {
-              this.datacourrier[index] = this.database[index];
-              this.objetCourier = this.datacourrier.filter(function (el) {
-                return el != null;
-              });
+          if (this.database[index]['@type'] == 'CourierArriver') {
+            if (this.database[index].etat == '0') {
+              if (this.database[index].statut == '1') {
+                this.datacourrier[index] = this.database[index];
+                this.objetCourier = this.datacourrier.filter(function (el) {
+                  return el != null;
+                });
+              }
             }
           }
         }
@@ -173,10 +173,63 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
       });
     }
 
-    if (
-      this.role.includes('ROLE_COORDINATEUR') ||
-      this.role.includes('ROLE_ASSISTANTE')
-    ) {
+    if (this.role.includes('ROLE_ASSISTANTE')) {
+      const decodedToken = this.helper.decodeToken(
+        localStorage.getItem('token')
+      );
+      const username: string[] = decodedToken.username;
+      this.authService.getUserConnected(username).subscribe((data) => {
+        this.database = data['hydra:member'][0]['courier'];
+        for (let index = 0; index < this.database.length; index++) {
+          const element = this.database[index];
+          if (element['@type'] == 'CourierArriver') {
+            if (this.database[index].etat == '0') {
+              if (this.database[index].statut == '1') {
+                this.datacourrier[index] = this.database[index];
+                this.objetCourier = this.datacourrier.filter(function (el) {
+                  return el != null;
+                });
+              }
+            }
+          }
+        }
+        for (let index = 0; index < this.objetCourier.length; index++) {
+          this.searchVS.currentSearch.subscribe((data: any) => {
+            if (data != 0) {
+              if (this.objetCourier[index]['id'] == data['id']) {
+                this.objetCourier[index] = data;
+                this.dataSource = new MatTableDataSource<CourierModel>(
+                  this.objetCourier
+                );
+                this.dataSource.paginator = this.paginator;
+              } else {
+                if (data.length != 0) {
+                  if (this.objetCourier.includes(data)) {
+                    // console.log("OUIIII");
+                  } else if (!this.objetCourier.includes(data)) {
+                    compt++;
+                  }
+                }
+              }
+              if (compt == this.objetCourier.length) {
+                this.objetCourier[index + 1] = data;
+                this.dataSource = new MatTableDataSource<CourierModel>(
+                  this.objetCourier
+                );
+                this.dataSource.paginator = this.paginator;
+              }
+            }
+          });
+        }
+
+        this.dataSource = new MatTableDataSource<CourierModel>(
+          this.objetCourier
+        );
+        this.dataSource.paginator = this.paginator;
+      });
+    }
+
+    if (this.role.includes('ROLE_COORDINATEUR')) {
       this.methodeService.getCourriers().subscribe((data) => {
         this.database = data['hydra:member'];
         for (let index = 0; index < this.database.length; index++) {

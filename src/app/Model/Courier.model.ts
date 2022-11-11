@@ -8,23 +8,15 @@ export interface CourierModel{
     object:string;
     nature: string;
     etat:string;
-
+    numeroArriver:string;
+    numeroDepart:string;
     dateArriver: string;
     expediteur: string;
-    dateCorrespondance:string;
-    numeroCorrespondance:string;
-    dateReponse:string;
-    numeroReponse:string;
     typeDeCourrier:string;
-
     dateDepart:string;
     destination:string;
-    nombrePiece:string;
-    numeroArchive:string;
     observation:string;
-    numeroOrdre:string;
     statut:string;
-    
     rapport: RapportModel;
     controleurs: UserModel;
     assistante: UserModel;

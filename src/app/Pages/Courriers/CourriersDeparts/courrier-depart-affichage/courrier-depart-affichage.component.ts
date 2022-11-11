@@ -15,7 +15,7 @@ export class CourrierDepartAffichageComponent implements OnInit {
   addForm: FormGroup;
 
   erreurdateDepart = '';
-  erreurdestination = '';
+  erreurdestinataire = '';
   erreurnumeroArchive = '';
   erreurobservation = '';
   erreurnumeroOrdre = '';
@@ -35,8 +35,8 @@ export class CourrierDepartAffichageComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
       numeroCourier: ['', Validators.required],
-      dateDepart: ['', Validators.required],
-      destination: ['', Validators.required],
+      Date: ['', Validators.required],
+      destinataire: ['', Validators.required],
       observation: ['', [Validators.required]],
       numeroArchive: ['', Validators.required],
       nombrePiece: ['', Validators.required],
