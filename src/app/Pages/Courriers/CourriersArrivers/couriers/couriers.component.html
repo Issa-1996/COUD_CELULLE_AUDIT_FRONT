@@ -16,16 +16,13 @@
         ></app-courrier-liste>
         <div class="example-button-row mt-3">
           <button
+            title="Ajouter un nouveau courrier"
             mat-raised-button
             style="background-color: #3b5998; color: white"
             (click)="nouveauCourrier()"
             *ngIf="role.includes('ROLE_ASSISTANTE')"
           >
-<<<<<<< HEAD
             NOUVEAU COURRIER ARRIVÉ
-=======
-            NOUVEAU COURRIER ARRIVÉE
->>>>>>> 3278060bce9343b8d980d33329de189d10d0d40d
           </button>
         </div>
       </form>
