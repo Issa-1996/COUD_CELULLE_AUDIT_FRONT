@@ -164,19 +164,19 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       this.role.includes('ROLE_ASSISTANTE') ||
       this.role.includes('ROLE_COORDINATEUR')
     ) {
-      const decodedToken = this.helper.decodeToken(
-        localStorage.getItem('token')
-      );
-      const username: string[] = decodedToken.username;
-      this.authService.getUserConnected(username).subscribe((data) => {
-        this.database = data['hydra:member'][0]['courier'];
-        for (let index = 0; index < this.database.length; index++) {
-          const element = this.database[index];
-          if(element["@type"]=="CourierArriver"){
-            console.log(element);
-          }
-        }
-      });
+      // const decodedToken = this.helper.decodeToken(
+      //   localStorage.getItem('token')
+      // );
+      // const username: string[] = decodedToken.username;
+      // this.authService.getUserConnected(username).subscribe((data) => {
+      //   this.database = data['hydra:member'][0]['courier'];
+      //   for (let index = 0; index < this.database.length; index++) {
+      //     const element = this.database[index];
+      //     if(element["@type"]=="CourierArriver"){
+      //       console.log(element);
+      //     }
+      //   }
+      // });
 
       this.methodeService.getCourriers().subscribe((data) => {
         this.database = data['hydra:member'];
