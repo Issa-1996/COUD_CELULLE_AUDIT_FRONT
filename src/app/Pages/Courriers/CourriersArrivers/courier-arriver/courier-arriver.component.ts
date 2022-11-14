@@ -36,8 +36,8 @@ export class CourierArriverComponent implements OnInit {
   erreurControleur = ' ';
   erreurMontant = '';
   erreurFacture = '';
-  erreurdestinataire= '';
-  erreurtypeDeCourrier='';
+  erreurdestinataire = '';
+  erreurtypeDeCourrier = '';
   erreur = '';
   success = '';
   code = '';
@@ -66,13 +66,9 @@ export class CourierArriverComponent implements OnInit {
       NumeroFacture: ['', Validators.required],
       numeroCourier: ['', Validators.required],
       montant: ['', Validators.required],
-      typeDeCourrier:['', Validators.required],
-      Date: ['', Validators.required],
+      typeDeCourrier: ['', Validators.required],
+      dateArriver: ['', Validators.required],
       expediteur: ['', Validators.required],
-      numeroCorrespondance: ['', [Validators.required]],
-      dateCorrespondance: ['', Validators.required],
-      numeroReponse: ['', Validators.required],
-      dateReponse: ['', Validators.required],
       controleurs: ['', Validators.required],
     });
     this.addForm.get('object').valueChanges.subscribe(() => {
@@ -105,33 +101,13 @@ export class CourierArriverComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('Date').valueChanges.subscribe(() => {
+    this.addForm.get('dateArriver').valueChanges.subscribe(() => {
       this.erreurdateArriver = '';
       this.erreur = '';
       this.success = '';
     });
     this.addForm.get('expediteur').valueChanges.subscribe(() => {
       this.erreurexpediteur = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('numeroCorrespondance').valueChanges.subscribe(() => {
-      this.erreurnumeroCorrespondance = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('dateCorrespondance').valueChanges.subscribe(() => {
-      this.erreurdateCorrespondance = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('numeroReponse').valueChanges.subscribe(() => {
-      this.erreurnumeroReponse = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('dateReponse').valueChanges.subscribe(() => {
-      this.erreurdateReponse = '';
       this.erreur = '';
       this.success = '';
     });
@@ -149,7 +125,7 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.get('typeDeCourrier').value.trim() === '') {
       this.erreurtypeDeCourrier = 'Type courrier obligatoire !';
     }
-    if (this.addForm.get('beneficiaire').value.trim() === '') {
+    if (this.addForm.get('destinataire').value.trim() === '') {
       this.erreurdestinataire = 'Destinataire obligatoire !';
     }
     if (this.addForm.get('NumeroFacture').value.trim() === '') {
@@ -161,23 +137,11 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.get('numeroCourier').value.trim() === '') {
       this.erreurnumeroCourier = 'Numero Courier obligatoire !';
     }
-    if (this.addForm.get('Date').value.trim() === '') {
+    if (this.addForm.get('dateArriver').value.trim() === '') {
       this.erreurdateArriver = 'Date Arriver obligatoire !';
     }
     if (this.addForm.get('expediteur').value.trim() === '') {
       this.erreurexpediteur = 'Expediteur obligatoire !';
-    }
-    if (this.addForm.get('numeroCorrespondance').value.trim() === '') {
-      this.erreurnumeroCorrespondance = 'Numero Correspondance obligatoire !';
-    }
-    if (this.addForm.get('dateCorrespondance').value.trim() === '') {
-      this.erreurdateCorrespondance = 'Date Correspondance obligatoire !';
-    }
-    if (this.addForm.get('numeroReponse').value.trim() === '') {
-      this.erreurnumeroReponse = 'Numero Reponse obligatoire !';
-    }
-    if (this.addForm.get('dateReponse').value.trim() === '') {
-      this.erreurdateReponse = 'Date Reponse obligatoire !';
     }
     if (this.addForm.get('controleurs').value.trim() === '') {
       this.erreurControleur = 'Controleur obligatoire !';
@@ -185,6 +149,10 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.invalid) {
       return;
     }
+    this.addForm.addControl(
+      'numeroArriver',
+      new FormControl(this.addForm.get('numeroCourier').value)
+    );
     this.addForm.addControl('etat', new FormControl('0'));
     this.addForm.addControl('statut', new FormControl('0'));
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
@@ -197,14 +165,14 @@ export class CourierArriverComponent implements OnInit {
         'coordinateur',
         new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
       );
-    } 
+    }
     this.subscribeCourierArriver(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: CourierModel) {
     this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
       (data) => {
         this.newValue(data);
-        this.erreur="";
+        this.erreur = '';
         this.success = 'NOUVEAU COURRIER ARRIVER AVEC SUCCESS';
       },
       (error) => {
@@ -212,7 +180,7 @@ export class CourierArriverComponent implements OnInit {
         if (error.status === 403) {
           this.erreur = error.error;
         } else {
-          this.success="";
+          this.success = '';
           this.erreur = "UNE ERREUR S'EST PRODUITE !";
         }
       }

@@ -79,7 +79,9 @@
             </span>
           </div>
           <div class="col-md-6">
-            <label for="Motivation de l'avis:" class="form-label">Motivation de l'avis</label>
+            <label for="Motivation de l'avis:" class="form-label"
+              >Motivation de l'avis</label
+            >
             <textarea
               class="form-control"
               id="motivation"
@@ -94,7 +96,12 @@
             </span>
           </div>
         </div>
-        <button type="submit" class="btn btn-sm" (click)="onSignIn()">
+        <button
+          type="submit"
+          class="btn btn-sm"
+          title="Enrégistrer un fiche de controle"
+          (click)="onSignIn()"
+        >
           ENREGISTRER
         </button>
       </form>

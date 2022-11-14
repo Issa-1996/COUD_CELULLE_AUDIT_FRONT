@@ -152,17 +152,22 @@ export class FicheDeControleComponent implements OnInit {
     const username: string[] = decodedToken.username;
     this.authService.getUserConnected(username).subscribe((data) => {
       this.controleurConnect=data['hydra:member'][0];
-      this.user = data['hydra:member'][0]['id'];
+      this.user = data['hydra:member'][0]['id'];      
       for (
         let i = 0;
-        i < data['hydra:member'][0]['courierArrivers'].length;
+        i < data['hydra:member'][0]['courrier'].length;
         i++
       ) {
-        if (
-          data['hydra:member'][0]['courierArrivers'][i]['ficheDeControle'] ==
-          null
-        ) {
-          this.tabObjet[i] = data['hydra:member'][0]['courierArrivers'][i];
+        if(data['hydra:member'][0]['courrier'][i]["@type"]=="CourierArriver"){
+          if((data['hydra:member'][0]['courrier'][i].etat==0) && data['hydra:member'][0]['courrier'][i].statut==0){
+            // console.log(data['hydra:member'][0]['courrier'][i]);
+            if (
+              data['hydra:member'][0]['courrier'][i]['ficheDeControle'] ==
+              null
+            ) {
+              this.tabObjet[i] = data['hydra:member'][0]['courrier'][i];
+            }
+          }          
         }
       }
       this.objetCourier = this.tabObjet.filter(function (el) {

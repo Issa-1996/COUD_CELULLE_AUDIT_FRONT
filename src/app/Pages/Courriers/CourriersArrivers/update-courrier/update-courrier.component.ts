@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { CourierModel } from 'app/Model/Courier.model';
 import { UserModel } from 'app/Model/User.model';
 import { BehavioSubjetService } from 'app/Service/behavio-subjet.service';
 import { MethodeService } from 'app/Service/methode.service';
@@ -31,10 +32,11 @@ export class UpdateCourrierComponent implements OnInit {
   erreurControleur = ' ';
   erreurMontant = '';
   erreurFacture = '';
-  erreurBeneficiaire = '';
+  erreurdestinataire = '';
   erreur = '';
   success = '';
   search: string;
+  dataUpdateCourrier: CourierModel;
   constructor(
     private formBuilder: FormBuilder,
     private methodeService: MethodeService,
@@ -43,30 +45,27 @@ export class UpdateCourrierComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchVS.currentSearch.subscribe(search=>this.search=search);
+    this.dataUpdateCourrier = this.transferdata.getData();
+    this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.getControleurs();
     this.addForm = this.formBuilder.group({
       id: [''],
       object: ['', Validators.required],
-      beneficiaire: ['', Validators.required],
+      destinataire: ['', Validators.required],
       NumeroFacture: ['', Validators.required],
       numeroCourier: ['', Validators.required],
       montant: ['', Validators.required],
-      Date: ['', Validators.required],
+      dateArriver: ['', Validators.required],
       expediteur: ['', Validators.required],
-      numeroCorrespondance: ['', [Validators.required]],
-      dateCorrespondance: ['', Validators.required],
-      numeroReponse: ['', Validators.required],
-      dateReponse: ['', Validators.required],
-      controleurs: ['', Validators.required],
+      controleurs: [''],
     });
     this.addForm.get('object').valueChanges.subscribe(() => {
       this.erreurobject = '';
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('beneficiaire').valueChanges.subscribe(() => {
-      this.erreurBeneficiaire = '';
+    this.addForm.get('destinataire').valueChanges.subscribe(() => {
+      this.erreurdestinataire = '';
       this.erreur = '';
       this.success = '';
     });
@@ -85,7 +84,7 @@ export class UpdateCourrierComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('Date').valueChanges.subscribe(() => {
+    this.addForm.get('dateArriver').valueChanges.subscribe(() => {
       this.erreurdateArriver = '';
       this.erreur = '';
       this.success = '';
@@ -95,40 +94,19 @@ export class UpdateCourrierComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('numeroCorrespondance').valueChanges.subscribe(() => {
-      this.erreurnumeroCorrespondance = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('dateCorrespondance').valueChanges.subscribe(() => {
-      this.erreurdateCorrespondance = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('numeroReponse').valueChanges.subscribe(() => {
-      this.erreurnumeroReponse = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('dateReponse').valueChanges.subscribe(() => {
-      this.erreurdateReponse = '';
-      this.erreur = '';
-      this.success = '';
-
-    });
     this.addForm.get('controleurs').valueChanges.subscribe(() => {
       this.erreurControleur = '';
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.patchValue(this.transferdata.getData());
+    this.addForm.patchValue(this.dataUpdateCourrier);
   }
   onSignIn(): any {
     if (this.addForm.get('object').value.trim() === '') {
       this.erreurobject = 'Objet obligatoire !';
     }
-    if (this.addForm.get('beneficiaire').value.trim() === '') {
-      this.erreurBeneficiaire = 'Bénéficiaire obligatoire !';
+    if (this.addForm.get('destinataire').value.trim() === '') {
+      this.erreurdestinataire = 'Destinataire obligatoire !';
     }
     if (this.addForm.get('NumeroFacture').value.trim() === '') {
       this.erreurFacture = 'Numero facture obligatoire !';
@@ -139,45 +117,40 @@ export class UpdateCourrierComponent implements OnInit {
     if (this.addForm.get('numeroCourier').value.trim() === '') {
       this.erreurnumeroCourier = 'Numero Courier obligatoire !';
     }
-    if (this.addForm.get('Date').value.trim() === '') {
+    if (this.addForm.get('dateArriver').value.trim() === '') {
       this.erreurdateArriver = 'Date Arriver obligatoire !';
     }
     if (this.addForm.get('expediteur').value.trim() === '') {
       this.erreurexpediteur = 'Expediteur obligatoire !';
     }
-    if (this.addForm.get('numeroCorrespondance').value.trim() === '') {
-      this.erreurnumeroCorrespondance = 'Numero Correspondance obligatoire !';
-    }
-    if (this.addForm.get('dateCorrespondance').value.trim() === '') {
-      this.erreurdateCorrespondance = 'Date Correspondance obligatoire !';
-    }
-    if (this.addForm.get('numeroReponse').value.trim() === '') {
-      this.erreurnumeroReponse = 'Numero Reponse obligatoire !';
-    }
-    if (this.addForm.get('dateReponse').value.trim() === '') {
-      this.erreurdateReponse = 'Date Reponse obligatoire !';
-    }
     if (this.addForm.invalid) {
       return;
     }
+    this.addForm.addControl(
+      'numeroArriver',
+      new FormControl(this.addForm.get('numeroCourier').value)
+    );
+    // if(this.addForm.get("controleurs").value==""){
+    //     // this.addForm.addControl("controleurs",new FormControl(this.dataUpdateCourrier.controleurs));
+    // }
     // this.addForm.addControl("assistante",new FormControl("/api/coud/assistantes/"+this.Connecter,));
     // this.addForm.addControl("coordinateur",new FormControl("/api/coud/coordinateurs/"+this.coordonateur,));
-
+    // if(this.addForm.get("controleurs").value !=""){
+    // }
     this.updateCourierArriver(this.addForm.value);
   }
   updateCourierArriver(objetCourierArriver: any) {
     this.methodeService.updateCourrierArriver(objetCourierArriver).subscribe(
       (data) => {
-        this.success = 'Courier arriver modifier avec success';
+        this.success = 'COURRIER ARRIVER MODIFIER AVEC SUCCESS';
         this.newValue(data);
-        //this.router.navigate(['/container/courier']);
       },
       (error) => {
         // @ts-ignore
         if (error.status === 403) {
           this.erreur = error.error;
         } else {
-          this.erreur = "Une erreur s'est produite !";
+          this.erreur = "UNE ERREUR S'EST PRODUITE !";
         }
       }
     );
@@ -191,7 +164,7 @@ export class UpdateCourrierComponent implements OnInit {
     );
   }
   start = Date.now();
-  newValue(search){
+  newValue(search) {
     this.searchVS.changeValue(search);
   }
 }

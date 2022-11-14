@@ -113,7 +113,7 @@ export class AddUserComponent implements OnInit {
       return;
     }
 
-    if (this.addForm.get('profil').value == '1') {
+    if (this.addForm.get('profil').value == '3') {
       this.addForm.addControl('roles', new FormControl(['ROLE_COORDINATEUR']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
@@ -149,7 +149,7 @@ export class AddUserComponent implements OnInit {
           }
         }
       );
-    } else if (this.addForm.get('profil').value == '3') {
+    } else if (this.addForm.get('profil').value == '1') {
       this.addForm.addControl('roles', new FormControl(['ROLE_ASSISTANTE']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(

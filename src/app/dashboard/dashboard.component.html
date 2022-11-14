@@ -76,7 +76,7 @@
                       <div class="ct-chart" id="dailySalesChart"></div>
                   </div>
                   <div class="card-body">
-                      <h4 class="card-title">RAPPORT TRIMESTRIEL DES COURIERS DE DEPART</h4>
+                      <h4 class="card-title">RAPPORT TRIMESTRIEL DES COURIERS DE ARRIVES</h4>
                       <p class="card-category">
                           <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
                   </div>
@@ -87,7 +87,7 @@
                   </div>
               </div>
               <div class="d-grid gap-2">
-                <button class="btn btn-success" type="button" (click)="generatePdf()">Imprimer rapports</button>
+                <button class="btn btn-success" type="button" (click)="generatePdf()">Imprimer Courrier Arrivé</button>
               </div>
           </div>
           <div class="col-md-4">
@@ -96,7 +96,7 @@
                       <div class="ct-chart" id="websiteViewsChart"></div>
                   </div>
                   <div class="card-body">
-                      <h4 class="card-title">RAPPORT TRIMESTRIEL DES COURIERS ARRIVES</h4>
+                      <h4 class="card-title">RAPPORT TRIMESTRIEL DES COURIERS DEPARTS </h4>
                       <p class="card-category">Last Campaign Performance</p>
                   </div>
                   <div class="card-footer">
@@ -106,7 +106,7 @@
                   </div>
               </div>
               <div class="d-grid gap-2">
-                <button class="btn btn-warning" type="button" (click)="generatePdf()">Imprimer rapports</button>
+                <button class="btn btn-warning" type="button" (click)="generateDepart()">Imprimer Courrier Départ</button>
               </div>
           </div>
           <div class="col-md-4">
@@ -125,7 +125,7 @@
                   </div>
               </div>
               <div class="d-grid gap-2">
-                <button class="btn btn-danger" type="button" (click)="generatePdf()">Imprimer rapports</button>
+                <button class="btn btn-danger" type="button" (click)="generateRejeter()">Imprimer Dourrier Rejeté</button>
               </div>
           </div>
       </div>

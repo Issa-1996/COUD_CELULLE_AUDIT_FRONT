@@ -5,6 +5,7 @@ import * as Chartist from 'chartist';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { generate } from 'rxjs';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -161,117 +162,61 @@ export class DashboardComponent implements OnInit {
   {
     var documentDefinition = {
       content: [
-      	
-        {text: 'RAPPORT TRIMESTRIEL DES COURRIERS', style:'header',},
-      
-        {text: 'Rapport trimestriel des courriers d\'arrivés', style:'subheader',},
+
         {
-          style: 'tableExemple',
-          table:{
-             body:[
-               ['colonne1','colonne2','colonne3'],
-               [
-                 {
-                   stack:[
-                     'Donne moi mes cent frans',
-                     {
-                       ul:[ 
-                         'item1',
-                         'item2'
-                       ]
-                     }
-                   ]
-                 },
-                 [
-                   'Avec une autre table',
-                   'Avec une autre table',
-                   'Avec une autre table',
-                   'Avec une autre table',
-                  
-                 ],
-                  {
-                    text:[
-                      'cherche une autre table\n',
-                      {text:'Merci beaucoup \n', italics: true},
-                      {text:'Merci beaucoup tu as tous compris', fontSize:15}
-                    ]
-                  }
-                
-               ]
-             ]
-          }
-         },
-        
-         {text: 'Rapport trimestriel des courriers de départ', style:'subheader',},
-         {
-          table: {
-            // headers are automatically repeated if the table spans over multiple pages
-            // you can declare how many rows should be treated as headers
-            headerRows: 1,
-            widths: [ '*', 'auto', 100 ],
-            body: [
-              [ 'First', 'Second', 'Third'],
-              [ 'Value ordinaire 1', 'Value 2 ordinaire', 'Value 3 ordinaire' ],
-              [ { text: 'Bold value', bold: true }, 'Valeur ajoutée', 'Valeur darrivée' ]
-            ]
-          }
-        },
-
-       
-        {text: 'Rapport trimestriel des courriers de rejetés', style:'subheader',},
-       
-       {
-        style: 'tableExemple',
-        table:{
-         // style:'table',
-           body:[
-             ['colonne1','colonne2','colonne3'],
-             [
-               {
-                 stack:[
-                   'Donne moi mes cent frans',
-                   {
-                     ul:[ 
-                       'item1',
-                       'item2'
-                     ]
-                   }
-                 ]
-               },
-               [
-                 'Avec une autre table',
-                 'Avec une autre table',
-                 'Avec une autre table',
-                 'Avec une autre table',
-                   
-               ],
-                {
-                  text:[
-                    'cherche une autre table\n',
-                    {text:'Merci beaucoup \n', italics: true},
-                    {text:'Merci beaucoup tu as tous compris', fontSize:15}
-                  ]
-                }
+          columns:[
+             {
+              text: 'REPUBLIQUE DU SENEGAL \n Un Peuple - Un But - Une Foi \n MINISTÈRE DE L\'ENSEIGNEMENT SUPÉRIEUR \n  DE LA RECHERCHE ET DE L\'INNOVATION \n CENTRE DES OEUVRES UNIVERSITAIRES DE DAKAR \n Direction',
+               style:'headers',
+             },
+             
+             {
               
-             ]
-           ]
-        }
-       },
-
-
-
-        ],
-
-        footer: {
-          columns: [
-            this.image, 'DI/COUD',
-            {
-               text: 'Contacter Mr Sylla au 77 775 65 42',
-                alignment: 'left',
-                style:'footer',
-            }
+             }, 
           ]
         },
+      	
+        {text: 'RAPPORT TRIMESTRIEL DES COURRIERS ARRIVES', style:'header',},
+      
+       // {text: 'Rapport trimestriel des courriers d\'arrivés', style:'subheader',},
+        {
+          style: 'tableExemple',
+          table: {
+            widths: [ '*', '*', '*' ],
+            body: [
+              [ { text: 'N° Courrier', bold: true },{ text: 'Objet', bold: true },{ text: 'Date', bold: true }],
+              [ ' 01', `Facture`,  `03/05/2022` ],
+              [ ' 02',  `Document médical`,  `05/05/2022` ],
+              [ ' 03',  `Document matriel`,  `08/06/2022` ],
+              [ ' 04',  `Facture`,  `03/05/2022` ],
+              [ ' 05',  `Document médical`,  `05/05/2022` ],
+              [ ' 06',  `Document matriel`,  `08/06/2022` ],
+              [ ' 07',  `Facture`,  `03/05/2022` ],
+              [ ' 08',  `Document médical`,  `05/05/2022` ],
+              [ ' 09',  `Document matriel`,  `08/06/2022` ],
+              [ ' 10',  `Document matriel`,  `08/06/2022` ],
+              [ ' 11',  `Document médical`,  `05/05/2022` ],
+              [ ' 12',  `Document matriel`,  `08/06/2022` ],
+              [ ' 13',  `Document médical`,  `05/05/2022` ],
+              [ ' 14',  `Document matriel`,  `08/06/2022` ],
+            ]
+          }
+         },
+         {
+          
+            table: {
+             widths:[163,'*'],
+             heights: [30],
+              body: [
+                [ { text: 'Total', bold: true }, { text: `14`, alignment: 'right' } ],
+                
+              ]
+            }
+          
+         },
+        
+        ],
+      
         styles: {
           subheader: {
             fontSize: 16,
@@ -281,23 +226,227 @@ export class DashboardComponent implements OnInit {
 
           },
           header:{
-            fontSize: 25,
+            fontSize: 20,
             bold: true,
             color: 'blue',
+            margin: [0, 40, 0, 10],
             alignment: 'center'
 
           },
-          footer:{
-            color: 'blue',
-          }
+
+          headers:{
+            fontSize: 10,
+          },
+
+          footer: {
+            columns: [
+               'DI/COUD',
+              {
+                 text: 'Contacter Mr Sylla au 77 700 00 00',
+                 alignment: 'left',
+                 style:'footer',
+                 color:'blue'
+              }
+            ]
+          },
         },
         
     };
     
     pdfMake.createPdf(documentDefinition).open();
    }
-}
+/* -----------------------FIN GENERER PDF ARRIVER---------------------*/
 
-/*----------------------FIN GENERER PDF------------------------- */
 
+generateDepart()
+   {
+     var documentDepart = {
+       content: [
+
+        {
+          columns:[
+             {
+              text: 'REPUBLIQUE DU SENEGAL \n Un Peuple - Un But - Une Foi \n MINISTÈRE DE L\'ENSEIGNEMENT SUPÉRIEUR \n  DE LA RECHERCHE ET DE L\'INNOVATION \n CENTRE DES OEUVRES UNIVERSITAIRES DE DAKAR \n Direction',
+               style:'headers',
+             },
+
+             {
+              
+             }, 
+          ]
+        },
+         
+         {text: 'RAPPORT TRIMESTRIEL DES COURRIERS DEPARTS', style:'header',},
+       
+        // {text: 'Rapport trimestriel des courriers départ', style:'subheader',},
+         {
+           style: 'tableExemple',
+           table: {
+             widths: [ '*', '*', '*' ],
+             body: [
+               [ { text: 'N° Courrier', bold: true },{ text: 'Objet', bold: true },{ text: 'Date', bold: true }],
+               [ ' 01', `Facture`,  `03/05/2022` ],
+               [ ' 02',  `Document médical`,  `05/05/2022` ],
+               [ ' 03',  `Document matriel`,  `08/06/2022` ],
+               [ ' 02',  `Document médical`,  `05/05/2022` ],
+               [ ' 03',  `Document matriel`,  `08/06/2022` ],
+               [ ' 02',  `Document médical`,  `05/05/2022` ],
+               [ ' 03',  `Document matriel`,  `08/06/2022` ],
+               
+             ]
+           }
+          },
+          {
            
+             table: {
+              widths:[163,'*'],
+              heights: [30],
+               body: [
+                 [ { text: 'Total', bold: true }, { text: `07`, alignment: 'right' } ],
+                 
+               ]
+             }
+           
+          },
+         
+    
+         ],
+   
+         styles: {
+           subheader: {
+             fontSize: 15,
+             bold: true,
+             margin: [0, 40, 0, 10],
+             color: 'blue',
+   
+           },
+           header:{
+             fontSize: 20,
+             bold: true,
+             color: 'blue',
+             margin: [0, 40, 0, 10],
+             alignment: 'center'
+   
+           },
+           headers:{
+            fontSize: 10,
+           },
+           footer: {
+            columns: [
+              this.image, 'DI/COUD',
+              {
+                 text: 'Contacter Mr Sylla au 77 700 00 00',
+                 alignment: 'left',
+                 style:'footer',
+                 color:'blue'
+              }
+            ]
+          },
+         },
+         
+     };
+     
+     pdfMake.createPdf(documentDepart).open();
+    }
+
+/*------------------FIN GENERER PDF DEPART------------------ */
+
+ generateRejeter()
+    {
+      var documentDepart = {
+        content: [
+          
+          {
+            columns:[
+               {
+                text: 'REPUBLIQUE DU SENEGAL \n Un Peuple - Un But - Une Foi \n MINISTÈRE DE L\'ENSEIGNEMENT SUPÉRIEUR \n  DE LA RECHERCHE ET DE L\'INNOVATION \n CENTRE DES OEUVRES UNIVERSITAIRES DE DAKAR \n Direction',
+                 style:'headers',
+               },
+              
+               {
+                
+               }, 
+            ]
+          },
+          {text: 'RAPPORT TRIMESTRIEL DES COURRIERS REJETES', style:'header',},
+        
+         // {text: 'Rapport trimestriel des courriers rejeter', style:'subheader',},
+          {
+            style: 'tableExemple',
+            table: {
+              widths: [ '*', '*', '*' ],
+              body: [
+                [ { text: 'N° Courrier', bold: true },{ text: 'Objet', bold: true },{ text: 'Date', bold: true }],
+                [ ' 01', `Facture`,  `03/05/2022` ],
+                [ ' 02',  `Document médical`,  `05/05/2022` ],
+                [ ' 03',  `Document matriel`,  `08/06/2022` ],
+                [ ' 02',  `Document médical`,  `05/05/2022` ],
+                [ ' 03',  `Document matriel`,  `08/06/2022` ],
+                [ ' 02',  `Document médical`,  `05/05/2022` ],
+                [ ' 03',  `Document matriel`,  `08/06/2022` ],
+                [ ' 02',  `Document médical`,  `05/05/2022` ],
+                [ ' 03',  `Document matriel`,  `08/06/2022` ],
+              ]
+            }
+          },
+          {
+            
+              table: {
+              widths:[163,'*'],
+              heights: [30],
+                body: [
+                  [ { text: 'Total', bold: true }, { text: `09`, alignment: 'right' } ],
+                  
+                ]
+              }
+            
+          },
+          
+      
+
+          ],
+
+          styles: {
+            subheader: {
+              fontSize: 14,
+              bold: true,
+              margin: [0, 40, 0, 10],
+              color: 'blue',
+
+            },
+            header:{
+              fontSize: 20,
+              bold: true,
+              color: 'blue',
+              margin: [0, 40, 0, 10],
+              alignment: 'center'
+
+            },
+            headers:{
+              fontSize: 10,
+            },
+            footer: {
+              columns: [
+                this.image, 'DI/COUD',
+                {
+                  text: 'Contacter Mr Sylla au 77 700 00 00',
+                  alignment: 'left',
+                  style:'footer',
+                  color:'blue'
+                }
+              ]
+            },
+          },
+          
+      };
+      
+      pdfMake.createPdf(documentDepart).open();
+    }
+    /*----------------------FIN GENERER PDF REJETER---------------------- */
+     
+
+ }
+
+
+
+
