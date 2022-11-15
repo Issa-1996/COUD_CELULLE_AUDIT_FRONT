@@ -22,15 +22,15 @@ import { CourierDepartComponent } from '../CourriersDeparts/courier-depart/couri
 })
 export class CourriersValiderComponent implements AfterViewInit, OnInit {
   displayedColumn: string[] = [
-    'id',
+    'numeroCourier',
     'objet',
     'type',
     'date',
     'destinataire',
     'expediteur',
     'detail',
-    'fiche',
     'fiches',
+    'imprimer',
     'depart',
   ];
   public role: any[];
@@ -178,18 +178,15 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
         localStorage.getItem('token')
       );
       const username: string[] = decodedToken.username;
-      this.authService.getUserConnected(username).subscribe((data) => {
-        this.database = data['hydra:member'][0]['courier'];
+      this.methodeService.getCourriersArrivers().subscribe((data) => {
+        this.database = data['hydra:member'];
         for (let index = 0; index < this.database.length; index++) {
-          const element = this.database[index];
-          if (element['@type'] == 'CourierArriver') {
-            if (this.database[index].etat == '0') {
-              if (this.database[index].statut == '1') {
-                this.datacourrier[index] = this.database[index];
-                this.objetCourier = this.datacourrier.filter(function (el) {
-                  return el != null;
-                });
-              }
+          if (this.database[index].etat == '0') {
+            if (this.database[index].statut == '1') {
+              this.datacourrier[index] = this.database[index];
+              this.objetCourier = this.datacourrier.filter(function (el) {
+                return el != null;
+              });
             }
           }
         }
@@ -230,7 +227,7 @@ export class CourriersValiderComponent implements AfterViewInit, OnInit {
     }
 
     if (this.role.includes('ROLE_COORDINATEUR')) {
-      this.methodeService.getCourriers().subscribe((data) => {
+      this.methodeService.getCourriersArrivers().subscribe((data) => {
         this.database = data['hydra:member'];
         for (let index = 0; index < this.database.length; index++) {
           if (this.database[index].etat == '0') {

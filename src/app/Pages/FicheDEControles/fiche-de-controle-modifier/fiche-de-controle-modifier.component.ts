@@ -36,6 +36,7 @@ export class FicheDeControleModifierComponent implements OnInit {
   coordonateur: UserModel;
   user: UserModel;
   search: string;
+  hiddenInput = 'false';
   ficheModifier: FicheDeControlModel;
   constructor(
     private formBuilder: FormBuilder,
@@ -62,6 +63,11 @@ export class FicheDeControleModifierComponent implements OnInit {
       this.erreur = '';
     });
     this.addForm.get('avisControleur').valueChanges.subscribe(() => {
+      if (this.addForm.get('avisControleur').value.trim() === 'REJET') {
+        this.hiddenInput = 'true';
+      } else if (this.addForm.get('avisControleur').value.trim() === 'RAS') {
+        this.hiddenInput = 'false';
+      }
       this.erreuravisControleur = '';
       this.erreur = '';
       this.success = '';
@@ -94,17 +100,7 @@ export class FicheDeControleModifierComponent implements OnInit {
     }
     if (this.addForm.invalid) {
       return;
-    }
-    // this.addForm.addControl(
-    //   'controleurs',
-    //   new FormControl('/api/coud/controleurs/' + this.user)
-    // );
-    // this.addForm.addControl(
-    //   'coordinateur',
-    //   new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
-    // );
-    // console.log(this.addForm.value);
-    
+    }    
     this.subscribeFicheDeControle(this.addForm.value);
   }
   subscribeFicheDeControle(objetFicheDeControle: any) {

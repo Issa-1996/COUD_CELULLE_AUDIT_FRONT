@@ -99,12 +99,12 @@ export class CourierDepartComponent implements OnInit {
       this.addForm.addControl('type', new FormControl('RAS'));
     } else if (this.courrierArrier.ficheDeControle.avisControleur == 'REJET') {
       this.addForm.addControl('type', new FormControl('REJET'));
-    }
+    }    
     this.subscribeCourierDepart(this.addForm.value);
   }
   subscribeCourierDepart(objetCourierDepart: any) {
     this.methodeService.addCourierDepart(objetCourierDepart).subscribe(
-      (data) => {       
+      (data) => {        
         this.courrierArrier.etat = '1';
         this.updateCourierArriver(this.courrierArrier);
         this.erreur = '';
@@ -126,7 +126,6 @@ export class CourierDepartComponent implements OnInit {
     this.methodeService
       .updateCourrierArriver(objetCourierArriver)
       .subscribe((data) => {
-        console.log(data);
         this.newValue(data);
       });
   }
