@@ -45,6 +45,7 @@ import { TransferDataService } from './Service/transfer-data.service';
 import { SearchService } from './Service/search.service';
 import { CourriersValiderComponent } from './Pages/Courriers/courriers-valider/courriers-valider.component';
 import { TotalArriverComponent } from './Pages/Courriers/CourriersArrivers/total-arriver/total-arriver.component';
+import { DetailUserComponent } from './Pages/Agents/detail-user/detail-user.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { TotalArriverComponent } from './Pages/Courriers/CourriersArrivers/total
     UpdateCourrierDepartComponent,
     CourrierDepartAffichageComponent,
     CourriersValiderComponent,
-    TotalArriverComponent
+    TotalArriverComponent,
+    DetailUserComponent
     
   ],
   imports: [

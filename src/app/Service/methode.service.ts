@@ -38,8 +38,14 @@ export class MethodeService {
   addUser(ObjetUser: any): Observable<UserModel> {
     return this.httpClient.post<UserModel>(`${envVars.url}/coud/users`, ObjetUser, {headers: this.headers});
   }
-  updateUser(username: any): Observable<any>{
-    return this.httpClient.put<any>(envVars.url+'/coud/users' + '/' + username.id, username, {headers: this.headers});
+  updateCoordonateur(username: any): Observable<any>{
+    return this.httpClient.put<any>(envVars.url+'/coud/coordinateurs' + '/' + username.id, username, {headers: this.headers});
+  }
+  updateControleur(username: any): Observable<any>{
+    return this.httpClient.put<any>(envVars.url+'/coud/controleurs' + '/' + username.id, username, {headers: this.headers});
+  }
+  updateAssistante(username: any): Observable<any>{
+    return this.httpClient.put<any>(envVars.url+'/coud/assistantes' + '/' + username.id, username, {headers: this.headers});
   }
   getProfils(): Observable<ProfilModel>{
     return this.httpClient.get<ProfilModel>(`${envVars.url}/coud/profils`);

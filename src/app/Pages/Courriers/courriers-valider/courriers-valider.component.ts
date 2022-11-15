@@ -22,15 +22,15 @@ import { CourierDepartComponent } from '../CourriersDeparts/courier-depart/couri
 })
 export class CourriersValiderComponent implements AfterViewInit, OnInit {
   displayedColumn: string[] = [
-    'id',
+    'numeroCourier',
     'objet',
     'type',
     'date',
     'destinataire',
     'expediteur',
     'detail',
-    'fiche',
     'fiches',
+    'imprimer',
     'depart',
   ];
   public role: any[];

@@ -14,14 +14,14 @@
       role.includes('ROLE_ASSISTANTE')
     "
   >
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+    <ng-container matColumnDef="numeroCourier">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>N° COURRIER</th>
+      <td mat-cell *matCellDef="let row">{{ row.numeroCourier }}</td>
     </ng-container>
 
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>DATE</th>
-      <td mat-cell *matCellDef="let row">{{ row.Date }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.dateArriver }}</td>
     </ng-container>
 
     <ng-container matColumnDef="objet">
@@ -64,9 +64,38 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="imprimer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <p *ngIf="role.includes('ROLE_CONTROLEURS')">IMPRIMER</p>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="example-button-container">
+          <button
+            mat-mini-fab
+            style="background-color: #3b5998"
+            aria-hidden="true"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            aria-label="Example icon button with a menu icon"
+            (click)="getFicheDeControle(row)"
+            *ngIf="role.includes('ROLE_CONTROLEURS')"
+          >
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="fiches">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <p *ngIf="role.includes('ROLE_COORDINATEUR')">FICHE</p>
+        <p
+          *ngIf="
+            role.includes('ROLE_COORDINATEUR') ||
+            role.includes('ROLE_CONTROLEURS')
+          "
+        >
+          FICHE
+        </p>
       </th>
       <td mat-cell *matCellDef="let row">
         <div class="example-button-container">
@@ -80,30 +109,10 @@
             style="background-color: #ffff00"
             aria-label="Example icon button with a menu icon"
             (click)="modifierFicheDeControle(row)"
-            *ngIf="role.includes('ROLE_COORDINATEUR')"
-          >
-            <mat-icon>filter_list</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="fiche">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <p *ngIf="role.includes('ROLE_CONTROLEURS')">FICHE</p>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <div class="example-button-container">
-          <button
-            mat-mini-fab
-            style="background-color: #3b5998"
-            aria-hidden="true"
-            data-toggle="modal"
-            data-target="#exampleModal"
-            style="background-color: #ffff00"
-            aria-label="Example icon button with a menu icon"
-            (click)="getFicheDeControle(row)"
-            *ngIf="role.includes('ROLE_CONTROLEURS')"
+            *ngIf="
+              role.includes('ROLE_COORDINATEUR') ||
+              role.includes('ROLE_CONTROLEURS')
+            "
           >
             <mat-icon>filter_list</mat-icon>
           </button>

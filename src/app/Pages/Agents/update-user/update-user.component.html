@@ -1,1 +1,177 @@
-<p>update-user works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="modal-body">
+        <div class="menu text-center">MODIFIER UTILISATEURS</div>
+        <div
+          *ngIf="erreur != ''"
+          class="login-erreur-container text-center bg-danger"
+        >
+          <span class="login-erreur"> {{ erreur }} </span>
+        </div>
+        <div
+          *ngIf="success != ''"
+          class="login-erreur-container text-center bg-success"
+        >
+          <span class="login-erreur"> {{ success }} </span>
+        </div>
+        <form class="form-signin" [formGroup]="addForm">
+          <div class="row">
+            <div class="col-md-6">
+              <label>NOM D'UTILISATEUR</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="username"
+                name="username"
+              />
+              <span
+                class="login-erreur"
+                *ngIf="erreurusername != ''"
+                style="color: red"
+              >
+                {{ erreurusername }}
+              </span>
+            </div>
+            <div class="col-md-6">
+              <label>AFFECTER UN PROFIL</label>
+              <select
+                class="form-control"
+                id="profil"
+                name="profil"
+                formControlName="profil"
+              >
+                <option disabled>Choisir un profil</option>
+                <option value="/api/coud/profils/{{ pro.id }}" *ngFor="let pro of profil">
+                  {{ pro.libelle }}
+                </option>
+              </select>
+              <span
+                class="login-erreur"
+                *ngIf="erreurprofil != ''"
+                style="color: red"
+              >
+                {{ erreurprofil }}
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>NUMERO MATRICULE</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="matricule"
+                name="matricule"
+                autofocus=""
+              />
+              <span
+                class="login-erreur"
+                *ngIf="erreurmatricule != ''"
+                style="color: red"
+              >
+                {{ erreurmatricule }}
+              </span>
+            </div>
+            <div class="col-md-6">
+              <label>NOM</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nom"
+                name="nom"
+              />
+              <span
+                class="login-erreur"
+                *ngIf="erreurnom != ''"
+                style="color: red"
+              >
+                {{ erreurnom }}
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>PRENOM</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="prenom"
+                name="prenom"
+              />
+              <span
+                class="login-erreur"
+                *ngIf="erreurprenom != ''"
+                style="color: red"
+              >
+                {{ erreurprenom }}
+              </span>
+            </div>
+            <div class="col-md-6">
+              <label>DATE D'AJOUT</label>
+              <input
+                type="date"
+                class="form-control"
+                formControlName="dateDeNaissance"
+                name="Date"
+                id="date-picker"
+              />
+              <span
+                class="login-erreur"
+                *ngIf="erreurdateDeNaissance != ''"
+                style="color: red"
+              >
+                {{ erreurdateDeNaissance }}
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>EMAIL</label>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                name="email"
+                placeholder="Ex: ...@coud.edu.sn"
+              />
+              <span
+                class="login-erreur"
+                *ngIf="erreuremail != ''"
+                style="color: red"
+              >
+                {{ erreuremail }}
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button
+                type="submit"
+                class="btn"
+                name="submit"
+                (click)="onUpdate()"
+                title="MODIFIER UN UTILISATEUR"
+              >
+                MODIFIER
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>ANNULER</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+        APPLIQUER
+      </button>
+    </mat-dialog-actions>
+  </body>
+</html>

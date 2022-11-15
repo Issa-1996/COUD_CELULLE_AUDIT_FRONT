@@ -7,6 +7,7 @@ import { UserModel } from 'app/Model/User.model';
 import { MethodeService } from 'app/Service/methode.service';
 import { TransferDataService } from 'app/Service/transfer-data.service';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { DetailUserComponent } from '../detail-user/detail-user.component';
 import { UpdateUserComponent } from '../update-user/update-user.component';
 
 
@@ -57,7 +58,7 @@ export class UsersComponent implements AfterViewInit, OnInit {
     });
   }
   detailAgent(user:any) {
-    const dialogRef = this.dialog.open(UpdateUserComponent);
+    const dialogRef = this.dialog.open(DetailUserComponent);
     this.transferdata.setData(user);
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
