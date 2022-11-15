@@ -32,6 +32,7 @@ export class CourierArriverComponent implements OnInit {
   erreurdateReponse = '';
   erreurnumeroReponse = '';
   erreurnumeroCourier = '';
+  erreurnumeroCompte = '';
   erreurobject = '';
   erreurControleur = ' ';
   erreurMontant = '';
@@ -65,6 +66,7 @@ export class CourierArriverComponent implements OnInit {
       destinataire: ['', Validators.required],
       NumeroFacture: ['', Validators.required],
       numeroCourier: ['', Validators.required],
+      numeroCompte: ['', Validators.required],
       montant: ['', Validators.required],
       typeDeCourrier: ['', Validators.required],
       dateArriver: ['', Validators.required],
@@ -98,6 +100,11 @@ export class CourierArriverComponent implements OnInit {
     });
     this.addForm.get('numeroCourier').valueChanges.subscribe(() => {
       this.erreurnumeroCourier = '';
+      this.erreur = '';
+      this.success = '';
+    });
+    this.addForm.get('numeroCompte').valueChanges.subscribe(() => {
+      this.erreurnumeroCompte = '';
       this.erreur = '';
       this.success = '';
     });
@@ -136,6 +143,9 @@ export class CourierArriverComponent implements OnInit {
     }
     if (this.addForm.get('numeroCourier').value.trim() === '') {
       this.erreurnumeroCourier = 'Numero Courier obligatoire !';
+    }
+    if (this.addForm.get('numeroCompte').value.trim() === '') {
+      this.erreurnumeroCompte = 'Numero Compte obligatoire !';
     }
     if (this.addForm.get('dateArriver').value.trim() === '') {
       this.erreurdateArriver = 'Date Arriver obligatoire !';
