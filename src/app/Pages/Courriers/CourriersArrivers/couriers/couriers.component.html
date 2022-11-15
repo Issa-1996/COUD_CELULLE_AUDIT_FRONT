@@ -6,7 +6,7 @@
   <mat-stepper [linear]="isLinear" #stepper class="shadow-lg">
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>COURRIERS-ENCOURS</ng-template>
+        <ng-template matStepLabel>COURRIERS-ARRIVÉS</ng-template>
         <app-courrier-liste
           *ngIf="
             role.includes('ROLE_ASSISTANTE') ||
@@ -35,7 +35,7 @@
         role.includes('ROLE_ASSISTANTE')
       "
     >
-      <ng-template matStepLabel>COURRIERS-TRAITÉS </ng-template>
+      <ng-template matStepLabel>COURRIERS-ENCOURS </ng-template>
       <courriers-valider></courriers-valider>
     </mat-step>
 
@@ -46,7 +46,7 @@
         role.includes('ROLE_CONTROLEURS')
       "
     >
-      <ng-template matStepLabel>COURRIERS-ARRIVÉS</ng-template>
+      <ng-template matStepLabel>COURRIERS-VALIDÉS</ng-template>
       <total-arriver></total-arriver>
     </mat-step>
 
