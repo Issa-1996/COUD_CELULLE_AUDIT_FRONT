@@ -31,7 +31,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     'depart',
   ];
   public role: any[];
-  database: CourierModel[] = [];
+  database: any;
   datacourrier: CourierModel[] = [];
   dataAssis: CourierModel[] = [];
   objetCourier: CourierModel[] = [];
@@ -75,7 +75,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     if (decodedToken.roles.includes('ROLE_CONTROLEURS')) {
       const dialogRef = this.dialog.open(FicheDeControleComponent);
       this.transferdata.setData(fiche);
-      this.dataDepot.setData(fiche);      
+      this.dataDepot.setData(fiche);
       dialogRef.afterClosed().subscribe((result) => {
         console.log(`Dialog result: ${result}`);
       });
@@ -163,33 +163,23 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       const decodedToken = this.helper.decodeToken(
         localStorage.getItem('token')
       );
-      const username: string[] = decodedToken.username;
-      this.authService.getUserConnected(username).subscribe((data) => {
-        this.database = data['hydra:member'][0]['courier'];
-        for (let index = 0; index < this.database.length; index++) {
-          const element = this.database[index];
-          if (element['@type'] == 'CourierArriver') {
-            this.dataAssis[index] = element;
-          }
-        }
-        this.dataAssis = this.dataAssis.filter(function (el) {
-          return el != null;
-        });
-        if (this.dataAssis.length == 0) {
+      this.methodeService.getCourriersArrivers().subscribe((data) => {
+        this.database = data["hydra:member"];
+        if (this.database.length == 0) {
           this.searchVS.currentSearch.subscribe((dataa: any) => {
             if (dataa) {
-              this.dataAssis = dataa;
+              this.database = dataa;
               this.dataSource = new MatTableDataSource<CourierModel>(
-                this.dataAssis
+                this.database
               );
               this.dataSource.paginator = this.paginator;
             }
           });
         } else {
-          for (let index = 0; index < this.dataAssis.length; index++) {
-            if (this.dataAssis[index].etat == '0') {
-              if (this.dataAssis[index].statut == '0') {
-                this.datacourrier[index] = this.dataAssis[index];
+          for (let index = 0; index < this.database.length; index++) {
+            if (this.database[index].etat == '0') {
+              if (this.database[index].statut == '0') {
+                this.datacourrier[index] = this.database[index];
                 this.objetCourier = this.datacourrier.filter(function (el) {
                   return el != null;
                 });
@@ -233,7 +223,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
     }
 
     if (this.role.includes('ROLE_COORDINATEUR')) {
-      this.methodeService.getCourriers().subscribe((data) => {
+      this.methodeService.getCourriersArrivers().subscribe((data) => {
         this.database = data['hydra:member'];
 
         if (this.database.length == 0) {

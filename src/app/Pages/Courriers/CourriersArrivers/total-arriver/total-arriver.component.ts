@@ -126,21 +126,19 @@ export class TotalArriverComponent implements OnInit {
         localStorage.getItem('token')
       );
       const username: string[] = decodedToken.username;
-      this.authService.getUserConnected(username).subscribe((data) => {
-        this.database = data['hydra:member'][0]['courier'];
+      this.methodeService.getCourriersArrivers().subscribe((data) => {
+        this.database = data['hydra:member'];
         for (let index = 0; index < this.database.length; index++) {
           const element = this.database[index];
-          if (element['@type'] == 'CourierArriver') {
-            if (element.ficheDeControle != null) {
-              if (element.etat == '1') {
-                this.dataTempo[index] = element;
-              }
+          if (element.ficheDeControle != null) {
+            if (element.etat == '1') {
+              this.dataTempo[index] = element;
             }
           }
         }
         this.dataTempo = this.dataTempo.filter(function (el) {
           return el != null;
-        });   
+        });
         for (let index = 0; index < this.dataTempo.length; index++) {
           this.datacourrier[index] = this.dataTempo[index];
           this.objetCourier = this.datacourrier.filter(function (el) {
@@ -182,7 +180,7 @@ export class TotalArriverComponent implements OnInit {
       });
     }
     if (this.role.includes('ROLE_COORDINATEUR')) {
-      this.methodeService.getCourriers().subscribe((data) => {
+      this.methodeService.getCourriersArrivers().subscribe((data) => {
         this.database = data['hydra:member'];
         for (let i = 0; i < this.database.length; i++) {
           if (this.database[i].ficheDeControle != null) {

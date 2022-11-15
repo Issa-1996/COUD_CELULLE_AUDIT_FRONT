@@ -68,7 +68,7 @@ export class MethodeService {
   getAssistantes(): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/assistantes`);
   }
-  getCourriers(): Observable<CourierModel>{
+  getCourriersArrivers(): Observable<CourierModel>{
     return this.httpClient.get<CourierModel>(`${envVars.url}/coud/courier_arrivers`);
   }
   getAllCourriers(): Observable<CourierModel>{

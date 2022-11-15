@@ -129,48 +129,37 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
       const decodedToken = this.helper.decodeToken(
         localStorage.getItem('token')
       );
-      const username: string[] = decodedToken.username;
-      this.authService.getUserConnected(username).subscribe((data) => {
-        this.database = data['hydra:member'][0]['courier'];
+      this.methodeService.getAllCourriersDepart().subscribe((data) => {
+        this.database = data['hydra:member'];
         for (let index = 0; index < this.database.length; index++) {
-          if (this.database[index]['@type'] == 'CourierDepart') {
-            this.datacourrier[index] = this.database[index];
-          }
-        }
-        this.objetCourier = this.datacourrier.filter(function (el) {
-          return el != null;
-        });
-        for (let index = 0; index < this.objetCourier.length; index++) {
           this.searchVS.currentSearch.subscribe((data: any) => {
             if (data != 0) {
-              if (this.objetCourier[index]['id'] == data['id']) {
-                this.objetCourier[index] = data;
+              if (this.database[index]['id'] == data['id']) {
+                this.database[index] = data;
                 this.dataSource = new MatTableDataSource<CourierModel>(
-                  this.objetCourier
+                  this.database
                 );
                 this.dataSource.paginator = this.paginator;
               } else {
                 if (data.length != 0) {
-                  if (this.objetCourier.includes(data)) {
+                  if (this.database.includes(data)) {
                     // console.log("OUIIII");
-                  } else if (!this.objetCourier.includes(data)) {
+                  } else if (!this.database.includes(data)) {
                     compt++;
                   }
                 }
               }
-              if (compt == this.objetCourier.length) {
-                this.objetCourier[index + 1] = data;
+              if (compt == this.database.length) {
+                this.database[index + 1] = data;
                 this.dataSource = new MatTableDataSource<CourierModel>(
-                  this.objetCourier
+                  this.database
                 );
                 this.dataSource.paginator = this.paginator;
               }
             }
           });
         }
-        this.dataSource = new MatTableDataSource<CourierModel>(
-          this.objetCourier
-        );
+        this.dataSource = new MatTableDataSource<CourierModel>(this.database);
         this.dataSource.paginator = this.paginator;
       });
     }
