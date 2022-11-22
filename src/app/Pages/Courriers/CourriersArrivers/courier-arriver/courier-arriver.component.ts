@@ -41,7 +41,6 @@ export class CourierArriverComponent implements OnInit {
   erreurtypeDeCourrier = '';
   erreur = '';
   success = '';
-  code = '';
   ConnecterAssistante: UserModel;
   ConnecterCoordinateur: UserModel;
   id: number;
@@ -229,7 +228,7 @@ export class CourierArriverComponent implements OnInit {
           this.ConnecterAssistante = data['hydra:member'][0]['id'];
         });
     }
-    if (decodedToken.roles.includes('ROLE_COORDINATEUR')) {
+    if (decodedToken.roles.includes('ROLE_COORDONATEUR')) {
       this.methodeService
         .getCoordonateursByUsername(decodedToken.username)
         .subscribe((data) => {

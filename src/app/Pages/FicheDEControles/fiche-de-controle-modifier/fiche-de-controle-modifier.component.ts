@@ -123,7 +123,7 @@ export class FicheDeControleModifierComponent implements OnInit {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     const username: string[] = decodedToken.username;
     this.authService.getUserConnected(username).subscribe((data) => {
-      if (data['hydra:member'][0]['roles'].includes('ROLE_COORDINATEUR')) {
+      if (data['hydra:member'][0]['roles'].includes('ROLE_COORDONATEUR')) {
         this.methodeService
           .getCoordonateursByUsername(data['hydra:member'][0]['username'])
           .subscribe((coord) => {
@@ -150,7 +150,7 @@ export class FicheDeControleModifierComponent implements OnInit {
             });
           });
       } else if (
-        data['hydra:member'][0]['roles'].includes('ROLE_CONTROLEURS')
+        data['hydra:member'][0]['roles'].includes('ROLE_CONTROLEUR')
       ) {
         this.methodeService
           .getControleursByUsername(data['hydra:member'][0]['username'])

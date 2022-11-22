@@ -72,7 +72,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
   }
   validerCourrierArriver(fiche: any) {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    if (decodedToken.roles.includes('ROLE_CONTROLEURS')) {
+    if (decodedToken.roles.includes('ROLE_CONTROLEUR')) {
       const dialogRef = this.dialog.open(FicheDeControleComponent);
       this.transferdata.setData(fiche);
       this.dataDepot.setData(fiche);
@@ -80,7 +80,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
         console.log(`Dialog result: ${result}`);
       });
       this.dataDepot.setData(fiche);
-    } else if (decodedToken.roles.includes('ROLE_COORDINATEUR')) {
+    } else if (decodedToken.roles.includes('ROLE_COORDONATEUR')) {
       const dialogRef = this.dialog.open(CourierDepartComponent);
       this.transferdata.setData(fiche);
       dialogRef.afterClosed().subscribe((result) => {
@@ -105,7 +105,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
   }
   listeCourrier() {
     var compt = 0;
-    if (this.role.includes('ROLE_CONTROLEURS')) {
+    if (this.role.includes('ROLE_CONTROLEUR')) {
       const decodedToken = this.helper.decodeToken(
         localStorage.getItem('token')
       );
@@ -222,7 +222,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
       });
     }
 
-    if (this.role.includes('ROLE_COORDINATEUR')) {
+    if (this.role.includes('ROLE_COORDONATEUR')) {
       this.methodeService.getCourriersArrivers().subscribe((data) => {
         this.database = data['hydra:member'];
 

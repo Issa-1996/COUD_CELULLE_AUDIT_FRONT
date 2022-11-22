@@ -65,11 +65,11 @@ export class LoginComponent implements OnInit {
           const decodedToken = this.helper.decodeToken(data.token);
           const roles: string[] = decodedToken.roles;
 
-          if (roles.includes('ROLE_COORDINATEUR')) {
+          if (roles.includes('ROLE_COORDONATEUR')) {
             this.router.navigate(['/container/accueil']);
           }
           if (
-            roles.includes('ROLE_CONTROLEURS') ||
+            roles.includes('ROLE_CONTROLEUR') ||
             roles.includes('ROLE_ASSISTANTE')
           ) {
             this.router.navigate(['/container/courier']);

@@ -86,7 +86,7 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
 
   listeCourrierDepart() {
     var compt = 0;
-    if (this.role.includes('ROLE_CONTROLEURS')) {
+    if (this.role.includes('ROLE_CONTROLEUR')) {
       const decodedToken = this.helper.decodeToken(
         localStorage.getItem('token')
       );
@@ -175,7 +175,7 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
       });
     }
 
-    if (this.role.includes('ROLE_COORDINATEUR')) {
+    if (this.role.includes('ROLE_COORDONATEUR')) {
       this.methodeService.getAllCourriersDepart().subscribe((data) => {
         this.database = data['hydra:member'];
         if (this.database.length == 0) {

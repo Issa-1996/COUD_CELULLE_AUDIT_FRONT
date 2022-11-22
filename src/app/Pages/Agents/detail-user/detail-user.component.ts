@@ -29,10 +29,9 @@ export class DetailUserComponent implements OnInit {
       matricule: ['', Validators.required],
       nom: ['', Validators.required],
       prenom: ['', [Validators.required]],
-      dateDeNaissance: ['', [Validators.required]],
+      dateAjout: ['', [Validators.required]],
       email: ['', [Validators.required]],
     });
     this.addForm.patchValue(this.dataUserUpdate);
-    // console.log(this.dataUserUpdate.roles[0]);
   }
 }

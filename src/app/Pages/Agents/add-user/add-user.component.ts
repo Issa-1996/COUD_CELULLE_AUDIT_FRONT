@@ -22,14 +22,11 @@ export class AddUserComponent implements OnInit {
   erreurmatricule = '';
   erreurnom = '';
   erreurprenom = '';
-  erreurdateDeNaissance = '';
+  erreurdateAjout = '';
   erreurprofil = '';
   erreuremail = '';
   erreur = '';
   success = '';
-  code = '';
-  sending = false;
-  btnText = 'Envoyer';
   today = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
 
   constructor(
@@ -47,7 +44,7 @@ export class AddUserComponent implements OnInit {
       matricule: ['', Validators.required],
       nom: ['', Validators.required],
       prenom: ['', [Validators.required]],
-      dateDeNaissance: ['', [Validators.required]],
+      dateAjout: ['', [Validators.required]],
       email: ['', [Validators.required]],
     });
     this.addForm.get('username').valueChanges.subscribe(() => {
@@ -70,8 +67,8 @@ export class AddUserComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('dateDeNaissance').valueChanges.subscribe(() => {
-      this.erreurdateDeNaissance = '';
+    this.addForm.get('dateAjout').valueChanges.subscribe(() => {
+      this.erreurdateAjout = '';
       this.erreur = '';
       this.success = '';
     });
@@ -103,8 +100,8 @@ export class AddUserComponent implements OnInit {
     if (this.addForm.get('prenom').value.trim() === '') {
       this.erreurprenom = 'Prenom obligatoire !';
     }
-    if (this.addForm.get('dateDeNaissance').value.trim() === '') {
-      this.erreurdateDeNaissance = 'Date De Naissance obligatoire !';
+    if (this.addForm.get('dateAjout').value.trim() === '') {
+      this.erreurdateAjout = 'Date Ajout obligatoire !';
     }
     if (this.addForm.get('email').value.trim() === '') {
       this.erreuremail = 'E-mail obligatoire !';
@@ -114,7 +111,7 @@ export class AddUserComponent implements OnInit {
     }
 
     if (this.addForm.get('profil').value == '3') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_COORDINATEUR']));
+      this.addForm.addControl('roles', new FormControl(['ROLE_COORDONATEUR']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
@@ -132,7 +129,7 @@ export class AddUserComponent implements OnInit {
         }
       );
     } else if (this.addForm.get('profil').value == '2') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_CONTROLEURS']));
+      this.addForm.addControl('roles', new FormControl(['ROLE_CONTROLEUR']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
