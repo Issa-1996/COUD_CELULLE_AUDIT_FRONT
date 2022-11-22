@@ -23,7 +23,7 @@
       </div>
       <form [formGroup]="addForm">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <label for="object:" class="form-label">TYPE DE COURRIER</label>
             <select
               name="typeDeCourrier"
@@ -41,6 +41,22 @@
               style="color: red"
             >
               {{ erreurtypeDeCourrier }}
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label for="numeroCompte:" class="form-label">NUMERO COMPTE</label>
+            <input
+              type="text"
+              class="form-control"
+              id="numeroCompte"
+              formControlName="numeroCompte"
+            />
+            <span
+              class="login-erreur"
+              *ngIf="erreurnumeroCompte != ''"
+              style="color: red"
+            >
+              {{ erreurnumeroCompte }}
             </span>
           </div>
         </div>
@@ -62,7 +78,7 @@
             </span>
           </div>
           <div class="col-md-6">
-            <label for="object:" class="form-label">Object</label>
+            <label for="object:" class="form-label">OBJET</label>
             <input
               type="text"
               class="form-control"
@@ -99,7 +115,7 @@
           </div>
 
           <div class="col-md-6">
-            <label for="montant" class="form-label">Montant</label>
+            <label for="montant" class="form-label">MONTANT</label>
             <input
               type="text"
               class="form-control"
@@ -176,7 +192,7 @@
             </span>
           </div>
           <div class="col-md-6">
-            <label>Date Arriver du Courier</label>
+            <label>DATE ARRIVER DU COURRIER</label>
             <input
               type="date"
               class="form-control"
@@ -274,10 +290,7 @@
       </form>
     </div>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>ANNULER</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-        APPLIQUER
-      </button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>FERMER</button>
     </mat-dialog-actions>
   </body>
 </html>

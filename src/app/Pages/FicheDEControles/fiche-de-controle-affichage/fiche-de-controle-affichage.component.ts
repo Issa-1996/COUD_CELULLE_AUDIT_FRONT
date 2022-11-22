@@ -62,7 +62,6 @@ export class FicheDeControleAffichageComponent implements OnInit {
              },
           
              {
-            //  image: await this.getBase64ImageFromURL("https://images.pexels.com/photos/209640/pexels-photo-209640.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=300"),
             //  image: await this.getBase64ImageFromURL("../assets/logo_coud.png"),
              },
 

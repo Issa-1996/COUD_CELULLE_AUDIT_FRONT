@@ -5,6 +5,7 @@ import { UserModel } from "./User.model";
 export interface CourierModel{
     id: string;
     numeroCourier: string;
+    numeroCompte: string;
     object:string;
     nature: string;
     etat:string;
