@@ -13,17 +13,8 @@ import { TransferDataService } from 'app/Service/transfer-data.service';
 })
 export class CourrierDepartAffichageComponent implements OnInit {
   addForm: FormGroup;
-
-  erreurdateDepart = '';
-  erreurdestinataire = '';
-  erreurnumeroArchive = '';
-  erreurobservation = '';
-  erreurnumeroOrdre = '';
-  erreurnombrePiece = '';
-  erreurnumeroCourier = '';
-  erreurobject = '';
-  erreurNumeroFacture = '';
   erreur = '';
+  success = '';
   courrierDepart: CourierModel;
   constructor(
     private formBuilder: FormBuilder,
@@ -33,16 +24,16 @@ export class CourrierDepartAffichageComponent implements OnInit {
   ngOnInit(): void {
     this.courrierDepart = this.transferData.getData();
     this.addForm = this.formBuilder.group({
+      id: [''],
       object: ['', Validators.required],
-      numeroCourier: ['', Validators.required],
-      Date: ['', Validators.required],
       destinataire: ['', Validators.required],
+      numeroCourier: ['', Validators.required],
+      dateDepart: ['', Validators.required],
       observation: ['', [Validators.required]],
-      numeroArchive: ['', Validators.required],
-      nombrePiece: ['', Validators.required],
-      numeroOrdre: ['', Validators.required],
       NumeroFacture: ['', Validators.required],
       montant: ['', Validators.required],
+      assistante: ['', Validators.required],
+      coordinateur: ['', Validators.required],
     });
     this.addForm.patchValue(this.courrierDepart);
   }

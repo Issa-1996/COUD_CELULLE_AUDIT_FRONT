@@ -73,10 +73,3 @@ export class UsersComponent implements AfterViewInit, OnInit {
     });
   }
 }
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}

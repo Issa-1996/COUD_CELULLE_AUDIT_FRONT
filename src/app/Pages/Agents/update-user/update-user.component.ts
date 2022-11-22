@@ -9,7 +9,6 @@ import { ProfilModel } from 'app/Model/Profil.model';
 import { UserModel } from 'app/Model/User.model';
 import { MethodeService } from 'app/Service/methode.service';
 import { TransferDataService } from 'app/Service/transfer-data.service';
-import { Router } from 'express';
 
 @Component({
   selector: 'app-update-user',
@@ -111,7 +110,7 @@ export class UpdateUserComponent implements OnInit {
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.updateCoordonateur(this.addForm.value).subscribe(
         (data) => {
-          console.log(data);          
+          console.log(data);
           this.erreur = '';
           this.success = 'MODIFIER  COORDONATEUR AVEC SUCCESS !';
         },
@@ -129,7 +128,7 @@ export class UpdateUserComponent implements OnInit {
       this.addForm.addControl('roles', new FormControl(['ROLE_CONTROLEUR']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.updateControleur(this.addForm.value).subscribe(
-        (data) => {         
+        (data) => {
           this.erreur = '';
           this.success = 'MODIFIER CONTROLEUR AVEC SUCCESS';
         },
@@ -147,7 +146,7 @@ export class UpdateUserComponent implements OnInit {
       this.addForm.addControl('roles', new FormControl(['ROLE_ASSISTANTE']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.updateAssistante(this.addForm.value).subscribe(
-        (data) => {         
+        (data) => {
           this.erreur = '';
           this.success = 'MODIFIER ASSISTANTE AVEC  SUCCESS !';
         },

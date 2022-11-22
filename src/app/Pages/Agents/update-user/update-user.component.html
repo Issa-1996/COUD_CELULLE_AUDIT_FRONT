@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <div class="modal-body">
-        <div class="menu text-center">MODIFIER UTILISATEURS</div>
+        <div class="menu text-center">MODIFIER UTILISATEUR</div>
         <div
           *ngIf="erreur != ''"
           class="login-erreur-container text-center bg-danger"
@@ -30,7 +30,6 @@
                 type="text"
                 class="form-control"
                 formControlName="username"
-                name="username"
               />
               <span
                 class="login-erreur"
@@ -44,8 +43,6 @@
               <label>AFFECTER UN PROFIL</label>
               <select
                 class="form-control"
-                id="profil"
-                name="profil"
                 formControlName="profil"
               >
                 <option disabled>Choisir un profil</option>

@@ -27,9 +27,6 @@ export class AddUserComponent implements OnInit {
   erreuremail = '';
   erreur = '';
   success = '';
-  code = '';
-  sending = false;
-  btnText = 'Envoyer';
   today = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
 
   constructor(

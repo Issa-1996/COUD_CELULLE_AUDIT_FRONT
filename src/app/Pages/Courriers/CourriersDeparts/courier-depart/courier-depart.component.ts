@@ -55,6 +55,7 @@ export class CourierDepartComponent implements OnInit {
       object: ['', Validators.required],
       destinataire: ['', Validators.required],
       numeroCourier: ['', Validators.required],
+      numeroCompte: ['', Validators.required],
       dateDepart: ['', Validators.required],
       observation: ['', [Validators.required]],
       NumeroFacture: ['', Validators.required],
@@ -70,11 +71,6 @@ export class CourierDepartComponent implements OnInit {
     });
     this.addForm.get('observation').valueChanges.subscribe(() => {
       this.erreurobservation = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('montant').valueChanges.subscribe(() => {
-      this.erreurnumeroOrdre = '';
       this.erreur = '';
       this.success = '';
     });
@@ -104,7 +100,7 @@ export class CourierDepartComponent implements OnInit {
   }
   subscribeCourierDepart(objetCourierDepart: any) {
     this.methodeService.addCourierDepart(objetCourierDepart).subscribe(
-      (data) => {        
+      (data) => {  
         this.courrierArrier.etat = '1';
         this.updateCourierArriver(this.courrierArrier);
         this.erreur = '';

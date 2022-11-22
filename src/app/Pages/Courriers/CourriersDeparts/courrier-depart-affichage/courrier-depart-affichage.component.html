@@ -1,68 +1,111 @@
 <div class="container col-md-12">
   <h4>DETAIL COURRIER DEPART</h4>
+  <div
+    *ngIf="erreur != ''"
+    class="login-erreur-container text-center bg-danger"
+  >
+    <p class="login-erreur">{{ erreur }}</p>
+  </div>
+  <div
+    *ngIf="success != ''"
+    class="login-erreur-container text-center bg-success"
+  >
+    <p class="login-erreur">{{ success }}</p>
+  </div>
   <form method="post" [formGroup]="addForm">
-    <div class="mb-3">
-      <label class="form-label">OBJET</label>
-      <input disabled type="text" class="form-control" formControlName="object" />
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label>OBJET</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="object"
+          disabled
+        />
+      </div>
+      <div class="col-md-6">
+        <label>DESTINATAIRE</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="destinataire"
+          disabled
+        />
+      </div>
     </div>
-    <div class="row">
-      <div class="col">
+    <div class="row mb-2">
+      <div class="col-md-6">
         <label>NUMERO COURRIER</label>
-        <input type="text" disabled class="form-control" formControlName="numeroCourier"/>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="numeroCourier"
+          disabled
+        />
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <label>DATE DEPART</label>
-        <input type="date" disabled class="form-control" formControlName="dateDepart" />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="object"
+          disabled
+        />
       </div>
     </div>
-    <div class="form-group">
-      <label>OBSERVATION COURRIER</label>
-      <textarea class="form-control" disabled rows="3" formControlName="observation"></textarea>
-    </div>
-    <div class="row">
-      <div class="col">
+    <div class="row mb-2">
+      <div class="col-md-6">
         <label>NUMERO FACTURE </label>
         <input
           type="text"
           class="form-control"
-          disabled
           formControlName="NumeroFacture"
+          disabled
         />
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <label>MONTANT</label>
         <input
           type="text"
           class="form-control"
-          disabled
           formControlName="montant"
+          disabled
         />
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label>DESTINATAIRE</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="destinataire"
+          disabled
+        />
+      </div>
+      <div class="col-md-6">
+        <label>DATE DEPART</label>
+        <input
+          type="date"
+          class="form-control"
+          formControlName="dateDepart"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="row mb-2">
       <div class="col-md-12">
-        <label>Observation Courier</label>
+        <label>OBSERVATION COURRIER</label><br />
         <textarea
           class="form-control"
-          disabled
-          rows="3"
           formControlName="observation"
+          rows="3"
+          disabled
         ></textarea>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col">
-        <label>NOMBRE DE PIECES</label>
-        <input type="text" disabled class="form-control" formControlName="nombrePiece"/>
-      </div>
-      <div class="col">
-        <label>NUMERO ORDRE</label>
-        <input type="text" disabled class="form-control" formControlName="numeroOrdre"/>
-      </div>
-    </div> -->
   </form>
 </div>
 <mat-dialog-actions align="end">
-  <!-- <button mat-button mat-dialog-close>ANNULER</button>-->
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>FERMER</button>
 </mat-dialog-actions>

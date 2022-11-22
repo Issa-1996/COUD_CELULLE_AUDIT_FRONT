@@ -41,7 +41,6 @@ export class CourierArriverComponent implements OnInit {
   erreurtypeDeCourrier = '';
   erreur = '';
   success = '';
-  code = '';
   ConnecterAssistante: UserModel;
   ConnecterCoordinateur: UserModel;
   id: number;

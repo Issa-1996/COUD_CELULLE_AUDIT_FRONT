@@ -33,6 +33,5 @@ export class DetailUserComponent implements OnInit {
       email: ['', [Validators.required]],
     });
     this.addForm.patchValue(this.dataUserUpdate);
-    // console.log(this.dataUserUpdate.roles[0]);
   }
 }

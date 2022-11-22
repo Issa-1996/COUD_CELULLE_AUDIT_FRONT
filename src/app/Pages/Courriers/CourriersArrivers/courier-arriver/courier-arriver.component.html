@@ -44,11 +44,10 @@
             </span>
           </div>
           <div class="col-md-6">
-            <label for="numeroCompte:" class="form-label">NUMERO COMPTE</label>
+            <label class="form-label">NUMERO COMPTE</label>
             <input
               type="text"
               class="form-control"
-              id="numeroCompte"
               formControlName="numeroCompte"
             />
             <span
@@ -67,7 +66,6 @@
               type="text"
               class="form-control"
               formControlName="numeroCourier"
-              id="numeroCourier"
             />
             <span
               class="login-erreur"
@@ -78,11 +76,10 @@
             </span>
           </div>
           <div class="col-md-6">
-            <label for="object:" class="form-label">OBJET</label>
+            <label class="form-label">OBJET</label>
             <input
               type="text"
               class="form-control"
-              id="object"
               formControlName="object"
             />
             <span
@@ -96,13 +93,12 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <label for="NumeroFacture:" class="form-label"
+            <label class="form-label"
               >NUMÉRO FACTURE</label
             >
             <input
               type="text"
               class="form-control"
-              id="NumeroFacture"
               formControlName="NumeroFacture"
             />
             <span
@@ -115,11 +111,10 @@
           </div>
 
           <div class="col-md-6">
-            <label for="montant" class="form-label">MONTANT</label>
+            <label class="form-label">MONTANT</label>
             <input
               type="text"
               class="form-control"
-              id="montant"
               formControlName="montant"
             />
             <span
@@ -133,11 +128,10 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <label for="destinataire:" class="form-label">DESTINATAIRE</label>
+            <label class="form-label">DESTINATAIRE</label>
             <input
               type="text"
               class="form-control"
-              id="destinataire"
               formControlName="destinataire"
             />
             <span
@@ -155,7 +149,6 @@
                 type="text"
                 class="form-control"
                 formControlName="expediteur"
-                id="expediteur"
               />
               <span
                 class="login-erreur"
@@ -172,7 +165,6 @@
             <label>AFFECTER UN CONTROLEUR</label>
             <select
               class="form-control"
-              id="controleurs"
               formControlName="controleurs"
             >
               <option disabled>CHOISIR UN CONTROLEUR</option>
@@ -197,7 +189,6 @@
               type="date"
               class="form-control"
               formControlName="dateArriver"
-              id="dateArriver"
             />
             <span
               class="login-erreur"
@@ -208,80 +199,11 @@
             </span>
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="col-md-6">
-            <label>Numéro Correspondance</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="numeroCorrespondance"
-              id="numeroCorrespondance"
-            />
-            <span
-              class="login-erreur"
-              *ngIf="erreurnumeroCorrespondance != ''"
-              style="color: red"
-            >
-              {{ erreurnumeroCorrespondance }}
-            </span>
-          </div>
-          <div class="col-md-6">
-            <label>Date Corres Courier</label>
-            <input
-              type="date"
-              class="form-control"
-              id="dateCorrespondance"
-              formControlName="dateCorrespondance"
-            />
-            <span
-              class="login-erreur"
-              *ngIf="erreurdateCorrespondance != ''"
-              style="color: red"
-            >
-              {{ erreurdateCorrespondance }}
-            </span>
-          </div>
-        </div> -->
-        <!-- <div class="row">
-          <div class="col-md-6">
-            <label>Numéro Réponse</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="numeroReponse"
-              id="numeroReponse"
-            />
-            <span
-              class="login-erreur"
-              *ngIf="erreurnumeroReponse != ''"
-              style="color: red"
-            >
-              {{ erreurnumeroReponse }}
-            </span>
-          </div>
-          <div class="col-md-6">
-            <label>Date Réponse</label>
-            <input
-              type="date"
-              class="form-control"
-              id="dateReponse"
-              formControlName="dateReponse"
-            />
-            <span
-              class="login-erreur"
-              *ngIf="erreurdateReponse != ''"
-              style="color: red"
-            >
-              {{ erreurdateReponse }}
-            </span>
-          </div>
-        </div> -->
         <div class="text-center">
           <button
             type="submit"
             class="btn btn-lg btn-block"
-            name="submit"
-            title="Enrégistrer un courrier"
+            title="ENREGISTREMENT COURRIER"
             (click)="onSignIn()"
           >
             ENREGISTRER

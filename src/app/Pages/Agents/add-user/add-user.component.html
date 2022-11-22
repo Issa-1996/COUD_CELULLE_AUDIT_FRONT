@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <div class="modal-body">
-        <div class="menu text-center">AJOUTER UTILISATEURS</div>
+        <div class="menu text-center">AJOUT UTILISATEUR</div>
         <div
           *ngIf="erreur != ''"
           class="login-erreur-container text-center bg-danger"
@@ -30,7 +30,6 @@
                 type="text"
                 class="form-control"
                 formControlName="username"
-                name="username"
               />
               <span
                 class="login-erreur"
@@ -44,8 +43,6 @@
               <label>AFFECTER UN PROFIL</label>
               <select
                 class="form-control"
-                id="profil"
-                name="profil"
                 formControlName="profil"
               >
                 <option disabled>Choisir un profil</option>
@@ -69,8 +66,6 @@
                 type="text"
                 class="form-control"
                 formControlName="matricule"
-                name="matricule"
-                autofocus=""
               />
               <span
                 class="login-erreur"
@@ -86,7 +81,6 @@
                 type="text"
                 class="form-control"
                 formControlName="nom"
-                name="nom"
               />
               <span
                 class="login-erreur"
@@ -104,7 +98,6 @@
                 type="text"
                 class="form-control"
                 formControlName="prenom"
-                name="prenom"
               />
               <span
                 class="login-erreur"
@@ -120,8 +113,6 @@
                 type="date"
                 class="form-control"
                 formControlName="dateAjout"
-                name="Date"
-                id="date-picker"
               />
               <span
                 class="login-erreur"
@@ -139,7 +130,6 @@
                 type="email"
                 class="form-control"
                 formControlName="email"
-                name="email"
                 placeholder="Ex: ...@coud.edu.sn"
               />
               <span
@@ -156,9 +146,8 @@
               <button
                 type="submit"
                 class="btn"
-                name="submit"
                 (click)="onSignIn()"
-                title="Enrégistrer un utilisateur"
+                title="ENREGISTRER UN UTILISATEUR"
               >
                 ENREGISTRER
               </button>
@@ -168,9 +157,8 @@
       </div>
     </div>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>ANNULER</button>
       <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-        APPLIQUER
+        FERMER
       </button>
     </mat-dialog-actions>
   </body>

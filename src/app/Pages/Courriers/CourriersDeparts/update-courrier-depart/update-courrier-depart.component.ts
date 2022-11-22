@@ -13,21 +13,9 @@ import { TransferDataService } from 'app/Service/transfer-data.service';
 export class UpdateCourrierDepartComponent implements OnInit {
   addForm: FormGroup;
 
-  erreurdateDepart = '';
-  erreurdestinataire = '';
-  erreurnumeroArchive = '';
   erreurobservation = '';
-  erreurnumeroOrdre = '';
-  erreurnombrePiece = '';
-  erreurnumeroCourier = '';
-  erreurobject = '';
   erreur = '';
   success = '';
-  erreurNumeroFacture = '';
-  erreurmontant = '';
-  code = '';
-  sending = false;
-  btnText = 'Envoyer';
   courrierDepartModifier: CourierModel;
   constructor(
     private formBuilder: FormBuilder,
@@ -43,63 +31,15 @@ export class UpdateCourrierDepartComponent implements OnInit {
       object: ['', Validators.required],
       destinataire: ['', Validators.required],
       numeroCourier: ['', Validators.required],
-      Date: ['', Validators.required],
+      dateDepart: ['', Validators.required],
       observation: ['', [Validators.required]],
-      // numeroArchive: ['', Validators.required],
-      // nombrePiece: ['', Validators.required],
-      // numeroOrdre: ['', Validators.required],
       NumeroFacture: ['', Validators.required],
       montant: ['', Validators.required],
       assistante: ['', Validators.required],
       coordinateur: ['', Validators.required],
     });
-    this.addForm.get('object').valueChanges.subscribe(() => {
-      this.erreurobject = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('destinataire').valueChanges.subscribe(() => {
-      this.erreurdestinataire = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('numeroCourier').valueChanges.subscribe(() => {
-      this.erreurnumeroCourier = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('Date').valueChanges.subscribe(() => {
-      this.erreurdateDepart = '';
-      this.erreur = '';
-      this.success = '';
-    });
     this.addForm.get('observation').valueChanges.subscribe(() => {
       this.erreurobservation = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    // this.addForm.get('numeroArchive').valueChanges.subscribe(() => {
-    //   this.erreurnumeroArchive = '';
-    //   this.erreur = '';
-    //   this.success = '';
-    // });
-    // this.addForm.get('nombrePiece').valueChanges.subscribe(() => {
-    //   this.erreurnombrePiece = '';
-    //   this.erreur = '';
-    //   this.success = '';
-    // });
-    // this.addForm.get('numeroOrdre').valueChanges.subscribe(() => {
-    //   this.erreurnumeroOrdre = '';
-    //   this.erreur = '';
-    //   this.success = '';
-    // });
-    this.addForm.get('NumeroFacture').valueChanges.subscribe(() => {
-      this.erreurnombrePiece = '';
-      this.erreur = '';
-      this.success = '';
-    });
-    this.addForm.get('montant').valueChanges.subscribe(() => {
-      this.erreurnumeroOrdre = '';
       this.erreur = '';
       this.success = '';
     });
@@ -107,30 +47,9 @@ export class UpdateCourrierDepartComponent implements OnInit {
   }
 
   onSignIn(): any {
-    if (this.addForm.get('object').value.trim() === '') {
-      this.erreurobject = 'Objet obligatoire !';
-    }
-    if (this.addForm.get('numeroCourier').value.trim() === '') {
-      this.erreurnumeroCourier = 'Numero courier obligatoire !';
-    }
-    if (this.addForm.get('Date').value.trim() === '') {
-      this.erreurdateDepart = 'Date départ obligatoire !';
-    }
-    if (this.addForm.get('destinataire').value.trim() === '') {
-      this.erreurdestinataire = 'Destinataire obligatoire !';
-    }
     if (this.addForm.get('observation').value.trim() === '') {
       this.erreurobservation = 'Observation obligatoire !';
     }
-    // if (this.addForm.get('numeroArchive').value.trim() === '') {
-    //   this.erreurnumeroArchive = 'Numero archive obligatoire !';
-    // }
-    // if (this.addForm.get('nombrePiece').value.trim() === '') {
-    //   this.erreurnombrePiece = 'Nombre Piece obligatoire !';
-    // }
-    // if (this.addForm.get('numeroOrdre').value.trim() === '') {
-    //   this.erreurnumeroOrdre = 'Numero ordre obligatoire !';
-    // }
     if (this.addForm.invalid) {
       return;
     }
