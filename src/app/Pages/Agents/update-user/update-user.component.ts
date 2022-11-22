@@ -25,7 +25,7 @@ export class UpdateUserComponent implements OnInit {
   erreurmatricule = '';
   erreurnom = '';
   erreurprenom = '';
-  erreurdateDeNaissance = '';
+  erreurdateAjout = '';
   erreurprofil = '';
   erreuremail = '';
   erreur = '';
@@ -48,7 +48,7 @@ export class UpdateUserComponent implements OnInit {
       matricule: ['', Validators.required],
       nom: ['', Validators.required],
       prenom: ['', [Validators.required]],
-      dateDeNaissance: ['', [Validators.required]],
+      dateAjout: ['', [Validators.required]],
       email: ['', [Validators.required]],
     });
     this.addForm.get('username').valueChanges.subscribe(() => {
@@ -71,8 +71,8 @@ export class UpdateUserComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('dateDeNaissance').valueChanges.subscribe(() => {
-      this.erreurdateDeNaissance = '';
+    this.addForm.get('dateAjout').valueChanges.subscribe(() => {
+      this.erreurdateAjout = '';
       this.erreur = '';
       this.success = '';
     });
@@ -81,22 +81,13 @@ export class UpdateUserComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    // this.addForm.get('profil').valueChanges.subscribe(() => {
-    //   this.erreurprofil = '';
-    //   this.erreur = '';
-    //   this.success = '';
-    // });
     this.addForm.patchValue(this.dataUserUpdate);
-    console.log(this.dataUserUpdate);
   }
 
   onUpdate(): any {
     if (this.addForm.get('username').value.trim() === '') {
       this.erreurusername = 'Nom utilisateur  obligatoire !';
     }
-    // if (this.addForm.get('profil').value.trim() === '') {
-    //   this.erreurprofil = 'Profil obligatoire !';
-    // }
     if (this.addForm.get('matricule').value.trim() === '') {
       this.erreurmatricule = 'Matricule obligatoire !';
     }
@@ -106,8 +97,8 @@ export class UpdateUserComponent implements OnInit {
     if (this.addForm.get('prenom').value.trim() === '') {
       this.erreurprenom = 'Prenom obligatoire !';
     }
-    if (this.addForm.get('dateDeNaissance').value.trim() === '') {
-      this.erreurdateDeNaissance = 'Date De Naissance obligatoire !';
+    if (this.addForm.get('dateAjout').value.trim() === '') {
+      this.erreurdateAjout = 'Date Ajout obligatoire !';
     }
     if (this.addForm.get('email').value.trim() === '') {
       this.erreuremail = 'E-mail obligatoire !';
@@ -116,7 +107,7 @@ export class UpdateUserComponent implements OnInit {
       return;
     }
     if (this.addForm.get('profil').value == '/api/coud/profils/3') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_COORDINATEUR']));
+      this.addForm.addControl('roles', new FormControl(['ROLE_COORDONATEUR']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.updateCoordonateur(this.addForm.value).subscribe(
         (data) => {
@@ -135,11 +126,10 @@ export class UpdateUserComponent implements OnInit {
         }
       );
     } else if (this.addForm.get('profil').value == '/api/coud/profils/2') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_CONTROLEURS']));
+      this.addForm.addControl('roles', new FormControl(['ROLE_CONTROLEUR']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.updateControleur(this.addForm.value).subscribe(
-        (data) => {
-          console.log(data);          
+        (data) => {         
           this.erreur = '';
           this.success = 'MODIFIER CONTROLEUR AVEC SUCCESS';
         },
@@ -157,8 +147,7 @@ export class UpdateUserComponent implements OnInit {
       this.addForm.addControl('roles', new FormControl(['ROLE_ASSISTANTE']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.updateAssistante(this.addForm.value).subscribe(
-        (data) => {
-          console.log(data);          
+        (data) => {         
           this.erreur = '';
           this.success = 'MODIFIER ASSISTANTE AVEC  SUCCESS !';
         },

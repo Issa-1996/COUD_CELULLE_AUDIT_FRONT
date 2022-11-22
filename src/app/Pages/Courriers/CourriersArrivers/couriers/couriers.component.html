@@ -10,8 +10,8 @@
         <app-courrier-liste
           *ngIf="
             role.includes('ROLE_ASSISTANTE') ||
-            role.includes('ROLE_COORDINATEUR') ||
-            role.includes('ROLE_CONTROLEURS')
+            role.includes('ROLE_COORDONATEUR') ||
+            role.includes('ROLE_CONTROLEUR')
           "
         ></app-courrier-liste>
         <div class="example-button-row mt-3">
@@ -30,8 +30,8 @@
 
     <mat-step
       *ngIf="
-        role.includes('ROLE_CONTROLEURS') ||
-        role.includes('ROLE_COORDINATEUR') ||
+        role.includes('ROLE_CONTROLEUR') ||
+        role.includes('ROLE_COORDONATEUR') ||
         role.includes('ROLE_ASSISTANTE')
       "
     >
@@ -42,8 +42,8 @@
     <!-- <mat-step
       *ngIf="
         role.includes('ROLE_ASSISTANTE') ||
-        role.includes('ROLE_COORDINATEUR') ||
-        role.includes('ROLE_CONTROLEURS')
+        role.includes('ROLE_COORDONATEUR') ||
+        role.includes('ROLE_CONTROLEUR')
       "
     >
       <ng-template matStepLabel>COURRIERS-VALIDÉS</ng-template>
@@ -53,8 +53,8 @@
     <mat-step
       *ngIf="
         role.includes('ROLE_ASSISTANTE') ||
-        role.includes('ROLE_COORDINATEUR') ||
-        role.includes('ROLE_CONTROLEURS')
+        role.includes('ROLE_COORDONATEUR') ||
+        role.includes('ROLE_CONTROLEUR')
       "
     >
       <ng-template matStepLabel>COURRIERS-DEPART</ng-template>

@@ -9,7 +9,7 @@
     [dataSource]="dataSource"
     matSort
     *ngIf="
-      role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDINATEUR') || role.includes('ROLE_CONTROLEURS')
+      role.includes('ROLE_ASSISTANTE') || role.includes('ROLE_COORDONATEUR') || role.includes('ROLE_CONTROLEUR')
     "
   >
     <!-- ID Column -->
@@ -85,7 +85,7 @@
     <!-- valider Column -->
     <ng-container matColumnDef="depart">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <p *ngIf="role.includes('ROLE_CONTROLEURS')">VALIDER</p>
+        <p *ngIf="role.includes('ROLE_CONTROLEUR')">VALIDER</p>
       </th>
       <td mat-cell *matCellDef="let row">
         <div class="example-button-container">
@@ -93,7 +93,7 @@
             (click)="validerCourrierArriver(row)"
             mat-mini-fab
             style="background-color: green"
-            *ngIf="role.includes('ROLE_CONTROLEURS')"
+            *ngIf="role.includes('ROLE_CONTROLEUR')"
           >
             <mat-icon>bookmark</mat-icon>
           </button>

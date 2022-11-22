@@ -9,8 +9,8 @@
     [dataSource]="dataSource"
     matSort
     *ngIf="
-      role.includes('ROLE_CONTROLEURS') ||
-      role.includes('ROLE_COORDINATEUR') ||
+      role.includes('ROLE_CONTROLEUR') ||
+      role.includes('ROLE_COORDONATEUR') ||
       role.includes('ROLE_ASSISTANTE')
     "
   >
@@ -66,7 +66,7 @@
 
     <ng-container matColumnDef="imprimer">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <p *ngIf="role.includes('ROLE_CONTROLEURS')">IMPRIMER</p>
+        <p *ngIf="role.includes('ROLE_CONTROLEUR')">IMPRIMER</p>
       </th>
       <td mat-cell *matCellDef="let row">
         <div class="example-button-container">
@@ -78,7 +78,7 @@
             data-target="#exampleModal"
             aria-label="Example icon button with a menu icon"
             (click)="getFicheDeControle(row)"
-            *ngIf="role.includes('ROLE_CONTROLEURS')"
+            *ngIf="role.includes('ROLE_CONTROLEUR')"
           >
             <mat-icon>filter_list</mat-icon>
           </button>
@@ -90,8 +90,8 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         <p
           *ngIf="
-            role.includes('ROLE_COORDINATEUR') ||
-            role.includes('ROLE_CONTROLEURS')
+            role.includes('ROLE_COORDONATEUR') ||
+            role.includes('ROLE_CONTROLEUR')
           "
         >
           FICHE
@@ -110,8 +110,8 @@
             aria-label="Example icon button with a menu icon"
             (click)="modifierFicheDeControle(row)"
             *ngIf="
-              role.includes('ROLE_COORDINATEUR') ||
-              role.includes('ROLE_CONTROLEURS')
+              role.includes('ROLE_COORDONATEUR') ||
+              role.includes('ROLE_CONTROLEUR')
             "
           >
             <mat-icon>filter_list</mat-icon>
@@ -123,7 +123,7 @@
     <!-- valider Column -->
     <ng-container matColumnDef="depart">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <p *ngIf="role.includes('ROLE_COORDINATEUR')">VALIDER</p>
+        <p *ngIf="role.includes('ROLE_COORDONATEUR')">VALIDER</p>
       </th>
       <td mat-cell *matCellDef="let row">
         <div class="example-button-container">
@@ -132,7 +132,7 @@
             mat-mini-fab
             title="Valider un fiche de controle"
             style="background-color: green"
-            *ngIf="role.includes('ROLE_COORDINATEUR')"
+            *ngIf="role.includes('ROLE_COORDONATEUR')"
           >
             <mat-icon>bookmark</mat-icon>
           </button>
