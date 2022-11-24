@@ -87,6 +87,7 @@
             style="background-color: green;"
             aria-label="Example icon button with a plus one icon"
             *ngIf="role.includes('ROLE_ASSISTANTE')"
+            (click)="generateCourrier()"
           >
             <mat-icon>menu</mat-icon>
           </button>
