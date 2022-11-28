@@ -11,12 +11,18 @@ import { TransferDataService } from 'app/Service/transfer-data.service';
 import { CourrierDepartAffichageComponent } from '../courrier-depart-affichage/courrier-depart-affichage.component';
 import { UpdateCourrierDepartComponent } from '../update-courrier-depart/update-courrier-depart.component';
 
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 @Component({
   selector: 'app-list-courriers-depart',
   templateUrl: './list-courriers-depart.component.html',
   styleUrls: ['./list-courriers-depart.component.css'],
 })
 export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
+  fiche: any;
   public role: any[];
   database: CourierModel[] = [];
   datacourrier: CourierModel[] = [];
@@ -36,6 +42,7 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
   ];
 
   ngOnInit(): void {
+   /* this.getFicheDeControle();*/
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
     this.role = decodedToken.roles;
     this.listeCourrierDepart();
@@ -46,8 +53,12 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
     private methodeService: MethodeService,
     private transferData: TransferDataService,
     private authService: AuthService,
-    private searchVS: SearchService
+    private searchVS: SearchService,
+    private transferdata: TransferDataService
   ) {}
+ /* getFicheDeControle(): any {
+    this.fiche=this.transferdata.getData().ficheDeControle;
+  }*/
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -226,4 +237,114 @@ export class ListCourriersDepartComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+  async generateCourrier(){
+    var  documentFiche={
+      content:[
+        {
+          columns:[
+             {
+              text: 'REPUBLIQUE DU SENEGAL \n Un Peuple - Un But - Une Foi \n MINISTÈRE DE L\'ENSEIGNEMENT SUPÉRIEUR \n  DE LA RECHERCHE ET DE L\'INNOVATION \n CENTRE DES OEUVRES UNIVERSITAIRES DE DAKAR \n DIRECTION',
+               style:'headers',
+             },
+
+             {
+              text:'  Courrier N° ..........................COUD/DIR/CSA  \n\n Dakar, le ...................................................... ' , 
+              style:'headers',
+             }, 
+          ],
+          
+        },
+
+        { text:'COURRIER DE DEPART',   style:'subheader', },
+              {
+                  style:'table',
+                  table: {
+                    widths:['*','*'],
+                    heights: [50],
+                    body: [
+                      [`Numéro Courrier:`, `Numéro Compte:`,],
+                    ]
+                  },
+                },
+            
+              [
+                {
+                  style:'table',
+                  table: {
+                    widths:['*','*'],
+                    heights: [50],
+                    body: [
+                      [`Type:`, `Objet:`,],
+                    ]
+                  },
+                }
+              ],
+              [
+                {
+                  style:'table',
+                  table: {
+                    widths:['*','*'],
+                    heights: [50],
+                    body: [
+                      [`Numéro Facture:`, `Montant:`,],
+                    ]
+                  },
+                }
+              ],
+              [
+                {
+                  style:'table',
+                  table: {
+                    widths:['*','*'],
+                    heights: [50],
+                    body: [
+                      [ `Destinataire:`, `Date de Départ:`],
+                    ]
+                  },
+                }
+              ],
+              [
+                {
+                  style:'table',
+                  table: {
+                    widths:['*'],
+                    heights: [50],
+                    body: [
+                      [ `Observation du Courrier:`,],
+                    ]
+                  },
+                }
+              ],
+
+    ],
+      
+      styles:
+      {
+       headers: {
+         fontSize: 10,
+       },
+       subheader:{
+         fontSize: 14,
+         decoration: 'underline',
+         margin: [0, 20, 0, 40],
+         alignment: 'center',
+         
+       },
+       table:{
+        fontSize: 10,
+      //  margin: [20, 20, 20, 20],
+        
+       }
+     },
+
+    }
+    pdfMake.createPdf(documentFiche).open();
+  }
+
+
+
 }
+
+
+
