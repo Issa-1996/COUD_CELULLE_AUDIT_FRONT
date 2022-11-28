@@ -16,7 +16,7 @@ export class CoordonateurGuard implements CanActivate {
       const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
       // console.log(decodedToken.username);
       const roles: string[] = decodedToken.roles;
-      if (roles.includes('ROLE_COORDONATEUR')) {
+      if (roles.includes('COORDONATEUR')) {
         this.router.navigate(['/']);
         return false;
       }

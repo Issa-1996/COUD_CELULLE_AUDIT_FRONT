@@ -46,6 +46,7 @@ import { SearchService } from './Service/search.service';
 import { CourriersValiderComponent } from './Pages/Courriers/courriers-valider/courriers-valider.component';
 import { TotalArriverComponent } from './Pages/Courriers/CourriersArrivers/total-arriver/total-arriver.component';
 import { DetailUserComponent } from './Pages/Agents/detail-user/detail-user.component';
+import { ProfilUserComponent } from './Pages/Agents/profil-user/profil-user.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { DetailUserComponent } from './Pages/Agents/detail-user/detail-user.comp
     CourrierDepartAffichageComponent,
     CourriersValiderComponent,
     TotalArriverComponent,
-    DetailUserComponent
+    DetailUserComponent,
+    ProfilUserComponent
     
   ],
   imports: [

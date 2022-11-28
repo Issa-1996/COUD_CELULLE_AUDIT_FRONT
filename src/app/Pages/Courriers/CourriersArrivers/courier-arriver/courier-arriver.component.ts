@@ -165,7 +165,7 @@ export class CourierArriverComponent implements OnInit {
     this.addForm.addControl('etat', new FormControl('0'));
     this.addForm.addControl('statut', new FormControl('0'));
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    if (decodedToken.roles.includes('ROLE_ASSISTANTE')) {
+    if (decodedToken.roles.includes('ASSISTANTE')) {
       this.addForm.addControl(
         'assistante',
         new FormControl('/api/coud/assistantes/' + this.ConnecterAssistante)
@@ -221,14 +221,14 @@ export class CourierArriverComponent implements OnInit {
   }
   connectUser() {
     const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
-    if (decodedToken.roles.includes('ROLE_ASSISTANTE')) {
+    if (decodedToken.roles.includes('ASSISTANTE')) {
       this.methodeService
         .getAssistanteByUsername(decodedToken.username)
         .subscribe((data) => {
           this.ConnecterAssistante = data['hydra:member'][0]['id'];
         });
     }
-    if (decodedToken.roles.includes('ROLE_COORDONATEUR')) {
+    if (decodedToken.roles.includes('COORDONATEUR')) {
       this.methodeService
         .getCoordonateursByUsername(decodedToken.username)
         .subscribe((data) => {

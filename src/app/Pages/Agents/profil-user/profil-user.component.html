@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <div class="modal-body">
-        <div class="menu text-center">MODIFIER UTILISATEUR</div>
+        <div class="menu text-center">MON PROFIL</div>
         <div
           *ngIf="erreur != ''"
           class="login-erreur-container text-center bg-danger"
@@ -40,57 +40,20 @@
               </span>
             </div>
             <div class="col-md-6">
-              <label>AFFECTER UN PROFIL</label>
-              <select
-                class="form-control"
-                formControlName="profil"
-              >
-                <option disabled>Choisir un profil</option>
-                <option value="{{ pro.id }}" *ngFor="let pro of profil">
-                  {{ pro.libelle }}
-                </option>
-              </select>
-              <span
-                class="login-erreur"
-                *ngIf="erreurprofil != ''"
-                style="color: red"
-              >
-                {{ erreurprofil }}
-              </span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>NUMERO MATRICULE</label>
+              <label>EMAIL</label>
               <input
-                type="text"
+                type="email"
                 class="form-control"
-                formControlName="matricule"
-                name="matricule"
-                autofocus=""
+                formControlName="email"
+                name="email"
+                placeholder="Ex: ...@coud.edu.sn"
               />
               <span
                 class="login-erreur"
-                *ngIf="erreurmatricule != ''"
+                *ngIf="erreuremail != ''"
                 style="color: red"
               >
-                {{ erreurmatricule }}
-              </span>
-            </div>
-            <div class="col-md-6">
-              <label>NOM</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="nom"
-                name="nom"
-              />
-              <span
-                class="login-erreur"
-                *ngIf="erreurnom != ''"
-                style="color: red"
-              >
-                {{ erreurnom }}
+                {{ erreuremail }}
               </span>
             </div>
           </div>
@@ -112,37 +75,51 @@
               </span>
             </div>
             <div class="col-md-6">
-              <label>DATE D'AJOUT</label>
+              <label>NOM</label>
               <input
                 type="text"
                 class="form-control"
-                formControlName="dateAjout"
+                formControlName="nom"
+                name="nom"
               />
               <span
                 class="login-erreur"
-                *ngIf="erreurdateAjout != ''"
+                *ngIf="erreurnom != ''"
                 style="color: red"
               >
-                {{ erreurdateAjout }}
+                {{ erreurnom }}
               </span>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
-              <label>EMAIL</label>
+              <label>NOUVEAU MOT DE PASS</label>
               <input
-                type="email"
+                type="password"
                 class="form-control"
-                formControlName="email"
-                name="email"
-                placeholder="Ex: ...@coud.edu.sn"
+                formControlName="password"
               />
               <span
                 class="login-erreur"
-                *ngIf="erreuremail != ''"
+                *ngIf="erreurpassword != ''"
                 style="color: red"
               >
-                {{ erreuremail }}
+                {{ erreurpassword }}
+              </span>
+            </div>
+            <div class="col-md-6">
+              <label>CONFIRMATION</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="conf"
+              />
+              <span
+                class="login-erreur"
+                *ngIf="erreurpassword != ''"
+                style="color: red"
+              >
+                {{ erreurpassword }}
               </span>
             </div>
           </div>
@@ -153,9 +130,9 @@
                 class="btn"
                 name="submit"
                 (click)="onUpdate()"
-                title="MODIFIER UN UTILISATEUR"
+                title="MODIFIER MON PROFIL"
               >
-                MODIFIER
+                METTRE A JOUR
               </button>
             </div>
           </div>
@@ -163,9 +140,8 @@
       </div>
     </div>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>ANNULER</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-        APPLIQUER
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial title="FERMER ET QUITTÉ">
+        FERMER
       </button>
     </mat-dialog-actions>
   </body>

@@ -105,14 +105,11 @@ export class UpdateUserComponent implements OnInit {
     if (this.addForm.invalid) {
       return;
     }
-    if (this.addForm.get('profil').value == '/api/coud/profils/3') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_COORDONATEUR']));
-      this.addForm.addControl('password', new FormControl('password'));
-      this.methodeService.updateCoordonateur(this.addForm.value).subscribe(
+    if (this.addForm.get('profil').value == '3') {
+      this.methodeService.updateUsers(this.addForm.value).subscribe(
         (data) => {
-          console.log(data);
           this.erreur = '';
-          this.success = 'MODIFIER  COORDONATEUR AVEC SUCCESS !';
+          this.success = 'CONTROLEUR MODIFIER AVEC SUCCESS !';
         },
         (error) => {
           // @ts-ignore
@@ -124,13 +121,11 @@ export class UpdateUserComponent implements OnInit {
           }
         }
       );
-    } else if (this.addForm.get('profil').value == '/api/coud/profils/2') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_CONTROLEUR']));
-      this.addForm.addControl('password', new FormControl('password'));
-      this.methodeService.updateControleur(this.addForm.value).subscribe(
+    } else if (this.addForm.get('profil').value == '2') {
+      this.methodeService.updateUsers(this.addForm.value).subscribe(
         (data) => {
           this.erreur = '';
-          this.success = 'MODIFIER CONTROLEUR AVEC SUCCESS';
+          this.success = 'COORDONATEUR MODIFIER AVEC SUCCESS';
         },
         (error) => {
           // @ts-ignore
@@ -142,13 +137,28 @@ export class UpdateUserComponent implements OnInit {
           }
         }
       );
-    } else if (this.addForm.get('profil').value == '/api/coud/profils/1') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_ASSISTANTE']));
-      this.addForm.addControl('password', new FormControl('password'));
-      this.methodeService.updateAssistante(this.addForm.value).subscribe(
+    } else if (this.addForm.get('profil').value == '1') {
+      console.log(this.addForm.value);      
+      this.methodeService.updateUsers(this.addForm.value).subscribe(
         (data) => {
           this.erreur = '';
           this.success = 'MODIFIER ASSISTANTE AVEC  SUCCESS !';
+        },
+        (error) => {
+          // @ts-ignore
+          if (error.status === 403) {
+            this.erreur = error.error;
+          } else {
+            this.success = '';
+            this.erreur = "UNE ERREUR S'EST PRODUITE !";
+          }
+        }
+      );
+    }else{
+      this.methodeService.updateUsers(this.addForm.value).subscribe(
+        (data) => {
+          this.erreur = '';
+          this.success = 'UTILISATEUR MODIFIER AVEC SUCCESS';
         },
         (error) => {
           // @ts-ignore

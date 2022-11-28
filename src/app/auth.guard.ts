@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
           // const roles: string[] = decodedToken.roles;
           // console.log(roles);
           
-          // if (roles.includes('ROLE_COORDONATEUR')) {
+          // if (roles.includes('COORDONATEUR')) {
           //   this.router.navigate(['/']);
           //   return false;
           // }

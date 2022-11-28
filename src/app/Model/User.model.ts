@@ -1,5 +1,6 @@
 import { CourierModel } from "./Courier.model";
 import { FicheDeControlModel } from "./FicheDeControl.model";
+import { ProfilModel } from "./Profil.model";
 import { RapportModel } from "./Rapport.model";
 
 export interface UserModel {
@@ -14,4 +15,5 @@ export interface UserModel {
     roles: [];
     FicheDeControle: FicheDeControlModel;
     courier: CourierModel;
+    profil:ProfilModel;
 }

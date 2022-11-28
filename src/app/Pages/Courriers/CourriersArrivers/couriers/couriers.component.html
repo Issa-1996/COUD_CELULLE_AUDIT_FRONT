@@ -9,9 +9,9 @@
         <ng-template matStepLabel>COURRIERS-ARRIVÉS</ng-template>
         <app-courrier-liste
           *ngIf="
-            role.includes('ROLE_ASSISTANTE') ||
-            role.includes('ROLE_COORDONATEUR') ||
-            role.includes('ROLE_CONTROLEUR')
+            role.includes('ASSISTANTE') ||
+            role.includes('COORDONATEUR') ||
+            role.includes('CONTROLEUR')
           "
         ></app-courrier-liste>
         <div class="example-button-row mt-3">
@@ -20,7 +20,7 @@
             mat-raised-button
             style="background-color: #3b5998; color: white"
             (click)="nouveauCourrier()"
-            *ngIf="role.includes('ROLE_ASSISTANTE')"
+            *ngIf="role.includes('ASSISTANTE')"
           >
             NOUVEAU COURRIER ARRIVÉ
           </button>
@@ -30,9 +30,9 @@
 
     <mat-step
       *ngIf="
-        role.includes('ROLE_CONTROLEUR') ||
-        role.includes('ROLE_COORDONATEUR') ||
-        role.includes('ROLE_ASSISTANTE')
+        role.includes('CONTROLEUR') ||
+        role.includes('COORDONATEUR') ||
+        role.includes('ASSISTANTE')
       "
     >
       <ng-template matStepLabel>COURRIERS-ENCOURS </ng-template>
@@ -41,9 +41,9 @@
 
     <mat-step
       *ngIf="
-        role.includes('ROLE_ASSISTANTE') ||
-        role.includes('ROLE_COORDONATEUR') ||
-        role.includes('ROLE_CONTROLEUR')
+        role.includes('ASSISTANTE') ||
+        role.includes('COORDONATEUR') ||
+        role.includes('CONTROLEUR')
       "
     >
       <ng-template matStepLabel>COURRIERS-DEPART</ng-template>

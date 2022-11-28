@@ -111,7 +111,7 @@ export class AddUserComponent implements OnInit {
     }
 
     if (this.addForm.get('profil').value == '3') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_COORDONATEUR']));
+      this.addForm.addControl('roles', new FormControl(['COORDONATEUR']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
@@ -129,7 +129,7 @@ export class AddUserComponent implements OnInit {
         }
       );
     } else if (this.addForm.get('profil').value == '2') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_CONTROLEUR']));
+      this.addForm.addControl('roles', new FormControl(['CONTROLEUR']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {
@@ -147,7 +147,7 @@ export class AddUserComponent implements OnInit {
         }
       );
     } else if (this.addForm.get('profil').value == '1') {
-      this.addForm.addControl('roles', new FormControl(['ROLE_ASSISTANTE']));
+      this.addForm.addControl('roles', new FormControl(['ASSISTANTE']));
       this.addForm.addControl('password', new FormControl('password'));
       this.methodeService.addUser(this.addForm.value).subscribe(
         (data) => {

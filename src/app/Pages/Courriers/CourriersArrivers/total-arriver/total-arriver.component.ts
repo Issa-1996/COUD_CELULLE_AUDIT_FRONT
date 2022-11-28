@@ -92,7 +92,7 @@ export class TotalArriverComponent implements OnInit {
   }
   listeCourrier() {
     var compt = 0;
-    if (this.role.includes('ROLE_CONTROLEUR')) {
+    if (this.role.includes('CONTROLEUR')) {
       const decodedToken = this.helper.decodeToken(
         localStorage.getItem('token')
       );
@@ -121,7 +121,7 @@ export class TotalArriverComponent implements OnInit {
       });
     }
 
-    if (this.role.includes('ROLE_ASSISTANTE')) {
+    if (this.role.includes('ASSISTANTE')) {
       const decodedToken = this.helper.decodeToken(
         localStorage.getItem('token')
       );
@@ -179,7 +179,7 @@ export class TotalArriverComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       });
     }
-    if (this.role.includes('ROLE_COORDONATEUR')) {
+    if (this.role.includes('COORDONATEUR')) {
       this.methodeService.getCourriersArrivers().subscribe((data) => {
         this.database = data['hydra:member'];
         for (let i = 0; i < this.database.length; i++) {

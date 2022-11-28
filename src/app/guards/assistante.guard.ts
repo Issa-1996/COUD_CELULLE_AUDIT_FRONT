@@ -15,7 +15,7 @@ export class AssistanteGuard implements CanActivate {
       const decodedToken = this.helper.decodeToken(localStorage.getItem('token'));
       // console.log(decodedToken.username);
       const roles: string[] = decodedToken.roles;
-      if (roles.includes('ROLE_ASSISTANTE')) {
+      if (roles.includes('ASSISTANTE')) {
         this.router.navigate(['/']);
         return false;
       }
