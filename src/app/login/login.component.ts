@@ -14,9 +14,11 @@ export class LoginComponent implements OnInit {
   helper = new JwtHelperService();
   username: any;
   password: any;
+  showPassword: boolean = false;
   erreurUsername = '';
   erreurPassword = '';
   erreur = '';
+  input: any;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -39,6 +41,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  showHidePassword() {
+    this.showPassword = !this.showPassword;
+  }
   /**
    * Connexion de l'utilisateur qui appel la methode isLogin() de auth.service.ts
    */

@@ -1,47 +1,86 @@
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="Yinka Enoch Adedokun">
-	<title>Login Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Yinka Enoch Adedokun" />
+  <title>Login Page</title>
 </head>
-<body style="background-image: url('/assets/bg3.png');">
-	<!-- Main Content -->
-	<div class="container">
-        <div class="images p-3">
-            <img src="../assets/AUDITS.jpg"  width="100%" height="120" alt="">
+<body style="background-image: url('/assets/bg3.png')">
+  <!-- Main Content -->
+  <div class="container">
+    <div class="images p-3">
+      <img src="../assets/AUDITS.jpg" width="100%" height="120" alt="" />
+    </div>
+    <div class="row main-content bg-success text-center mt-5">
+      <div class="col-md-4 text-center company__info">
+        <span class="company__logo">
+          <h2>
+            <img
+              src="../../../assets/logo_coud copy.png"
+              alt=""
+              width="100%"
+              height="100"
+            />
+          </h2>
+        </span>
+      </div>
+      <div class="col-md-8 col-xs-12 col-sm-12 login_form">
+        <div class="container-fluid">
+          <div class="row">
+            <h2>AUTHENTIFICATION</h2>
+          </div>
+          <div class="row">
+            <span style="color: red; font-size: 20px" *ngIf="erreur != ''">
+              {{ erreur }}
+            </span>
+            <form [formGroup]="addForm" class="form-group">
+              <div class="row">
+                <input
+                  type="text"
+                  id="inputUsername"
+                  formControlName="username"
+                  name="username"
+                  class="form__input"
+                  placeholder="Nom d'utilisateur"
+                />
+                <span
+                  style="color: red; font-size: 16px"
+                  *ngIf="erreurUsername != ''"
+                >
+                  {{ erreurUsername }}
+                </span>
+              </div>
+              <div class="row">
+                <span class="fa fa-lock"></span>
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  id="inputPassword"
+                  formControlName="password"
+                  name="password"
+                  class="form__input"
+                  placeholder="Mot de passe"
+                />
+                <span
+                  style="color: red; font-size: 16px"
+                  *ngIf="erreurPassword != ''"
+                >
+                  {{ erreurPassword }}
+                </span>
+                <input type="checkbox" (click)="showHidePassword()" />
+                {{ showPassword ?  '  Caché ':  ' Affiché' }} Password
+              </div>
+
+              <div class="row">
+                <input
+                  (click)="onSignIn()"
+                  type="submit"
+                  value="CONNEXION"
+                  class="btn"
+                />
+              </div>
+            </form>
+          </div>
         </div>
-		<div class="row main-content bg-success text-center mt-5">
-			<div class="col-md-4 text-center company__info">
-				<span class="company__logo">
-					<h2>
-						<img src="../../../assets/logo_coud copy.png" alt="" width="100%" height="100"> 
-					</h2>
-				</span>
-			</div>
-			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
-				<div class="container-fluid">
-					<div class="row">
-						<h2>AUTHENTIFICATION</h2>
-					</div>
-					<div class="row">
-						<span style="color: red; font-size: 20px;" *ngIf="erreur!=''"> {{ erreur }} </span>
-						<form [formGroup]="addForm" class="form-group">
-							<div class="row">
-								<input type="text" id="inputUsername"  formControlName="username" name="username" class="form__input" placeholder="Nom d'utilisateur">
-								<span style="color: red; font-size: 16px;" *ngIf="erreurUsername!=''"> {{ erreurUsername }} </span>
-							</div>
-							<div class="row">
-								<!-- <span class="fa fa-lock"></span> -->
-								<input type="password"id="inputPassword" formControlName="password" name="password" class="form__input" placeholder="Mot de passe">
-								<span style="color: red; font-size: 16px;" *ngIf="erreurPassword!=''"> {{ erreurPassword }} </span>
-							</div>
-							<div class="row">
-								<input (click)="onSignIn()" type="submit" value="CONNEXION" class="btn">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 </body>
