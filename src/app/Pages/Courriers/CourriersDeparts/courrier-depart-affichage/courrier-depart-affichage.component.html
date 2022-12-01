@@ -15,26 +15,6 @@
   <form method="post" [formGroup]="addForm">
     <div class="row mb-2">
       <div class="col-md-6">
-        <label>OBJET</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="object"
-          disabled
-        />
-      </div>
-      <div class="col-md-6">
-        <label>DESTINATAIRE</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="destinataire"
-          disabled
-        />
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-md-6">
         <label>NUMERO COURRIER</label>
         <input
           type="text"
@@ -44,7 +24,27 @@
         />
       </div>
       <div class="col-md-6">
-        <label>DATE DEPART</label>
+        <label>NUMERO COMPTE</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="numeroCompte"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label>TYPE</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="type"
+          disabled
+        />
+      </div>
+      <div class="col-md-6">
+        <label>OBJET</label>
         <input
           type="text"
           class="form-control"

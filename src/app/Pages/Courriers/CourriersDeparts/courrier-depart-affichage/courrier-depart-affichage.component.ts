@@ -28,6 +28,8 @@ export class CourrierDepartAffichageComponent implements OnInit {
       object: ['', Validators.required],
       destinataire: ['', Validators.required],
       numeroCourier: ['', Validators.required],
+      numeroCompte: ['', Validators.required],
+      type: ['', Validators.required],
       dateDepart: ['', Validators.required],
       observation: ['', [Validators.required]],
       NumeroFacture: ['', Validators.required],
