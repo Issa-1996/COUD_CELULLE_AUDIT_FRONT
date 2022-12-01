@@ -20,7 +20,7 @@ export interface CourierModel{
     observation:string;
     statut:string;
     rapport: RapportModel;
-    controleurs: UserModel;
+    controleur: UserModel;
     assistante: UserModel;
     coordonateur: UserModel;
     ficheDeControle: FicheDeControlModel;

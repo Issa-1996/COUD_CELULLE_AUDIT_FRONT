@@ -58,7 +58,7 @@ export class CourierArriverComponent implements OnInit {
     this.connectUser();
     this.getAssistante();
     this.getCoordonateur();
-    this.getControleurs();
+    this.getControleur();
     this.searchVS.currentSearch.subscribe((search) => (this.search = search));
     this.addForm = this.formBuilder.group({
       object: ['', Validators.required],
@@ -70,7 +70,7 @@ export class CourierArriverComponent implements OnInit {
       typeDeCourrier: ['', Validators.required],
       dateArriver: ['', Validators.required],
       expediteur: ['', Validators.required],
-      controleurs: ['', Validators.required],
+      controleur: ['', Validators.required],
     });
     this.addForm.get('object').valueChanges.subscribe(() => {
       this.erreurobject = '';
@@ -117,7 +117,7 @@ export class CourierArriverComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('controleurs').valueChanges.subscribe(() => {
+    this.addForm.get('controleur').valueChanges.subscribe(() => {
       this.erreurControleur = '';
       this.erreur = '';
       this.success = '';
@@ -152,7 +152,7 @@ export class CourierArriverComponent implements OnInit {
     if (this.addForm.get('expediteur').value.trim() === '') {
       this.erreurexpediteur = 'Expediteur obligatoire !';
     }
-    if (this.addForm.get('controleurs').value.trim() === '') {
+    if (this.addForm.get('controleur').value.trim() === '') {
       this.erreurControleur = 'Controleur obligatoire !';
     }
     if (this.addForm.invalid) {
@@ -195,8 +195,8 @@ export class CourierArriverComponent implements OnInit {
       }
     );
   }
-  getControleurs(): any {
-    this.methodeService.getControleurs().subscribe(
+  getControleur(): any {
+    this.methodeService.getControleur().subscribe(
       (data) => {
         this.controleur = data['hydra:member'];
       },

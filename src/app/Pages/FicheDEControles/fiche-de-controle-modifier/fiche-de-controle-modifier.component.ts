@@ -153,7 +153,7 @@ export class FicheDeControleModifierComponent implements OnInit {
         data['hydra:member'][0]['roles'].includes('CONTROLEUR')
       ) {
         this.methodeService
-          .getControleursByUsername(data['hydra:member'][0]['username'])
+          .getControleurByUsername(data['hydra:member'][0]['username'])
           .subscribe((coord) => {
             this.user = coord['hydra:member'][0]['courierArrivers'];
             for (

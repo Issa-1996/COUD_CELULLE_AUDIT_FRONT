@@ -50,10 +50,10 @@ export class MethodeService {
   getProfils(): Observable<ProfilModel>{
     return this.httpClient.get<ProfilModel>(`${envVars.url}/coud/profils`);
   }
-  getControleurs(): Observable<UserModel>{
+  getControleur(): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs`);
   }
-  getControleursByUsername(username: UserModel): Observable<UserModel>{
+  getControleurByUsername(username: UserModel): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs?username=${username}`);
   }
   getCoordonateurs(): Observable<UserModel>{

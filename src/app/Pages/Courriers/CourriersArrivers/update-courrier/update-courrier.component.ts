@@ -18,7 +18,7 @@ import { TransferDataService } from 'app/Service/transfer-data.service';
 })
 export class UpdateCourrierComponent implements OnInit {
   addForm: FormGroup;
-  controleurs: UserModel;
+  controleur: UserModel;
   coordonateur: UserModel;
   erreurdateArriver = '';
   erreurexpediteur = '';
@@ -46,7 +46,7 @@ export class UpdateCourrierComponent implements OnInit {
   ngOnInit(): void {
     this.dataUpdateCourrier = this.transferdata.getData();
     this.searchVS.currentSearch.subscribe((search) => (this.search = search));
-    this.getControleurs();
+    this.getControleur();
     this.addForm = this.formBuilder.group({
       id: [''],
       object: ['', Validators.required],
@@ -56,7 +56,7 @@ export class UpdateCourrierComponent implements OnInit {
       montant: ['', Validators.required],
       dateArriver: ['', Validators.required],
       expediteur: ['', Validators.required],
-      controleurs: [''],
+      controleur: [''],
     });
     this.addForm.get('object').valueChanges.subscribe(() => {
       this.erreurobject = '';
@@ -93,7 +93,7 @@ export class UpdateCourrierComponent implements OnInit {
       this.erreur = '';
       this.success = '';
     });
-    this.addForm.get('controleurs').valueChanges.subscribe(() => {
+    this.addForm.get('controleur').valueChanges.subscribe(() => {
       this.erreurControleur = '';
       this.erreur = '';
       this.success = '';
@@ -129,12 +129,12 @@ export class UpdateCourrierComponent implements OnInit {
       'numeroArriver',
       new FormControl(this.addForm.get('numeroCourier').value)
     );
-    // if(this.addForm.get("controleurs").value==""){
-    //     // this.addForm.addControl("controleurs",new FormControl(this.dataUpdateCourrier.controleurs));
+    // if(this.addForm.get("controleur").value==""){
+    //     // this.addForm.addControl("controleur",new FormControl(this.dataUpdateCourrier.controleur));
     // }
     // this.addForm.addControl("assistante",new FormControl("/api/coud/assistantes/"+this.Connecter,));
     // this.addForm.addControl("coordonateur",new FormControl("/api/coud/coordonateurs/"+this.coordonateur,));
-    // if(this.addForm.get("controleurs").value !=""){
+    // if(this.addForm.get("controleur").value !=""){
     // }
     this.updateCourierArriver(this.addForm.value);
   }
@@ -154,10 +154,10 @@ export class UpdateCourrierComponent implements OnInit {
       }
     );
   }
-  getControleurs(): any {
-    this.methodeService.getControleurs().subscribe(
+  getControleur(): any {
+    this.methodeService.getControleur().subscribe(
       (data) => {
-        this.controleurs = data['hydra:member'];
+        this.controleur = data['hydra:member'];
       },
       (error: any) => {}
     );

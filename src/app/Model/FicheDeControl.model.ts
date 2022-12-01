@@ -8,7 +8,7 @@ export interface FicheDeControlModel{
     motivation:string;
     objet:string;
     recommandations:string;
-    controleurs:UserModel;
+    controleur:UserModel;
     coordonateur: UserModel;
     courier:CourierModel;
 }

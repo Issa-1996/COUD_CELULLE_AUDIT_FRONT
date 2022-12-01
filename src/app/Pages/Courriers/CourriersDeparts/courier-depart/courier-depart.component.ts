@@ -60,7 +60,7 @@ export class CourierDepartComponent implements OnInit {
       observation: ['', [Validators.required]],
       NumeroFacture: ['', Validators.required],
       montant: ['', Validators.required],
-      controleurs: ['', Validators.required],
+      controleur: ['', Validators.required],
       coordonateur: ['', Validators.required],
       assistante: ['', Validators.required],
     });

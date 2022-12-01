@@ -92,7 +92,7 @@ export class FicheDeControleComponent implements OnInit {
       this.erreuravisControleur = 'Avis controleur obligatoire !';
     }
     this.addForm.addControl(
-      'controleurs',
+      'controleur',
       new FormControl('/api/coud/controleurs/' + this.user)
     );
     this.addForm.addControl(
