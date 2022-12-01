@@ -174,7 +174,6 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
                 this.database
               );
               this.dataSource.paginator = this.paginator;
-              console.log(this.database);
             }
           });
         } else {

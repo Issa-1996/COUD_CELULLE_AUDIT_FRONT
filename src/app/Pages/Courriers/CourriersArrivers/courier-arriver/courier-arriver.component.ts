@@ -175,8 +175,7 @@ export class CourierArriverComponent implements OnInit {
         new FormControl('/api/coud/coordonateurs/' + this.coordonateur)
       );
     }
-    this.newValue(this.addForm.value);
-    // this.subscribeCourierArriver(this.addForm.value);
+    this.subscribeCourierArriver(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: CourierModel) {
     this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
