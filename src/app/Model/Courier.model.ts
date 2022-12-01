@@ -3,6 +3,7 @@ import { RapportModel } from "./Rapport.model";
 import { UserModel } from "./User.model";
 
 export interface CourierModel{
+    length: number;
     id: string;
     numeroCourier: string;
     numeroCompte: string;
@@ -21,6 +22,6 @@ export interface CourierModel{
     rapport: RapportModel;
     controleurs: UserModel;
     assistante: UserModel;
-    coordinateur: UserModel;
+    coordonateur: UserModel;
     ficheDeControle: FicheDeControlModel;
 }

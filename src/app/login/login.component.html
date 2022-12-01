@@ -59,14 +59,14 @@
                   class="form__input"
                   placeholder="Mot de passe"
                 />
+                <input type="checkbox" (click)="showHidePassword()" />
+                {{ showPassword ? "  Caché " : " Affiché" }} Password
                 <span
                   style="color: red; font-size: 16px"
                   *ngIf="erreurPassword != ''"
                 >
                   {{ erreurPassword }}
                 </span>
-                <input type="checkbox" (click)="showHidePassword()" />
-                {{ showPassword ?  '  Caché ':  ' Affiché' }} Password
               </div>
 
               <div class="row">

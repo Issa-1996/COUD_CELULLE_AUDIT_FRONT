@@ -53,12 +53,12 @@
         transform: translate3d(0,$value,0);
 }
 
-@mixin transform-origin($coordinates){
-      -webkit-transform-origin: $coordinates;
-        -moz-transform-origin: $coordinates;
-        -o-transform-origin: $coordinates;
-        -ms-transform-origin: $coordinates;
-        transform-origin: $coordinates;
+@mixin transform-origin($coordonates){
+      -webkit-transform-origin: $coordonates;
+        -moz-transform-origin: $coordonates;
+        -o-transform-origin: $coordonates;
+        -ms-transform-origin: $coordonates;
+        transform-origin: $coordonates;
 }
 
 @mixin radial-gradient($extern-color, $center-color){

@@ -36,7 +36,7 @@ export class UpdateCourrierDepartComponent implements OnInit {
       NumeroFacture: ['', Validators.required],
       montant: ['', Validators.required],
       assistante: ['', Validators.required],
-      coordinateur: ['', Validators.required],
+      coordonateur: ['', Validators.required],
     });
     this.addForm.get('observation').valueChanges.subscribe(() => {
       this.erreurobservation = '';

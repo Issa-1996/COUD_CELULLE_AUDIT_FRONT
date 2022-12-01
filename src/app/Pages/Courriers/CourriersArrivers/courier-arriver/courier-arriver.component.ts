@@ -42,7 +42,7 @@ export class CourierArriverComponent implements OnInit {
   erreur = '';
   success = '';
   ConnecterAssistante: UserModel;
-  ConnecterCoordinateur: UserModel;
+  ConnecterCoordonateur: UserModel;
   id: number;
   object: String;
   search: string;
@@ -171,11 +171,12 @@ export class CourierArriverComponent implements OnInit {
         new FormControl('/api/coud/assistantes/' + this.ConnecterAssistante)
       );
       this.addForm.addControl(
-        'coordinateur',
-        new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
+        'coordonateur',
+        new FormControl('/api/coud/coordonateurs/' + this.coordonateur)
       );
     }
-    this.subscribeCourierArriver(this.addForm.value);
+    this.newValue(this.addForm.value);
+    // this.subscribeCourierArriver(this.addForm.value);
   }
   subscribeCourierArriver(objetCourierArriver: CourierModel) {
     this.methodeService.addCourierArriver(objetCourierArriver).subscribe(
@@ -232,7 +233,7 @@ export class CourierArriverComponent implements OnInit {
       this.methodeService
         .getCoordonateursByUsername(decodedToken.username)
         .subscribe((data) => {
-          this.ConnecterCoordinateur = data['hydra:member'][0]['id'];
+          this.ConnecterCoordonateur = data['hydra:member'][0]['id'];
         });
     }
   }

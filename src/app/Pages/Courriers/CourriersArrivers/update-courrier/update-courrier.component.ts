@@ -133,7 +133,7 @@ export class UpdateCourrierComponent implements OnInit {
     //     // this.addForm.addControl("controleurs",new FormControl(this.dataUpdateCourrier.controleurs));
     // }
     // this.addForm.addControl("assistante",new FormControl("/api/coud/assistantes/"+this.Connecter,));
-    // this.addForm.addControl("coordinateur",new FormControl("/api/coud/coordinateurs/"+this.coordonateur,));
+    // this.addForm.addControl("coordonateur",new FormControl("/api/coud/coordonateurs/"+this.coordonateur,));
     // if(this.addForm.get("controleurs").value !=""){
     // }
     this.updateCourierArriver(this.addForm.value);

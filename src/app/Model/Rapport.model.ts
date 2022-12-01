@@ -5,5 +5,5 @@ export interface RapportModel{
     id: number;
     date: string;
     courier: CourierModel;
-    coordinateur: UserModel;
+    coordonateur: UserModel;
 }

@@ -9,6 +9,6 @@ export interface FicheDeControlModel{
     objet:string;
     recommandations:string;
     controleurs:UserModel;
-    coordinateur: UserModel;
+    coordonateur: UserModel;
     courier:CourierModel;
 }

@@ -39,7 +39,7 @@ export class MethodeService {
     return this.httpClient.post<UserModel>(`${envVars.url}/coud/users`, ObjetUser, {headers: this.headers});
   }
   updateCoordonateur(username: any): Observable<any>{
-    return this.httpClient.put<any>(envVars.url+'/coud/coordinateurs' + '/' + username.id, username, {headers: this.headers});
+    return this.httpClient.put<any>(envVars.url+'/coud/coordonateurs' + '/' + username.id, username, {headers: this.headers});
   }
   updateControleur(username: any): Observable<any>{
     return this.httpClient.put<any>(envVars.url+'/coud/controleurs' + '/' + username.id, username, {headers: this.headers});
@@ -57,10 +57,10 @@ export class MethodeService {
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/controleurs?username=${username}`);
   }
   getCoordonateurs(): Observable<UserModel>{
-    return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordinateurs`);
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordonateurs`);
   }
   getCoordonateursByUsername(username: UserModel): Observable<UserModel>{
-    return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordinateurs?username=${username}`);
+    return this.httpClient.get<UserModel>(`${envVars.url}/coud/coordonateurs?username=${username}`);
   }
   getAssistanteByUsername(username: UserModel): Observable<UserModel>{
     return this.httpClient.get<UserModel>(`${envVars.url}/coud/assistantes?username=${username}`);

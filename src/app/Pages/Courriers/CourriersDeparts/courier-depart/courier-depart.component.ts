@@ -61,7 +61,7 @@ export class CourierDepartComponent implements OnInit {
       NumeroFacture: ['', Validators.required],
       montant: ['', Validators.required],
       controleurs: ['', Validators.required],
-      coordinateur: ['', Validators.required],
+      coordonateur: ['', Validators.required],
       assistante: ['', Validators.required],
     });
     this.addForm.get('dateDepart').valueChanges.subscribe(() => {

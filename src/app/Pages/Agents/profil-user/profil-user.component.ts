@@ -25,6 +25,7 @@ export class ProfilUserComponent implements OnInit {
   erreuremail = '';
   erreur = '';
   success = '';
+  showPassword: boolean = false;
   today = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
 
   constructor(
@@ -80,6 +81,10 @@ export class ProfilUserComponent implements OnInit {
       this.dataUpdate = data['hydra:member'][0];
       this.addForm.patchValue(this.dataUpdate);
     });
+  }
+
+  showHidePassword() {
+    this.showPassword = !this.showPassword;
   }
 
   onUpdate(): any {

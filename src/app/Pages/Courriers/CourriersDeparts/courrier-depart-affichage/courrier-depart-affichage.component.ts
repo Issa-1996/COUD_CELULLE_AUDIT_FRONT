@@ -33,7 +33,7 @@ export class CourrierDepartAffichageComponent implements OnInit {
       NumeroFacture: ['', Validators.required],
       montant: ['', Validators.required],
       assistante: ['', Validators.required],
-      coordinateur: ['', Validators.required],
+      coordonateur: ['', Validators.required],
     });
     this.addForm.patchValue(this.courrierDepart);
   }

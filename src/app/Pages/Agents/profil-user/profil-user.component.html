@@ -95,7 +95,7 @@
             <div class="col-md-6">
               <label>NOUVEAU MOT DE PASS</label>
               <input
-                type="password"
+                [type]="showPassword ? 'text' : 'password'"
                 class="form-control"
                 formControlName="password"
               />
@@ -110,7 +110,7 @@
             <div class="col-md-6">
               <label>CONFIRMATION</label>
               <input
-                type="password"
+                [type]="showPassword ? 'text' : 'password'"
                 class="form-control"
                 formControlName="conf"
               />
@@ -121,6 +121,8 @@
               >
                 {{ erreurpassword }}
               </span>
+              <input type="checkbox" (click)="showHidePassword()" />
+              {{ showPassword ? "  Caché " : " Affiché" }} Password
             </div>
           </div>
           <div class="row">
@@ -140,7 +142,12 @@
       </div>
     </div>
     <mat-dialog-actions align="end">
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial title="FERMER ET QUITTÉ">
+      <button
+        mat-button
+        [mat-dialog-close]="true"
+        cdkFocusInitial
+        title="FERMER ET QUITTÉ"
+      >
         FERMER
       </button>
     </mat-dialog-actions>

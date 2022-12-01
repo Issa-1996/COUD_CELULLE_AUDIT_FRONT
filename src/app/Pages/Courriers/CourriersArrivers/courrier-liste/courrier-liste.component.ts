@@ -32,6 +32,7 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
   ];
   public role: any[];
   database: any;
+  databehavio: any;
   datacourrier: CourierModel[] = [];
   dataAssis: CourierModel[] = [];
   objetCourier: CourierModel[] = [];
@@ -164,15 +165,16 @@ export class CourrierListeComponent implements AfterViewInit, OnInit {
         localStorage.getItem('token')
       );
       this.methodeService.getCourriersArrivers().subscribe((data) => {
-        this.database = data["hydra:member"];
+        this.database = data['hydra:member'];
         if (this.database.length == 0) {
           this.searchVS.currentSearch.subscribe((dataa: any) => {
-            if (dataa) {
+            if (dataa != 0) {
               this.database = dataa;
               this.dataSource = new MatTableDataSource<CourierModel>(
                 this.database
               );
               this.dataSource.paginator = this.paginator;
+              console.log(this.database);
             }
           });
         } else {

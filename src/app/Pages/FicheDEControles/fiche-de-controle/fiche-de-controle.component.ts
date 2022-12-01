@@ -96,8 +96,8 @@ export class FicheDeControleComponent implements OnInit {
       new FormControl('/api/coud/controleurs/' + this.user)
     );
     this.addForm.addControl(
-      'coordinateur',
-      new FormControl('/api/coud/coordinateurs/' + this.coordonateur)
+      'coordonateur',
+      new FormControl('/api/coud/coordonateurs/' + this.coordonateur)
     );
     this.addForm.addControl(
       'courrierArriver',
